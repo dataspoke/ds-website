@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://dataspoke.com
+
+# Sitemaps
+Sitemap: https://dataspoke.com/sitemap.xml
