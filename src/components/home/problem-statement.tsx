@@ -5,19 +5,19 @@ const painPoints = [
     icon: Clock,
     title: "Your team is doing work AI could handle",
     description:
-      "Manual data entry, report building, document processing — it's costing you hours and money every week. The right AI integration changes that overnight.",
+      "Manual data entry, report building, document processing. It's costing you hours and money every week. The right AI integration changes that overnight.",
   },
   {
     icon: Unplug,
     title: "Your data is everywhere",
     description:
-      "CRMs, spreadsheets, ad platforms — nothing talks to each other and you can't see the full picture. Connected data means better answers, faster.",
+      "CRMs, spreadsheets, ad platforms. Nothing talks to each other and you can't see the full picture. Connected data means better answers, faster.",
   },
   {
     icon: HelpCircle,
-    title: "You know AI matters, but where do you start?",
+    title: "You have data but no insights",
     description:
-      "ChatGPT, copilots, automation tools — there's a lot of noise. You need someone who can cut through it and build what actually works for your business.",
+      "You're collecting data everywhere but nobody's analyzing it. The patterns, trends, and predictions that could grow your business are sitting untouched.",
   },
 ];
 
@@ -30,7 +30,7 @@ export function ProblemStatement() {
             Sound Familiar?
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Most businesses are sitting on untapped potential &mdash; in their data,
+            Most businesses are sitting on untapped potential in their data,
             their workflows, and the AI tools they haven&apos;t deployed yet.
           </p>
         </div>

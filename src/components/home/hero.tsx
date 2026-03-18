@@ -22,14 +22,16 @@ export function Hero() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-            AI Integration. Connected Data.{" "}
+            AI Integration.
+            <br />
+            Connected Data.
+            <br />
             <span className="text-primary">Better Decisions.</span>
           </h1>
           <p className="mt-6 text-lg text-muted-foreground sm:text-xl leading-relaxed">
-            Your competitors are already using AI and data to move faster.
-            DataSpoke gives your business the same edge &mdash; we integrate AI
-            tools, connect your data, and automate the work that&apos;s slowing
-            you down.
+            We help small businesses integrate AI, connect scattered data,
+            and turn it all into insights that drive real growth. From
+            automation to predictive analytics, we handle the full pipeline.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4">
             <Button asChild size="lg" className="text-base">
