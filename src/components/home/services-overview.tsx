@@ -14,7 +14,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 };
 
 export function ServicesOverview() {
-  const featured = SERVICES.filter((s) => s.slug !== "crm-implementation").slice(0, 3);
+  const featured = SERVICES.slice(0, 3);
 
   return (
     <section className="py-20">

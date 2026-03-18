@@ -23,35 +23,26 @@ export function BioSection() {
               Nick
             </h2>
             <p className="text-primary font-medium mt-1">
-              Founder &amp; AI Integrator
+              Founder
             </p>
             <div className="mt-6 space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                I&apos;m an AI integrator and data consultant based in Durham,
-                Connecticut, helping small businesses and law firms put AI and
-                data to work. With over a decade of experience in tech consulting,
-                I&apos;ve seen what works and what doesn&apos;t when it comes to
-                building systems that actually support business growth.
+                I started DataSpoke to give small businesses access to the same
+                AI, data, and engineering capabilities that large companies take
+                for granted. I&apos;ve spent 10+ years building data pipelines,
+                deploying AI tools, and designing cloud systems for businesses
+                that need things to actually work.
               </p>
               <p>
-                Before consulting, I served in the U.S. Army and earned a
-                master&apos;s degree in operations research, a discipline
-                focused on using data and analysis to make better decisions.
-                That background shapes everything I do: I don&apos;t chase shiny
-                objects or over-engineer solutions. I find the simplest path to
-                real results.
+                Before that, I served in the U.S. Army and earned a master&apos;s
+                in operations research. That training is about one thing: using
+                data to make better decisions. It&apos;s the lens I bring to
+                every project.
               </p>
               <p>
-                When we work together, I become a part of your team. I handle
-                AI integration, data strategy, system architecture, and
-                hands-on implementation. Whether you need AI embedded in your
-                workflows, your data connected into one view, or a custom
-                tool built, I&apos;m the person you call.
-              </p>
-              <p>
-                My working style is direct, strategic, and jargon-free. I speak
-                business first, technology second. And I only recommend what
-                I&apos;d build for myself.
+                I work directly with my clients. No layers, no hand-offs. If you
+                need AI in your workflows, your data connected, or a custom
+                platform built, I&apos;m the one building it.
               </p>
             </div>
           </div>

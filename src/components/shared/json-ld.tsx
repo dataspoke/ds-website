@@ -15,7 +15,7 @@ const jsonLd = {
   founder: {
     "@type": "Person",
     name: "Nick",
-    jobTitle: "Founder & AI Integrator",
+    jobTitle: "Founder",
   },
   areaServed: {
     "@type": "Country",
