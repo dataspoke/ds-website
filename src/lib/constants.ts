@@ -18,7 +18,7 @@ export const SERVICES: Service[] = [
     slug: "ai-integration",
     title: "AI Integration",
     description:
-      "We embed AI directly into your business workflows — from intelligent document processing to custom chatbots that handle real customer questions. Not buzzwords, real tools that save your team hours every week.",
+      "We embed AI directly into your business workflows. From intelligent document processing to custom chatbots that handle real customer questions. Not buzzwords, real tools that save your team hours every week.",
     whoItsFor: "Businesses ready to put AI to work on real problems",
     icon: "Sparkles",
     features: [
@@ -32,7 +32,7 @@ export const SERVICES: Service[] = [
     slug: "connected-data",
     title: "Connected Data & Analytics",
     description:
-      "Your data lives in a dozen different places. We connect it all — CRMs, ad platforms, spreadsheets, databases — into a single view so you can finally see what's actually happening in your business.",
+      "Your data lives in a dozen different places. We connect it all into a single view so you can finally see what's actually happening in your business. CRMs, ad platforms, spreadsheets, databases.",
     whoItsFor: "Companies with data scattered across tools and platforms",
     icon: "BarChart3",
     features: [
@@ -60,7 +60,7 @@ export const SERVICES: Service[] = [
     slug: "custom-development",
     title: "Custom Development",
     description:
-      "When off-the-shelf tools don't cut it, we build exactly what you need. Web applications, internal tools, APIs, and integrations — designed around how your business actually works.",
+      "When off-the-shelf tools don't cut it, we build exactly what you need. Web applications, internal tools, APIs, and integrations designed around how your business actually works.",
     whoItsFor: "Companies that need software built for their specific workflows",
     icon: "Code",
     features: [
@@ -74,7 +74,7 @@ export const SERVICES: Service[] = [
     slug: "data-security",
     title: "Data Security & Governance",
     description:
-      "Protect your data and stay compliant as you grow. We set up the policies, controls, and infrastructure to keep your business secure — enterprise-grade practices, right-sized for you.",
+      "Protect your data and stay compliant as you grow. We set up the policies, controls, and infrastructure to keep your business secure. Enterprise-grade practices, right-sized for you.",
     whoItsFor: "Businesses handling sensitive data that need proper security",
     icon: "Shield",
     features: [
@@ -113,7 +113,7 @@ export const SERVICE_OPTIONS = [
 export const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      "DataSpoke connected all our data sources into one dashboard. We went from guessing to knowing — and it took weeks, not months.",
+      "DataSpoke connected all our data sources into one dashboard. We went from guessing to knowing, and it took weeks, not months.",
     author: "Managing Partner",
     role: "Managing Partner",
     company: "Regional Law Firm",

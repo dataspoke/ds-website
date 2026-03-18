@@ -14,17 +14,17 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 };
 
 export function ServicesOverview() {
-  const featured = SERVICES.slice(0, 4);
+  const featured = SERVICES.filter((s) => s.slug !== "crm-implementation").slice(0, 3);
 
   return (
     <section className="py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="How We Help"
-          subtitle="We bring the expertise of a full technology team — AI, data, security, and development — directly to your business."
+          subtitle="We bring the expertise of a full technology team directly to your business. AI, data, and development."
         />
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((service) => {
             const Icon = iconMap[service.icon];
             return (

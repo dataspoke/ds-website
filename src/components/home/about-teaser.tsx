@@ -18,7 +18,7 @@ export function AboutTeaser() {
               Who&apos;s Behind DataSpoke
             </h2>
             <p className="mt-4 text-muted-foreground leading-relaxed">
-              DataSpoke is led by Nick &mdash; an Army veteran and operations
+              DataSpoke is led by Nick, an Army veteran and operations
               research expert with 10+ years in tech consulting. He helps small
               businesses integrate AI, connect their data, and build systems
               that actually drive results. Based in Connecticut, serving clients

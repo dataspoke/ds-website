@@ -35,7 +35,7 @@ export function BioSection() {
               </p>
               <p>
                 Before consulting, I served in the U.S. Army and earned a
-                master&apos;s degree in operations research &mdash; a discipline
+                master&apos;s degree in operations research, a discipline
                 focused on using data and analysis to make better decisions.
                 That background shapes everything I do: I don&apos;t chase shiny
                 objects or over-engineer solutions. I find the simplest path to
@@ -46,7 +46,7 @@ export function BioSection() {
                 AI integration, data strategy, system architecture, and
                 hands-on implementation. Whether you need AI embedded in your
                 workflows, your data connected into one view, or a custom
-                tool built &mdash; I&apos;m the person you call.
+                tool built, I&apos;m the person you call.
               </p>
               <p>
                 My working style is direct, strategic, and jargon-free. I speak

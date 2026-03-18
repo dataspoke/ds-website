@@ -17,7 +17,7 @@ export default function ServicesPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Services"
-            subtitle="We bring the expertise of a full technology team — AI, data, security, and development — directly to your business."
+            subtitle="We bring the expertise of a full technology team directly to your business. AI, data, security, and development."
           />
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">

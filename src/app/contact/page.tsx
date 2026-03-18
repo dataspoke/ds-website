@@ -51,7 +51,7 @@ export default function ContactPage() {
                 <div>
                   <p className="text-sm font-medium">Location</p>
                   <p className="text-sm text-muted-foreground">
-                    Durham, CT &mdash; serving clients nationwide
+                    Durham, CT. Serving clients nationwide.
                   </p>
                 </div>
               </div>
