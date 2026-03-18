@@ -3,8 +3,8 @@ import type { NavItem, Service, Testimonial } from "@/types";
 export const SITE_NAME = "DataSpoke";
 export const SITE_DESCRIPTION =
   "AI integration, connected data, and automation for small businesses. We help you integrate AI tools, unify your data, and make smarter decisions.";
-export const SITE_URL = "https://dataspoke.com";
-export const CONTACT_EMAIL = "nick@dataspoke.com";
+export const SITE_URL = "https://dataspoke.io";
+export const CONTACT_EMAIL = "nick@dataspoke.io";
 
 export const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },

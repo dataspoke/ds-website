@@ -59,7 +59,7 @@ export async function POST(request: Request) {
     const { name, email, company, service, message } = body;
     const serviceName =
       SERVICE_OPTIONS.find((s) => s.value === service)?.label || service;
-    const contactEmail = process.env.CONTACT_EMAIL || "nick@dataspoke.com";
+    const contactEmail = process.env.CONTACT_EMAIL || "nick@dataspoke.io";
 
     if (!process.env.RESEND_API_KEY) {
       console.log("RESEND_API_KEY not set. Logging form submission:", { name, email, company, service: serviceName, message });
@@ -70,7 +70,7 @@ export async function POST(request: Request) {
 
     // Send notification to Nick
     await resend.emails.send({
-      from: "DataSpoke <nick@dataspoke.com>",
+      from: "DataSpoke <nick@dataspoke.io>",
       to: contactEmail,
       subject: `New inquiry from ${name} — ${serviceName}`,
       text: [
