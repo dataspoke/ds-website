@@ -1,39 +1,60 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { Section } from "@/components/shared/section";
+import { CREDENTIALS, SOCIAL_LINKS } from "@/lib/constants";
+
+export function ProfilePhoto({ className = "" }: { className?: string }) {
+  return (
+    <Image
+      src="/nick-paul-family.jpg"
+      alt="Nick Paul and family on a mountain summit overlooking the water"
+      width={1220}
+      height={1520}
+      sizes="260px"
+      className={`aspect-[4/5] w-full max-w-[240px] rounded-2xl object-cover ${className}`}
+    />
+  );
+}
 
 export function AboutTeaser() {
   return (
-    <section className="py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-center gap-12">
-          {/* Photo placeholder */}
-          <div className="flex-shrink-0">
-            <div className="h-36 w-36 rounded-full bg-secondary flex items-center justify-center border-2 border-primary/20">
-              <span className="text-3xl font-bold text-primary">N</span>
-            </div>
+    <Section id="about">
+      <div className="grid items-center gap-10 md:grid-cols-[240px_1fr] md:gap-12">
+        <ProfilePhoto />
+        <div className="grid max-w-2xl gap-4">
+          <p className="eyebrow">About</p>
+          <h2 className="text-3xl font-bold leading-[1.15] sm:text-4xl">
+            I&apos;m Nick Paul. I help small businesses get their software working together.
+          </h2>
+          <p className="text-muted-foreground">
+            The name is the whole idea. Your business is the hub. Every tool you use is a spoke.
+            My job is making the spokes carry data to the hub, so you can see the business
+            clearly and so AI has something real to work with.
+          </p>
+          <p className="text-muted-foreground">
+            You talk to the person doing the work. Plain English, no jargon. You own all of it,
+            documented, so you&apos;re never locked in.
+          </p>
+          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
+            {CREDENTIALS.map((c) => (
+              <span key={c}>{c}</span>
+            ))}
           </div>
-
-          <div className="max-w-xl">
-            <h2 className="text-3xl font-bold tracking-tight">
-              Who&apos;s Behind DataSpoke
-            </h2>
-            <p className="mt-4 text-muted-foreground leading-relaxed">
-              DataSpoke is led by Nick, an Army veteran and operations
-              research expert with 10+ years in tech consulting. He helps small
-              businesses integrate AI, connect their data, and build systems
-              that actually drive results. Based in Connecticut, serving clients
-              nationwide.
-            </p>
-            <Link
-              href="/about"
-              className="mt-6 inline-flex items-center text-primary font-medium hover:underline"
-            >
-              More about Nick
-              <ArrowRight className="ml-1 h-4 w-4" />
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <Link href="/about" className="font-semibold text-primary hover:text-primary/80">
+              More about me &rarr;
             </Link>
+            <a
+              href={SOCIAL_LINKS.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-primary hover:text-primary/80"
+            >
+              LinkedIn &rarr;
+            </a>
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

@@ -4,34 +4,32 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { NAV_ITEMS, SITE_NAME } from "@/lib/constants";
+import { Logo } from "@/components/shared/logo";
+import { BookCall } from "@/components/shared/book-call";
+import { NAV_ITEMS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
 
+  const isActive = (href: string) => pathname === href.split("#")[0];
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-lg">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-            <span className="text-sm font-bold text-primary-foreground">D</span>
-          </div>
-          <span className="text-xl font-bold">{SITE_NAME}</span>
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur-md">
+      <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between gap-6 px-4 sm:px-6">
+        <Link href="/" aria-label="DataSpoke home" className="shrink-0">
+          <Logo />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden items-center gap-7 md:flex">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                pathname === item.href
-                  ? "text-primary"
-                  : "text-muted-foreground"
+                "text-[0.97rem] font-medium transition-colors hover:text-primary",
+                isActive(item.href) ? "text-primary" : "text-ink"
               )}
             >
               {item.label}
@@ -39,46 +37,35 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
-          <Button asChild>
-            <Link href="/contact">Get in Touch</Link>
-          </Button>
+        <div className="flex items-center gap-2">
+          <BookCall size="default" className="h-10 px-4 text-[0.95rem]" />
+          <button
+            className="rounded-md p-2 md:hidden"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
+          >
+            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
-
-        <button
-          className="md:hidden p-2"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden border-t border-border/40 bg-background">
-          <nav className="flex flex-col px-4 py-4 gap-4">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileOpen(false)}
-                className={cn(
-                  "text-sm font-medium transition-colors",
-                  pathname === item.href
-                    ? "text-primary"
-                    : "text-muted-foreground"
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <Button asChild className="mt-2">
-              <Link href="/contact" onClick={() => setMobileOpen(false)}>
-                Get in Touch
-              </Link>
-            </Button>
-          </nav>
-        </div>
+        <nav className="flex flex-col gap-4 border-t border-border bg-background px-4 py-5 md:hidden">
+          {NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setMobileOpen(false)}
+              className={cn(
+                "text-base font-medium",
+                isActive(item.href) ? "text-primary" : "text-ink"
+              )}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
       )}
     </header>
   );

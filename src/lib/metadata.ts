@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_NAME, SITE_URL, SITE_DESCRIPTION } from "./constants";
+import { SITE_NAME, SITE_URL, SITE_DESCRIPTION, SITE_TAGLINE } from "./constants";
 
 export function generateMetadata(page: {
   title: string;
@@ -28,27 +28,29 @@ export function generateMetadata(page: {
   };
 }
 
+const defaultTitle = `${SITE_NAME} | ${SITE_TAGLINE}`;
+
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} | AI Integration, Connected Data & Analytics`,
+    default: defaultTitle,
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
   keywords: [
-    "AI integration small business",
-    "business data analytics",
-    "AI automation consulting",
-    "connected data solutions",
-    "CRM implementation",
-    "custom dashboard development",
-    "data science consulting",
-    "small business AI tools",
+    "connected data small business",
+    "AI readiness assessment",
+    "small business dashboards",
+    "CRM data integration consultant",
+    "business automation consulting",
+    "data science consulting small business",
+    "operations research consultant",
+    "AI assistant for business data",
   ],
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
-    title: `${SITE_NAME} | AI Integration, Connected Data & Analytics`,
+    title: defaultTitle,
     description: SITE_DESCRIPTION,
     url: SITE_URL,
   },
