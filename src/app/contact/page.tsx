@@ -34,7 +34,7 @@ export default function ContactPage() {
               <h2 className="text-2xl font-bold">Book a free 30-minute call</h2>
               <p className="text-muted-foreground">
                 Pick a time that suits you. You&apos;ll get a calendar invite with a video link.
-                Come with whatever is frustrating you; no preparation needed.
+                Come with whatever is frustrating you. No preparation needed.
               </p>
               <BookCall className="justify-self-start">Pick a time</BookCall>
             </div>
@@ -46,7 +46,7 @@ export default function ContactPage() {
               <ol className="grid gap-3">
                 {STEPS.map((s, i) => (
                   <li key={s.title} className="flex gap-3 text-[0.95rem] text-muted-foreground">
-                    <span className="font-display font-bold text-brand">{i + 1}</span>
+                    <span className="w-4 shrink-0 text-center font-display font-bold text-primary tabular-nums">{i + 1}</span>
                     <span>
                       <span className="font-semibold text-foreground">{s.title}.</span>{" "}
                       {s.description}

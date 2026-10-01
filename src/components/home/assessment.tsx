@@ -1,5 +1,6 @@
 import { BookCall } from "@/components/shared/book-call";
 import { Section, SectionHead } from "@/components/shared/section";
+import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { ASSESSMENT } from "@/lib/constants";
 
 export function Assessment() {
@@ -10,17 +11,16 @@ export function Assessment() {
           <SectionHead eyebrow="Start here" title="The AI Assessment" lede={ASSESSMENT.lede} />
           <ul className="grid gap-3">
             {ASSESSMENT.includes.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-muted-foreground">
-                <span className="mt-[9px] h-2.5 w-2.5 shrink-0 rounded-full bg-brand" aria-hidden="true" />
+              <SpokeBullet key={item} as="li" size="list" className="text-muted-foreground">
                 {item}
-              </li>
+              </SpokeBullet>
             ))}
           </ul>
         </div>
 
         <div className="grid gap-5 rounded-2xl border border-border p-6 sm:p-8">
           <div>
-            <p className="text-sm text-muted-foreground">Example scorecard, home services company</p>
+            <p className="text-sm text-muted-foreground">Example scorecard: home-services company</p>
             <div className="mt-3 grid gap-2.5">
               {ASSESSMENT.sampleScores.map((row) => (
                 <div

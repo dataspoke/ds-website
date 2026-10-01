@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { generateMetadata } from "@/lib/metadata";
 import { Section, SectionHead } from "@/components/shared/section";
+import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { StageTitle } from "@/components/home/stages";
 import { Assessment } from "@/components/home/assessment";
 import { CtaBanner } from "@/components/home/cta-banner";
@@ -19,7 +20,7 @@ function ProductDetail({ product }: { product: Product }) {
   return (
     <article
       id={product.slug}
-      className="grid scroll-mt-24 gap-6 border-t border-border py-10 md:grid-cols-[1fr_1fr] md:gap-12"
+      className="grid gap-6 border-t border-border py-10 md:grid-cols-[1fr_1fr] md:gap-12"
     >
       <div className="grid content-start gap-3">
         <h3 className="text-2xl font-bold">{product.title}</h3>
@@ -29,7 +30,7 @@ function ProductDetail({ product }: { product: Product }) {
         </p>
         <Link
           href={`/contact?service=${product.slug}`}
-          className="mt-1 font-semibold text-primary hover:text-primary/80"
+          className="mt-1 justify-self-start py-2 font-semibold text-primary hover:text-primary/80"
         >
           Ask about this &rarr;
         </Link>
@@ -41,10 +42,9 @@ function ProductDetail({ product }: { product: Product }) {
           </p>
           <ul className="mt-2 grid gap-2">
             {product.soundsLike.map((s) => (
-              <li key={s} className="flex items-start gap-3 text-[0.95rem] text-muted-foreground">
-                <span className="mt-[9px] h-2 w-2 shrink-0 rounded-full bg-brand" aria-hidden="true" />
+              <SpokeBullet key={s} as="li" size="list" className="text-[0.95rem] text-muted-foreground">
                 {s}
-              </li>
+              </SpokeBullet>
             ))}
           </ul>
         </div>
@@ -54,10 +54,9 @@ function ProductDetail({ product }: { product: Product }) {
           </p>
           <ul className="mt-2 grid gap-2">
             {product.youGet.map((s) => (
-              <li key={s} className="flex items-start gap-3 text-[0.95rem] text-muted-foreground">
-                <span className="mt-[9px] h-2 w-2 shrink-0 rounded-full bg-brand" aria-hidden="true" />
+              <SpokeBullet key={s} as="li" size="list" className="text-[0.95rem] text-muted-foreground">
                 {s}
-              </li>
+              </SpokeBullet>
             ))}
           </ul>
         </div>
@@ -72,23 +71,23 @@ export default function ServicesPage() {
       <Section tight>
         <SectionHead
           eyebrow="Products"
-          title="Connect your company. Make it AI-ready. Then run it on what you know."
+          title={"Connect your company. Make it AI\u2011ready. Then run it on what you know."}
           lede="You don't need to know what to ask for. Find the problem that sounds like yours."
         />
-        <nav aria-label="Jump to a stage" className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
+        <nav aria-label="Jump to a stage" className="mt-8 flex flex-wrap gap-x-6 gap-y-0 text-sm font-semibold">
           {STAGES.map((s) => (
-            <a key={s.slug} href={`#${s.slug}`} className="text-primary hover:text-primary/80">
+            <a key={s.slug} href={`#${s.slug}`} className="inline-block py-2.5 text-primary hover:text-primary/80">
               {s.number} {s.title}
             </a>
           ))}
-          <a href="#assessment" className="text-primary hover:text-primary/80">
+          <a href="#assessment" className="inline-block py-2.5 text-primary hover:text-primary/80">
             The AI Assessment
           </a>
         </nav>
       </Section>
 
       {STAGES.map((stage) => (
-        <Section key={stage.slug} id={stage.slug} className="scroll-mt-20 pt-0 sm:pt-0">
+        <Section key={stage.slug} id={stage.slug} className="pt-0 sm:pt-0">
           <StageTitle stage={stage} />
           {stage.products.map((p) => (
             <ProductDetail key={p.slug} product={p} />

@@ -22,10 +22,10 @@ export function Footer() {
             </p>
             <p className="text-sm font-semibold text-ink select-all">{CONTACT_EMAIL}</p>
           </div>
-          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          <ul className="flex flex-wrap gap-x-6 gap-y-0 text-sm">
             {NAV_ITEMS.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="text-muted-foreground hover:text-primary">
+                <Link href={item.href} className="inline-block py-2.5 text-muted-foreground hover:text-primary">
                   {item.label}
                 </Link>
               </li>
@@ -35,7 +35,7 @@ export function Footer() {
                 href={SOCIAL_LINKS.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary"
+                className="inline-block py-2.5 text-muted-foreground hover:text-primary"
               >
                 LinkedIn
               </a>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generateMetadata } from "@/lib/metadata";
 import { Section, SectionHead } from "@/components/shared/section";
+import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { ProfilePhoto } from "@/components/home/about-teaser";
 import { ExpertiseSection } from "@/components/home/expertise";
 import { CtaBanner } from "@/components/home/cta-banner";
@@ -9,7 +10,7 @@ import { CREDENTIALS, SOCIAL_LINKS } from "@/lib/constants";
 export const metadata: Metadata = generateMetadata({
   title: "About",
   description:
-    "Nick Paul runs DataSpoke from Durham, CT. Data scientist and software developer, Army Engineer officer and combat veteran, B.S. in mathematics, M.S. in operations research, 5 years building analytics, automation, custom software and AI for small businesses nationwide.",
+    "Nick Paul runs DataSpoke from Durham, CT. He's a data scientist and software developer, an Army Engineer officer and combat veteran, with a B.S. in mathematics and an M.S. in operations research. For five years he has built analytics, automation, custom software and AI for small businesses nationwide.",
   path: "/about",
 });
 
@@ -49,11 +50,11 @@ export default function AboutPage() {
   return (
     <>
       <Section>
-        <div className="grid items-start gap-10 md:grid-cols-[260px_1fr] md:gap-14">
-          <ProfilePhoto className="max-w-[260px]" />
+        <div className="grid items-start gap-10 md:grid-cols-[200px_1fr] md:gap-14 lg:grid-cols-[260px_1fr]">
+          <ProfilePhoto priority className="max-w-[200px] sm:max-w-[260px]" />
           <div className="grid max-w-2xl gap-5">
             <p className="eyebrow">About</p>
-            <h1 className="text-4xl font-extrabold leading-[1.1] sm:text-5xl">
+            <h1 className="text-4xl font-extrabold leading-[1.1] sm:text-5xl md:text-[2.6rem] lg:text-5xl">
               I&apos;m Nick Paul. I help small businesses get their software working together.
             </h1>
             <p className="lede">
@@ -63,13 +64,13 @@ export default function AboutPage() {
             </p>
             <p className="text-muted-foreground">
               I learned operations as an Army Engineer officer, leading soldiers in combat zones.
-              Out there a plan only counts if it works on the ground, the supplies have to show
-              up, and people are depending on you to get it right. I run every project the same
+              Out there, a plan only counts if it works on the ground. The supplies have to show
+              up, and people depend on you to get it right. I run every project the same
               way.
             </p>
             <p className="text-muted-foreground">
-              My training is in math: a bachelor&apos;s in mathematics and a master&apos;s in
-              operations research, a discipline about one thing: using data to make better
+              My training is in math. I have a bachelor&apos;s in mathematics and a master&apos;s
+              in operations research, a field about one thing: using data to make better
               decisions. I&apos;m a data scientist and a software developer, so I can both find
               the answer in the numbers and build the system that puts it to work.
             </p>
@@ -81,7 +82,7 @@ export default function AboutPage() {
               plus what&apos;s still missing before a document can be drafted. For a home-services
               contractor, I traced every ad dollar through to paying jobs, so the owner knows
               which marketing actually makes money. For a membership business, I replaced a
-              slow vendor app with iOS and Android apps the owner controls outright and serves to his customers.
+              slow vendor app with iOS and Android apps the owner controls outright.
             </p>
             <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
               {CREDENTIALS.map((c) => (
@@ -104,11 +105,10 @@ export default function AboutPage() {
         <SectionHead eyebrow="How I work" title="Four things you can hold me to." />
         <div className="mt-10 grid gap-7 sm:grid-cols-2 md:gap-10">
           {PRINCIPLES.map((p) => (
-            <div key={p.title} className="grid content-start gap-2">
-              <span className="h-3.5 w-3.5 rounded-full bg-brand" aria-hidden="true" />
-              <h3 className="text-[1.15rem] font-bold">{p.title}</h3>
+            <SpokeBullet key={p.title} size="heading">
+              <h3 className="text-[1.15rem] font-bold leading-snug">{p.title}</h3>
               <p className="text-muted-foreground">{p.description}</p>
-            </div>
+            </SpokeBullet>
           ))}
         </div>
       </Section>
@@ -124,10 +124,9 @@ export default function AboutPage() {
             </p>
             <ul className="mt-3 grid gap-2.5">
               {FIT.yes.map((s) => (
-                <li key={s} className="flex items-start gap-3 text-muted-foreground">
-                  <span className="mt-[9px] h-2.5 w-2.5 shrink-0 rounded-full bg-brand" aria-hidden="true" />
+                <SpokeBullet key={s} as="li" size="list" className="text-muted-foreground">
                   {s}
-                </li>
+                </SpokeBullet>
               ))}
             </ul>
           </div>
@@ -137,10 +136,9 @@ export default function AboutPage() {
             </p>
             <ul className="mt-3 grid gap-2.5">
               {FIT.no.map((s) => (
-                <li key={s} className="flex items-start gap-3 text-muted-foreground">
-                  <span className="mt-[9px] h-2.5 w-2.5 shrink-0 rounded-full bg-border" aria-hidden="true" />
+                <SpokeBullet key={s} as="li" size="list" tone="muted" className="text-muted-foreground">
                   {s}
-                </li>
+                </SpokeBullet>
               ))}
             </ul>
           </div>

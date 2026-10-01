@@ -22,7 +22,7 @@ export function Header() {
           <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav className="hidden items-center gap-7 lg:flex">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
@@ -38,9 +38,9 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <BookCall size="default" className="h-10 px-4 text-[0.95rem]" />
+          <BookCall size="default" className="h-11 px-4 text-[0.95rem]" />
           <button
-            className="rounded-md p-2 md:hidden"
+            className="rounded-md p-2.5 lg:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
@@ -51,14 +51,14 @@ export function Header() {
       </div>
 
       {mobileOpen && (
-        <nav className="flex flex-col gap-4 border-t border-border bg-background px-4 py-5 md:hidden">
+        <nav className="flex flex-col border-t border-border bg-background px-4 py-2 lg:hidden">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setMobileOpen(false)}
               className={cn(
-                "text-base font-medium",
+                "block py-3 text-base font-medium",
                 isActive(item.href) ? "text-primary" : "text-ink"
               )}
             >
