@@ -38,8 +38,8 @@ const SIZES = {
 } as const;
 
 const TONES = {
-  brand: { dot: "bg-brand", line: "bg-tint-strong" },
-  muted: { dot: "bg-input", line: "bg-border" },
+  brand: { dot: "bg-brand", line: "bg-brand/50" },
+  muted: { dot: "bg-input", line: "bg-input/50" },
 } as const;
 
 export function SpokeBullet({
