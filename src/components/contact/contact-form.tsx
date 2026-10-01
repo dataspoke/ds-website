@@ -62,10 +62,10 @@ export function ContactForm() {
         <CheckCircle className="mx-auto h-12 w-12 text-primary" />
         <h3 className="mt-4 text-xl font-semibold">Message Sent</h3>
         <p className="mt-2 text-muted-foreground">
-          Thanks for reaching out. I&apos;ll get back to you within 24 hours.
+          Thanks for reaching out. IThanks for reaching out. I&apos;ll get back to you within 24 hours.apos;ll reply within one business day.
         </p>
         <Button className="mt-6" onClick={() => setStatus("idle")}>
-          Send Another Message
+          Send another note
         </Button>
       </div>
     );
@@ -128,13 +128,13 @@ export function ContactForm() {
       </div>
 
       <div>
-        <Label htmlFor="service">What do you need help with? *</Label>
+        <Label htmlFor="service">What sounds most like you? *</Label>
         <Select
           value={formData.service}
           onValueChange={(value) => setFormData({ ...formData, service: value })}
         >
           <SelectTrigger className="mt-1">
-            <SelectValue placeholder="Select a service" />
+            <SelectValue placeholder="Pick the closest one" />
           </SelectTrigger>
           <SelectContent>
             {SERVICE_OPTIONS.map((opt) => (
@@ -155,7 +155,7 @@ export function ContactForm() {
           id="message"
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-          placeholder="Tell me about your project or challenge..."
+          placeholder="What is slowing you down right now?"
           rows={5}
           className="mt-1"
         />
@@ -176,7 +176,7 @@ export function ContactForm() {
         ) : (
           <>
             <Send className="mr-2 h-4 w-4" />
-            Send Message
+            Send note
           </>
         )}
       </Button>

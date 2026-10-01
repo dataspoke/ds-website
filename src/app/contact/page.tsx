@@ -1,76 +1,88 @@
 import type { Metadata } from "next";
-import { generateMetadata } from "@/lib/metadata";
 import { Suspense } from "react";
-import { Linkedin, MapPin } from "lucide-react";
-import { SectionHeading } from "@/components/shared/section-heading";
+import { generateMetadata } from "@/lib/metadata";
+import { Section } from "@/components/shared/section";
+import { BookCall } from "@/components/shared/book-call";
 import { ContactForm } from "@/components/contact/contact-form";
-import { SOCIAL_LINKS } from "@/lib/constants";
+import { CONTACT_EMAIL, LOCATION, SOCIAL_LINKS, STEPS } from "@/lib/constants";
 
 export const metadata: Metadata = generateMetadata({
   title: "Contact",
   description:
-    "Get in touch with DataSpoke for AI integration, connected data, CRM implementation, or a free consultation.",
+    "Book a free 30-minute call with DataSpoke, or send a note about what's slowing your business down. Replies within one business day.",
   path: "/contact",
 });
 
 export default function ContactPage() {
   return (
-    <section className="py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          title="Get in Touch"
-          subtitle="Have a question or ready to talk? Fill out the form and I'll get back to you within 24 hours."
-        />
+    <>
+      <Section>
+        <div className="grid max-w-2xl gap-4">
+          <p className="eyebrow">Contact</p>
+          <h1 className="text-4xl font-extrabold leading-[1.1] sm:text-5xl">
+            Let&apos;s talk about what&apos;s slowing you down.
+          </h1>
+          <p className="lede">
+            The fastest route is a 30-minute call. If you&apos;d rather write, the form goes
+            straight to me and I reply within one business day.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-5">
-          <div className="lg:col-span-3">
-            <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-card" />}>
+        <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
+          <div className="grid content-start gap-8">
+            <div className="grid gap-4 rounded-2xl border border-border p-6 sm:p-8">
+              <h2 className="text-2xl font-bold">Book a free 30-minute call</h2>
+              <p className="text-muted-foreground">
+                Pick a time that suits you. You&apos;ll get a calendar invite with a video link.
+                Come with whatever is frustrating you; no preparation needed.
+              </p>
+              <BookCall className="justify-self-start">Pick a time</BookCall>
+            </div>
+
+            <div className="grid gap-3">
+              <p className="text-xs font-semibold uppercase tracking-[0.08em] text-primary">
+                What happens next
+              </p>
+              <ol className="grid gap-3">
+                {STEPS.map((s, i) => (
+                  <li key={s.title} className="flex gap-3 text-[0.95rem] text-muted-foreground">
+                    <span className="font-display font-bold text-brand">{i + 1}</span>
+                    <span>
+                      <span className="font-semibold text-foreground">{s.title}.</span>{" "}
+                      {s.description}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            <div className="grid gap-1.5 text-sm text-muted-foreground">
+              <p>
+                Email{" "}
+                <span className="font-semibold text-foreground select-all">{CONTACT_EMAIL}</span>
+              </p>
+              <p>
+                <a
+                  href={SOCIAL_LINKS.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-primary hover:text-primary/80"
+                >
+                  LinkedIn
+                </a>{" "}
+                · {LOCATION}, working with clients nationwide
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="mb-5 text-2xl font-bold">Or send a note</h2>
+            <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-tint" />}>
               <ContactForm />
             </Suspense>
           </div>
-
-          <div className="lg:col-span-2">
-            <div className="rounded-xl border border-border/40 bg-card p-8 space-y-6">
-              <h3 className="text-lg font-semibold">Other Ways to Reach Me</h3>
-
-              <div className="flex items-start gap-3">
-                <Linkedin className="mt-0.5 h-5 w-5 text-primary" />
-                <div>
-                  <p className="text-sm font-medium">LinkedIn</p>
-                  <a
-                    href={SOCIAL_LINKS.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    Connect on LinkedIn
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <MapPin className="mt-0.5 h-5 w-5 text-primary" />
-                <div>
-                  <p className="text-sm font-medium">Location</p>
-                  <p className="text-sm text-muted-foreground">
-                    Durham, CT. Serving clients nationwide.
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-8 rounded-lg bg-primary/5 border border-primary/10 p-6">
-                <h4 className="text-sm font-semibold text-primary">
-                  Free 30-Minute Consultation
-                </h4>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Not sure where to start? Book a free call and we&apos;ll
-                  discuss your challenges and see if we&apos;re a good fit.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-    </section>
+      </Section>
+    </>
   );
 }

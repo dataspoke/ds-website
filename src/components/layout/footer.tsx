@@ -1,66 +1,51 @@
 import Link from "next/link";
-import { Linkedin } from "lucide-react";
-import { NAV_ITEMS, SITE_NAME, SOCIAL_LINKS } from "@/lib/constants";
+import { Logo } from "@/components/shared/logo";
+import {
+  CONTACT_EMAIL,
+  LOCATION,
+  NAV_ITEMS,
+  SITE_NAME,
+  SOCIAL_LINKS,
+  TRADEMARK_NOTE,
+} from "@/lib/constants";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/40 bg-card">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          <div>
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <span className="text-sm font-bold text-primary-foreground">D</span>
-              </div>
-              <span className="text-xl font-bold">{SITE_NAME}</span>
-            </div>
-            <p className="mt-4 text-sm text-muted-foreground max-w-xs">
-              AI integration, connected data, and automation for small
-              businesses. Durham, CT.
+    <footer className="border-t border-border">
+      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6">
+        <div className="flex flex-wrap items-start justify-between gap-8">
+          <div className="grid max-w-sm gap-3">
+            <Logo />
+            <p className="text-sm text-muted-foreground">
+              Connected data and AI readiness for small businesses. {LOCATION}, working with
+              clients nationwide.
             </p>
+            <p className="text-sm font-semibold text-ink select-all">{CONTACT_EMAIL}</p>
           </div>
-
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider">
-              Navigation
-            </h3>
-            <ul className="mt-4 space-y-2">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider">
-              Connect
-            </h3>
-            <ul className="mt-4 space-y-2">
-              <li>
-                <a
-                  href={SOCIAL_LINKS.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <Linkedin className="h-4 w-4" />
-                  LinkedIn
-                </a>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+            {NAV_ITEMS.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="text-muted-foreground hover:text-primary">
+                  {item.label}
+                </Link>
               </li>
-            </ul>
-          </div>
+            ))}
+            <li>
+              <a
+                href={SOCIAL_LINKS.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary"
+              >
+                LinkedIn
+              </a>
+            </li>
+          </ul>
         </div>
-
-        <div className="mt-12 border-t border-border/40 pt-8 text-center">
-          <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
+        <div className="grid gap-2 border-t border-border pt-6 text-sm text-muted-foreground">
+          <p>{TRADEMARK_NOTE}</p>
+          <p>
+            &copy; {new Date().getFullYear()} {SITE_NAME} · {LOCATION}
           </p>
         </div>
       </div>

@@ -1,11 +1,12 @@
-import { SITE_NAME, SITE_URL, SITE_DESCRIPTION } from "@/lib/constants";
+import { SITE_NAME, SITE_URL, SITE_DESCRIPTION, CONTACT_EMAIL, PRODUCTS } from "@/lib/constants";
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": "ProfessionalService",
   name: SITE_NAME,
   description: SITE_DESCRIPTION,
   url: SITE_URL,
+  email: CONTACT_EMAIL,
   address: {
     "@type": "PostalAddress",
     addressLocality: "Durham",
@@ -14,7 +15,7 @@ const jsonLd = {
   },
   founder: {
     "@type": "Person",
-    name: "Nick",
+    name: "Nick Paul",
     jobTitle: "Founder",
   },
   areaServed: {
@@ -22,6 +23,19 @@ const jsonLd = {
     name: "United States",
   },
   priceRange: "$$",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Products",
+    itemListElement: PRODUCTS.map((p) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: p.title,
+        description: p.description,
+        url: `${SITE_URL}/services#${p.slug}`,
+      },
+    })),
+  },
 };
 
 export function JsonLd() {
