@@ -257,7 +257,7 @@ export const STAGES: Stage[] = [
 export const PRODUCTS = STAGES.flatMap((s) => s.products);
 
 export const RETAINER_NOTE =
-  "Most clients keep me on a monthly retainer afterward. I watch what I built, fix problems before you notice them, and give you a straight answer before you buy the next tool a vendor is pitching.";
+  "Most clients keep me on a monthly retainer afterward. I watch what I built, fix problems before you notice them and give you a straight answer before you buy the next tool a vendor is pitching.";
 
 export const EXPERTISE: Expertise[] = [
   {
@@ -284,7 +284,7 @@ export const ASSESSMENT = {
   price: "$999",
   terms: "fixed price · 2 weeks",
   lede:
-    "Two weeks. I inventory every system and data source your company runs on, score how connected and AI\u2011ready it is today, and hand you a prioritized plan. You keep the plan whether or not we work together.",
+    "Two weeks. I inventory every system and data source your company runs on, score how connected and AI\u2011ready it is today and hand you a prioritized plan. You keep the plan whether or not we work together.",
   includes: [
     "A map of every tool, who uses it and what data lives there",
     "A connected-data score and an AI\u2011readiness score, with the gaps named",
@@ -337,7 +337,7 @@ export const EXAMPLES: Example[] = [
     before:
       "Ad platforms reporting conversions the sales team can't find. Leads from several agencies and vendors arriving by email.",
     after:
-      "Every lead source flowing into the CRM in minutes, junk filtered out, and one view of cost per paying job by channel and by agency.",
+      "Every lead source flowing into the CRM in minutes, junk filtered out and one view of cost per paying job by channel and by agency.",
     result: "One trusted number for what each marketing dollar brings back.",
   },
   {
