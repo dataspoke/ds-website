@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://dataspoke.io
+Host: https://www.dataspoke.io
 
 # Sitemaps
-Sitemap: https://dataspoke.io/sitemap.xml
+Sitemap: https://www.dataspoke.io/sitemap.xml
