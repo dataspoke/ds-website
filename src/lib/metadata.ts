@@ -10,6 +10,9 @@ export function generateMetadata(page: {
   return {
     title: page.title,
     description: page.description,
+    alternates: {
+      canonical: page.path,
+    },
     openGraph: {
       title: fullTitle,
       description: page.description,

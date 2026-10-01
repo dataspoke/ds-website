@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { generateMetadata } from "@/lib/metadata";
 import { Suspense } from "react";
 import { Linkedin, MapPin } from "lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { ContactForm } from "@/components/contact/contact-form";
 import { SOCIAL_LINKS } from "@/lib/constants";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generateMetadata({
   title: "Contact",
   description:
     "Get in touch with DataSpoke for AI integration, connected data, CRM implementation, or a free consultation.",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { generateMetadata } from "@/lib/metadata";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { ServiceCard } from "@/components/services/service-card";
 import { CtaBanner } from "@/components/home/cta-banner";
 import { SERVICES } from "@/lib/constants";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generateMetadata({
   title: "Services",
   description:
     "AI integration, connected data & analytics, CRM implementation, custom development, and data security services for small businesses.",
-};
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (
