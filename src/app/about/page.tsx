@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generateMetadata } from "@/lib/metadata";
 import { Section, SectionHead } from "@/components/shared/section";
+import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { ProfilePhoto } from "@/components/home/about-teaser";
 import { ExpertiseSection } from "@/components/home/expertise";
 import { CtaBanner } from "@/components/home/cta-banner";
@@ -104,11 +105,10 @@ export default function AboutPage() {
         <SectionHead eyebrow="How I work" title="Four things you can hold me to." />
         <div className="mt-10 grid gap-7 sm:grid-cols-2 md:gap-10">
           {PRINCIPLES.map((p) => (
-            <div key={p.title} className="grid content-start gap-2">
-              <span className="h-3.5 w-3.5 rounded-full bg-brand" aria-hidden="true" />
-              <h3 className="text-[1.15rem] font-bold">{p.title}</h3>
+            <SpokeBullet key={p.title} size="heading">
+              <h3 className="text-[1.15rem] font-bold leading-snug">{p.title}</h3>
               <p className="text-muted-foreground">{p.description}</p>
-            </div>
+            </SpokeBullet>
           ))}
         </div>
       </Section>
@@ -124,10 +124,9 @@ export default function AboutPage() {
             </p>
             <ul className="mt-3 grid gap-2.5">
               {FIT.yes.map((s) => (
-                <li key={s} className="flex items-start gap-3 text-muted-foreground">
-                  <span className="mt-[9px] h-2.5 w-2.5 shrink-0 rounded-full bg-brand" aria-hidden="true" />
+                <SpokeBullet key={s} as="li" size="list" className="text-muted-foreground">
                   {s}
-                </li>
+                </SpokeBullet>
               ))}
             </ul>
           </div>
@@ -137,10 +136,9 @@ export default function AboutPage() {
             </p>
             <ul className="mt-3 grid gap-2.5">
               {FIT.no.map((s) => (
-                <li key={s} className="flex items-start gap-3 text-muted-foreground">
-                  <span className="mt-[9px] h-2.5 w-2.5 shrink-0 rounded-full bg-input" aria-hidden="true" />
+                <SpokeBullet key={s} as="li" size="list" tone="muted" className="text-muted-foreground">
                   {s}
-                </li>
+                </SpokeBullet>
               ))}
             </ul>
           </div>

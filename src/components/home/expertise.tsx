@@ -1,4 +1,5 @@
 import { Section, SectionHead } from "@/components/shared/section";
+import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { EXPERTISE } from "@/lib/constants";
 
 export function ExpertiseSection() {
@@ -11,14 +12,13 @@ export function ExpertiseSection() {
       />
       <div className="mt-12 grid gap-7 md:grid-cols-2 lg:grid-cols-3 md:gap-10">
         {EXPERTISE.map((e) => (
-          <div key={e.title} className="grid content-start gap-2.5">
-            <span className="h-3.5 w-3.5 rounded-full bg-brand" aria-hidden="true" />
-            <h3 className="text-[1.15rem] font-bold">{e.title}</h3>
+          <SpokeBullet key={e.title} size="heading">
+            <h3 className="text-[1.15rem] font-bold leading-snug">{e.title}</h3>
             <p className="text-muted-foreground">{e.description}</p>
             <p className="text-sm text-muted-foreground">
               <span className="font-semibold">For example:</span> {e.example}
             </p>
-          </div>
+          </SpokeBullet>
         ))}
       </div>
     </Section>

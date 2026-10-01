@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { generateMetadata } from "@/lib/metadata";
 import { Section, SectionHead } from "@/components/shared/section";
+import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { StageTitle } from "@/components/home/stages";
 import { Assessment } from "@/components/home/assessment";
 import { CtaBanner } from "@/components/home/cta-banner";
@@ -41,10 +42,9 @@ function ProductDetail({ product }: { product: Product }) {
           </p>
           <ul className="mt-2 grid gap-2">
             {product.soundsLike.map((s) => (
-              <li key={s} className="flex items-start gap-3 text-[0.95rem] text-muted-foreground">
-                <span className="mt-[9px] h-2 w-2 shrink-0 rounded-full bg-brand" aria-hidden="true" />
+              <SpokeBullet key={s} as="li" size="list" className="text-[0.95rem] text-muted-foreground">
                 {s}
-              </li>
+              </SpokeBullet>
             ))}
           </ul>
         </div>
@@ -54,10 +54,9 @@ function ProductDetail({ product }: { product: Product }) {
           </p>
           <ul className="mt-2 grid gap-2">
             {product.youGet.map((s) => (
-              <li key={s} className="flex items-start gap-3 text-[0.95rem] text-muted-foreground">
-                <span className="mt-[9px] h-2 w-2 shrink-0 rounded-full bg-brand" aria-hidden="true" />
+              <SpokeBullet key={s} as="li" size="list" className="text-[0.95rem] text-muted-foreground">
                 {s}
-              </li>
+              </SpokeBullet>
             ))}
           </ul>
         </div>
