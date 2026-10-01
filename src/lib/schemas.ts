@@ -19,7 +19,7 @@ export function validateContactForm(data: Partial<ContactFormData>): ValidationR
   }
 
   if (!data.service || data.service.trim().length === 0) {
-    errors.service = "Please select a service";
+    errors.service = "Please pick the closest one";
   }
 
   return {

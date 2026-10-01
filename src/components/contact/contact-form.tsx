@@ -123,7 +123,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <Label htmlFor="company">Company / Organization</Label>
+        <Label htmlFor="company">Company</Label>
         <Input
           id="company"
           value={formData.company}
@@ -174,7 +174,7 @@ export function ContactForm() {
 
       {status === "error" && (
         <p className="text-sm text-destructive">
-          Something went wrong. Please try again or email me directly.
+          Something went wrong. Please try again or email me at nick@dataspoke.io.
         </p>
       )}
 

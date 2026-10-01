@@ -14,7 +14,7 @@ export function Hero() {
           </h1>
           <p className="lede max-w-xl">{HERO.lede}</p>
           <div className="mt-1 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <BookCall>Start with an AI Assessment</BookCall>
+            <BookCall>Start with the AI Assessment</BookCall>
             <Link href="/services" className="font-semibold text-primary hover:text-primary/80">
               See the products &rarr;
             </Link>

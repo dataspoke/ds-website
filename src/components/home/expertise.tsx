@@ -8,7 +8,7 @@ export function ExpertiseSection() {
       <SectionHead
         eyebrow="What's underneath"
         title="Connected data is the foundation. Better decisions are the point."
-        lede="Sometimes the answer is a dashboard, not a chat. Sometimes it's a model. Sometimes it's a tool nobody sells. Every product above draws on three things I've done for a living."
+        lede="Sometimes the answer is a dashboard, not a chat. Sometimes it's a model. Sometimes it's a tool nobody sells. Every product I build draws on three things I've done for a living."
       />
       <div className="mt-12 grid gap-7 md:grid-cols-2 lg:grid-cols-3 md:gap-10">
         {EXPERTISE.map((e) => (

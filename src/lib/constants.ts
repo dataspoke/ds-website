@@ -27,7 +27,7 @@ export const HERO = {
   eyebrow: "For small businesses with too many tools and not enough answers",
   headline: SITE_TAGLINE,
   lede:
-    "Your sales, operations and finance software each know part of the story. I connect them into one picture you own, so every decision is made on what's actually happening.",
+    "Your sales, operations and finance tools each know part of the story. I connect them into one picture you own, so every decision is made on what's actually happening.",
   byline:
     "Nick Paul · Army Engineer officer · data scientist & software developer · M.S. Operations Research · one senior consultant, no hand-offs",
 };
@@ -108,7 +108,7 @@ export const STAGES: Stage[] = [
         slug: "live-numbers",
         title: "Live Numbers",
         description:
-          "Dashboards and monthly reports that build themselves from your real systems. Some numbers you need every Monday, the same way, without asking anyone. That's a dashboard, not a chat.",
+          "Dashboards and monthly reports that build themselves from your real systems. Some numbers you need every Monday, the same way, without asking anyone.",
         result:
           "A weekly scorecard that matches your CRM to the lead, and shows cost per paying customer by channel.",
         soundsLike: [
@@ -117,7 +117,7 @@ export const STAGES: Stage[] = [
           "Ad platforms report conversions your sales team can't find.",
         ],
         youGet: [
-          "A scorecard that matches your system of record, down to the individual lead.",
+          "A scorecard that matches your CRM, down to the individual lead.",
           "Monthly reports that build and send themselves.",
           "One trusted answer to what you spent and what you got, by channel and by agency.",
           "Numbers you can hand to your bookkeeper or your board without caveats.",
@@ -127,7 +127,7 @@ export const STAGES: Stage[] = [
         slug: "lead-flow",
         title: "Lead Flow",
         description:
-          "Every lead from every source captured in minutes, acknowledged instantly, and followed up by text and email until they book or say no.",
+          "Every lead from every source captured in minutes, acknowledged instantly and followed up by text and email until they book or say no.",
         result:
           "Leads from ads, your website and lead vendors reach your CRM in minutes, and the customer hears back right away.",
         soundsLike: [
@@ -173,7 +173,7 @@ export const STAGES: Stage[] = [
         slug: "ai-ready-company",
         title: "AI\u2011Ready Company",
         description:
-          "How your business actually runs, written down and kept current: systems, processes, roles. Then your team trained to use AI on it, with custom skills for the jobs they do every day.",
+          "How your business actually runs, written down and kept current: systems, processes, roles. Then your team trained to use AI on it, with custom AI tools set up for the jobs they do every day.",
         result:
           "An internal playbook that updates itself from the documents your team already edits, and a team that knows how to put AI to work on it.",
         soundsLike: [
@@ -182,9 +182,9 @@ export const STAGES: Stage[] = [
           "You'd like to use AI but aren't sure what it would even have access to.",
         ],
         youGet: [
-          "A company playbook: systems, processes and roles, kept current from the docs you already edit.",
+          "A company playbook: systems, processes and roles, kept current from the documents you already edit.",
           "Hands-on training for your team on the AI tools that fit their jobs.",
-          "Custom AI skills for your recurring work: intake, proposals, reports, follow-up.",
+          "Custom AI tools for your recurring work: intake, proposals, reports, follow-up.",
           "A clear map of what AI can and can't see, so nothing leaks.",
         ],
       },
@@ -202,14 +202,14 @@ export const STAGES: Stage[] = [
         description:
           "Any job someone does the same way every week runs itself: intake, follow-up, reconciliation, sending reports. Where AI can do the work, it drafts and a person approves.",
         result:
-          "Hours back every week, and nobody re-typing what the business already knows.",
+          "Hours back every week, and nobody retyping what the business already knows.",
         soundsLike: [
           "The same report gets rebuilt by hand every Monday.",
           "Proposals, intake forms and follow-ups are written from scratch each time.",
           "A person is the only thing moving work from one step to the next.",
         ],
         youGet: [
-          "Repeat work that runs on a schedule or on a trigger, with a person reviewing instead of re-typing.",
+          "Repeat work that runs on a schedule or on a trigger, with a person reviewing instead of retyping.",
           "AI that drafts the document, the reply or the summary, and waits for approval.",
           "A record of every automated step, so you can see what happened and why.",
         ],
@@ -236,7 +236,7 @@ export const STAGES: Stage[] = [
         slug: "find-the-margin",
         title: "Find the Margin",
         description:
-          "Where the next customers and the next dollars are. Prospects that look like your best clients, services and segments that actually pay, pricing that's leaking. Tested properly before you spend.",
+          "Where the next customers and the next dollars are. Prospects that look like your best customers, services and segments that actually pay, pricing that's leaking. Tested properly before you spend.",
         result:
           "A ranked list of who to call next, and proof of which bet paid off.",
         soundsLike: [
@@ -263,13 +263,13 @@ export const EXPERTISE: Expertise[] = [
   {
     title: "Operations",
     description:
-      "Trained in operations research. I look at how work actually moves through your business, where it waits, and what it costs, then fix the flow before adding software to it.",
+      "Trained in operations research. I look at how work actually moves through your business, where it waits and what it costs, then fix the flow before adding software to it.",
     example: "Replacing a whiteboard schedule with a planner that reads the real orders.",
   },
   {
     title: "Data science",
     description:
-      "Anyone can run a model. Knowing whether it was done right, what the result means, and what to do about it on Monday morning is the job. I guide the question, the method and the decision.",
+      "Anyone can run a model. Knowing whether it was done right, what the result means and what to do about it on Monday morning is the job. I guide the question, the method and the decision.",
     example: "Ranking which prospects a sales team should call first, and proving the ranking works.",
   },
   {
@@ -286,7 +286,7 @@ export const ASSESSMENT = {
   lede:
     "Two weeks. I inventory every system and data source your company runs on, score how connected and AI\u2011ready it is today, and hand you a prioritized plan. You keep the plan whether or not we work together.",
   includes: [
-    "A map of every tool, who uses it, and what data lives there",
+    "A map of every tool, who uses it and what data lives there",
     "A connected-data score and an AI\u2011readiness score, with the gaps named",
     "The three projects worth doing first, with what each would cost and return",
     "A 60-minute walkthrough with you and your leadership team",
@@ -307,19 +307,19 @@ export const STEPS: Step[] = [
     label: "Step 1",
     title: "Free 30-minute call",
     description:
-      "You tell me what's frustrating you. I tell you honestly whether I can fix it and whether the assessment is the right start.",
+      "You tell me what's frustrating you. I tell you honestly whether I can fix it and whether the AI Assessment is the right place to start.",
   },
   {
     label: "Step 2",
     title: "AI Assessment",
     description:
-      "Two weeks. You get the map, the scores and a written plan with prices before any build work starts.",
+      "You get the map, the scores and a written plan with prices before any build work starts.",
   },
   {
     label: "Step 3",
     title: "Build, hand over, support",
     description:
-      "Fixed-scope projects from the plan. You own every account, every line of code and plain-English documentation.",
+      "Fixed-scope projects from the plan. You own every account and every line of code, with plain-English documentation.",
   },
 ];
 
@@ -337,13 +337,13 @@ export const EXAMPLES: Example[] = [
     before:
       "Ad platforms reporting conversions the sales team can't find. Leads from several agencies and vendors arriving by email.",
     after:
-      "Every lead source into the CRM in minutes, junk filtered out, and one view of cost per paying job by channel and by agency.",
+      "Every lead source flowing into the CRM in minutes, junk filtered out, and one view of cost per paying job by channel and by agency.",
     result: "One trusted number for what each marketing dollar brings back.",
   },
   {
     industry: "Membership business",
     before:
-      "A customer-facing app that was slow, out of date, and dependent on a vendor nobody could reach.",
+      "A customer-facing app that was slow, out of date and dependent on a vendor nobody could reach.",
     after:
       "Rebuilt iOS and Android apps on top of the booking system the business already pays for, and the owner holding the keys to their own data.",
     result: "Customers book in seconds. The owner owns the whole thing.",
@@ -361,18 +361,18 @@ export const CREDENTIALS = [
 export const SERVICE_OPTIONS = [
   { value: "assessment", label: "Start with the AI Assessment" },
   { value: "connected-company", label: "Connect our systems" },
-  { value: "live-numbers", label: "Numbers and reports I can trust" },
+  { value: "live-numbers", label: "Numbers and reports we can trust" },
   { value: "lead-flow", label: "Respond to every lead faster" },
   { value: "company-brain", label: "Get answers from our own business data" },
   { value: "ai-ready-company", label: "Get our company and team AI\u2011ready" },
   { value: "automate-the-busywork", label: "Automate repeat work" },
   { value: "early-warnings", label: "Know what's coming before it hits" },
   { value: "find-the-margin", label: "Find where the money is" },
-  { value: "other", label: "Not sure yet, let's talk" },
+  { value: "other", label: "Not sure yet. Let's talk." },
 ];
 
 export const TRADEMARK_NOTE =
-  "Product names are trademarks of their respective owners. DataSpoke is not affiliated with, endorsed by, or a partner of these companies.";
+  "Product names are trademarks of their respective owners. DataSpoke is not affiliated with, endorsed by or a partner of these companies.";
 
 export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/in/nick-paul-8b466818/",

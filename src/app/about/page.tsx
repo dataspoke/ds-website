@@ -10,7 +10,7 @@ import { CREDENTIALS, SOCIAL_LINKS } from "@/lib/constants";
 export const metadata: Metadata = generateMetadata({
   title: "About",
   description:
-    "Nick Paul runs DataSpoke from Durham, CT. Data scientist and software developer, Army Engineer officer and combat veteran, B.S. in mathematics, M.S. in operations research, 5 years building analytics, automation, custom software and AI for small businesses nationwide.",
+    "Nick Paul runs DataSpoke from Durham, CT. He's a data scientist and software developer, an Army Engineer officer and combat veteran, with a B.S. in mathematics and an M.S. in operations research. For five years he has built analytics, automation, custom software and AI for small businesses nationwide.",
   path: "/about",
 });
 
@@ -64,13 +64,13 @@ export default function AboutPage() {
             </p>
             <p className="text-muted-foreground">
               I learned operations as an Army Engineer officer, leading soldiers in combat zones.
-              Out there a plan only counts if it works on the ground, the supplies have to show
-              up, and people are depending on you to get it right. I run every project the same
+              Out there, a plan only counts if it works on the ground. The supplies have to show
+              up, and people depend on you to get it right. I run every project the same
               way.
             </p>
             <p className="text-muted-foreground">
-              My training is in math: a bachelor&apos;s in mathematics and a master&apos;s in
-              operations research, a discipline about one thing: using data to make better
+              My training is in math. I have a bachelor&apos;s in mathematics and a master&apos;s
+              in operations research, a field about one thing: using data to make better
               decisions. I&apos;m a data scientist and a software developer, so I can both find
               the answer in the numbers and build the system that puts it to work.
             </p>
@@ -82,7 +82,7 @@ export default function AboutPage() {
               plus what&apos;s still missing before a document can be drafted. For a home-services
               contractor, I traced every ad dollar through to paying jobs, so the owner knows
               which marketing actually makes money. For a membership business, I replaced a
-              slow vendor app with iOS and Android apps the owner controls outright and serves to his customers.
+              slow vendor app with iOS and Android apps the owner controls outright.
             </p>
             <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
               {CREDENTIALS.map((c) => (

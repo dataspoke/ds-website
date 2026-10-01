@@ -20,7 +20,7 @@ export function Assessment() {
 
         <div className="grid gap-5 rounded-2xl border border-border p-6 sm:p-8">
           <div>
-            <p className="text-sm text-muted-foreground">Example scorecard, home services company</p>
+            <p className="text-sm text-muted-foreground">Example scorecard: home-services company</p>
             <div className="mt-3 grid gap-2.5">
               {ASSESSMENT.sampleScores.map((row) => (
                 <div

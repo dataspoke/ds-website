@@ -34,7 +34,7 @@ export default function ContactPage() {
               <h2 className="text-2xl font-bold">Book a free 30-minute call</h2>
               <p className="text-muted-foreground">
                 Pick a time that suits you. You&apos;ll get a calendar invite with a video link.
-                Come with whatever is frustrating you; no preparation needed.
+                Come with whatever is frustrating you. No preparation needed.
               </p>
               <BookCall className="justify-self-start">Pick a time</BookCall>
             </div>
