@@ -29,7 +29,7 @@ export const HERO = {
   lede:
     "Your sales, operations and finance software each know part of the story. I connect them into one picture you own, so every decision is made on what's actually happening.",
   byline:
-    "Nick Paul · Army veteran · M.S. Operations Research · one senior consultant, no hand-offs",
+    "Nick Paul · Army Engineer officer · data scientist & software developer · M.S. Operations Research · one senior consultant, no hand-offs",
 };
 
 /** Spokes on the hero diagram: one per area of the business, clockwise from the top. */
@@ -345,15 +345,16 @@ export const EXAMPLES: Example[] = [
     before:
       "A customer-facing app that was slow, out of date, and dependent on a vendor nobody could reach.",
     after:
-      "A rebuilt app on top of the booking system the business already pays for, and the owner holding the keys to their own data.",
+      "Rebuilt iOS and Android apps on top of the booking system the business already pays for, and the owner holding the keys to their own data.",
     result: "Customers book in seconds. The owner owns the whole thing.",
   },
 ];
 
 export const CREDENTIALS = [
-  "Army veteran",
-  "M.S. Operations Research",
-  "10+ years building data systems",
+  "Army Engineer officer, combat veteran",
+  "B.S. Mathematics · M.S. Operations Research",
+  "Data scientist & software developer",
+  "5 years consulting for small businesses",
   `${LOCATION} · clients nationwide`,
 ];
 

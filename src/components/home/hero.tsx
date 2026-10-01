@@ -19,15 +19,7 @@ export function Hero() {
               See the products &rarr;
             </Link>
           </div>
-          <div className="mt-2 flex items-center gap-3">
-            <div
-              className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-dashed border-brand bg-tint text-[0.6rem] font-semibold text-primary"
-              aria-hidden="true"
-            >
-              photo
-            </div>
-            <p className="text-sm text-muted-foreground">{HERO.byline}</p>
-          </div>
+          <p className="mt-2 text-sm text-muted-foreground">{HERO.byline}</p>
         </div>
         <figure className="mx-auto w-full max-w-[700px]">
           <SpokeDiagram />
