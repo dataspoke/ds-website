@@ -9,7 +9,7 @@ export function ExpertiseSection() {
         title="Connected data is the foundation. Better decisions are the point."
         lede="Sometimes the answer is a dashboard, not a chat. Sometimes it's a model. Sometimes it's a tool nobody sells. Every product above draws on three things I've done for a living."
       />
-      <div className="mt-12 grid gap-7 md:grid-cols-3 md:gap-10">
+      <div className="mt-12 grid gap-7 md:grid-cols-2 lg:grid-cols-3 md:gap-10">
         {EXPERTISE.map((e) => (
           <div key={e.title} className="grid content-start gap-2.5">
             <span className="h-3.5 w-3.5 rounded-full bg-brand" aria-hidden="true" />

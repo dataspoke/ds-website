@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 export function StageTitle({ stage }: { stage: Stage }) {
   return (
     <div className="flex flex-wrap items-center gap-3 border-b-2 border-brand pb-3">
-      <span className="font-display font-extrabold text-brand">{stage.number}</span>
+      <span className="font-display font-extrabold text-primary">{stage.number}</span>
       <h3 className="text-[1.05rem] font-bold uppercase tracking-[0.06em]">{stage.title}</h3>
       <p className="w-full text-[0.97rem] text-muted-foreground sm:ml-auto sm:w-auto">
         {stage.summary}
@@ -36,7 +36,7 @@ export function Stages({ showRetainer = true }: { showRetainer?: boolean }) {
     <Section tint id="products">
       <SectionHead
         eyebrow="What I build"
-        title="Connect your company. Make it AI-ready. Then run it on what you know."
+        title={"Connect your company. Make it AI\u2011ready. Then run it on what you know."}
         lede="Three stages, in order. Most clients start at the top and work down."
       />
       <div className="mt-14 grid gap-10">
@@ -46,7 +46,7 @@ export function Stages({ showRetainer = true }: { showRetainer?: boolean }) {
             <div
               className={cn(
                 "grid gap-4",
-                stage.products.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"
+                stage.products.length === 2 ? "md:grid-cols-2" : "md:grid-cols-2 lg:grid-cols-3"
               )}
             >
               {stage.products.map((p) => (

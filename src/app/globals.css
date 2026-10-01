@@ -112,6 +112,13 @@
     letter-spacing: -0.02em;
     text-wrap: balance;
   }
+  p, li {
+    text-wrap: pretty;
+  }
+  /* Keep anchor targets clear of the 72px sticky header. */
+  [id] {
+    scroll-margin-top: 88px;
+  }
 }
 
 @layer utilities {

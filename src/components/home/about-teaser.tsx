@@ -2,8 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { Section } from "@/components/shared/section";
 import { CREDENTIALS, SOCIAL_LINKS } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
-export function ProfilePhoto({ className = "" }: { className?: string }) {
+export function ProfilePhoto({
+  className = "",
+  priority = false,
+}: {
+  className?: string;
+  priority?: boolean;
+}) {
   return (
     <Image
       src="/nick-paul-family.jpg"
@@ -11,7 +18,10 @@ export function ProfilePhoto({ className = "" }: { className?: string }) {
       width={1220}
       height={1520}
       sizes="260px"
-      className={`aspect-[4/5] w-full max-w-[240px] rounded-2xl object-cover ${className}`}
+      // Next 16 deprecates `priority`; eager + high fetch priority is the documented replacement.
+      loading={priority ? "eager" : undefined}
+      fetchPriority={priority ? "high" : undefined}
+      className={cn("aspect-[4/5] w-full max-w-[240px] rounded-2xl object-cover", className)}
     />
   );
 }

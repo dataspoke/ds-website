@@ -46,7 +46,7 @@ export default function ContactPage() {
               <ol className="grid gap-3">
                 {STEPS.map((s, i) => (
                   <li key={s.title} className="flex gap-3 text-[0.95rem] text-muted-foreground">
-                    <span className="font-display font-bold text-brand">{i + 1}</span>
+                    <span className="w-4 shrink-0 text-center font-display font-bold text-primary tabular-nums">{i + 1}</span>
                     <span>
                       <span className="font-semibold text-foreground">{s.title}.</span>{" "}
                       {s.description}

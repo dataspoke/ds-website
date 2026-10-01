@@ -76,7 +76,7 @@ export const PROBLEMS: Problem[] = [
 ];
 
 export const PROBLEMS_CLOSE =
-  "Connecting the software is the first step. Capturing what the business already knows is the second. That's what makes you AI-ready.";
+  "Connecting the software is the first step. Capturing what the business already knows is the second. That's what makes you AI\u2011ready.";
 
 export const STAGES: Stage[] = [
   {
@@ -147,7 +147,7 @@ export const STAGES: Stage[] = [
   {
     number: "02",
     slug: "ai-ready",
-    title: "AI-Ready",
+    title: "AI\u2011Ready",
     summary: "AI that knows your business, and a team that knows how to use it.",
     products: [
       {
@@ -171,7 +171,7 @@ export const STAGES: Stage[] = [
       },
       {
         slug: "ai-ready-company",
-        title: "AI-Ready Company",
+        title: "AI\u2011Ready Company",
         description:
           "How your business actually runs, written down and kept current: systems, processes, roles. Then your team trained to use AI on it, with custom skills for the jobs they do every day.",
         result:
@@ -284,10 +284,10 @@ export const ASSESSMENT = {
   price: "$999",
   terms: "fixed price · 2 weeks",
   lede:
-    "Two weeks. I inventory every system and data source your company runs on, score how connected and AI-ready it is today, and hand you a prioritized plan. You keep the plan whether or not we work together.",
+    "Two weeks. I inventory every system and data source your company runs on, score how connected and AI\u2011ready it is today, and hand you a prioritized plan. You keep the plan whether or not we work together.",
   includes: [
     "A map of every tool, who uses it, and what data lives there",
-    "A connected-data score and an AI-readiness score, with the gaps named",
+    "A connected-data score and an AI\u2011readiness score, with the gaps named",
     "The three projects worth doing first, with what each would cost and return",
     "A 60-minute walkthrough with you and your leadership team",
   ],
@@ -298,7 +298,7 @@ export const ASSESSMENT = {
     { label: "Phone calls", score: 2 },
     { label: "Operations", score: 5 },
     { label: "Finance (Books)", score: 3 },
-    { label: "AI-ready", score: 1 },
+    { label: "AI\u2011ready", score: 1 },
   ],
 };
 
@@ -364,7 +364,7 @@ export const SERVICE_OPTIONS = [
   { value: "live-numbers", label: "Numbers and reports I can trust" },
   { value: "lead-flow", label: "Respond to every lead faster" },
   { value: "company-brain", label: "Get answers from our own business data" },
-  { value: "ai-ready-company", label: "Get our company and team AI-ready" },
+  { value: "ai-ready-company", label: "Get our company and team AI\u2011ready" },
   { value: "automate-the-busywork", label: "Automate repeat work" },
   { value: "early-warnings", label: "Know what's coming before it hits" },
   { value: "find-the-margin", label: "Find where the money is" },

@@ -37,6 +37,8 @@ export function ContactForm() {
     const validation = validateContactForm(formData);
     if (!validation.valid) {
       setErrors(validation.errors);
+      const firstKey = ["name", "email", "service"].find((k) => validation.errors[k]);
+      if (firstKey) document.getElementById(firstKey)?.focus();
       return;
     }
     setErrors({});
@@ -60,9 +62,9 @@ export function ContactForm() {
     return (
       <div className="rounded-xl border border-primary/20 bg-primary/5 p-8 text-center">
         <CheckCircle className="mx-auto h-12 w-12 text-primary" />
-        <h3 className="mt-4 text-xl font-semibold">Message Sent</h3>
+        <h3 className="mt-4 text-xl font-semibold">Message sent</h3>
         <p className="mt-2 text-muted-foreground">
-          Thanks for reaching out. IThanks for reaching out. I&apos;ll get back to you within 24 hours.apos;ll reply within one business day.
+          Thanks for reaching out. I&apos;ll reply within one business day.
         </p>
         <Button className="mt-6" onClick={() => setStatus("idle")}>
           Send another note
@@ -93,11 +95,13 @@ export function ContactForm() {
           id="name"
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          aria-invalid={!!errors.name}
+          aria-describedby={errors.name ? "name-error" : undefined}
           placeholder="Your name"
-          className="mt-1"
+          className="mt-1 h-11"
         />
         {errors.name && (
-          <p className="mt-1 text-sm text-destructive">{errors.name}</p>
+          <p id="name-error" className="mt-1 text-sm text-destructive">{errors.name}</p>
         )}
       </div>
 
@@ -108,11 +112,13 @@ export function ContactForm() {
           type="email"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          aria-invalid={!!errors.email}
+          aria-describedby={errors.email ? "email-error" : undefined}
           placeholder="you@company.com"
-          className="mt-1"
+          className="mt-1 h-11"
         />
         {errors.email && (
-          <p className="mt-1 text-sm text-destructive">{errors.email}</p>
+          <p id="email-error" className="mt-1 text-sm text-destructive">{errors.email}</p>
         )}
       </div>
 
@@ -123,7 +129,7 @@ export function ContactForm() {
           value={formData.company}
           onChange={(e) => setFormData({ ...formData, company: e.target.value })}
           placeholder="Your company name"
-          className="mt-1"
+          className="mt-1 h-11"
         />
       </div>
 
@@ -133,7 +139,12 @@ export function ContactForm() {
           value={formData.service}
           onValueChange={(value) => setFormData({ ...formData, service: value })}
         >
-          <SelectTrigger className="mt-1">
+          <SelectTrigger
+            id="service"
+            aria-invalid={!!errors.service}
+            aria-describedby={errors.service ? "service-error" : undefined}
+            className="mt-1 h-11 w-full text-base data-[size=default]:h-11"
+          >
             <SelectValue placeholder="Pick the closest one" />
           </SelectTrigger>
           <SelectContent>
@@ -145,7 +156,7 @@ export function ContactForm() {
           </SelectContent>
         </Select>
         {errors.service && (
-          <p className="mt-1 text-sm text-destructive">{errors.service}</p>
+          <p id="service-error" className="mt-1 text-sm text-destructive">{errors.service}</p>
         )}
       </div>
 
@@ -157,7 +168,7 @@ export function ContactForm() {
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
           placeholder="What is slowing you down right now?"
           rows={5}
-          className="mt-1"
+          className="mt-1 min-h-32"
         />
       </div>
 
@@ -167,7 +178,7 @@ export function ContactForm() {
         </p>
       )}
 
-      <Button type="submit" size="lg" className="w-full" disabled={status === "loading"}>
+      <Button type="submit" size="lg" className="h-12 w-full text-base" disabled={status === "loading"}>
         {status === "loading" ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />

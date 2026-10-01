@@ -5,7 +5,7 @@ export function ProblemStatement() {
   return (
     <Section id="familiar">
       <SectionHead eyebrow="Sound familiar?" title="Your business knows more than you can see." />
-      <div className="mt-12 grid gap-7 md:grid-cols-3 md:gap-10">
+      <div className="mt-12 grid gap-7 md:grid-cols-2 lg:grid-cols-3 md:gap-10">
         {PROBLEMS.map((p) => (
           <div key={p.title} className="grid content-start gap-2.5">
             <span className="h-3.5 w-3.5 rounded-full bg-brand" aria-hidden="true" />

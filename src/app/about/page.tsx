@@ -49,11 +49,11 @@ export default function AboutPage() {
   return (
     <>
       <Section>
-        <div className="grid items-start gap-10 md:grid-cols-[260px_1fr] md:gap-14">
-          <ProfilePhoto className="max-w-[260px]" />
+        <div className="grid items-start gap-10 md:grid-cols-[200px_1fr] md:gap-14 lg:grid-cols-[260px_1fr]">
+          <ProfilePhoto priority className="max-w-[200px] sm:max-w-[260px]" />
           <div className="grid max-w-2xl gap-5">
             <p className="eyebrow">About</p>
-            <h1 className="text-4xl font-extrabold leading-[1.1] sm:text-5xl">
+            <h1 className="text-4xl font-extrabold leading-[1.1] sm:text-5xl md:text-[2.6rem] lg:text-5xl">
               I&apos;m Nick Paul. I help small businesses get their software working together.
             </h1>
             <p className="lede">
@@ -138,7 +138,7 @@ export default function AboutPage() {
             <ul className="mt-3 grid gap-2.5">
               {FIT.no.map((s) => (
                 <li key={s} className="flex items-start gap-3 text-muted-foreground">
-                  <span className="mt-[9px] h-2.5 w-2.5 shrink-0 rounded-full bg-border" aria-hidden="true" />
+                  <span className="mt-[9px] h-2.5 w-2.5 shrink-0 rounded-full bg-input" aria-hidden="true" />
                   {s}
                 </li>
               ))}

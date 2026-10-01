@@ -9,7 +9,7 @@ export function Examples() {
         title="The same problem, in every kind of business."
         lede="Law firms, contractors, gyms, manufacturers, consultancies and retailers. The tools change; the pattern doesn't."
       />
-      <div className="mt-12 grid gap-6 md:grid-cols-3">
+      <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {EXAMPLES.map((ex) => (
           <article key={ex.industry} className="grid content-start gap-3.5 rounded-xl border border-border p-7">
             <p className="text-xs font-semibold uppercase tracking-[0.08em] text-primary">
