@@ -70,6 +70,7 @@ export default function ServicesPage() {
     <>
       <Section tight>
         <SectionHead
+          as="h1"
           eyebrow="Products"
           title={"Connect your company. Make it AI\u2011ready. Then run it on what you know."}
           lede="You don't need to know what to ask for. Find the problem that sounds like yours."
