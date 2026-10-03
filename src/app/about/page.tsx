@@ -5,6 +5,7 @@ import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { ProfilePhoto } from "@/components/home/about-teaser";
 import { ExpertiseSection } from "@/components/home/expertise";
 import { CtaBanner } from "@/components/home/cta-banner";
+import { PersonJsonLd } from "@/components/shared/json-ld";
 import { CREDENTIALS, SOCIAL_LINKS } from "@/lib/constants";
 
 export const metadata: Metadata = generateMetadata({
@@ -49,6 +50,7 @@ const FIT = {
 export default function AboutPage() {
   return (
     <>
+      <PersonJsonLd />
       <Section>
         <div className="grid items-start gap-10 md:grid-cols-[200px_1fr] md:gap-14 lg:grid-cols-[260px_1fr]">
           <ProfilePhoto priority className="max-w-[200px] sm:max-w-[260px]" />

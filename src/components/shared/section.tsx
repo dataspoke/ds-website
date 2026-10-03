@@ -26,13 +26,15 @@ interface SectionHeadProps {
   title: string;
   lede?: string;
   className?: string;
+  /** Use "h1" when this is the page's top heading. */
+  as?: "h1" | "h2";
 }
 
-export function SectionHead({ eyebrow, title, lede, className }: SectionHeadProps) {
+export function SectionHead({ eyebrow, title, lede, className, as: Heading = "h2" }: SectionHeadProps) {
   return (
     <div className={cn("grid max-w-2xl gap-3.5", className)}>
       {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-      <h2 className="text-3xl font-bold leading-[1.15] sm:text-4xl">{title}</h2>
+      <Heading className="text-3xl font-bold leading-[1.15] sm:text-4xl">{title}</Heading>
       {lede && <p className="lede">{lede}</p>}
     </div>
   );
