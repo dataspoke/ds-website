@@ -4,7 +4,16 @@ import type { CaseStudy } from "@/types";
 // did about it. Drawn from real client work. Rules: industry, size and revenue
 // band only. No location, no client names, no proprietary method.
 
-export const CASE_STUDIES: CaseStudy[] = [
+/** Client use cases held back until the client approves the text. Remove a slug to publish it. */
+const AWAITING_CLIENT_OK = new Set([
+  "every-lead-in-under-a-minute",
+  "where-every-sale-came-from",
+  "cost-per-paying-job",
+  "own-app-own-data",
+  "members-before-they-leave",
+]);
+
+const ALL_CASE_STUDIES: CaseStudy[] = [
   {
     slug: "every-lead-in-under-a-minute",
     title: "Every lead in the CRM in under a minute",
@@ -192,3 +201,5 @@ export const CASE_STUDIES: CaseStudy[] = [
     featured: true,
   },
 ];
+
+export const CASE_STUDIES = ALL_CASE_STUDIES.filter((c) => !AWAITING_CLIENT_OK.has(c.slug));
