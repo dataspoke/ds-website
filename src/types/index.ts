@@ -51,6 +51,8 @@ export interface CaseStudy {
   industry: string;
   /** Headcount band, e.g. "20–50 staff". */
   size: string;
+  /** Optional annual revenue band, e.g. "$1–5M revenue". Shown only when set. */
+  revenueBand?: string;
   lines: ServiceLineSlug[];
   summary: {
     problem: string;
