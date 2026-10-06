@@ -1,5 +1,5 @@
 import { Section, SectionHead } from "@/components/shared/section";
-import { EXAMPLES } from "@/lib/constants";
+import { EXAMPLES } from "@/content/home";
 
 export function Examples() {
   return (

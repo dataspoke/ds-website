@@ -6,7 +6,8 @@ import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { StageTitle } from "@/components/home/stages";
 import { Assessment } from "@/components/home/assessment";
 import { CtaBanner } from "@/components/home/cta-banner";
-import { RETAINER_NOTE, STAGES } from "@/lib/constants";
+import { RETAINER_NOTE } from "@/content/approach";
+import { STAGES } from "@/content/services";
 import type { Product } from "@/types";
 
 export const metadata: Metadata = generateMetadata({

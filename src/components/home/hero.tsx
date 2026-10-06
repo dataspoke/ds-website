@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BookCall } from "@/components/shared/book-call";
 import { SpokeDiagram } from "@/components/shared/spoke-diagram";
-import { HERO } from "@/lib/constants";
+import { HERO } from "@/content/home";
 
 export function Hero() {
   return (

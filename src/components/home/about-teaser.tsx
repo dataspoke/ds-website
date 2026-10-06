@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Section } from "@/components/shared/section";
-import { CREDENTIALS, SOCIAL_LINKS } from "@/lib/constants";
+import { CREDENTIALS } from "@/content/home";
+import { SOCIAL_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 export function ProfilePhoto({

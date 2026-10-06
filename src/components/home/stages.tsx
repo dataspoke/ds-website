@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Section, SectionHead } from "@/components/shared/section";
-import { RETAINER_NOTE, STAGES } from "@/lib/constants";
+import { RETAINER_NOTE } from "@/content/approach";
+import { STAGES } from "@/content/services";
 import type { Product, Stage } from "@/types";
 import { cn } from "@/lib/utils";
 

@@ -1,6 +1,6 @@
 import { Section, SectionHead } from "@/components/shared/section";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
-import { PROBLEMS, PROBLEMS_CLOSE } from "@/lib/constants";
+import { PROBLEMS, PROBLEMS_CLOSE } from "@/content/home";
 
 export function ProblemStatement() {
   return (

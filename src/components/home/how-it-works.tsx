@@ -1,5 +1,5 @@
 import { Section, SectionHead } from "@/components/shared/section";
-import { STEPS } from "@/lib/constants";
+import { STEPS } from "@/content/approach";
 
 export function HowItWorks() {
   return (

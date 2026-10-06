@@ -1,7 +1,7 @@
 import { BookCall } from "@/components/shared/book-call";
 import { Section, SectionHead } from "@/components/shared/section";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
-import { ASSESSMENT } from "@/lib/constants";
+import { ASSESSMENT } from "@/content/approach";
 
 export function Assessment() {
   return (

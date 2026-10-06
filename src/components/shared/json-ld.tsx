@@ -3,10 +3,10 @@ import {
   SITE_URL,
   SITE_DESCRIPTION,
   CONTACT_EMAIL,
-  PRODUCTS,
   SOCIAL_LINKS,
-  CREDENTIALS,
 } from "@/lib/constants";
+import { PRODUCTS } from "@/content/services";
+import { CREDENTIALS } from "@/content/home";
 
 // Stable ids let search engines join the business and its founder across pages.
 const ORG_ID = `${SITE_URL}/#organization`;

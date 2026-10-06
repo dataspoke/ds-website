@@ -6,7 +6,8 @@ import { ProfilePhoto } from "@/components/home/about-teaser";
 import { ExpertiseSection } from "@/components/home/expertise";
 import { CtaBanner } from "@/components/home/cta-banner";
 import { PersonJsonLd } from "@/components/shared/json-ld";
-import { CREDENTIALS, SOCIAL_LINKS } from "@/lib/constants";
+import { CREDENTIALS } from "@/content/home";
+import { SOCIAL_LINKS } from "@/lib/constants";
 
 export const metadata: Metadata = generateMetadata({
   title: "About",

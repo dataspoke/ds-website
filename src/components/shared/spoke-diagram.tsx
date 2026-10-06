@@ -1,4 +1,4 @@
-import { SPOKES } from "@/lib/constants";
+import { SPOKES } from "@/content/home";
 import { cn } from "@/lib/utils";
 
 interface Geometry {

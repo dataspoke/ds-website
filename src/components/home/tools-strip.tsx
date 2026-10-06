@@ -1,4 +1,4 @@
-import { TOOLS } from "@/lib/constants";
+import { TOOLS } from "@/content/home";
 
 /** Text wordmarks only. Vendor brand rules do not permit logos without a partner agreement. */
 export function ToolsStrip() {

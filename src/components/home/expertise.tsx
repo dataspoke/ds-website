@@ -1,6 +1,6 @@
 import { Section, SectionHead } from "@/components/shared/section";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
-import { EXPERTISE } from "@/lib/constants";
+import { EXPERTISE } from "@/content/home";
 
 export function ExpertiseSection() {
   return (

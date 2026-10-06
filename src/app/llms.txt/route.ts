@@ -1,17 +1,14 @@
+import { ASSESSMENT, RETAINER_NOTE, STEPS } from "@/content/approach";
 import {
-  ASSESSMENT,
   BOOKING_URL,
   CONTACT_EMAIL,
-  CREDENTIALS,
   LOCATION,
-  RETAINER_NOTE,
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
-  STAGES,
-  STEPS,
-  TOOLS,
 } from "@/lib/constants";
+import { CREDENTIALS, TOOLS } from "@/content/home";
+import { STAGES } from "@/content/services";
 
 // Plain-text summary for AI assistants and answer engines (https://llmstxt.org).
 // Built from the same constants as the pages, so it stays in sync with the site copy.
