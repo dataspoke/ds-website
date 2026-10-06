@@ -36,11 +36,15 @@ export const TOOLS = [
   "Lawmatics",
   "Clio",
   "QuickBooks",
+  "Stripe",
   "RingCentral",
+  "Zoom",
   "Google Ads",
   "Meta Ads",
   "Mindbody",
   "Google Workspace",
+  "Slack",
+  "Airtable",
 ];
 
 export const PROBLEMS_HEAD = {
