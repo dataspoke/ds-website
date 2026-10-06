@@ -1,4 +1,4 @@
-import type { Product, ServiceLine, Stage } from "@/types";
+import type { Product, ServiceLine, ServiceLineSlug, Stage } from "@/types";
 
 // Product copy. Each product belongs to one service line below.
 // The legacy STAGES grouping at the bottom reuses these same objects.
@@ -43,12 +43,11 @@ const LEAD_FLOW: Product = {
   ],
 };
 
-/** Stub. Phase 1 (stream A) finishes this copy. */
 const TRUST_LADDER: Product = {
   slug: "trust-ladder",
   title: "Trust Ladder",
   description:
-    "Everything your business knows, sorted by how much you can rely on it. Decided, then documented, then discussed, then hearsay. Each fact keeps a link to where it came from.",
+    "I collect what your business produces, process it and turn it into structured records: clients, projects, decisions, policies. Not one giant pile of files. Every fact carries a trust level and a link to where it came from.",
   result:
     "AI and reports draw on what was decided, not on what someone once said in a meeting.",
   soundsLike: [
@@ -60,6 +59,7 @@ const TRUST_LADDER: Product = {
     "Calls, emails and documents turned into structured records with a source on each one.",
     "Every fact tagged Decided, Documented, Discussed or Hearsay.",
     "One place where the current answer lives, and a trail to how it got there.",
+    "AI that says \"this was only discussed\" instead of passing hearsay off as policy.",
   ],
 };
 
@@ -83,7 +83,6 @@ const LIVE_NUMBERS: Product = {
   ],
 };
 
-/** Stub. Phase 1 (streams A and D) finishes this copy. */
 const KPI_HIERARCHY: Product = {
   slug: "kpi-hierarchy",
   title: "KPI Hierarchy",
@@ -102,23 +101,58 @@ const KPI_HIERARCHY: Product = {
   ],
 };
 
-/** Stub. Phase 1 (stream A) finishes this copy. */
 const YOUR_OWN_APP: Product = {
   slug: "your-own-app",
-  title: "Your Own App",
+  title: "Internal Tools",
   description:
-    "An app.yourcompany.com built around how your business actually works. It sits on top of the systems you already own and shows each person the work that's theirs.",
+    "An app.yourcompany.com built around how your business actually works. It sits on top of the systems you already pay for and shows each person the work that's theirs.",
   result:
     "Your team works in one screen built for them, instead of five tools built for everyone.",
   soundsLike: [
     "Your team keeps a spreadsheet next to the software because the software doesn't fit.",
     "You pay for features you don't use and still can't do the one thing you need.",
-    "Customers use an app from a vendor nobody can reach.",
+    "New staff need a week to learn which of five tools holds which answer.",
   ],
   youGet: [
-    "A web or mobile app built for your process, on your own domain.",
-    "Your data in systems you own, not locked in a vendor's.",
-    "Plain-English documentation, so you're never stuck with me.",
+    "A web app on your own domain, built for your process.",
+    "Each person's work on one screen, pulled from the systems you already run.",
+    "Your data stays in systems you own, not locked in mine or a new vendor's.",
+  ],
+};
+
+const CLIENT_PORTAL: Product = {
+  slug: "client-portal",
+  title: "Client Portal",
+  description:
+    "A place where your clients log in and see their status, documents and invoices. It reads from your CRM and accounting system, so nobody updates it by hand.",
+  result:
+    "Fewer \"where is this at?\" calls, and clients who feel looked after between meetings.",
+  soundsLike: [
+    "Clients email to ask for a status you could simply show them.",
+    "Documents go back and forth as attachments and nobody knows which version is final.",
+  ],
+  youGet: [
+    "A branded portal on your own domain.",
+    "Status, documents and invoices pulled live from the systems you already use.",
+    "Per-client logins, so each client sees only their own work.",
+  ],
+};
+
+const MOBILE_APP: Product = {
+  slug: "mobile-app",
+  title: "Mobile Apps",
+  description:
+    "iOS and Android apps for your customers or your crew, built on the booking, CRM or field system you already pay for. Your brand, your data, your app store listing.",
+  result:
+    "Customers book and pay in your app, and you own the relationship instead of a vendor.",
+  soundsLike: [
+    "Customers use an app from a vendor nobody can reach.",
+    "Your crew fills in paper forms that someone retypes at the office.",
+  ],
+  youGet: [
+    "Native-feeling iOS and Android apps under your company's name.",
+    "Built on your existing systems, so nothing has to migrate.",
+    "Plain-English documentation and code you own, so you're never stuck with me.",
   ],
 };
 
@@ -246,15 +280,16 @@ export const SERVICE_LINES: ServiceLine[] = [
     title: "Organize",
     oneLiner: "A pile of data turned into records AI and reports can trust.",
     problem:
-      "Once the data is captured, it's still a pile. Calls, emails and documents disagree with each other. Some of it was decided. Some of it was only said once in a meeting. AI can't tell the difference unless you sort it.",
+      "Once the data is captured, it's still a pile. Calls, emails and documents disagree with each other. Some of it was decided. Some of it was only said once in a meeting. AI can't tell the difference unless someone sorts it, so it treats a passing comment like company policy. I collect it, process it and turn it into structured records, each one marked with how far you can trust it.",
     soundsLike: [
       "Two documents say different things and nobody knows which one is current.",
       "A decision was made on a call, and three weeks later nobody can find it.",
       "You'd like AI to answer questions, but you don't trust what it would read.",
     ],
     youGet: [
-      "Structured records built from your calls, emails and documents.",
-      "A trust ladder on every fact: Decided, Documented, Discussed, Hearsay.",
+      "Structured records built from your calls, emails and documents, not one giant pile of files.",
+      "A trust level on every fact: Decided, Documented, Discussed or Hearsay.",
+      "AI and reports that know what was decided and what is only hearsay.",
       "A source behind every answer, so you can check it.",
     ],
     products: [TRUST_LADDER],
@@ -265,16 +300,16 @@ export const SERVICE_LINES: ServiceLine[] = [
     title: "Metrics & Dashboards",
     oneLiner: "Numbers you need every Monday, the same way, without asking anyone.",
     problem:
-      "Month-end means exporting four reports and hoping they match. The leadership meeting starts with a debate about whose number is right, and nobody can say which numbers actually move the goal.",
+      "Month-end means exporting four reports and hoping they match. The leadership meeting starts with a debate about whose number is right, and nobody can say which numbers actually move the goal. Routine reports belong in a dashboard. You shouldn't prompt AI to rebuild the same report every Monday and get a slightly different answer each time.",
     soundsLike: [
       "Your leadership meeting starts with a debate about whose number is right.",
       "Month-end means someone spends a day reconciling reports by hand.",
-      "Ad platforms report conversions your sales team can't find.",
+      "Someone asks AI to rebuild the same report every Monday.",
     ],
     youGet: [
       "A scorecard that matches your CRM, down to the individual lead.",
       "Monthly reports that build and send themselves.",
-      "A KPI hierarchy: one goal, the numbers that prove it and the ones your team can move this week.",
+      "A KPI hierarchy: one goal, the lagging KPIs that prove it, the leading indicators your team can move this week and a weekly scorecard that ties them together.",
     ],
     products: [LIVE_NUMBERS, KPI_HIERARCHY],
   },
@@ -284,18 +319,19 @@ export const SERVICE_LINES: ServiceLine[] = [
     title: "Custom Software",
     oneLiner: "Every business should have an app.yourcompany.com built around how it actually works.",
     problem:
-      "Off-the-shelf software is built for everyone, so it fits nobody exactly. Your team fills the gaps with spreadsheets, sticky notes and copy and paste.",
+      "Off-the-shelf software is built for everyone, so it fits nobody exactly. Your team fills the gaps with spreadsheets, sticky notes and copy and paste. You already pay for systems that hold the data. What's missing is the screen built around how your company works. I build internal tools, client portals and mobile apps on top of the systems you already pay for.",
     soundsLike: [
       "Your team keeps a spreadsheet next to the software because the software doesn't fit.",
       "You pay for features you don't use and still can't do the one thing you need.",
-      "Customers use an app from a vendor nobody can reach.",
+      "Clients email to ask for a status you could simply show them.",
     ],
     youGet: [
-      "A web or mobile app built for your process, on your own domain.",
-      "Built on top of the systems you already own.",
-      "Plain-English documentation, so you're never stuck with me.",
+      "Internal tools that show each person the work that's theirs.",
+      "Client portals where customers see status, documents and invoices without calling you.",
+      "iOS and Android apps on the booking, CRM or accounting system you already pay for.",
+      "Code you own and plain-English documentation, so you're never stuck with me.",
     ],
-    products: [YOUR_OWN_APP],
+    products: [YOUR_OWN_APP, CLIENT_PORTAL, MOBILE_APP],
   },
   {
     slug: "ai-implementation",
@@ -337,9 +373,140 @@ export const SERVICE_LINES: ServiceLine[] = [
   },
 ];
 
+export const HUB_LINES = SERVICE_LINES.filter((l) => l.kind === "hub");
+export const SPOKE_LINES = SERVICE_LINES.filter((l) => l.kind === "spoke");
+
+export function getServiceLine(slug: string): ServiceLine | undefined {
+  return SERVICE_LINES.find((l) => l.slug === slug);
+}
+
+/** Copy for the /services overview page. */
+export const SERVICES_PAGE = {
+  eyebrow: "Services",
+  title: "Your data in the middle. Everything else runs on it.",
+  lede:
+    "Two hub services get your data captured and organized. Four spokes put it to work. You don't need to know what to ask for. Find the problem that sounds like yours.",
+  diagramHub: "Your data",
+  hubEyebrow: "The hub",
+  hubTitle: "Start with the data.",
+  hubLede:
+    "Every spoke runs on what the hub collects. Most clients start here, because a dashboard or an AI tool is only as good as the data under it.",
+  spokeEyebrow: "The spokes",
+  spokeTitle: "Then put it to work.",
+  spokeLede:
+    "Each spoke is a project with a fixed scope. Pick the one that hurts most today. The others get easier once the hub is in place.",
+};
+
+/** Diagram labels, split into lines so they fit on a phone. */
+export const SERVICE_DIAGRAM_LABELS: Record<ServiceLineSlug, string[]> = {
+  capture: ["Capture"],
+  organize: ["Organize"],
+  "metrics-dashboards": ["Metrics &", "Dashboards"],
+  "custom-software": ["Custom", "Software"],
+  "ai-implementation": ["AI", "Implementation"],
+  "analytics-data-science": ["Analytics &", "Data Science"],
+};
+
+export interface LadderRung {
+  label: string;
+  description: string;
+}
+
+export interface Ladder {
+  eyebrow: string;
+  title: string;
+  lede: string;
+  rungs: LadderRung[];
+  caption: string;
+}
+
+/** Simple step graphics shown on some line pages. Top rung first. */
+export const LINE_LADDERS: Partial<Record<ServiceLineSlug, Ladder>> = {
+  organize: {
+    eyebrow: "The trust ladder",
+    title: "Not every fact is equal.",
+    lede:
+      "I collect what your business produces, process it and file each fact on one of four rungs. Each one keeps a link back to its source.",
+    rungs: [
+      {
+        label: "Decided",
+        description:
+          "Signed off by someone who can make the call. A contract, an approved price, a written policy.",
+      },
+      {
+        label: "Documented",
+        description:
+          "Written down in a place of record but not formally approved. A process doc, a proposal, a CRM note.",
+      },
+      {
+        label: "Discussed",
+        description:
+          "Talked through on a call or in a meeting. Useful context, not yet a commitment.",
+      },
+      {
+        label: "Hearsay",
+        description:
+          "Mentioned once, second-hand or unconfirmed. Kept on file but never treated as fact.",
+      },
+    ],
+    caption:
+      "AI and reports lean on the top rungs. When the only answer is hearsay, they say so.",
+  },
+  "metrics-dashboards": {
+    eyebrow: "The KPI hierarchy",
+    title: "Every number answers to the goal.",
+    lede:
+      "A dashboard with forty numbers tells you nothing. I build it from the top down, so each number has a reason to be there and an owner.",
+    rungs: [
+      {
+        label: "Goal",
+        description: "The one outcome the year is about. Revenue, margin or jobs completed.",
+      },
+      {
+        label: "Lagging KPIs",
+        description:
+          "The numbers that prove you hit it. They tell you what happened, after it happened.",
+      },
+      {
+        label: "Leading indicators",
+        description:
+          "The numbers your team can move this week. Response time, quotes sent, calls made.",
+      },
+      {
+        label: "Weekly scorecard",
+        description:
+          "One page every Monday, built from your systems, with an owner on every number.",
+      },
+    ],
+    caption:
+      "Routine reports belong in the dashboard. Save AI for the questions you haven't asked before.",
+  },
+};
+
+/** Labels for the shared blocks on each line page. */
+export const LINE_PAGE = {
+  backLabel: "All services",
+  problemHeading: "The problem",
+  soundsLikeHeading: "Sounds like you if",
+  youGetHeading: "What you get",
+  productsEyebrow: "What I build",
+  productsTitle: "The pieces of this service",
+  caseStudiesEyebrow: "Related work",
+  caseStudiesTitle: "Where I've done this before",
+  caseStudyLink: "Read the case study",
+  otherLinesHeading: "Other services",
+  ctaTitle: (title: string) => `Ask me about ${title}.`,
+  ctaLede:
+    "Tell me what's frustrating you. I'll tell you honestly whether I can fix it, and what it would take.",
+  ctaButton: "Ask about this",
+  bookCall: "Book a 30-minute call",
+  seeLine: (title: string) => `See ${title}`,
+};
+
 /**
- * Legacy three-stage grouping used by the current home and /services pages.
- * Same product objects as SERVICE_LINES. Retire once Phase 1 pages ship.
+ * Legacy three-stage grouping. The /services page no longer uses it.
+ * Still imported by src/components/home/stages.tsx, src/app/llms.txt/route.ts
+ * and (via PRODUCTS) src/components/shared/json-ld.tsx. Retire in Phase 2.
  */
 export const STAGES: Stage[] = [
   {

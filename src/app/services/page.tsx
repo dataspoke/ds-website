@@ -1,101 +1,75 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { generateMetadata } from "@/lib/metadata";
 import { Section, SectionHead } from "@/components/shared/section";
-import { SpokeBullet } from "@/components/shared/spoke-bullet";
-import { StageTitle } from "@/components/home/stages";
 import { Assessment } from "@/components/home/assessment";
 import { CtaBanner } from "@/components/home/cta-banner";
-import { RETAINER_NOTE } from "@/content/approach";
-import { STAGES } from "@/content/services";
-import type { Product } from "@/types";
+import { LineCard } from "@/components/services/line-card";
+import { ServicesMap } from "@/components/services/services-map";
+import { ASSESSMENT, RETAINER_NOTE } from "@/content/approach";
+import { HUB_LINES, SERVICES_PAGE, SPOKE_LINES } from "@/content/services";
 
 export const metadata: Metadata = generateMetadata({
-  title: "Products",
+  title: "Services",
   description:
-    "Connect your company, make it AI-ready, then run it on what you know. Connected data, live numbers, lead flow, a private company brain, AI training, automation, early warnings and margin analysis for small businesses.",
+    "Data in the middle, everything else running on it. Capture and organize your company's data, then put it to work with dashboards, custom software, AI and analytics. For established businesses past $1M in revenue.",
   path: "/services",
 });
 
-function ProductDetail({ product }: { product: Product }) {
-  return (
-    <article
-      id={product.slug}
-      className="grid gap-6 border-t border-border py-10 md:grid-cols-[1fr_1fr] md:gap-12"
-    >
-      <div className="grid content-start gap-3">
-        <h3 className="text-2xl font-bold">{product.title}</h3>
-        <p className="text-muted-foreground">{product.description}</p>
-        <p className="text-sm text-muted-foreground">
-          <span className="font-semibold text-foreground/80">Typical result:</span> {product.result}
-        </p>
-        <Link
-          href={`/contact?service=${product.slug}`}
-          className="mt-1 justify-self-start py-2 font-semibold text-primary hover:text-primary/80"
-        >
-          Ask about this &rarr;
-        </Link>
-      </div>
-      <div className="grid content-start gap-6">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-primary">
-            Sounds like you if
-          </p>
-          <ul className="mt-2 grid gap-2">
-            {product.soundsLike.map((s) => (
-              <SpokeBullet key={s} as="li" size="list" className="text-[0.95rem] text-muted-foreground">
-                {s}
-              </SpokeBullet>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-primary">
-            What you get
-          </p>
-          <ul className="mt-2 grid gap-2">
-            {product.youGet.map((s) => (
-              <SpokeBullet key={s} as="li" size="list" className="text-[0.95rem] text-muted-foreground">
-                {s}
-              </SpokeBullet>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </article>
-  );
-}
+const jumpLinks = [
+  { href: "#hub", label: SERVICES_PAGE.hubEyebrow },
+  { href: "#spokes", label: SERVICES_PAGE.spokeEyebrow },
+  { href: "#assessment", label: `The ${ASSESSMENT.name}` },
+];
 
 export default function ServicesPage() {
   return (
     <>
       <Section tight>
-        <SectionHead
-          as="h1"
-          eyebrow="Products"
-          title={"Connect your company. Make it AI\u2011ready. Then run it on what you know."}
-          lede="You don't need to know what to ask for. Find the problem that sounds like yours."
-        />
-        <nav aria-label="Jump to a stage" className="mt-8 flex flex-wrap gap-x-6 gap-y-0 text-sm font-semibold">
-          {STAGES.map((s) => (
-            <a key={s.slug} href={`#${s.slug}`} className="inline-block py-2.5 text-primary hover:text-primary/80">
-              {s.number} {s.title}
-            </a>
-          ))}
-          <a href="#assessment" className="inline-block py-2.5 text-primary hover:text-primary/80">
-            The AI Assessment
-          </a>
-        </nav>
+        <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.15fr]">
+          <div className="grid gap-6">
+            <SectionHead
+              as="h1"
+              eyebrow={SERVICES_PAGE.eyebrow}
+              title={SERVICES_PAGE.title}
+              lede={SERVICES_PAGE.lede}
+            />
+            <nav aria-label="Jump to a section" className="flex flex-wrap gap-x-6 text-sm font-semibold">
+              {jumpLinks.map((l) => (
+                <a key={l.href} href={l.href} className="inline-block py-2.5 text-primary hover:text-primary/80">
+                  {l.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+          <ServicesMap className="mx-auto w-full max-w-xl" />
+        </div>
       </Section>
 
-      {STAGES.map((stage) => (
-        <Section key={stage.slug} id={stage.slug} className="pt-0 sm:pt-0">
-          <StageTitle stage={stage} />
-          {stage.products.map((p) => (
-            <ProductDetail key={p.slug} product={p} />
+      <Section tint id="hub">
+        <SectionHead
+          eyebrow={SERVICES_PAGE.hubEyebrow}
+          title={SERVICES_PAGE.hubTitle}
+          lede={SERVICES_PAGE.hubLede}
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {HUB_LINES.map((l) => (
+            <LineCard key={l.slug} line={l} />
           ))}
-        </Section>
-      ))}
+        </div>
+      </Section>
+
+      <Section id="spokes">
+        <SectionHead
+          eyebrow={SERVICES_PAGE.spokeEyebrow}
+          title={SERVICES_PAGE.spokeTitle}
+          lede={SERVICES_PAGE.spokeLede}
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {SPOKE_LINES.map((l) => (
+            <LineCard key={l.slug} line={l} />
+          ))}
+        </div>
+      </Section>
 
       <Section tint tight>
         <p className="max-w-3xl text-muted-foreground">{RETAINER_NOTE}</p>

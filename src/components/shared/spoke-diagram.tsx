@@ -155,3 +155,209 @@ export function SpokeDiagram({
     </svg>
   );
 }
+
+interface ServiceGeometry {
+  W: number;
+  H: number;
+  CX: number;
+  CY: number;
+  /** Distance from the centre to each spoke dot. */
+  R: number;
+  labelOffset: number;
+  fontSize: number;
+  charWidth: number;
+  lineH: number;
+  padX: number;
+  padY: number;
+  hubR: number;
+  hubLabelFont: number;
+  hubPillW: number;
+  hubPillH: number;
+  hubPillFont: number;
+  strokeWidth: number;
+  dotR: number;
+}
+
+// Four spokes on the diagonals, labels centred above (top row) or below (bottom row)
+// each dot. Labels are two lines so the widest ("Implementation", 14 chars) stays
+// narrow enough that the two pills in a row never touch, even on a phone.
+const SERVICE_DESKTOP: ServiceGeometry = {
+  W: 720,
+  H: 520,
+  CX: 360,
+  CY: 260,
+  R: 200,
+  labelOffset: 16,
+  fontSize: 15,
+  charWidth: 8.6,
+  lineH: 19,
+  padX: 16,
+  padY: 10,
+  hubR: 104,
+  hubLabelFont: 13,
+  hubPillW: 124,
+  hubPillH: 34,
+  hubPillFont: 15,
+  strokeWidth: 3,
+  dotR: 7,
+};
+
+// Phone: dots sit ~110 units either side of centre. The widest pill is ~173 wide,
+// so the pills span x = 27..421 and the two in a row stay apart.
+const SERVICE_COMPACT: ServiceGeometry = {
+  W: 448,
+  H: 420,
+  CX: 224,
+  CY: 210,
+  R: 156,
+  labelOffset: 14,
+  fontSize: 18,
+  charWidth: 10.2,
+  lineH: 22,
+  padX: 15,
+  padY: 10,
+  hubR: 92,
+  hubLabelFont: 15,
+  hubPillW: 128,
+  hubPillH: 36,
+  hubPillFont: 18,
+  strokeWidth: 3,
+  dotR: 7,
+};
+
+export interface DiagramLine {
+  label: string[];
+  href: string;
+}
+
+/**
+ * Services hub-and-spoke: data in the middle, holding the hub lines (Capture, Organize),
+ * with one spoke per line that runs on it. Every label links to its line page.
+ */
+export function ServicesDiagram({
+  hubLabel,
+  hubs,
+  spokes,
+  compact = false,
+  className,
+}: {
+  hubLabel: string;
+  hubs: DiagramLine[];
+  spokes: DiagramLine[];
+  compact?: boolean;
+  className?: string;
+}) {
+  const g = compact ? SERVICE_COMPACT : SERVICE_DESKTOP;
+  const font = "var(--font-inter), system-ui, sans-serif";
+
+  const nodes = spokes.map((spoke, i) => {
+    const ang = ((-135 + i * (360 / spokes.length)) * Math.PI) / 180;
+    const x = g.CX + g.R * Math.cos(ang);
+    const y = g.CY + g.R * Math.sin(ang);
+    const longest = Math.max(...spoke.label.map((l) => l.length));
+    const w = longest * g.charWidth + g.padX * 2;
+    const h = spoke.label.length * g.lineH + g.padY * 2;
+    const by = Math.sin(ang) < 0 ? y - g.labelOffset - h : y + g.labelOffset;
+    return { ...spoke, x, y, w, h, bx: x - w / 2, by };
+  });
+
+  // Hub: a small "YOUR DATA" label above a stack of white pills, centred as a block.
+  const stackH = hubs.length * g.hubPillH + (hubs.length - 1) * 8;
+  const blockH = g.hubLabelFont + 10 + stackH;
+  const labelY = g.CY - blockH / 2 + g.hubLabelFont * 0.8;
+  const pillsTop = g.CY - blockH / 2 + g.hubLabelFont + 10;
+
+  return (
+    <svg
+      viewBox={`0 0 ${g.W} ${g.H}`}
+      role="group"
+      aria-label={`Diagram: ${hubLabel} at the center, holding ${hubs
+        .map((h) => h.label.join(" "))
+        .join(" and ")}, with spokes to ${spokes.map((s) => s.label.join(" ")).join(", ")}`}
+      className={cn("block h-auto w-full", className)}
+    >
+      {nodes.map((n) => (
+        <line
+          key={`l-${n.href}`}
+          x1={g.CX}
+          y1={g.CY}
+          x2={n.x}
+          y2={n.y}
+          stroke="var(--tint-strong)"
+          strokeWidth={g.strokeWidth}
+          className="spoke-line"
+        />
+      ))}
+      {nodes.map((n) => (
+        <a key={`n-${n.href}`} href={n.href} className="group">
+          <circle cx={n.x} cy={n.y} r={g.dotR} fill="var(--brand)" />
+          <rect
+            x={n.bx}
+            y={n.by}
+            width={n.w}
+            height={n.h}
+            rx={14}
+            fill="var(--background)"
+            stroke="var(--tint-strong)"
+            strokeWidth={1.5}
+            className="transition-colors group-hover:stroke-[var(--brand)]"
+          />
+          {n.label.map((line, li) => (
+            <text
+              key={line}
+              x={n.x}
+              y={n.by + g.padY + li * g.lineH + g.lineH * 0.72}
+              textAnchor="middle"
+              fontSize={g.fontSize}
+              fontWeight={600}
+              fill="var(--ink)"
+              fontFamily={font}
+            >
+              {line}
+            </text>
+          ))}
+        </a>
+      ))}
+      <circle cx={g.CX} cy={g.CY} r={g.hubR} fill="var(--brand)" />
+      <text
+        x={g.CX}
+        y={labelY}
+        textAnchor="middle"
+        fontSize={g.hubLabelFont}
+        fontWeight={700}
+        letterSpacing="0.08em"
+        fill="#ffffff"
+        fontFamily="var(--font-jakarta), var(--font-inter), sans-serif"
+      >
+        {hubLabel.toUpperCase()}
+      </text>
+      {hubs.map((hub, i) => {
+        const y = pillsTop + i * (g.hubPillH + 8);
+        return (
+          <a key={hub.href} href={hub.href} className="group">
+            <rect
+              x={g.CX - g.hubPillW / 2}
+              y={y}
+              width={g.hubPillW}
+              height={g.hubPillH}
+              rx={g.hubPillH / 2}
+              fill="#ffffff"
+              className="transition-opacity group-hover:opacity-90"
+            />
+            <text
+              x={g.CX}
+              y={y + g.hubPillH / 2 + g.hubPillFont * 0.35}
+              textAnchor="middle"
+              fontSize={g.hubPillFont}
+              fontWeight={700}
+              fill="var(--brand)"
+              fontFamily={font}
+            >
+              {hub.label.join(" ")}
+            </text>
+          </a>
+        );
+      })}
+    </svg>
+  );
+}
