@@ -31,6 +31,8 @@ export const SPOKES = [
 /** Text only. Vendor brand rules do not allow logo use without a partner agreement; see public/logos/README.md. */
 export const TOOLS = [
   "Salesforce",
+  "HubSpot",
+  "GoHighLevel",
   "Lawmatics",
   "Clio",
   "QuickBooks",
