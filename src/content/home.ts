@@ -31,8 +31,12 @@ export const SPOKES = [
 /** Text only. Vendor brand rules do not allow logo use without a partner agreement; see public/logos/README.md. */
 export const TOOL_GROUPS = [
   {
-    label: "Sales & marketing",
-    tools: ["Salesforce", "HubSpot", "GoHighLevel", "Lawmatics", "Google Ads", "Meta Ads"],
+    label: "CRM",
+    tools: ["Salesforce", "HubSpot", "GoHighLevel", "Lawmatics"],
+  },
+  {
+    label: "Marketing",
+    tools: ["Google Ads", "Meta Ads"],
   },
   {
     label: "Calls & meetings",
@@ -43,12 +47,12 @@ export const TOOL_GROUPS = [
     tools: ["Slack", "Google Workspace", "Airtable"],
   },
   {
-    label: "Operations",
+    label: "Industry software",
     tools: ["Clio", "Mindbody"],
   },
   {
     label: "Finance",
-    tools: ["QuickBooks", "Stripe"],
+    tools: ["QuickBooks", "Xero", "Bookkeep", "Stripe", "Gusto", "ADP"],
   },
 ];
 
