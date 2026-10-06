@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
+import { SiteChrome } from "@/components/lp/site-chrome";
 import { JsonLd } from "@/components/shared/json-ld";
 import { defaultMetadata } from "@/lib/metadata";
 import "./globals.css";
@@ -30,9 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${jakarta.variable} font-sans antialiased`}>
         <JsonLd />
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );
