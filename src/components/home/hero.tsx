@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BookCall } from "@/components/shared/book-call";
 import { SpokeDiagram } from "@/components/shared/spoke-diagram";
+import { ProofLine } from "@/components/home/proof-line";
 import { HERO } from "@/content/home";
 
 export function Hero() {
@@ -13,10 +14,14 @@ export function Hero() {
             {HERO.headline}
           </h1>
           <p className="lede max-w-xl">{HERO.lede}</p>
+          <ProofLine className="max-w-xl" />
           <div className="mt-1 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <BookCall>Start with the AI Assessment</BookCall>
-            <Link href="/services" className="font-semibold text-primary hover:text-primary/80">
-              See the products &rarr;
+            <BookCall>{HERO.primaryCta}</BookCall>
+            <Link
+              href={HERO.secondaryCta.href}
+              className="font-semibold text-primary hover:text-primary/80"
+            >
+              {HERO.secondaryCta.label} &rarr;
             </Link>
           </div>
           <p className="mt-2 text-sm text-muted-foreground">{HERO.byline}</p>

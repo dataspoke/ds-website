@@ -3,12 +3,12 @@ import { Section, SectionHead } from "@/components/shared/section";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { ASSESSMENT } from "@/content/approach";
 
-export function Assessment() {
+export function Assessment({ tint = false }: { tint?: boolean }) {
   return (
-    <Section id="assessment">
+    <Section tint={tint} id="assessment">
       <div className="grid items-start gap-9 lg:grid-cols-2 lg:gap-14">
         <div className="grid gap-5">
-          <SectionHead eyebrow="Start here" title="The AI Assessment" lede={ASSESSMENT.lede} />
+          <SectionHead eyebrow="Start here" title={`The ${ASSESSMENT.name}`} lede={ASSESSMENT.lede} />
           <ul className="grid gap-3">
             {ASSESSMENT.includes.map((item) => (
               <SpokeBullet key={item} as="li" size="list" className="text-muted-foreground">
@@ -20,7 +20,7 @@ export function Assessment() {
 
         <div className="grid gap-5 rounded-2xl border border-border p-6 sm:p-8">
           <div>
-            <p className="text-sm text-muted-foreground">Example scorecard: home-services company</p>
+            <p className="text-sm text-muted-foreground">{ASSESSMENT.sampleLabel}</p>
             <div className="mt-3 grid gap-2.5">
               {ASSESSMENT.sampleScores.map((row) => (
                 <div
@@ -47,7 +47,7 @@ export function Assessment() {
               {ASSESSMENT.terms}
             </span>
           </p>
-          <BookCall className="justify-self-start">Book an assessment call</BookCall>
+          <BookCall className="justify-self-start">{ASSESSMENT.cta}</BookCall>
           <p className="text-sm text-muted-foreground">{ASSESSMENT.credit}</p>
         </div>
       </div>

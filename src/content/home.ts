@@ -1,13 +1,22 @@
-import { LOCATION, SITE_TAGLINE } from "@/lib/constants";
-import type { Example, Expertise, Problem } from "@/types";
+import { ASSESSMENT } from "@/content/approach";
+import { LOCATION } from "@/lib/constants";
+import type { Expertise, Problem } from "@/types";
 
 export const HERO = {
   eyebrow: "For established businesses past $1M in revenue that run on too many tools",
-  headline: SITE_TAGLINE,
+  headline: "Your business, running on its own data.",
   lede:
-    "Your sales, operations and finance tools each know part of the story. I connect them into one picture you own, so every decision is made on what's actually happening.",
+    "I capture what your business already produces, organize it into something you can trust, and build the dashboards, software and AI that run on it.",
+  primaryCta: `Start with the ${ASSESSMENT.name}`,
+  secondaryCta: { label: "See the services", href: "/services" },
   byline:
     "Nick Paul · Army Engineer officer · data scientist & software developer · M.S. Operations Research · one senior consultant, no hand-offs",
+};
+
+/** The proof line. Shown on the home hero and the About page. */
+export const PROOF_LINE = {
+  claim: "I doubled my revenue in the last year by running my own business on these tools.",
+  offer: "I can do the same for yours.",
 };
 
 /** Spokes on the hero diagram: one per area of the business, clockwise from the top. */
@@ -35,6 +44,13 @@ export const TOOLS = [
   "Google Workspace",
 ];
 
+export const PROBLEMS_HEAD = {
+  eyebrow: "Sound familiar?",
+  title: "Your business knows more than you can see.",
+  lede:
+    "Most businesses produce more data than they can use. It's spread across SaaS tools, calls, meetings, Slack and public records, and almost none of it is in one place.",
+};
+
 export const PROBLEMS: Problem[] = [
   {
     title: "The big systems don't talk to each other.",
@@ -44,7 +60,7 @@ export const PROBLEMS: Problem[] = [
   {
     title: "Data you produce every day and never use.",
     description:
-      "Every call, meeting, email and text is a record of the business. Almost none of it is captured anywhere you can look at it, and AI can't reach any of it.",
+      "Every call, meeting, email and Slack thread is a record of the business. So are the public records about your market. Almost none of it is captured anywhere you can look at it, and AI can't reach any of it.",
   },
   {
     title: "Things that live only in people's heads.",
@@ -54,7 +70,44 @@ export const PROBLEMS: Problem[] = [
 ];
 
 export const PROBLEMS_CLOSE =
-  "Connecting the software is the first step. Capturing what the business already knows is the second. That's what makes you AI‑ready.";
+  "Capturing that pile is the first step. Organizing it into something you can trust is the second. Every dashboard, app and AI tool runs on those two.";
+
+/** Home: hub-and-spoke grid of the six service lines. */
+export const SERVICES_HEAD = {
+  eyebrow: "What I do",
+  title: "Two foundations. Four things to build on them.",
+  lede:
+    "Capture and Organize are the hub. Every dashboard, app and AI tool I build runs on them. Most clients start at the hub and add spokes as they go.",
+  hubLabel: "The hub",
+  spokeLabel: "The spokes",
+  allLink: { label: "See all services", href: "/services" },
+};
+
+/** Home: featured case studies. */
+export const WORK_HEAD = {
+  eyebrow: "Work",
+  title: "What this looks like in a real business.",
+  lede: "Industry and size only. My clients' names and numbers stay theirs.",
+  allLink: { label: "See all work", href: "/work" },
+  readLabel: "Read the case study",
+};
+
+/** Home: how it works. Steps live in STEPS in approach.ts. */
+export const HOW_HEAD = {
+  eyebrow: "How it works",
+  title: "Three steps, no surprises.",
+  moreLink: { label: "See the full approach", href: "/approach" },
+};
+
+/** Home: about teaser. */
+export const ABOUT_TEASER = {
+  eyebrow: "About",
+  title: "I'm Nick Paul. I help established businesses run on their own data.",
+  paragraphs: [
+    "The name is the whole idea. Your business is the hub. Every tool you use is a spoke. My job is making the spokes carry data to the hub, so you can see the business clearly and so AI has something real to work with.",
+    "You talk to the person doing the work. Plain English, no jargon. You own all of it, documented, so you're never locked in.",
+  ],
+};
 
 export const EXPERTISE: Expertise[] = [
   {
@@ -74,33 +127,6 @@ export const EXPERTISE: Expertise[] = [
     description:
       "When nothing off the shelf fits how your team works, I build the piece that does, on top of the systems you already own, and document it so you're never stuck with me.",
     example: "A customer-facing app that sits on top of the booking system you already pay for.",
-  },
-];
-
-export const EXAMPLES: Example[] = [
-  {
-    industry: "Professional services",
-    before:
-      "Month-end reports built by hand from exports. The owner prepping for client meetings by digging through old calls and notes.",
-    after:
-      "Reports that check themselves against the books and send on their own. A private assistant that already knows every client, call and open task.",
-    result: "Reports arrive without being asked for. Meeting prep is one question.",
-  },
-  {
-    industry: "Home services",
-    before:
-      "Ad platforms reporting conversions the sales team can't find. Leads from several agencies and vendors arriving by email.",
-    after:
-      "Every lead source flowing into the CRM in minutes, junk filtered out and one view of cost per paying job by channel and by agency.",
-    result: "One trusted number for what each marketing dollar brings back.",
-  },
-  {
-    industry: "Membership business",
-    before:
-      "A customer-facing app that was slow, out of date and dependent on a vendor nobody could reach.",
-    after:
-      "Rebuilt iOS and Android apps on top of the booking system the business already pays for, and the owner holding the keys to their own data.",
-    result: "Customers book in seconds. The owner owns the whole thing.",
   },
 ];
 
