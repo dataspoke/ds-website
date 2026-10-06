@@ -6,7 +6,7 @@ export function ToolsStrip() {
     <div className="mx-auto max-w-6xl px-4 sm:px-6">
       <div className="border-y border-border py-6">
         <p className="text-sm text-muted-foreground">Works with the tools you already use</p>
-        <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-5 lg:grid-cols-4">
+        <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-5 lg:grid-cols-5">
           {TOOL_GROUPS.map((group) => (
             <div key={group.label}>
               <p className="text-xs font-semibold uppercase tracking-[0.08em] text-primary">

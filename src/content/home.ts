@@ -35,12 +35,16 @@ export const TOOL_GROUPS = [
     tools: ["Salesforce", "HubSpot", "GoHighLevel", "Lawmatics", "Google Ads", "Meta Ads"],
   },
   {
-    label: "Comms",
-    tools: ["RingCentral", "Zoom", "Fathom", "Slack"],
+    label: "Calls & meetings",
+    tools: ["RingCentral", "Zoom", "Fathom"],
+  },
+  {
+    label: "Team tools",
+    tools: ["Slack", "Google Workspace", "Airtable"],
   },
   {
     label: "Operations",
-    tools: ["Clio", "Mindbody", "Airtable", "Google Workspace"],
+    tools: ["Clio", "Mindbody"],
   },
   {
     label: "Finance",
