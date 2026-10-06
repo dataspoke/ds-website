@@ -8,8 +8,6 @@ export const HERO = {
     "I capture what your business already produces, organize it into something you can trust, and build the dashboards, software and AI that run on it.",
   primaryCta: `Start with the ${ASSESSMENT.name}`,
   secondaryCta: { label: "See the services", href: "/services" },
-  byline:
-    "Nick Paul · Army Engineer officer · data scientist & software developer · M.S. Operations Research · one senior consultant, no hand-offs",
 };
 
 /** The proof line. Shown on the home hero and the About page. */

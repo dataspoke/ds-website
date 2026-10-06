@@ -24,7 +24,6 @@ export function Hero() {
               {HERO.secondaryCta.label} &rarr;
             </Link>
           </div>
-          <p className="mt-2 text-sm text-muted-foreground">{HERO.byline}</p>
         </div>
         <figure className="mx-auto w-full max-w-[700px]">
           <SpokeDiagram compact className="sm:hidden" />
