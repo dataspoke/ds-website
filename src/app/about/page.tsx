@@ -5,6 +5,7 @@ import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { ProfilePhoto } from "@/components/home/about-teaser";
 import { ExpertiseSection } from "@/components/home/expertise";
 import { CtaBanner } from "@/components/home/cta-banner";
+import { ProofLine } from "@/components/home/proof-line";
 import { PersonJsonLd } from "@/components/shared/json-ld";
 import { CREDENTIALS } from "@/content/home";
 import { SOCIAL_LINKS } from "@/lib/constants";
@@ -12,7 +13,7 @@ import { SOCIAL_LINKS } from "@/lib/constants";
 export const metadata: Metadata = generateMetadata({
   title: "About",
   description:
-    "Nick Paul runs DataSpoke from Durham, CT. He's a data scientist and software developer, an Army Engineer officer and combat veteran, with a B.S. in mathematics and an M.S. in operations research. For five years he has built analytics, automation, custom software and AI for small businesses nationwide.",
+    "Nick Paul runs DataSpoke. He's a data scientist and software developer, an Army Engineer officer and combat veteran, with a B.S. in mathematics and an M.S. in operations research. For five years he has built analytics, automation, custom software and AI for established businesses nationwide.",
   path: "/about",
 });
 
@@ -58,7 +59,7 @@ export default function AboutPage() {
           <div className="grid max-w-2xl gap-5">
             <p className="eyebrow">About</p>
             <h1 className="text-4xl font-extrabold leading-[1.1] sm:text-5xl md:text-[2.6rem] lg:text-5xl">
-              I&apos;m Nick Paul. I help small businesses get their software working together.
+              I&apos;m Nick Paul. I help established businesses run on their own data.
             </h1>
             <p className="lede">
               The name is the whole idea. Your business is the hub. Every tool you use is a spoke.
@@ -78,7 +79,7 @@ export default function AboutPage() {
               the answer in the numbers and build the system that puts it to work.
             </p>
             <p className="text-muted-foreground">
-              For the last five years I&apos;ve brought all of that to small businesses as a
+              For the last five years I&apos;ve brought all of that to owner-run businesses as a
               technology consultant: analytics, automation, custom software and AI. For a law
               firm, I built a private AI assistant wired into its phones, case files and call
               recordings. Attorneys ask about any matter and get the whole history in seconds,
@@ -87,6 +88,7 @@ export default function AboutPage() {
               which marketing actually makes money. For a membership business, I replaced a
               slow vendor app with iOS and Android apps the owner controls outright.
             </p>
+            <ProofLine />
             <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
               {CREDENTIALS.map((c) => (
                 <span key={c}>{c}</span>

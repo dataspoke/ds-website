@@ -1,10 +1,12 @@
+import Link from "next/link";
 import { Section, SectionHead } from "@/components/shared/section";
 import { STEPS } from "@/content/approach";
+import { HOW_HEAD } from "@/content/home";
 
 export function HowItWorks() {
   return (
     <Section id="how" className="pt-0 sm:pt-0">
-      <SectionHead eyebrow="How it works" title="Three steps, no surprises." />
+      <SectionHead eyebrow={HOW_HEAD.eyebrow} title={HOW_HEAD.title} />
       <ol className="mt-12 grid gap-8 md:grid-cols-3">
         {STEPS.map((step, i) => (
           <li key={step.title} className="relative grid content-start gap-3 pt-7">
@@ -26,6 +28,12 @@ export function HowItWorks() {
           </li>
         ))}
       </ol>
+      <Link
+        href={HOW_HEAD.moreLink.href}
+        className="mt-9 inline-block font-semibold text-primary hover:text-primary/80"
+      >
+        {HOW_HEAD.moreLink.label} &rarr;
+      </Link>
     </Section>
   );
 }
