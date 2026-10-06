@@ -29,23 +29,26 @@ export const SPOKES = [
 ];
 
 /** Text only. Vendor brand rules do not allow logo use without a partner agreement; see public/logos/README.md. */
-export const TOOLS = [
-  "Salesforce",
-  "HubSpot",
-  "GoHighLevel",
-  "Lawmatics",
-  "Clio",
-  "QuickBooks",
-  "Stripe",
-  "RingCentral",
-  "Zoom",
-  "Google Ads",
-  "Meta Ads",
-  "Mindbody",
-  "Google Workspace",
-  "Slack",
-  "Airtable",
+export const TOOL_GROUPS = [
+  {
+    label: "Sales & marketing",
+    tools: ["Salesforce", "HubSpot", "GoHighLevel", "Lawmatics", "Google Ads", "Meta Ads"],
+  },
+  {
+    label: "Comms",
+    tools: ["RingCentral", "Zoom", "Fathom", "Slack"],
+  },
+  {
+    label: "Operations",
+    tools: ["Clio", "Mindbody", "Airtable", "Google Workspace"],
+  },
+  {
+    label: "Finance",
+    tools: ["QuickBooks", "Stripe"],
+  },
 ];
+
+export const TOOLS = TOOL_GROUPS.flatMap((g) => g.tools);
 
 export const PROBLEMS_HEAD = {
   eyebrow: "Sound familiar?",
