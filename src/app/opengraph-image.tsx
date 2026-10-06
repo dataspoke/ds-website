@@ -43,7 +43,7 @@ export default async function Image() {
               {SITE_TAGLINE}
             </span>
             <span style={{ fontFamily: "Inter", fontSize: 28, lineHeight: 1.35, color: OG_COLORS.muted }}>
-              Connected data, dashboards, automation and AI for small businesses.
+              Data, dashboards, custom software, AI and analytics for established businesses.
             </span>
           </div>
           <span style={{ fontFamily: "Inter", fontSize: 24, color: OG_COLORS.primary }}>dataspoke.io</span>

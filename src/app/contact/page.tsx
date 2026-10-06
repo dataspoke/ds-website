@@ -4,7 +4,7 @@ import { generateMetadata } from "@/lib/metadata";
 import { Section } from "@/components/shared/section";
 import { BookCall } from "@/components/shared/book-call";
 import { ContactForm } from "@/components/contact/contact-form";
-import { CONTACT_EMAIL, LOCATION, SOCIAL_LINKS } from "@/lib/constants";
+import { CONTACT_EMAIL, SOCIAL_LINKS } from "@/lib/constants";
 import { STEPS } from "@/content/approach";
 
 export const metadata: Metadata = generateMetadata({
@@ -71,7 +71,7 @@ export default function ContactPage() {
                 >
                   LinkedIn
                 </a>{" "}
-                · {LOCATION}, working with clients nationwide
+                · Working with clients nationwide
               </p>
             </div>
           </div>

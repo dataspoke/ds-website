@@ -7,7 +7,7 @@ import { LpCtaBanner } from "@/components/lp/lp-cta-banner";
 import { LP_AI } from "@/content/lp";
 
 export const metadata: Metadata = {
-  title: "AI-Ready Company | DataSpoke",
+  title: "AI-Ready Company",
   description:
     "Connect your systems, make your company AI-ready and automate the busywork. A two-week Data & AI Assessment, then a plan.",
   robots: { index: false, follow: false },

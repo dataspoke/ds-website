@@ -6,7 +6,7 @@ import { LpCtaBanner } from "@/components/lp/lp-cta-banner";
 import { LP_DASHBOARDS } from "@/content/lp";
 
 export const metadata: Metadata = {
-  title: "Metrics & Dashboards | DataSpoke",
+  title: "Metrics & Dashboards",
   description:
     "Routine reports belong in a dashboard, not in a prompt you re-type every Monday. A KPI hierarchy from goal to weekly scorecard, and one trusted number.",
   robots: { index: false, follow: false },

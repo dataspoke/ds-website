@@ -1,18 +1,22 @@
-import { ASSESSMENT, RETAINER_NOTE, STEPS } from "@/content/approach";
+import { ASSESSMENT, KPI_HIERARCHY, PHASES } from "@/content/approach";
 import {
   BOOKING_URL,
   CONTACT_EMAIL,
-  LOCATION,
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
 } from "@/lib/constants";
-import { CREDENTIALS, TOOLS } from "@/content/home";
-import { STAGES } from "@/content/services";
+import { CREDENTIALS, PROOF_LINE, TOOLS } from "@/content/home";
+import { HUB_LINES, SPOKE_LINES } from "@/content/services";
+import type { ServiceLine } from "@/types";
 
 // Plain-text summary for AI assistants and answer engines (https://llmstxt.org).
 // Built from the same constants as the pages, so it stays in sync with the site copy.
 export const dynamic = "force-static";
+
+function lineEntry(l: ServiceLine) {
+  return `- [${l.title}](${SITE_URL}/services/${l.slug}): ${l.oneLiner} You get: ${l.youGet.join(" ")}`;
+}
 
 function body() {
   const lines: string[] = [
@@ -20,26 +24,25 @@ function body() {
     "",
     `> ${SITE_DESCRIPTION}`,
     "",
-    `${SITE_NAME} is run by Nick Paul from ${LOCATION}: ${CREDENTIALS.slice(0, 3).join("; ")}. One senior consultant, no hand-offs. Clients are owner-run small businesses (roughly 5 to 50 people) across the United States whose CRM, accounting, phone and marketing tools don't talk to each other.`,
+    `${SITE_NAME} is run by Nick Paul: ${CREDENTIALS.slice(0, 3).join("; ")}. One senior consultant, no hand-offs. Clients are established businesses past $1M in annual revenue, across the United States, whose CRM, accounting, phone and marketing tools don't talk to each other.`,
+    "",
+    `${PROOF_LINE.claim} ${PROOF_LINE.offer}`,
     "",
     `Systems commonly connected: ${TOOLS.join(", ")}.`,
     "",
-    "## Products",
+    "## Services",
     "",
-  ];
-
-  for (const stage of STAGES) {
-    lines.push(`### ${stage.number} ${stage.title}: ${stage.summary}`, "");
-    for (const p of stage.products) {
-      lines.push(`- [${p.title}](${SITE_URL}/services#${p.slug}): ${p.description} Typical result: ${p.result}`);
-    }
-    lines.push("");
-  }
-
-  lines.push(
-    RETAINER_NOTE,
+    "Six service lines in a hub and spokes. The hub captures and organizes the company's data. The spokes put it to work.",
     "",
-    "## The AI Assessment",
+    "### Hub: the data in the middle",
+    "",
+    ...HUB_LINES.map(lineEntry),
+    "",
+    "### Spokes: what runs on it",
+    "",
+    ...SPOKE_LINES.map(lineEntry),
+    "",
+    `## The ${ASSESSMENT.name}`,
     "",
     `Price: ${ASSESSMENT.price}, ${ASSESSMENT.terms}.`,
     "",
@@ -49,14 +52,18 @@ function body() {
     "",
     ASSESSMENT.credit,
     "",
-    "## How it works",
+    "## Approach",
     "",
-    ...STEPS.map((s) => `- ${s.title}: ${s.description}`),
+    ...PHASES.map((p) => `- ${p.title}: ${p.description}`),
+    "",
+    `${KPI_HIERARCHY.title} ${KPI_HIERARCHY.lede}`,
     "",
     "## Pages",
     "",
     `- [Home](${SITE_URL}): what ${SITE_NAME} does and who it's for`,
-    `- [Products](${SITE_URL}/services): every product, who it fits and what you get`,
+    `- [Services](${SITE_URL}/services): the six service lines and how they fit together`,
+    `- [Work](${SITE_URL}/work): case studies, filterable by service line`,
+    `- [Approach](${SITE_URL}/approach): the ${ASSESSMENT.name}, then build, hand-over and retainer, plus the KPI hierarchy`,
     `- [About](${SITE_URL}/about): Nick Paul's background and how he works`,
     `- [Contact](${SITE_URL}/contact): book a free 30-minute call or send a note`,
     "",
@@ -64,8 +71,8 @@ function body() {
     "",
     `- Email: ${CONTACT_EMAIL}`,
     `- Book a free 30-minute call: ${BOOKING_URL}`,
-    ""
-  );
+    "",
+  ];
 
   return lines.join("\n");
 }

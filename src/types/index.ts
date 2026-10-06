@@ -12,14 +12,6 @@ export interface Product {
   youGet: string[];
 }
 
-export interface Stage {
-  number: string;
-  slug: string;
-  title: string;
-  summary: string;
-  products: Product[];
-}
-
 export type ServiceLineSlug =
   | "capture"
   | "organize"

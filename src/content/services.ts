@@ -1,7 +1,6 @@
-import type { Product, ServiceLine, ServiceLineSlug, Stage } from "@/types";
+import type { Product, ServiceLine, ServiceLineSlug } from "@/types";
 
 // Product copy. Each product belongs to one service line below.
-// The legacy STAGES grouping at the bottom reuses these same objects.
 
 const CONNECTED_COMPANY: Product = {
   slug: "connected-company",
@@ -504,33 +503,20 @@ export const LINE_PAGE = {
 };
 
 /**
- * Legacy three-stage grouping. The /services page no longer uses it.
- * Still imported by src/components/home/stages.tsx, src/app/llms.txt/route.ts
- * and (via PRODUCTS) src/components/shared/json-ld.tsx. Retire in Phase 2.
+ * Retired /services#<id> anchors from the old three-stage page, mapped to the
+ * line page that now holds that copy. Product ids keep their hash so the line
+ * page scrolls to the product. #assessment still lives on /services.
  */
-export const STAGES: Stage[] = [
-  {
-    number: "01",
-    slug: "connected",
-    title: "Connected",
-    summary: "Every system feeding one picture you own.",
-    products: [CONNECTED_COMPANY, LIVE_NUMBERS, LEAD_FLOW],
-  },
-  {
-    number: "02",
-    slug: "ai-ready",
-    title: "AI‑Ready",
-    summary: "AI that knows your business, and a team that knows how to use it.",
-    products: [COMPANY_BRAIN, AI_READY_COMPANY],
-  },
-  {
-    number: "03",
-    slug: "optimized",
-    title: "Optimized",
-    summary: "New ways of running the business that weren't possible before.",
-    products: [AUTOMATE_THE_BUSYWORK, EARLY_WARNINGS, FIND_THE_MARGIN],
-  },
-];
-
-/** Products shown on the current site (legacy stages). Used by JSON-LD. */
-export const PRODUCTS = STAGES.flatMap((s) => s.products);
+export const LEGACY_SERVICE_ANCHORS: Record<string, string> = {
+  connected: "/services/capture",
+  "connected-company": "/services/capture#connected-company",
+  "lead-flow": "/services/capture#lead-flow",
+  "live-numbers": "/services/metrics-dashboards#live-numbers",
+  "ai-ready": "/services/ai-implementation",
+  "company-brain": "/services/ai-implementation#company-brain",
+  "ai-ready-company": "/services/ai-implementation#ai-ready-company",
+  "automate-the-busywork": "/services/ai-implementation#automate-the-busywork",
+  optimized: "/services/analytics-data-science",
+  "early-warnings": "/services/analytics-data-science#early-warnings",
+  "find-the-margin": "/services/analytics-data-science#find-the-margin",
+};

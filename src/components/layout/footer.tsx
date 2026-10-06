@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Logo } from "@/components/shared/logo";
 import {
   CONTACT_EMAIL,
-  LOCATION,
   NAV_ITEMS,
   SITE_NAME,
   SOCIAL_LINKS,
@@ -17,7 +16,7 @@ export function Footer() {
           <div className="grid max-w-sm gap-3">
             <Logo />
             <p className="text-sm text-muted-foreground">
-              Connected data and AI readiness for small businesses. {LOCATION}, working with
+              Data, dashboards, custom software and AI for established businesses. Working with
               clients nationwide.
             </p>
             <p className="text-sm font-semibold text-ink select-all">{CONTACT_EMAIL}</p>
@@ -45,7 +44,7 @@ export function Footer() {
         <div className="grid gap-2 border-t border-border pt-6 text-sm text-muted-foreground">
           <p>{TRADEMARK_NOTE}</p>
           <p>
-            &copy; {new Date().getFullYear()} {SITE_NAME} · {LOCATION}
+            &copy; {new Date().getFullYear()} {SITE_NAME}
           </p>
         </div>
       </div>

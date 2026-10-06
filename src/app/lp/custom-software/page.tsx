@@ -6,7 +6,7 @@ import { LpCtaBanner } from "@/components/lp/lp-cta-banner";
 import { LP_CUSTOM_SOFTWARE } from "@/content/lp";
 
 export const metadata: Metadata = {
-  title: "Custom Software | DataSpoke",
+  title: "Custom Software",
   description:
     "An app.yourcompany.com built around how your business actually works. Internal tools, client portals and mobile apps on the systems you already pay for.",
   robots: { index: false, follow: false },

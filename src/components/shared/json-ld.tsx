@@ -5,7 +5,7 @@ import {
   CONTACT_EMAIL,
   SOCIAL_LINKS,
 } from "@/lib/constants";
-import { PRODUCTS } from "@/content/services";
+import { SERVICE_LINES } from "@/content/services";
 import { CREDENTIALS } from "@/content/home";
 
 // Stable ids let search engines join the business and its founder across pages.
@@ -43,14 +43,14 @@ const jsonLd = {
   priceRange: "$$",
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "Products",
-    itemListElement: PRODUCTS.map((p) => ({
+    name: "Services",
+    itemListElement: SERVICE_LINES.map((l) => ({
       "@type": "Offer",
       itemOffered: {
         "@type": "Service",
-        name: p.title,
-        description: p.description,
-        url: `${SITE_URL}/services#${p.slug}`,
+        name: l.title,
+        description: `${l.oneLiner} ${l.problem}`,
+        url: `${SITE_URL}/services/${l.slug}`,
       },
     })),
   },

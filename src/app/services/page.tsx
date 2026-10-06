@@ -3,6 +3,7 @@ import { generateMetadata } from "@/lib/metadata";
 import { Section, SectionHead } from "@/components/shared/section";
 import { Assessment } from "@/components/home/assessment";
 import { CtaBanner } from "@/components/home/cta-banner";
+import { LegacyAnchorRedirect } from "@/components/services/legacy-anchor-redirect";
 import { LineCard } from "@/components/services/line-card";
 import { ServicesMap } from "@/components/services/services-map";
 import { ASSESSMENT, RETAINER_NOTE } from "@/content/approach";
@@ -24,6 +25,7 @@ const jumpLinks = [
 export default function ServicesPage() {
   return (
     <>
+      <LegacyAnchorRedirect />
       <Section tight>
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.15fr]">
           <div className="grid gap-6">

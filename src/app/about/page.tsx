@@ -38,7 +38,7 @@ const PRINCIPLES = [
 
 const FIT = {
   yes: [
-    "Owner-run businesses, roughly 5 to 50 people",
+    "Established businesses past $1M in annual revenue",
     "You already pay for a CRM, accounting software and a phone system, and they don't talk",
     "You want numbers you can trust and a team that can use AI on real work",
   ],

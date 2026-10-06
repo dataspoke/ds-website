@@ -97,7 +97,8 @@ export const LP_AI = {
 
 export const LP_CUSTOM_SOFTWARE = {
   eyebrow: "For established businesses past $1M in revenue",
-  headline: "Every business should have an app.yourcompany.com built around how it actually works.",
+  // ​ (zero-width space) lets the domain wrap after "app." on narrow phones.
+  headline: "Every business should have an app.​yourcompany.com built around how it actually works.",
   lede:
     "Internal tools, client portals and mobile apps, built on the systems you already pay for. You own the code and you own the accounts.",
   soundsLikeEyebrow: "Sounds like you if",

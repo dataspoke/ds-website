@@ -3,7 +3,7 @@ import type { NavItem } from "@/types";
 // Site-wide config. Page copy lives in src/content/*.
 
 export const SITE_NAME = "DataSpoke";
-export const SITE_TAGLINE = "Your company, running on connected data. Ready for AI.";
+export const SITE_TAGLINE = "Your business, running on its own data.";
 export const SITE_DESCRIPTION =
   "DataSpoke connects the software an established business already runs on into one picture the owner controls, makes it ready for AI, and builds the dashboards, automations and analysis that turn it into better decisions.";
 export const SITE_URL = "https://www.dataspoke.io";
@@ -19,16 +19,15 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Contact", href: "/contact" },
 ];
 
+// One option per service line slug (src/content/services.ts), so /contact?service=<slug> preselects.
 export const SERVICE_OPTIONS = [
   { value: "assessment", label: "Start with the Data & AI Assessment" },
-  { value: "connected-company", label: "Connect our systems" },
-  { value: "live-numbers", label: "Numbers and reports we can trust" },
-  { value: "lead-flow", label: "Respond to every lead faster" },
-  { value: "company-brain", label: "Get answers from our own business data" },
-  { value: "ai-ready-company", label: "Get our company and team AI‑ready" },
-  { value: "automate-the-busywork", label: "Automate repeat work" },
-  { value: "early-warnings", label: "Know what's coming before it hits" },
-  { value: "find-the-margin", label: "Find where the money is" },
+  { value: "capture", label: "Get all our systems feeding one place" },
+  { value: "organize", label: "Clean up and organize our data" },
+  { value: "metrics-dashboards", label: "Numbers and dashboards we can trust" },
+  { value: "custom-software", label: "Build our own app or internal tool" },
+  { value: "ai-implementation", label: "Put AI to work on our business" },
+  { value: "analytics-data-science", label: "Find where the money is and what's coming" },
   { value: "other", label: "Not sure yet. Let's talk." },
 ];
 

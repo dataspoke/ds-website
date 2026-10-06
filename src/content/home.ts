@@ -1,5 +1,4 @@
 import { ASSESSMENT } from "@/content/approach";
-import { LOCATION } from "@/lib/constants";
 import type { Expertise, Problem } from "@/types";
 
 export const HERO = {
@@ -136,5 +135,5 @@ export const CREDENTIALS = [
   "B.S. Mathematics · M.S. Operations Research",
   "Data scientist & software developer",
   "5 years consulting for owner-run businesses",
-  `${LOCATION} · clients nationwide`,
+  "Clients nationwide",
 ];
