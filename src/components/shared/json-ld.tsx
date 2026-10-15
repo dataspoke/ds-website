@@ -36,10 +36,11 @@ function LdScript({ data }: { data: object }) {
 }
 
 const personSameAs = [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.upwork];
+const organizationSameAs = [SOCIAL_LINKS.linkedinCompany];
 
 /**
  * Homepage only. Organization, not ProfessionalService (deprecated).
- * No Organization sameAs: the profiles on file are Nick's, and they live on the Person.
+ * Company profiles are on Organization sameAs. Nick's personal profiles stay on the Person.
  */
 export function OrganizationJsonLd() {
   const data = {
@@ -55,6 +56,7 @@ export function OrganizationJsonLd() {
       width: 512,
       height: 512,
     },
+    sameAs: organizationSameAs,
     image: `${SITE_URL}/opengraph-image`,
     email: CONTACT_EMAIL,
     contactPoint: {

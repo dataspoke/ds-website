@@ -31,7 +31,7 @@ export function Footer({ navItems }: { navItems: NavItem[] }) {
             ))}
             <li>
               <a
-                href={SOCIAL_LINKS.linkedin}
+                href={SOCIAL_LINKS.linkedinCompany}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block py-2.5 text-muted-foreground hover:text-primary"

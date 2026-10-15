@@ -36,6 +36,7 @@ export const TRADEMARK_NOTE =
 
 export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/in/nick-paul-8b466818/",
+  linkedinCompany: "https://www.linkedin.com/company/dataspoke-io/",
   upwork: "https://www.upwork.com/freelancers/~013f135f6dfc7660c7",
 };
 
