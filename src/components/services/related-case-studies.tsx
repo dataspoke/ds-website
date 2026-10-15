@@ -13,18 +13,23 @@ export function RelatedCaseStudies({ line }: { line: ServiceLineSlug }) {
       <SectionHead eyebrow={LINE_PAGE.caseStudiesEyebrow} title={LINE_PAGE.caseStudiesTitle} />
       <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {studies.map((c) => (
-          <Link
+          <article
             key={c.slug}
-            href={`/work/${c.slug}`}
-            className="grid content-start gap-2.5 rounded-xl border border-tint-strong bg-background p-6 transition-colors hover:border-brand"
+            className="relative grid content-start gap-2.5 rounded-xl border border-tint-strong bg-background p-6 transition-colors hover:border-brand"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.08em] text-primary">
               {c.industry} · {c.size}
             </p>
-            <h3 className="text-xl font-bold">{c.title}</h3>
+            <h3 className="text-xl font-bold">
+              <Link
+                href={`/work/${c.slug}`}
+                className="after:absolute after:inset-0 after:rounded-xl hover:text-primary"
+              >
+                {c.title}
+              </Link>
+            </h3>
             <p className="text-[0.97rem] text-muted-foreground">{c.summary.result}</p>
-            <p className="mt-1 font-semibold text-primary">{LINE_PAGE.caseStudyLink} &rarr;</p>
-          </Link>
+          </article>
         ))}
       </div>
     </Section>

@@ -55,6 +55,14 @@ export interface CaseStudy {
   sources: string[];
   sections: CaseStudySection[];
   featured: boolean;
+  /**
+   * Git author timestamps for this study's text in src/content/case-studies.ts.
+   * published: the commit that introduced it. modified: the last commit that changed it.
+   */
+  dates?: {
+    published: string;
+    modified: string;
+  };
 }
 
 export interface Problem {

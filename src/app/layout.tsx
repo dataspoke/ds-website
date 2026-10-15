@@ -3,6 +3,7 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SiteChrome } from "@/components/lp/site-chrome";
 import { GA_MEASUREMENT_ID } from "@/lib/constants";
+import { getNavItems } from "@/lib/nav";
 import { defaultMetadata } from "@/lib/metadata";
 import "./globals.css";
 
@@ -36,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${jakarta.variable} font-sans antialiased`}>
-        <SiteChrome>{children}</SiteChrome>
+        <SiteChrome navItems={getNavItems()}>{children}</SiteChrome>
       </body>
       <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
     </html>

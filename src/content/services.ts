@@ -379,6 +379,11 @@ export function getServiceLine(slug: string): ServiceLine | undefined {
   return SERVICE_LINES.find((l) => l.slug === slug);
 }
 
+/** Anchor text for a link to a service page: the name plus the existing one-liner. */
+export function serviceLinkText(line: { title: string; oneLiner: string }): string {
+  return `${line.title}: ${line.oneLiner.replace(/\.\s*$/, "")}`;
+}
+
 /** Copy for the /services overview page. */
 export const SERVICES_PAGE = {
   eyebrow: "Services",
@@ -492,7 +497,6 @@ export const LINE_PAGE = {
   productsTitle: "The pieces of this service",
   caseStudiesEyebrow: "Related work",
   caseStudiesTitle: "Where I've done this before",
-  caseStudyLink: "Read the case study",
   otherLinesHeading: "Other services",
   ctaTitle: (title: string) => `Ask me about ${title}.`,
   ctaLede:
