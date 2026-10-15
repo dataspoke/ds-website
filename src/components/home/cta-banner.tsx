@@ -1,8 +1,9 @@
+import type { ReactNode } from "react";
 import { BookCall } from "@/components/shared/book-call";
 import { Section } from "@/components/shared/section";
 import { CONTACT_EMAIL } from "@/lib/constants";
 
-export function CtaBanner() {
+export function CtaBanner({ note }: { note?: ReactNode }) {
   return (
     <Section tint id="contact-cta">
       <div className="grid max-w-2xl gap-4">
@@ -13,6 +14,7 @@ export function CtaBanner() {
           I&apos;ll tell you honestly whether I can fix it. If the answer is no, I&apos;ll point
           you to who can.
         </p>
+        {note}
         <div className="mt-1 flex flex-wrap items-center gap-x-6 gap-y-3">
           <BookCall>Book a 30-minute call</BookCall>
           <span className="text-muted-foreground">

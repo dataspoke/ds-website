@@ -35,9 +35,11 @@ function LdScript({ data }: { data: object }) {
   );
 }
 
+const personSameAs = [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.upwork];
+
 /**
  * Homepage only. Organization, not ProfessionalService (deprecated).
- * No sameAs: the only profile on file is Nick's personal LinkedIn, which is on the founder.
+ * No Organization sameAs: the profiles on file are Nick's, and they live on the Person.
  */
 export function OrganizationJsonLd() {
   const data = {
@@ -75,7 +77,7 @@ export function OrganizationJsonLd() {
       name: "Nick Paul",
       jobTitle: "Founder",
       url: `${SITE_URL}/about`,
-      sameAs: [SOCIAL_LINKS.linkedin],
+      sameAs: personSameAs,
     },
   };
   return <LdScript data={data} />;
@@ -94,7 +96,7 @@ export function PersonJsonLd() {
     image: `${SITE_URL}/nick-paul-family.jpg`,
     email: CONTACT_EMAIL,
     worksFor: provider,
-    sameAs: [SOCIAL_LINKS.linkedin],
+    sameAs: personSameAs,
     knowsAbout: [
       "Data science",
       "Operations research",
