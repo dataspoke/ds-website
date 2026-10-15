@@ -1,4 +1,5 @@
 import { ASSESSMENT, KPI_HIERARCHY, PHASES } from "@/content/approach";
+import { CASE_STUDIES } from "@/content/case-studies";
 import {
   BOOKING_URL,
   CONTACT_EMAIL,
@@ -8,7 +9,7 @@ import {
 } from "@/lib/constants";
 import { CREDENTIALS, PROOF_LINE, TOOLS } from "@/content/home";
 import { HUB_LINES, SPOKE_LINES } from "@/content/services";
-import type { ServiceLine } from "@/types";
+import type { CaseStudy, ServiceLine } from "@/types";
 
 // Plain-text summary for AI assistants and answer engines (https://llmstxt.org).
 // Built from the same constants as the pages, so it stays in sync with the site copy.
@@ -16,6 +17,11 @@ export const dynamic = "force-static";
 
 function lineEntry(l: ServiceLine) {
   return `- [${l.title}](${SITE_URL}/services/${l.slug}): ${l.oneLiner} You get: ${l.youGet.join(" ")}`;
+}
+
+function caseStudyEntry(c: CaseStudy) {
+  const band = [c.industry, c.size, c.revenueBand].filter(Boolean).join(", ");
+  return `- [${c.title}](${SITE_URL}/work/${c.slug}): ${band}. ${c.summary.problem} ${c.summary.result}`;
 }
 
 function body() {
@@ -42,7 +48,7 @@ function body() {
     "",
     ...SPOKE_LINES.map(lineEntry),
     "",
-    `## The ${ASSESSMENT.name}`,
+    `## The [${ASSESSMENT.name}](${SITE_URL}/approach#assessment)`,
     "",
     `Price: ${ASSESSMENT.price}, ${ASSESSMENT.terms}.`,
     "",
@@ -58,6 +64,9 @@ function body() {
     "",
     `${KPI_HIERARCHY.title} ${KPI_HIERARCHY.lede}`,
     "",
+    ...(CASE_STUDIES.length
+      ? ["## Case studies", "", ...CASE_STUDIES.map(caseStudyEntry), ""]
+      : []),
     "## Pages",
     "",
     `- [Home](${SITE_URL}): what ${SITE_NAME} does and who it's for`,

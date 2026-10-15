@@ -1,4 +1,5 @@
 import { BookCall } from "@/components/shared/book-call";
+import { AssessmentJsonLd } from "@/components/shared/json-ld";
 import { Section, SectionHead } from "@/components/shared/section";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { ASSESSMENT } from "@/content/approach";
@@ -6,6 +7,7 @@ import { ASSESSMENT } from "@/content/approach";
 export function Assessment({ tint = false }: { tint?: boolean }) {
   return (
     <Section tint={tint} id="assessment">
+      <AssessmentJsonLd />
       <div className="grid items-start gap-9 lg:grid-cols-2 lg:gap-14">
         <div className="grid gap-5">
           <SectionHead eyebrow="Start here" title={`The ${ASSESSMENT.name}`} lede={ASSESSMENT.lede} />

@@ -51,7 +51,7 @@ export const RETAINER_NOTE =
 
 /** /approach page. */
 export const APPROACH_PAGE = {
-  metaTitle: "Approach",
+  metaTitle: "How an engagement works",
   metaDescription:
     "How I work with established businesses: a two-week Data & AI Assessment, fixed-scope builds you own, a clean hand-over and an optional monthly retainer. Plus the KPI hierarchy I use to pick the numbers that run the business.",
   eyebrow: "Approach",

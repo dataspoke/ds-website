@@ -4,13 +4,15 @@ import { Section, SectionHead } from "@/components/shared/section";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { LpCtaBanner } from "@/components/lp/lp-cta-banner";
 import { LP_DASHBOARDS } from "@/content/lp";
+import { generateMetadata as pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Metrics & Dashboards",
   description:
     "Routine reports belong in a dashboard, not in a prompt you re-type every Monday. A KPI hierarchy from goal to weekly scorecard, and one trusted number.",
-  robots: { index: false, follow: false },
-};
+  path: "/lp/dashboards",
+  noIndex: true,
+});
 
 export default function LpDashboardsPage() {
   return (

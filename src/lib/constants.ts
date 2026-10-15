@@ -37,3 +37,6 @@ export const TRADEMARK_NOTE =
 export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/in/nick-paul-8b466818/",
 };
+
+// GA4. Loaded on every page from the root layout.
+export const GA_MEASUREMENT_ID = "G-JWYN8NRDFS";

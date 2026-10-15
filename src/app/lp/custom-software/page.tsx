@@ -4,13 +4,15 @@ import { Section, SectionHead } from "@/components/shared/section";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { LpCtaBanner } from "@/components/lp/lp-cta-banner";
 import { LP_CUSTOM_SOFTWARE } from "@/content/lp";
+import { generateMetadata as pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Custom Software",
   description:
     "An app.yourcompany.com built around how your business actually works. Internal tools, client portals and mobile apps on the systems you already pay for.",
-  robots: { index: false, follow: false },
-};
+  path: "/lp/custom-software",
+  noIndex: true,
+});
 
 export default function LpCustomSoftwarePage() {
   return (

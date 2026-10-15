@@ -2,8 +2,31 @@
 User-agent: *
 Allow: /
 
+# GPTBot
+User-agent: GPTBot
+Allow: /
+
+# ChatGPT-User
+User-agent: ChatGPT-User
+Allow: /
+
+# OAI-SearchBot
+User-agent: OAI-SearchBot
+Allow: /
+
+# ClaudeBot
+User-agent: ClaudeBot
+Allow: /
+
+# PerplexityBot
+User-agent: PerplexityBot
+Allow: /
+
 # Host
 Host: https://www.dataspoke.io
 
 # Sitemaps
 Sitemap: https://www.dataspoke.io/sitemap.xml
+
+# LLM-readable site summary
+# https://www.dataspoke.io/llms.txt

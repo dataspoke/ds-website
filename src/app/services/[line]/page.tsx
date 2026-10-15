@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { generateMetadata as pageMetadata } from "@/lib/metadata";
+import { clipMetaDescription, generateMetadata as pageMetadata } from "@/lib/metadata";
+import { ServiceJsonLd } from "@/components/shared/json-ld";
 import { Section, SectionHead } from "@/components/shared/section";
 import { BookCall } from "@/components/shared/book-call";
 import { Button } from "@/components/ui/button";
@@ -22,8 +23,8 @@ export async function generateMetadata({ params }: PageProps<"/services/[line]">
   const line = getServiceLine(slug);
   if (!line) return {};
   return pageMetadata({
-    title: line.title,
-    description: `${line.oneLiner} ${line.problem}`.slice(0, 300),
+    title: `${line.title}: ${line.oneLiner.replace(/\.\s*$/, "")}`,
+    description: clipMetaDescription(`${line.oneLiner} ${line.problem}`),
     path: `/services/${line.slug}`,
   });
 }
@@ -38,6 +39,7 @@ export default async function ServiceLinePage({ params }: PageProps<"/services/[
 
   return (
     <>
+      <ServiceJsonLd line={line} />
       <Section tight>
         <Link href="/services" className="inline-block py-2 text-sm font-semibold text-primary hover:text-primary/80">
           &larr; {LINE_PAGE.backLabel}

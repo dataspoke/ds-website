@@ -8,9 +8,11 @@ import { cn } from "@/lib/utils";
 export function ProfilePhoto({
   className = "",
   priority = false,
+  sizes = "240px",
 }: {
   className?: string;
   priority?: boolean;
+  sizes?: string;
 }) {
   return (
     <Image
@@ -18,7 +20,7 @@ export function ProfilePhoto({
       alt="Nick Paul and family on a mountain summit overlooking the water"
       width={1220}
       height={1520}
-      sizes="260px"
+      sizes={sizes}
       // Next 16 deprecates `priority`; eager + high fetch priority is the documented replacement.
       loading={priority ? "eager" : undefined}
       fetchPriority={priority ? "high" : undefined}

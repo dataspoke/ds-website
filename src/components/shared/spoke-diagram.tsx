@@ -95,6 +95,8 @@ export function SpokeDiagram({
   return (
     <svg
       viewBox={`0 0 ${g.W} ${g.H}`}
+      width={g.W}
+      height={g.H}
       role="img"
       aria-label="Diagram: your business at the center, connected to sales, marketing, phone calls, meetings, operations, finance, customers and documents"
       className={cn("block h-auto w-full", className)}
@@ -270,6 +272,8 @@ export function ServicesDiagram({
   return (
     <svg
       viewBox={`0 0 ${g.W} ${g.H}`}
+      width={g.W}
+      height={g.H}
       role="group"
       aria-label={`Diagram: ${hubLabel} at the center, holding ${hubs
         .map((h) => h.label.join(" "))

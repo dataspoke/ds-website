@@ -5,13 +5,15 @@ import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { LpProductCard } from "@/components/lp/lp-product-card";
 import { LpCtaBanner } from "@/components/lp/lp-cta-banner";
 import { LP_AI } from "@/content/lp";
+import { generateMetadata as pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "AI-Ready Company",
   description:
     "Connect your systems, make your company AI-ready and automate the busywork. A two-week Data & AI Assessment, then a plan.",
-  robots: { index: false, follow: false },
-};
+  path: "/lp/ai",
+  noIndex: true,
+});
 
 export default function LpAiPage() {
   return (
