@@ -11,7 +11,7 @@ import { CREDENTIALS } from "@/content/home";
 import { SOCIAL_LINKS } from "@/lib/constants";
 
 export const metadata: Metadata = generateMetadata({
-  title: "About",
+  title: "About Nick Paul",
   description:
     "Nick Paul runs DataSpoke. He's a data scientist and software developer, an Army Engineer officer and combat veteran, with a B.S. in mathematics and an M.S. in operations research. For five years he has built analytics, automation, custom software and AI for established businesses nationwide.",
   path: "/about",
@@ -55,7 +55,11 @@ export default function AboutPage() {
       <PersonJsonLd />
       <Section>
         <div className="grid items-start gap-10 md:grid-cols-[200px_1fr] md:gap-14 lg:grid-cols-[260px_1fr]">
-          <ProfilePhoto priority className="max-w-[200px] sm:max-w-[260px]" />
+          <ProfilePhoto
+            priority
+            sizes="(min-width: 640px) 260px, 200px"
+            className="max-w-[200px] sm:max-w-[260px]"
+          />
           <div className="grid max-w-2xl gap-5">
             <p className="eyebrow">About</p>
             <h1 className="text-4xl font-extrabold leading-[1.1] sm:text-5xl md:text-[2.6rem] lg:text-5xl">

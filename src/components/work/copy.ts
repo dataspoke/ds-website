@@ -16,7 +16,7 @@ export const WORK_COPY = {
     showing: (line: string) => `Showing work in ${line}.`,
     empty: "No case studies in this line yet. Here is everything else.",
     readMore: "Read the case study",
-    metaTitle: "Work",
+    metaTitle: "Case studies",
     metaDescription:
       "Case studies from established businesses: the problem, what I built and the result. Dashboards, custom software, AI and analytics built on the systems they already run.",
   },
