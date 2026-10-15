@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import type { NavItem } from "@/types";
 
 /**
  * The root layout has no access to the current pathname, so it can't
@@ -10,7 +11,13 @@ import { Footer } from "@/components/layout/footer";
  * their own minimal layout (src/app/lp/layout.tsx) instead, so this small
  * client wrapper reads the pathname and suppresses the site chrome there.
  */
-export function SiteChrome({ children }: { children: React.ReactNode }) {
+export function SiteChrome({
+  children,
+  navItems,
+}: {
+  children: React.ReactNode;
+  navItems: NavItem[];
+}) {
   const pathname = usePathname();
   const isLandingPage = pathname?.startsWith("/lp");
 
@@ -20,9 +27,9 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <Header />
+      <Header navItems={navItems} />
       <main>{children}</main>
-      <Footer />
+      <Footer navItems={navItems} />
     </>
   );
 }

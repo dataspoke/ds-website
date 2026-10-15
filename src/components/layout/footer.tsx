@@ -2,13 +2,13 @@ import Link from "next/link";
 import { Logo } from "@/components/shared/logo";
 import {
   CONTACT_EMAIL,
-  NAV_ITEMS,
   SITE_NAME,
   SOCIAL_LINKS,
   TRADEMARK_NOTE,
 } from "@/lib/constants";
+import type { NavItem } from "@/types";
 
-export function Footer() {
+export function Footer({ navItems }: { navItems: NavItem[] }) {
   return (
     <footer className="border-t border-border">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6">
@@ -22,7 +22,7 @@ export function Footer() {
             <p className="text-sm font-semibold text-ink select-all">{CONTACT_EMAIL}</p>
           </div>
           <ul className="flex flex-wrap gap-x-6 gap-y-0 text-sm">
-            {NAV_ITEMS.map((item) => (
+            {navItems.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className="inline-block py-2.5 text-muted-foreground hover:text-primary">
                   {item.label}

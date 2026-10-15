@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { BulletList, ListLabel, ProductDetail } from "@/components/services/product-detail";
 import { LadderGraphic } from "@/components/services/ladder";
 import { RelatedCaseStudies } from "@/components/services/related-case-studies";
-import { LINE_LADDERS, LINE_PAGE, SERVICE_LINES, getServiceLine } from "@/content/services";
+import { LINE_LADDERS, LINE_PAGE, SERVICE_LINES, getServiceLine, serviceLinkText } from "@/content/services";
 
 // Only the six lines exist; anything else is a 404.
 export const dynamicParams = false;
@@ -97,11 +97,11 @@ export default async function ServiceLinePage({ params }: PageProps<"/services/[
         </div>
         <nav aria-label={LINE_PAGE.otherLinesHeading} className="mt-12">
           <ListLabel>{LINE_PAGE.otherLinesHeading}</ListLabel>
-          <ul className="mt-2 flex flex-wrap gap-x-6">
+          <ul className="mt-3 grid max-w-2xl gap-3">
             {others.map((l) => (
               <li key={l.slug}>
-                <Link href={`/services/${l.slug}`} className="inline-block py-2.5 font-semibold text-primary hover:text-primary/80">
-                  {l.title}
+                <Link href={`/services/${l.slug}`} className="font-semibold text-primary hover:text-primary/80">
+                  {serviceLinkText(l)}
                 </Link>
               </li>
             ))}

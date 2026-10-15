@@ -199,6 +199,11 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
       },
     ],
     featured: true,
+    // fe56d73 (2026-10-06T14:21:26-04:00) added this study. No later commit changed its text.
+    dates: {
+      published: "2026-10-06T14:21:26-04:00",
+      modified: "2026-10-06T14:21:26-04:00",
+    },
   },
 ];
 

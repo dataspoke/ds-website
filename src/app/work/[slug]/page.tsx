@@ -5,10 +5,13 @@ import { generateMetadata as pageMetadata } from "@/lib/metadata";
 import { Section } from "@/components/shared/section";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { BookCall } from "@/components/shared/book-call";
-import { LineTags } from "@/components/work/line-tags";
+import { ArticleJsonLd } from "@/components/shared/json-ld";
 import { SummaryBox } from "@/components/work/summary-box";
-import { WORK_COPY, getCaseStudy } from "@/components/work/copy";
+import { WORK_COPY, getCaseStudy, getLine } from "@/components/work/copy";
 import { CASE_STUDIES } from "@/content/case-studies";
+import { serviceLinkText } from "@/content/services";
+import { SITE_URL } from "@/lib/constants";
+import { formatLongDate, sameCalendarDay } from "@/lib/dates";
 
 const copy = WORK_COPY.detail;
 
@@ -42,9 +45,30 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
   const firstLine = study.lines[0];
   const contactHref = firstLine ? `/contact?service=${firstLine}` : "/contact";
+  const services = study.lines.flatMap((slug) => {
+    const line = getLine(slug);
+    return line ? [line] : [];
+  });
+  const showUpdated =
+    study.dates != null && !sameCalendarDay(study.dates.published, study.dates.modified);
 
   return (
     <>
+      {study.dates && (
+        <ArticleJsonLd
+          headline={study.title}
+          description={`${study.summary.problem} ${study.summary.result}`}
+          path={`/work/${study.slug}`}
+          datePublished={study.dates.published}
+          dateModified={study.dates.modified}
+          authorName="Nick Paul"
+          about={services.map((line) => ({
+            id: `${SITE_URL}/services/${line.slug}#service`,
+            name: line.title,
+            url: `${SITE_URL}/services/${line.slug}`,
+          }))}
+        />
+      )}
       <Section tight>
         <div className="grid max-w-3xl gap-6">
           <Link
@@ -54,6 +78,21 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             &larr; {copy.backLabel}
           </Link>
           <h1 className="text-3xl font-bold leading-[1.15] sm:text-4xl">{study.title}</h1>
+          {study.dates && (
+            <p className="text-sm text-muted-foreground">
+              <Link href="/about" className="font-semibold text-foreground hover:text-primary">
+                Nick Paul
+              </Link>
+              {" · "}
+              <time dateTime={study.dates.published}>{formatLongDate(study.dates.published)}</time>
+              {showUpdated && (
+                <>
+                  {" · Updated "}
+                  <time dateTime={study.dates.modified}>{formatLongDate(study.dates.modified)}</time>
+                </>
+              )}
+            </p>
+          )}
           <SummaryBox study={study} />
         </div>
       </Section>
@@ -84,7 +123,18 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
           <div className="grid gap-3">
             <h2 className="text-2xl font-bold">{copy.linesHeading}</h2>
-            <LineTags lines={study.lines} linkTo="service" />
+            <ul className="grid gap-3">
+              {services.map((line) => (
+                <li key={line.slug}>
+                  <Link
+                    href={`/services/${line.slug}`}
+                    className="font-semibold text-primary hover:text-primary/80"
+                  >
+                    {serviceLinkText(line)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </Section>
