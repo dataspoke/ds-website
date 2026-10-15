@@ -8,6 +8,7 @@ import { HowItWorks } from "@/components/home/how-it-works";
 import { AboutTeaser } from "@/components/home/about-teaser";
 import { CtaBanner } from "@/components/home/cta-banner";
 import { OrganizationJsonLd } from "@/components/shared/json-ld";
+import { UpworkRatingLine } from "@/components/shared/upwork-proof";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
 import { generateMetadata as pageMetadata } from "@/lib/metadata";
 
@@ -29,7 +30,7 @@ export default function HomePage() {
       <FeaturedWork />
       <HowItWorks />
       <AboutTeaser />
-      <CtaBanner />
+      <CtaBanner note={<UpworkRatingLine />} />
     </>
   );
 }

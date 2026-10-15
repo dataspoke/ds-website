@@ -7,6 +7,7 @@ import { ExpertiseSection } from "@/components/home/expertise";
 import { CtaBanner } from "@/components/home/cta-banner";
 import { ProofLine } from "@/components/home/proof-line";
 import { PersonJsonLd } from "@/components/shared/json-ld";
+import { UpworkCredential } from "@/components/shared/upwork-proof";
 import { CREDENTIALS } from "@/content/home";
 import { SOCIAL_LINKS } from "@/lib/constants";
 
@@ -106,6 +107,7 @@ export default function AboutPage() {
                 LinkedIn &rarr;
               </a>
             </div>
+            <UpworkCredential />
           </div>
         </div>
       </Section>

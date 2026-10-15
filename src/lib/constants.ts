@@ -36,7 +36,16 @@ export const TRADEMARK_NOTE =
 
 export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/in/nick-paul-8b466818/",
+  upwork: "https://www.upwork.com/freelancers/~013f135f6dfc7660c7",
 };
+
+/** Public profile facts, read 2026-10-15. No quotes, earnings, job count, or badge artwork. */
+export const UPWORK_PROOF = {
+  rating: "5.0",
+  clientCount: 28,
+  jobSuccess: "100% Job Success",
+  badge: "Top Rated Plus",
+} as const;
 
 // GA4. Loaded on every page from the root layout.
 export const GA_MEASUREMENT_ID = "G-JWYN8NRDFS";
