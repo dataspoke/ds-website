@@ -1,0 +1,40 @@
+name: IndexNow
+
+# Runs after a production deploy so the key file is already public.
+# IndexNow rejects a submission when it cannot fetch /<key>.txt with HTTP 200.
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: read
+
+concurrency:
+  group: indexnow-production
+  cancel-in-progress: true
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Wait for the Vercel production deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/wait-for-vercel.mjs
+
+      - name: Submit sitemap URLs to IndexNow
+        run: node scripts/indexnow.mjs
