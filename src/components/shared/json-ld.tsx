@@ -191,6 +191,32 @@ export function ArticleJsonLd({
   return <LdScript data={data} />;
 }
 
+/** Visible Q&A. Answer text is the plain string rendered on the page. */
+export function FaqPageJsonLd({
+  path,
+  faqs,
+}: {
+  path: string;
+  faqs: { question: string; answer: string }[];
+}) {
+  const pageUrl = `${SITE_URL}${path}`;
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${pageUrl}#faq`,
+    url: pageUrl,
+    mainEntity: faqs.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+  return <LdScript data={data} />;
+}
+
 /** Free estimate offer. Rendered only on /free-estimate, with the FAQ block on that page. */
 export function EstimateJsonLd() {
   const pageUrl = `${SITE_URL}${FREE_ESTIMATE.path}`;
@@ -211,24 +237,10 @@ export function EstimateJsonLd() {
       description: "Free 30-minute call and a written estimate. No obligation.",
     },
   };
-  const faq = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "@id": `${pageUrl}#faq`,
-    url: pageUrl,
-    mainEntity: ESTIMATE_FAQS.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
   return (
     <>
       <LdScript data={service} />
-      <LdScript data={faq} />
+      <FaqPageJsonLd path={FREE_ESTIMATE.path} faqs={ESTIMATE_FAQS} />
     </>
   );
 }

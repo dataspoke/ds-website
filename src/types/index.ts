@@ -96,3 +96,18 @@ export interface ContactFormData {
   service: string;
   message: string;
 }
+
+/** A phrase inside a plain-text answer that should render as a link. Schema keeps the plain text. */
+export interface TextLink {
+  label: string;
+  href: string;
+}
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+  /** One phrase inside `answer`. Prefer `links` when an answer has several. */
+  link?: TextLink;
+  /** Phrases inside `answer`, matched by exact text. */
+  links?: TextLink[];
+}

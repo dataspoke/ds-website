@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { EstimateJsonLd } from "@/components/shared/json-ld";
+import { FaqList } from "@/components/shared/faq-list";
 import { Section, SectionHead } from "@/components/shared/section";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { EstimateCta } from "@/components/shared/estimate-cta";
-import { ESTIMATE_FAQS, FREE_ESTIMATE, type EstimateFaq } from "@/content/free-estimate";
+import { ESTIMATE_FAQS, FREE_ESTIMATE } from "@/content/free-estimate";
 import { LINE_PAGE, SERVICE_LINES } from "@/content/services";
 import { BOOKING_EMBED_URL, CONTACT_EMAIL } from "@/lib/constants";
 import { generateMetadata as pageMetadata } from "@/lib/metadata";
@@ -14,21 +15,6 @@ export const metadata: Metadata = pageMetadata({
   description: FREE_ESTIMATE.metaDescription,
   path: FREE_ESTIMATE.path,
 });
-
-function FaqAnswer({ faq }: { faq: EstimateFaq }) {
-  if (!faq.link) return faq.answer;
-  const [before, after] = faq.answer.split(faq.link.label);
-  if (after === undefined) return faq.answer;
-  return (
-    <>
-      {before}
-      <Link href={faq.link.href} className="font-semibold text-primary hover:text-primary/80">
-        {faq.link.label}
-      </Link>
-      {after}
-    </>
-  );
-}
 
 export default function FreeEstimatePage() {
   return (
@@ -128,18 +114,9 @@ export default function FreeEstimatePage() {
         </div>
       </Section>
 
-      <Section tint>
+      <Section tint id="faq">
         <SectionHead eyebrow={FREE_ESTIMATE.faq.eyebrow} title={FREE_ESTIMATE.faq.title} />
-        <dl className="mt-10 grid max-w-3xl gap-8">
-          {ESTIMATE_FAQS.map((faq) => (
-            <div key={faq.question} className="grid gap-2">
-              <dt className="text-xl font-bold">{faq.question}</dt>
-              <dd className="text-muted-foreground">
-                <FaqAnswer faq={faq} />
-              </dd>
-            </div>
-          ))}
-        </dl>
+        <FaqList faqs={ESTIMATE_FAQS} />
       </Section>
     </>
   );
