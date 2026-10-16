@@ -4,8 +4,24 @@ module.exports = {
   generateRobotsTxt: true,
   // A small site: list pages directly in sitemap.xml instead of an index pointing at sitemap-0.xml.
   generateIndexSitemap: false,
-  // Non-page routes (share image, logo, llms.txt) and the no-nav /lp/* ad landing pages.
-  exclude: ["/opengraph-image", "/twitter-image", "/logo.png", "/icon.svg", "/llms.txt", "/lp", "/lp/*"],
+  // Non-page routes (share image, logo, icons, llms.txt) and the no-nav /lp/* ad landing pages.
+  exclude: [
+    "/opengraph-image",
+    "/twitter-image",
+    "/logo.png",
+    "/icon.svg",
+    "/icon.png",
+    "/icon1.png",
+    "/icon2.png",
+    "/apple-icon.png",
+    "/favicon.ico",
+    "/manifest.webmanifest",
+    "/icons/icon-192.png",
+    "/icons/icon-512.png",
+    "/llms.txt",
+    "/lp",
+    "/lp/*",
+  ],
   // /work renders per request (the ?line= filter), so next-sitemap doesn't find it in the static output.
   additionalPaths: async (config) => [await config.transform(config, "/work")],
   robotsTxtOptions: {
