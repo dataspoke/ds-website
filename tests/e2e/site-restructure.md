@@ -10,7 +10,7 @@ Run every scenario at 375px and 1280px wide. On every page, the document must be
 3. Expect to land on `/services/custom-software`.
 4. Click the first case study in "Where I've done this before".
 5. Expect to land on `/work/<slug>` for that case study.
-6. Expect the "Book a call" link to point to the Google Calendar booking URL (`BOOKING_URL` in `src/lib/constants.ts`).
+6. Expect the case study's "Book a 30-minute call" link to point to the Google Calendar booking URL (`BOOKING_URL` in `src/lib/constants.ts`). The header "Free estimate" button points to `/free-estimate`.
 
 ## b. Filter the work page
 
@@ -47,4 +47,4 @@ For each of `/lp/ai`, `/lp/custom-software` and `/lp/dashboards`:
 1. Open `/approach` and `/about`. Expect each to render with an H1.
 2. On `/`, `/services`, `/work`, `/approach` and `/about`, expect no "AI Assessment" except as part of "Data & AI Assessment", and no "small business".
 3. Expect the home page title to be "DataSpoke | Your business, running on its own data."
-4. Expect `public/sitemap.xml` to list `/services/*`, `/work`, `/work/*` and `/approach`, and no `/lp/*` page.
+4. Expect `public/sitemap.xml` to list `/free-estimate`, `/services/*`, `/work`, `/work/*` and `/approach`, and no `/lp/*` page.

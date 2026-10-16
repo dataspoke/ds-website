@@ -1,4 +1,3 @@
-import { ASSESSMENT } from "@/content/approach";
 import type { Expertise, Problem } from "@/types";
 
 export const HERO = {
@@ -6,7 +5,7 @@ export const HERO = {
   headline: "Your business, running on its own data.",
   lede:
     "I capture what your business already produces, organize it into something you can trust, and build the dashboards, software and AI that run on it.",
-  primaryCta: `Start with the ${ASSESSMENT.name}`,
+  primaryCta: "Book your free estimate",
   secondaryCta: { label: "See the services", href: "/services" },
 };
 
