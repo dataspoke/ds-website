@@ -3,10 +3,10 @@ import { Logo } from "@/components/shared/logo";
 import { SITE_NAME } from "@/lib/constants";
 
 /**
- * Layout for /lp/* landing pages: no site nav, just the logo (linking home,
- * not to the nav menu) and a minimal footer. The root layout still wraps
- * this one, so src/components/lp/site-chrome.tsx suppresses the main
- * Header/Footer for any pathname under /lp.
+ * Layout for the service ad pages (/lp/ai, /lp/custom-software, /lp/dashboards):
+ * no site nav, logo linking home, copyright only. /lp/free-estimate has its
+ * own layout. The root layout still wraps this one, so
+ * src/components/lp/site-chrome.tsx suppresses the main Header/Footer on /lp.
  */
 export default function LpLayout({ children }: { children: React.ReactNode }) {
   return (
