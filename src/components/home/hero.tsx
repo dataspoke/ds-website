@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookCall } from "@/components/shared/book-call";
+import { EstimateCta } from "@/components/shared/estimate-cta";
 import { SpokeDiagram } from "@/components/shared/spoke-diagram";
 import { ProofLine } from "@/components/home/proof-line";
 import { HERO } from "@/content/home";
@@ -16,7 +16,7 @@ export function Hero() {
           <p className="lede max-w-xl">{HERO.lede}</p>
           <ProofLine className="max-w-xl" />
           <div className="mt-1 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <BookCall>{HERO.primaryCta}</BookCall>
+            <EstimateCta location="home-hero">{HERO.primaryCta}</EstimateCta>
             <Link
               href={HERO.secondaryCta.href}
               className="font-semibold text-primary hover:text-primary/80"

@@ -74,6 +74,7 @@ function body() {
     `- [Work](${SITE_URL}/work): case studies, filterable by service line`,
     `- [Approach](${SITE_URL}/approach): the ${ASSESSMENT.name}, then build, hand-over and retainer, plus the KPI hierarchy`,
     `- [About](${SITE_URL}/about): Nick Paul's background and how he works`,
+    `- [Free estimate](${SITE_URL}/free-estimate): a free 30-minute call about tools, data, and goals, then a written estimate with a recommended plan and a price range. No obligation.`,
     `- [Contact](${SITE_URL}/contact): book a free 30-minute call or send a note`,
     "",
     "## Contact",

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { BookCall } from "@/components/shared/book-call";
+import { EstimateCta } from "@/components/shared/estimate-cta";
 import { Section } from "@/components/shared/section";
 import { CONTACT_EMAIL } from "@/lib/constants";
 
@@ -16,7 +16,7 @@ export function CtaBanner({ note }: { note?: ReactNode }) {
         </p>
         {note}
         <div className="mt-1 flex flex-wrap items-center gap-x-6 gap-y-3">
-          <BookCall>Book a 30-minute call</BookCall>
+          <EstimateCta location="home-banner">Book your free estimate</EstimateCta>
           <span className="text-muted-foreground">
             or email <span className="font-semibold text-foreground select-all">{CONTACT_EMAIL}</span>
           </span>

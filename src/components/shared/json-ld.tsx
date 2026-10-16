@@ -1,4 +1,5 @@
 import { ASSESSMENT } from "@/content/approach";
+import { ESTIMATE_FAQS, FREE_ESTIMATE } from "@/content/free-estimate";
 import { CREDENTIALS } from "@/content/home";
 import type { ServiceLine } from "@/types";
 import {
@@ -13,6 +14,7 @@ import {
 const ORG_ID = `${SITE_URL}/#organization`;
 const PERSON_ID = `${SITE_URL}/about#nick-paul`;
 const ASSESSMENT_ID = `${SITE_URL}/approach#data-ai-assessment`;
+const ESTIMATE_ID = `${SITE_URL}${FREE_ESTIMATE.path}#service`;
 
 const provider = {
   "@type": "Organization",
@@ -187,6 +189,48 @@ export function ArticleJsonLd({
       : {}),
   };
   return <LdScript data={data} />;
+}
+
+/** Free estimate offer. Rendered only on /free-estimate, with the FAQ block on that page. */
+export function EstimateJsonLd() {
+  const pageUrl = `${SITE_URL}${FREE_ESTIMATE.path}`;
+  const service = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": ESTIMATE_ID,
+    name: FREE_ESTIMATE.headline,
+    description: FREE_ESTIMATE.metaDescription,
+    url: pageUrl,
+    provider,
+    areaServed,
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      url: pageUrl,
+      description: "Free 30-minute call and a written estimate. No obligation.",
+    },
+  };
+  const faq = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${pageUrl}#faq`,
+    url: pageUrl,
+    mainEntity: ESTIMATE_FAQS.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+  return (
+    <>
+      <LdScript data={service} />
+      <LdScript data={faq} />
+    </>
+  );
 }
 
 /** The priced assessment. Rendered only where the assessment block is on the page. */

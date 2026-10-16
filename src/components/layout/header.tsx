@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/shared/logo";
-import { BookCall } from "@/components/shared/book-call";
+import { EstimateCta } from "@/components/shared/estimate-cta";
 import { cn } from "@/lib/utils";
 import type { NavItem } from "@/types";
 
@@ -42,7 +42,14 @@ export function Header({ navItems }: { navItems: NavItem[] }) {
         </nav>
 
         <div className="flex items-center gap-1 sm:gap-2">
-          <BookCall size="default" className="h-11 px-3 text-[0.95rem] sm:px-4" />
+          <EstimateCta
+            location="header"
+            size="default"
+            hideIconOnMobile
+            className="h-11 px-3 text-[0.95rem] sm:px-4"
+          >
+            Free estimate
+          </EstimateCta>
           <button
             className="rounded-md p-2 sm:p-2.5 lg:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
