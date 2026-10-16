@@ -42,12 +42,15 @@ export function generateMetadata(page: {
   noIndex?: boolean;
 }): Metadata {
   const fullTitle = page.absoluteTitle ? page.title : `${page.title} | ${SITE_NAME}`;
-  const pageUrl = page.path === "/" ? SITE_URL : `${SITE_URL}${page.path}`;
+  // Drop any query or hash. /contact?service=* must canonical to /contact,
+  // including retired params such as ai-integration, fractional-cto, and web-apps.
+  const pathname = page.path.split(/[?#]/)[0] || "/";
+  const pageUrl = pathname === "/" ? SITE_URL : `${SITE_URL}${pathname}`;
   return {
     title: page.absoluteTitle ? { absolute: page.title } : page.title,
     description: page.description,
     alternates: {
-      canonical: page.path,
+      canonical: pageUrl,
     },
     openGraph: {
       title: fullTitle,

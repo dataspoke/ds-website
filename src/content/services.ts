@@ -502,7 +502,7 @@ export const LINE_PAGE = {
   ctaLede:
     "Tell me what's frustrating you. I'll tell you honestly whether I can fix it, and what it would take.",
   ctaButton: "Ask about this",
-  bookCall: "Book a 30-minute call",
+  estimateCta: "Book your free estimate",
   seeLine: (title: string) => `See ${title}`,
 };
 
