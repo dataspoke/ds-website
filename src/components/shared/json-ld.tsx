@@ -4,6 +4,7 @@ import { CREDENTIALS } from "@/content/home";
 import type { ServiceLine } from "@/types";
 import {
   CONTACT_EMAIL,
+  CONTACT_PHONE,
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
@@ -38,7 +39,18 @@ function LdScript({ data }: { data: object }) {
 }
 
 const personSameAs = [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.upwork];
-const organizationSameAs = [SOCIAL_LINKS.linkedinCompany];
+const organizationSameAs = [
+  SOCIAL_LINKS.linkedinCompany,
+  SOCIAL_LINKS.clutch,
+  SOCIAL_LINKS.goodfirms,
+  SOCIAL_LINKS.linkedinServices,
+];
+
+const organizationAreaServed = [
+  { "@type": "State", name: "Connecticut" },
+  { "@type": "State", name: "New York" },
+  { "@type": "Country", name: "United States" },
+];
 
 /**
  * Homepage only. Organization, not ProfessionalService (deprecated).
@@ -64,9 +76,11 @@ export function OrganizationJsonLd() {
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "sales",
+      telephone: CONTACT_PHONE,
       email: CONTACT_EMAIL,
       url: `${SITE_URL}/contact`,
       availableLanguage: ["English"],
+      areaServed: "US",
     },
     address: {
       "@type": "PostalAddress",
@@ -74,7 +88,12 @@ export function OrganizationJsonLd() {
       addressRegion: "CT",
       addressCountry: "US",
     },
-    areaServed,
+    areaServed: organizationAreaServed,
+    potentialAction: {
+      "@type": "ReserveAction",
+      name: FREE_ESTIMATE.cta,
+      url: `${SITE_URL}${FREE_ESTIMATE.path}`,
+    },
     founder: {
       "@type": "Person",
       "@id": PERSON_ID,
