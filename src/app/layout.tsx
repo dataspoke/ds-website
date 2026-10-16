@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { AiReferralTracker } from "@/components/analytics/ai-referral";
 import { SiteChrome } from "@/components/lp/site-chrome";
 import { GA_MEASUREMENT_ID } from "@/lib/constants";
 import { getNavItems } from "@/lib/nav";
@@ -37,6 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${jakarta.variable} font-sans antialiased`}>
+        <AiReferralTracker />
         <SiteChrome navItems={getNavItems()}>{children}</SiteChrome>
       </body>
       <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />

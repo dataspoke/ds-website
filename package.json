@@ -13,7 +13,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postbuild": "next-sitemap"
+    "postbuild": "next-sitemap",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@next/third-parties": "^16.3.6",

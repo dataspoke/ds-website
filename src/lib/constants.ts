@@ -49,4 +49,5 @@ export const UPWORK_PROOF = {
 } as const;
 
 // GA4. Loaded on every page from the root layout.
+// AiReferralTracker sends ai_referral and sets user property ai_source.
 export const GA_MEASUREMENT_ID = "G-JWYN8NRDFS";
