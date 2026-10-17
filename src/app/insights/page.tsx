@@ -8,10 +8,10 @@ import { formatLongDate } from "@/lib/dates";
 export function generateMetadata(): Metadata {
   const posts = getInsightPosts();
   return pageMetadata({
-    title: "Insights",
+    title: "Insights: plain-English articles on running a business on its own data",
     description: posts.length
-      ? "Articles from DataSpoke."
-      : "Articles from DataSpoke. No posts yet.",
+      ? "Articles from DataSpoke for business owners on connecting your software, knowing your numbers and putting AI to work without a technical background."
+      : "Articles from DataSpoke for business owners on connecting your software, knowing your numbers and putting AI to work. No posts yet.",
     path: "/insights",
   });
 }

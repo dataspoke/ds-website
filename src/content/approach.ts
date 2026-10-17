@@ -5,9 +5,9 @@ export const ASSESSMENT = {
   price: "$999",
   terms: "fixed price · 2 weeks",
   lede:
-    "Two weeks. I inventory every system and data source your company runs on, score how connected and AI‑ready it is today and hand you a prioritized plan. You keep the plan whether or not we work together.",
+    "Two weeks. We list every system and data source your company runs on, score how connected and AI‑ready it is today and hand you a prioritized plan. You keep the plan whether or not we work together.",
   includes: [
-    "A map of every tool, who uses it and what data lives there",
+    "A map of every tool, who uses it and what information lives there",
     "A connected-data score and an AI‑readiness score, with the gaps named",
     "The three projects worth doing first, with what each would cost and return",
     "A 60-minute walkthrough with you and your leadership team",
@@ -28,15 +28,15 @@ export const ASSESSMENT = {
 export const STEPS: Step[] = [
   {
     label: "Step 1",
-    title: "Free 30-minute call",
+    title: "Free 30-minute estimate",
     description:
-      "You tell me what's frustrating you. I tell you honestly whether I can fix it and whether the Data & AI Assessment is the right place to start.",
+      "You tell us what's slowing your business down. We tell you honestly whether we can fix it, and you get a written estimate with a plan and a price range within two business days.",
   },
   {
     label: "Step 2",
-    title: "Data & AI Assessment",
+    title: "Data & AI Assessment, if you want the full map",
     description:
-      "You get the map, the scores and a written plan with prices before any build work starts.",
+      "Two weeks, fixed price. You get the map of your systems, the scores and a written plan with prices before any build work starts.",
   },
   {
     label: "Step 3",
@@ -47,17 +47,17 @@ export const STEPS: Step[] = [
 ];
 
 export const RETAINER_NOTE =
-  "Most clients keep me on a monthly retainer afterward. I watch what I built, fix problems before you notice them and give you a straight answer before you buy the next tool a vendor is pitching.";
+  "Most clients keep DataSpoke on a monthly retainer afterward. We watch what we built, fix problems before you notice them and give you a straight answer before you buy the next tool a vendor is pitching.";
 
 /** /approach page. */
 export const APPROACH_PAGE = {
-  metaTitle: "How an engagement works",
+  metaTitle: "How working with DataSpoke goes, step by step",
   metaDescription:
-    "How I work with established businesses: a two-week Data & AI Assessment, fixed-scope builds you own, a clean hand-over and an optional monthly retainer. Plus the KPI hierarchy I use to pick the numbers that run the business.",
+    "How DataSpoke works with business owners: a free 30-minute estimate, an optional two-week Data & AI Assessment, fixed-scope projects you own, a clean hand-over and an optional monthly retainer. Plus the simple method we use to pick the numbers that run a business.",
   eyebrow: "Approach",
-  title: "Assess. Build. Hand over. Keep it running.",
+  title: "You see the plan and the price first. You own everything at the end.",
   lede:
-    "Every engagement follows the same four phases. You see the plan and the price before any build work starts, and you own everything at the end.",
+    "Every engagement follows the same four phases, starting with a free 30-minute estimate. Nothing is built until you have agreed to a scope, a price and a finish line.",
 };
 
 export const PHASES: Step[] = [
@@ -65,7 +65,7 @@ export const PHASES: Step[] = [
     label: "Phase 1",
     title: ASSESSMENT.name,
     description:
-      "Two weeks, fixed price. I map every system and data source, score where you stand and write the plan. You keep the plan either way.",
+      "Two weeks, fixed price. We map every system and data source, score where you stand and write the plan. You keep the plan either way.",
   },
   {
     label: "Phase 2",
@@ -101,29 +101,29 @@ export interface ScorecardRow {
   onTrack: boolean;
 }
 
-/** "Metrics that run the business": goal → lagging KPIs → leading indicators → weekly scorecard. */
+/** "Metrics that run the business": goal → results → weekly activities → weekly scorecard. */
 export const KPI_HIERARCHY = {
   eyebrow: "Metrics that run the business",
   title: "Start from what you want. Then pick the numbers.",
   lede:
-    "Most dashboards start from whatever data is easy to pull. I start from the goal and work down. Each level answers a different question, and only the bottom one gets looked at every week.",
-  exampleLabel: "Worked example: a commercial cleaning company, 60 staff, $6M revenue",
+    "Most dashboards start from whatever data is easy to pull. We start from the goal and work down. Each level answers a different question, and only the bottom one gets looked at every week.",
+  exampleLabel: "Worked example, made up for illustration: a commercial cleaning company",
   levels: [
     {
       label: "Goal",
       question: "What do you want to achieve?",
       description: "One or two outcomes, in plain words, with a date.",
-      example: ["Grow revenue from $6M to $8M in two years while holding a 15% net margin."],
+      example: ["Grow revenue by a third in two years while holding the net margin."],
     },
     {
-      label: "Lagging KPIs",
+      label: "Results that prove it (lagging KPIs)",
       question: "How will you know you got there?",
       description:
         "The results. They tell you the truth, but only after it's too late to change them.",
       example: ["Monthly revenue", "Net margin", "Client retention", "Average contract value"],
     },
     {
-      label: "Leading indicators",
+      label: "Weekly activities that drive it (leading indicators)",
       question: "What moves those numbers before they move?",
       description:
         "The activities and early signals your team controls this week. This is where the work happens.",
@@ -139,7 +139,7 @@ export const KPI_HIERARCHY = {
       label: "Weekly scorecard",
       question: "Are we on track this week?",
       description:
-        "Five to ten leading numbers, each with an owner and a target. Reviewed in the same meeting every week.",
+        "Five to ten weekly numbers, each with an owner and a target. Reviewed in the same meeting every week.",
       example: [],
     },
   ] satisfies KpiLevel[],
@@ -156,5 +156,5 @@ export const KPI_HIERARCHY = {
     ] satisfies ScorecardRow[],
   },
   close:
-    "When a scorecard number goes red, you know which lagging KPI is at risk weeks before it shows up in the books. I build the scorecard to update itself from the systems you already use.",
+    "When a scorecard number goes red, you know which result is at risk weeks before it shows up in the books. We build the scorecard to update itself from the systems you already use.",
 };

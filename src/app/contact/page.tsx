@@ -8,9 +8,9 @@ import { CONTACT_EMAIL, SOCIAL_LINKS } from "@/lib/constants";
 import { STEPS } from "@/content/approach";
 
 export const metadata: Metadata = generateMetadata({
-  title: "Book a free 30-minute call",
+  title: "Contact DataSpoke: book a free call or send a note",
   description:
-    "Book a free 30-minute call with DataSpoke, or send a note about what's slowing your business down. Replies within one business day.",
+    "Book a free 30-minute call with DataSpoke in Durham, CT, or send a note about what's slowing your business down. Replies within one business day. Serving Connecticut, New York and the US.",
   path: "/contact",
 });
 
@@ -24,8 +24,8 @@ export default function ContactPage() {
             Let&apos;s talk about what&apos;s slowing you down.
           </h1>
           <p className="lede">
-            The fastest route is a 30-minute call. If you&apos;d rather write, the form goes
-            straight to me and I reply within one business day.
+            The fastest route is a free 30-minute call. If you&apos;d rather write, the form goes
+            straight to us and you get a reply within one business day.
           </p>
         </div>
 
@@ -35,7 +35,8 @@ export default function ContactPage() {
               <h2 className="text-2xl font-bold">Book a free 30-minute call</h2>
               <p className="text-muted-foreground">
                 Pick a time that suits you. You&apos;ll get a calendar invite with a video link.
-                Come with whatever is frustrating you. No preparation needed.
+                Come with whatever is slowing your business down. No preparation and no technical
+                background needed.
               </p>
               <BookCall className="justify-self-start">Pick a time</BookCall>
             </div>
@@ -71,7 +72,7 @@ export default function ContactPage() {
                 >
                   LinkedIn
                 </a>{" "}
-                · Working with clients nationwide
+                · Durham, CT · Serving CT, NY and clients nationwide
               </p>
             </div>
           </div>

@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { generateMetadata as pageMetadata } from "@/lib/metadata";
 import { Section } from "@/components/shared/section";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
-import { BookCall } from "@/components/shared/book-call";
+import { EstimateCta } from "@/components/shared/estimate-cta";
 import { ArticleJsonLd } from "@/components/shared/json-ld";
 import { SummaryBox } from "@/components/work/summary-box";
 import { WORK_COPY, getCaseStudy, getLine } from "@/components/work/copy";
@@ -144,7 +144,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           <h2 className="text-3xl font-bold leading-[1.15] sm:text-4xl">{copy.ctaHeading}</h2>
           <p className="lede">{copy.ctaLede}</p>
           <div className="mt-1 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <BookCall>{copy.ctaBook}</BookCall>
+            <EstimateCta location={`work-${study.slug}`}>{copy.ctaBook}</EstimateCta>
             <Link
               href={contactHref}
               className="py-2 font-semibold text-primary hover:text-primary/80"

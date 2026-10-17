@@ -25,7 +25,12 @@ export interface ServiceLine {
   /** Hub lines are the foundation every spoke builds on. */
   kind: "hub" | "spoke";
   title: string;
+  /** The outcome for the owner, in plain words. Doubles as the page h1. */
   oneLiner: string;
+  /** Browser-tab and search-result title, in buyers' words. */
+  metaTitle: string;
+  /** Search-result description. Whole sentences, in buyers' words. */
+  metaDescription: string;
   problem: string;
   soundsLike: string[];
   youGet: string[];
