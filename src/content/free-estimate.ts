@@ -50,6 +50,8 @@ export const FREE_ESTIMATE = {
   booking: {
     eyebrow: "Book a time",
     title: "Pick a 30-minute slot.",
+    /** Used where the page has no second link out to the calendar. */
+    embedLede: "The calendar below is the same booking page we use for this estimate.",
     lede: "The calendar below is the same booking page we use for this estimate. If it does not load, open it in a new tab.",
     fallback: "Open the booking page",
   },

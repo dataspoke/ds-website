@@ -18,6 +18,9 @@ export const BOOKING_URL = "https://calendar.app.google/jzAtxw6Pjtwz8WDV9";
 export const BOOKING_EMBED_URL =
   "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1ug-9sT7CsY63Cypht12egXKITsJwCyHhyx-Hs85nJyxHcby5GlWqOuVqBWix1vFC83Byi3Eah?gv=true";
 export const FREE_ESTIMATE_PATH = "/free-estimate";
+/** Ad landing page. Same offer as /free-estimate, with no site navigation. */
+export const LP_FREE_ESTIMATE_PATH = "/lp/free-estimate";
+export const PRIVACY_PATH = "/privacy";
 export const LOCATION = "Durham, CT";
 
 export const NAV_ITEMS: NavItem[] = [
