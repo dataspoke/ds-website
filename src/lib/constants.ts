@@ -8,6 +8,7 @@ export const SITE_DESCRIPTION =
   "DataSpoke connects the software an established business already runs on into one picture the owner controls, makes it ready for AI, and builds the dashboards, automations and analysis that turn it into better decisions.";
 export const SITE_URL = "https://www.dataspoke.io";
 export const CONTACT_EMAIL = "nick@dataspoke.io";
+export const CONTACT_PHONE = "+1-732-768-4663";
 export const BOOKING_URL = "https://calendar.app.google/jzAtxw6Pjtwz8WDV9";
 /**
  * Same appointment schedule as BOOKING_URL. The short link sends
@@ -48,6 +49,9 @@ export const TRADEMARK_NOTE =
 export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/in/nick-paul-8b466818/",
   linkedinCompany: "https://www.linkedin.com/company/dataspoke-io/",
+  linkedinServices: "https://www.linkedin.com/services/page/a800a0347a5aa45b29",
+  clutch: "https://clutch.co/profile/dataspoke",
+  goodfirms: "https://www.goodfirms.co/company/dataspoke",
   upwork: "https://www.upwork.com/freelancers/~013f135f6dfc7660c7",
 };
 

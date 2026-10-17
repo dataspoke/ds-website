@@ -1,4 +1,5 @@
 import { FREE_ESTIMATE_PATH } from "@/lib/constants";
+import type { FaqItem } from "@/types";
 
 export const FREE_ESTIMATE = {
   path: FREE_ESTIMATE_PATH,
@@ -60,14 +61,7 @@ export const FREE_ESTIMATE = {
   },
 } as const;
 
-export interface EstimateFaq {
-  question: string;
-  answer: string;
-  /** Visible phrase inside `answer` that links to `href`. Schema uses the plain answer. */
-  link?: { label: string; href: string };
-}
-
-export const ESTIMATE_FAQS: EstimateFaq[] = [
+export const ESTIMATE_FAQS: FaqItem[] = [
   {
     question: "What happens on the call?",
     answer:

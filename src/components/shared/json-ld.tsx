@@ -4,6 +4,7 @@ import { CREDENTIALS } from "@/content/home";
 import type { ServiceLine } from "@/types";
 import {
   CONTACT_EMAIL,
+  CONTACT_PHONE,
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
@@ -38,7 +39,18 @@ function LdScript({ data }: { data: object }) {
 }
 
 const personSameAs = [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.upwork];
-const organizationSameAs = [SOCIAL_LINKS.linkedinCompany];
+const organizationSameAs = [
+  SOCIAL_LINKS.linkedinCompany,
+  SOCIAL_LINKS.clutch,
+  SOCIAL_LINKS.goodfirms,
+  SOCIAL_LINKS.linkedinServices,
+];
+
+const organizationAreaServed = [
+  { "@type": "State", name: "Connecticut" },
+  { "@type": "State", name: "New York" },
+  { "@type": "Country", name: "United States" },
+];
 
 /**
  * Homepage only. Organization, not ProfessionalService (deprecated).
@@ -64,9 +76,11 @@ export function OrganizationJsonLd() {
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "sales",
+      telephone: CONTACT_PHONE,
       email: CONTACT_EMAIL,
       url: `${SITE_URL}/contact`,
       availableLanguage: ["English"],
+      areaServed: "US",
     },
     address: {
       "@type": "PostalAddress",
@@ -74,7 +88,12 @@ export function OrganizationJsonLd() {
       addressRegion: "CT",
       addressCountry: "US",
     },
-    areaServed,
+    areaServed: organizationAreaServed,
+    potentialAction: {
+      "@type": "ReserveAction",
+      name: FREE_ESTIMATE.cta,
+      url: `${SITE_URL}${FREE_ESTIMATE.path}`,
+    },
     founder: {
       "@type": "Person",
       "@id": PERSON_ID,
@@ -191,6 +210,32 @@ export function ArticleJsonLd({
   return <LdScript data={data} />;
 }
 
+/** Visible Q&A. Answer text is the plain string rendered on the page. */
+export function FaqPageJsonLd({
+  path,
+  faqs,
+}: {
+  path: string;
+  faqs: { question: string; answer: string }[];
+}) {
+  const pageUrl = `${SITE_URL}${path}`;
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${pageUrl}#faq`,
+    url: pageUrl,
+    mainEntity: faqs.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+  return <LdScript data={data} />;
+}
+
 /** Free estimate offer. Rendered only on /free-estimate, with the FAQ block on that page. */
 export function EstimateJsonLd() {
   const pageUrl = `${SITE_URL}${FREE_ESTIMATE.path}`;
@@ -211,24 +256,10 @@ export function EstimateJsonLd() {
       description: "Free 30-minute call and a written estimate. No obligation.",
     },
   };
-  const faq = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "@id": `${pageUrl}#faq`,
-    url: pageUrl,
-    mainEntity: ESTIMATE_FAQS.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
   return (
     <>
       <LdScript data={service} />
-      <LdScript data={faq} />
+      <FaqPageJsonLd path={FREE_ESTIMATE.path} faqs={ESTIMATE_FAQS} />
     </>
   );
 }

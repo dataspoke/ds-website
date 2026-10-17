@@ -8,6 +8,7 @@ import {
   SITE_URL,
 } from "@/lib/constants";
 import { CREDENTIALS, PROOF_LINE, TOOLS } from "@/content/home";
+import { SERVICE_PAGE_EXTRAS } from "@/content/service-pages";
 import { HUB_LINES, SPOKE_LINES } from "@/content/services";
 import type { CaseStudy, ServiceLine } from "@/types";
 
@@ -48,6 +49,21 @@ function body() {
     "",
     ...SPOKE_LINES.map(lineEntry),
     "",
+    "## Questions on the service pages",
+    "",
+    "Each service page answers these in the visible FAQ, with the same words in FAQPage structured data. Pricing on every page points at the free 30-minute estimate and the Data & AI Assessment. No other prices are quoted.",
+    "",
+    ...[...HUB_LINES, ...SPOKE_LINES].flatMap((l) => {
+      const extra = SERVICE_PAGE_EXTRAS[l.slug];
+      return [
+        `### [${l.title}](${SITE_URL}/services/${l.slug})`,
+        "",
+        `${extra.engagement.title} ${extra.engagement.lede}`,
+        "",
+        ...extra.faqs.map((f) => `- ${f.question} ${f.answer}`),
+        "",
+      ];
+    }),
     `## The [${ASSESSMENT.name}](${SITE_URL}/approach#assessment)`,
     "",
     `Price: ${ASSESSMENT.price}, ${ASSESSMENT.terms}.`,

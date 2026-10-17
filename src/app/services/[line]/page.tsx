@@ -2,13 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { clipMetaDescription, generateMetadata as pageMetadata } from "@/lib/metadata";
-import { ServiceJsonLd } from "@/components/shared/json-ld";
+import { FaqPageJsonLd, ServiceJsonLd } from "@/components/shared/json-ld";
+import { FaqList } from "@/components/shared/faq-list";
 import { Section, SectionHead } from "@/components/shared/section";
-import { BookCall } from "@/components/shared/book-call";
+import { EstimateCta } from "@/components/shared/estimate-cta";
 import { Button } from "@/components/ui/button";
+import { EngagementSection } from "@/components/services/engagement";
 import { BulletList, ListLabel, ProductDetail } from "@/components/services/product-detail";
 import { LadderGraphic } from "@/components/services/ladder";
 import { RelatedCaseStudies } from "@/components/services/related-case-studies";
+import { SERVICE_PAGE_EXTRAS } from "@/content/service-pages";
 import { LINE_LADDERS, LINE_PAGE, SERVICE_LINES, getServiceLine, serviceLinkText } from "@/content/services";
 
 // Only the six lines exist; anything else is a 404.
@@ -35,11 +38,13 @@ export default async function ServiceLinePage({ params }: PageProps<"/services/[
   if (!line) notFound();
 
   const ladder = LINE_LADDERS[line.slug];
+  const extra = SERVICE_PAGE_EXTRAS[line.slug];
   const others = SERVICE_LINES.filter((l) => l.slug !== line.slug);
 
   return (
     <>
       <ServiceJsonLd line={line} />
+      <FaqPageJsonLd path={`/services/${line.slug}`} faqs={extra.faqs} />
       <Section tight>
         <Link href="/services" className="inline-block py-2 text-sm font-semibold text-primary hover:text-primary/80">
           &larr; {LINE_PAGE.backLabel}
@@ -78,7 +83,14 @@ export default async function ServiceLinePage({ params }: PageProps<"/services/[
         </div>
       </Section>
 
+      <EngagementSection engagement={extra.engagement} />
+
       <RelatedCaseStudies line={line.slug} />
+
+      <Section id="faq" className="pt-0 sm:pt-0">
+        <SectionHead eyebrow={extra.faqEyebrow} title={extra.faqTitle} />
+        <FaqList faqs={extra.faqs} />
+      </Section>
 
       <Section tint id="contact-cta">
         <div className="grid max-w-2xl gap-4">
@@ -90,9 +102,12 @@ export default async function ServiceLinePage({ params }: PageProps<"/services/[
             <Button asChild size="lg" className="h-11 text-base font-semibold">
               <Link href={`/contact?service=${line.slug}`}>{LINE_PAGE.ctaButton}</Link>
             </Button>
-            <BookCall size="lg" className="bg-background text-primary ring-1 ring-primary hover:bg-tint">
-              {LINE_PAGE.bookCall}
-            </BookCall>
+            <EstimateCta
+              location={`service-${line.slug}`}
+              className="bg-background text-primary ring-1 ring-primary hover:bg-tint"
+            >
+              {LINE_PAGE.estimateCta}
+            </EstimateCta>
           </div>
         </div>
         <nav aria-label={LINE_PAGE.otherLinesHeading} className="mt-12">
