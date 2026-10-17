@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { clipMetaDescription, generateMetadata as pageMetadata } from "@/lib/metadata";
+import { generateMetadata as pageMetadata } from "@/lib/metadata";
 import { FaqPageJsonLd, ServiceJsonLd } from "@/components/shared/json-ld";
 import { FaqList } from "@/components/shared/faq-list";
 import { Section, SectionHead } from "@/components/shared/section";
@@ -26,8 +26,8 @@ export async function generateMetadata({ params }: PageProps<"/services/[line]">
   const line = getServiceLine(slug);
   if (!line) return {};
   return pageMetadata({
-    title: `${line.title}: ${line.oneLiner.replace(/\.\s*$/, "")}`,
-    description: clipMetaDescription(`${line.oneLiner} ${line.problem}`),
+    title: line.metaTitle,
+    description: line.metaDescription,
     path: `/services/${line.slug}`,
   });
 }

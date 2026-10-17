@@ -38,7 +38,7 @@ function LdScript({ data }: { data: object }) {
   );
 }
 
-const personSameAs = [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.upwork];
+const personSameAs = [SOCIAL_LINKS.linkedin];
 const organizationSameAs = [
   SOCIAL_LINKS.linkedinCompany,
   SOCIAL_LINKS.clutch,

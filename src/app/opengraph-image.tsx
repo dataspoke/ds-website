@@ -43,7 +43,7 @@ export default async function Image() {
               {SITE_TAGLINE}
             </span>
             <span style={{ fontFamily: "Inter", fontSize: 28, lineHeight: 1.35, color: OG_COLORS.muted }}>
-              Data, dashboards, custom software, AI and analytics for established businesses.
+              Data, dashboards, custom software and AI for established businesses. Durham, CT · serving CT, NY and the US.
             </span>
           </div>
           <span style={{ fontFamily: "Inter", fontSize: 24, color: OG_COLORS.primary }}>dataspoke.io</span>

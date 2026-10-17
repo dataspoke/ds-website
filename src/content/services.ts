@@ -1,14 +1,16 @@
 import type { Product, ServiceLine, ServiceLineSlug } from "@/types";
 
-// Product copy. Each product belongs to one service line below.
+// Service copy. Every line and product leads with what changes for the owner,
+// then says what gets built. Technical words are explained where they appear.
+// Claims stay general: kinds of work, no client names, no made-up numbers.
 
 const CONNECTED_COMPANY: Product = {
   slug: "connected-company",
   title: "Connected Company",
   description:
-    "Every source your business produces, flowing into one place you own: calls, call transcripts, meeting notes, ads, CRM activity, operations and finance.",
+    "Nobody on your team copies information from one program to another. Calls, signed documents, emails and invoices land on the right customer record on their own. We connect the tools you already pay for so the information flows between them.",
   result:
-    "Phone calls, signed documents and emails land on the right customer record without anyone filing them.",
+    "Hours of retyping disappear each week, and every customer has one complete record from first call to final payment.",
   soundsLike: [
     "Someone on your team spends hours a week copying data from one program to another.",
     "You have a Zapier setup that breaks quietly and nobody notices for weeks.",
@@ -18,7 +20,7 @@ const CONNECTED_COMPANY: Product = {
     "Information moves between your tools without anyone copying it.",
     "An alert when something needs a human decision, instead of a silent failure.",
     "One customer record that follows the person from first call to final payment.",
-    "Automations that are documented and owned, not a black box.",
+    "Automations that are written down and owned by you, not a black box.",
   ],
 };
 
@@ -26,9 +28,9 @@ const LEAD_FLOW: Product = {
   slug: "lead-flow",
   title: "Lead Flow",
   description:
-    "Every lead from every source captured in minutes, acknowledged instantly and followed up by text and email until they book or say no.",
+    "Every lead gets a reply within minutes, including the ones that come in Saturday night. Leads from ads, your website and lead vendors reach your CRM (your customer list) on their own, and follow-up by text and email keeps going until they book or say no.",
   result:
-    "Leads from ads, your website and lead vendors reach your CRM in minutes, and the customer hears back right away.",
+    "No lead sits in an inbox over the weekend, and customers hear back from a real company right away.",
   soundsLike: [
     "A lead comes in Saturday night and nobody sees it until Tuesday.",
     "Your team copies leads by hand from a vendor's email into the CRM.",
@@ -46,16 +48,16 @@ const TRUST_LADDER: Product = {
   slug: "trust-ladder",
   title: "Trust Ladder",
   description:
-    "I collect what your business produces, process it and turn it into structured records: clients, projects, decisions, policies. Not one giant pile of files. Every fact carries a trust level and a link to where it came from.",
+    "Everyone works from the same facts. We turn your calls, emails and documents into organized records of clients, projects, decisions and policies, instead of one giant pile of files. Every fact carries a trust level and a link to where it came from, so a passing comment never gets treated as company policy.",
   result:
-    "AI and reports draw on what was decided, not on what someone once said in a meeting.",
+    "Reports and AI draw on what was actually decided, and anyone can check where an answer came from.",
   soundsLike: [
     "Two documents say different things and nobody knows which one is current.",
     "A decision was made on a call, and three weeks later nobody can find it.",
     "You'd like AI to answer questions, but you don't trust what it would read.",
   ],
   youGet: [
-    "Calls, emails and documents turned into structured records with a source on each one.",
+    "Calls, emails and documents turned into organized records with a source on each one.",
     "Every fact tagged Decided, Documented, Discussed or Hearsay.",
     "One place where the current answer lives, and a trail to how it got there.",
     "AI that says \"this was only discussed\" instead of passing hearsay off as policy.",
@@ -66,9 +68,9 @@ const LIVE_NUMBERS: Product = {
   slug: "live-numbers",
   title: "Live Numbers",
   description:
-    "Dashboards and monthly reports that build themselves from your real systems. Some numbers you need every Monday, the same way, without asking anyone.",
+    "You know your numbers every Monday without asking anyone to build a report. Dashboards and monthly reports update themselves from your real systems, so the same question gets the same answer every week.",
   result:
-    "A weekly scorecard that matches your CRM to the lead, and shows cost per paying customer by channel.",
+    "A weekly scorecard that matches your CRM lead for lead, and shows what each marketing channel costs you per paying customer.",
   soundsLike: [
     "Your leadership meeting starts with a debate about whose number is right.",
     "Month-end means someone spends a day reconciling reports by hand.",
@@ -86,7 +88,7 @@ const KPI_HIERARCHY: Product = {
   slug: "kpi-hierarchy",
   title: "KPI Hierarchy",
   description:
-    "One goal at the top. The lagging numbers that prove you hit it. The leading indicators your team can move this week. A weekly scorecard that ties them together.",
+    "You know which three numbers matter and who is responsible for each. We start from the one goal the year is about, then pick the results that prove you hit it and the weekly activities your team can move right now. (KPI stands for key performance indicator: a number you track because it tells you whether the business is on course.)",
   result:
     "Every number on the dashboard answers to the goal, and every manager knows which one is theirs.",
   soundsLike: [
@@ -94,7 +96,7 @@ const KPI_HIERARCHY: Product = {
     "You find out you missed the quarter when the quarter is over.",
   ],
   youGet: [
-    "A goal broken down into lagging KPIs and leading indicators.",
+    "A goal broken down into the results that prove it and the weekly activities that drive it.",
     "An owner for each number.",
     "A weekly scorecard built from the systems you already run.",
   ],
@@ -104,9 +106,9 @@ const YOUR_OWN_APP: Product = {
   slug: "your-own-app",
   title: "Internal Tools",
   description:
-    "An app.yourcompany.com built around how your business actually works. It sits on top of the systems you already pay for and shows each person the work that's theirs.",
+    "Your team works in one screen built for them instead of five programs built for everyone. We build a web app at your own address, such as app.yourcompany.com, that sits on top of the systems you already pay for and shows each person the work that's theirs.",
   result:
-    "Your team works in one screen built for them, instead of five tools built for everyone.",
+    "The side spreadsheet goes away, new staff learn one screen instead of five, and the data stays in systems you own.",
   soundsLike: [
     "Your team keeps a spreadsheet next to the software because the software doesn't fit.",
     "You pay for features you don't use and still can't do the one thing you need.",
@@ -115,7 +117,7 @@ const YOUR_OWN_APP: Product = {
   youGet: [
     "A web app on your own domain, built for your process.",
     "Each person's work on one screen, pulled from the systems you already run.",
-    "Your data stays in systems you own, not locked in mine or a new vendor's.",
+    "Your data stays in systems you own, not locked in ours or a new vendor's.",
   ],
 };
 
@@ -123,9 +125,9 @@ const CLIENT_PORTAL: Product = {
   slug: "client-portal",
   title: "Client Portal",
   description:
-    "A place where your clients log in and see their status, documents and invoices. It reads from your CRM and accounting system, so nobody updates it by hand.",
+    "Fewer \"where is this at?\" calls, and clients who feel looked after between meetings. A portal is a private page where each client logs in and sees their own status, documents and invoices. It reads from your CRM and accounting system, so nobody updates it by hand.",
   result:
-    "Fewer \"where is this at?\" calls, and clients who feel looked after between meetings.",
+    "Clients answer their own status questions, and your team spends that time on the work.",
   soundsLike: [
     "Clients email to ask for a status you could simply show them.",
     "Documents go back and forth as attachments and nobody knows which version is final.",
@@ -141,17 +143,17 @@ const MOBILE_APP: Product = {
   slug: "mobile-app",
   title: "Mobile Apps",
   description:
-    "iOS and Android apps for your customers or your crew, built on the booking, CRM or field system you already pay for. Your brand, your data, your app store listing.",
+    "Your customers book and pay in an app with your name on it, and you own the relationship instead of a vendor. We build iPhone and Android apps for your customers or your crew on top of the booking, CRM or field system you already pay for.",
   result:
-    "Customers book and pay in your app, and you own the relationship instead of a vendor.",
+    "Your brand in the app store, your data in your hands, and nothing to migrate.",
   soundsLike: [
     "Customers use an app from a vendor nobody can reach.",
     "Your crew fills in paper forms that someone retypes at the office.",
   ],
   youGet: [
-    "Native-feeling iOS and Android apps under your company's name.",
+    "Native-feeling iPhone and Android apps under your company's name.",
     "Built on your existing systems, so nothing has to migrate.",
-    "Plain-English documentation and code you own, so you're never stuck with me.",
+    "Plain-English documentation and code you own, so you're never stuck with us.",
   ],
 };
 
@@ -159,7 +161,7 @@ const COMPANY_BRAIN: Product = {
   slug: "company-brain",
   title: "Company Brain",
   description:
-    "A private assistant that can see your CRM, calls, documents and numbers. Ask in plain English, get an answer with the source behind it. Runs under your own logins.",
+    "Ask a question about your own business in plain English and get the answer with the source behind it. A private assistant that can see your CRM, calls, documents and numbers, running under your own logins, so nothing leaves your control.",
   result:
     "An owner asks \"what do I need to know before this meeting?\" and gets the client history, recent calls and open tasks in one answer.",
   soundsLike: [
@@ -179,9 +181,9 @@ const AI_READY_COMPANY: Product = {
   slug: "ai-ready-company",
   title: "AI‑Ready Company",
   description:
-    "How your business actually runs, written down and kept current: systems, processes, roles. Then your team trained to use AI on it, with custom AI tools set up for the jobs they do every day.",
+    "Your team uses AI on real work, every day, the same way. We write down how your business actually runs (systems, processes, roles) and keep it current, then train your people on the AI tools that fit their jobs and set up custom tools for the work they repeat every week.",
   result:
-    "An internal playbook that updates itself from the documents your team already edits, and a team that knows how to put AI to work on it.",
+    "A company playbook that updates itself from the documents your team already edits, and a team that knows how to put AI to work on it.",
   soundsLike: [
     "New hires learn the job by shadowing, because the written process is outdated or missing.",
     "Your team uses AI tools inconsistently, or not at all, because nobody set them up for the work.",
@@ -199,9 +201,9 @@ const AUTOMATE_THE_BUSYWORK: Product = {
   slug: "automate-the-busywork",
   title: "Automate the Busywork",
   description:
-    "Any job someone does the same way every week runs itself: intake, follow-up, reconciliation, sending reports. Where AI can do the work, it drafts and a person approves.",
+    "Hours back every week for the people you already have. Any job someone does the same way every week runs itself: intake, follow-up, matching payments to invoices, sending reports. Where AI can do the work, it writes the draft and a person approves it.",
   result:
-    "Hours back every week, and nobody retyping what the business already knows.",
+    "You take on more customers without adding admin staff, and nobody retypes what the business already knows.",
   soundsLike: [
     "The same report gets rebuilt by hand every Monday.",
     "Proposals, intake forms and follow-ups are written from scratch each time.",
@@ -218,7 +220,7 @@ const EARLY_WARNINGS: Product = {
   slug: "early-warnings",
   title: "Early Warnings",
   description:
-    "Your business tells you what's about to happen before it does. A customer about to leave, a job drifting over budget, a quarter that needs two more crews, cash getting tight.",
+    "You hear about problems while there is still time to fix them. A customer about to leave, a job drifting over budget, a quarter that needs two more crews, cash getting tight. We use your own history to flag the signals that matter and to forecast what's coming.",
   result:
     "You call the customer before they call you, and you hire before the rush instead of during it.",
   soundsLike: [
@@ -229,7 +231,7 @@ const EARLY_WARNINGS: Product = {
   youGet: [
     "A short list every morning of what needs attention today.",
     "Alerts on the signals that matter: silence from a good customer, a stalled deal, a slipping margin.",
-    "Forecasts for demand, capacity and cash, built from your own history.",
+    "Forecasts for demand, staffing and cash, built from your own history.",
   ],
 };
 
@@ -237,7 +239,7 @@ const FIND_THE_MARGIN: Product = {
   slug: "find-the-margin",
   title: "Find the Margin",
   description:
-    "Where the next customers and the next dollars are. Prospects that look like your best customers, services and segments that actually pay, pricing that's leaking. Tested properly before you spend.",
+    "You see where the money is actually made and where it leaks. Which customers, services and marketing channels pay, which prospects look like your best customers, and which pricing is costing you. Each bet is tested properly before you spend more on it.",
   result:
     "A ranked list of who to call next, and proof of which bet paid off.",
   soundsLike: [
@@ -246,7 +248,7 @@ const FIND_THE_MARGIN: Product = {
     "Marketing decisions are made on gut feel and the agency's own report.",
   ],
   youGet: [
-    "Profitability by customer, service and channel, from connected finance and operations data.",
+    "Profit by customer, service and channel, from connected finance and operations data.",
     "Prospect lists built from your best existing customers or from public records.",
     "Experiments set up and measured properly, so you know a bet paid off before you double it.",
   ],
@@ -257,17 +259,20 @@ export const SERVICE_LINES: ServiceLine[] = [
   {
     slug: "capture",
     kind: "hub",
-    title: "Capture",
-    oneLiner: "Every system feeding one picture you own.",
+    title: "Data Capture & Integration",
+    oneLiner: "Stop retyping. Every lead, call and invoice lands where it belongs on its own.",
+    metaTitle: "Connect your business software so nothing gets retyped",
+    metaDescription:
+      "DataSpoke connects the CRM, accounting, phone and marketing tools your business already uses, so leads, calls and invoices flow between them on their own. Save hours of manual work each week and never miss a lead. Free 30-minute estimate. Serving CT, NY and the US.",
     problem:
-      "CRM, accounting, scheduling, phones. Each one is right about its own piece and wrong about the whole. Every call, meeting, email and text is a record of the business, and almost none of it is captured anywhere you can look at it.",
+      "Your CRM, accounting software, scheduler and phone system each know part of the story, and someone on your team spends hours a week carrying information between them by hand. Leads wait in inboxes. Calls, emails and texts hold facts about your customers that never get written down anywhere you can find. Integration is the plain word for fixing that: we connect the programs you already pay for so the information moves on its own.",
     soundsLike: [
       "Someone on your team spends hours a week copying data from one program to another.",
       "A lead comes in Saturday night and nobody sees it until Tuesday.",
       "You have a Zapier setup that breaks quietly and nobody notices for weeks.",
     ],
     youGet: [
-      "Information moves between your tools without anyone copying it.",
+      "Hours of retyping back every week, because information moves between your tools without anyone copying it.",
       "One customer record that follows the person from first call to final payment.",
       "Every lead in your CRM within minutes, with the customer's original message attached.",
     ],
@@ -276,19 +281,22 @@ export const SERVICE_LINES: ServiceLine[] = [
   {
     slug: "organize",
     kind: "hub",
-    title: "Organize",
-    oneLiner: "A pile of data turned into records AI and reports can trust.",
+    title: "Data Organization & Warehousing",
+    oneLiner: "One trustworthy set of records, so everyone works from the same facts.",
+    metaTitle: "Organize your business data into one trustworthy record",
+    metaDescription:
+      "DataSpoke turns the calls, emails, documents and spreadsheets your business produces into one organized, trustworthy set of records you own. End the argument about whose number is right and give AI something real to read. Free 30-minute estimate. CT, NY and nationwide.",
     problem:
-      "Once the data is captured, it's still a pile. Calls, emails and documents disagree with each other. Some of it was decided. Some of it was only said once in a meeting. AI can't tell the difference unless someone sorts it, so it treats a passing comment like company policy. I collect it, process it and turn it into structured records, each one marked with how far you can trust it.",
+      "Once the information is captured, it's still a pile. Two documents disagree. A decision was made on a call and nobody can find it. A report says one thing and the accounting software says another. We sort the pile into organized records of clients, projects, decisions and policies, and we mark each fact with how far you can trust it. A data warehouse is the plain word for where that organized copy lives: one central, well-kept store of your business information that you own and that your reports, software and AI all read from.",
     soundsLike: [
       "Two documents say different things and nobody knows which one is current.",
       "A decision was made on a call, and three weeks later nobody can find it.",
       "You'd like AI to answer questions, but you don't trust what it would read.",
     ],
     youGet: [
-      "Structured records built from your calls, emails and documents, not one giant pile of files.",
+      "Organized records built from your calls, emails and documents, not one giant pile of files.",
       "A trust level on every fact: Decided, Documented, Discussed or Hearsay.",
-      "AI and reports that know what was decided and what is only hearsay.",
+      "Reports and AI that know what was decided and what is only hearsay.",
       "A source behind every answer, so you can check it.",
     ],
     products: [TRUST_LADDER],
@@ -297,9 +305,12 @@ export const SERVICE_LINES: ServiceLine[] = [
     slug: "metrics-dashboards",
     kind: "spoke",
     title: "Metrics & Dashboards",
-    oneLiner: "Numbers you need every Monday, the same way, without asking anyone.",
+    oneLiner: "Know your numbers every Monday without anyone building a report.",
+    metaTitle: "Business dashboards that show you your numbers every Monday",
+    metaDescription:
+      "DataSpoke builds dashboards and weekly scorecards that update themselves from the systems your business already runs. Know your numbers, end the debate about whose report is right and see which marketing actually pays. Free 30-minute estimate. Serving CT, NY and the US.",
     problem:
-      "Month-end means exporting four reports and hoping they match. The leadership meeting starts with a debate about whose number is right, and nobody can say which numbers actually move the goal. Routine reports belong in a dashboard. You shouldn't prompt AI to rebuild the same report every Monday and get a slightly different answer each time.",
+      "Month-end means exporting four reports and hoping they match. The leadership meeting starts with a debate about whose number is right, and nobody can say which numbers actually move the goal. A dashboard is a page of your key numbers that updates itself from your real systems. Routine reports belong there, built once and the same every week, not rebuilt by hand or re-asked of an AI chat window every Monday.",
     soundsLike: [
       "Your leadership meeting starts with a debate about whose number is right.",
       "Month-end means someone spends a day reconciling reports by hand.",
@@ -308,7 +319,7 @@ export const SERVICE_LINES: ServiceLine[] = [
     youGet: [
       "A scorecard that matches your CRM, down to the individual lead.",
       "Monthly reports that build and send themselves.",
-      "A KPI hierarchy: one goal, the lagging KPIs that prove it, the leading indicators your team can move this week and a weekly scorecard that ties them together.",
+      "A short chain of numbers from your goal down to this week's activities, with an owner on each one.",
     ],
     products: [LIVE_NUMBERS, KPI_HIERARCHY],
   },
@@ -316,9 +327,12 @@ export const SERVICE_LINES: ServiceLine[] = [
     slug: "custom-software",
     kind: "spoke",
     title: "Custom Software",
-    oneLiner: "Every business should have an app.yourcompany.com built around how it actually works.",
+    oneLiner: "Software built around how your business works, so your team stops working around the software.",
+    metaTitle: "Custom software built around how your business works",
+    metaDescription:
+      "DataSpoke builds internal tools, client portals and mobile apps on top of the systems your business already pays for. Your team works in one screen built for them, clients answer their own status questions, and you own the code. Free 30-minute estimate. CT, NY and nationwide.",
     problem:
-      "Off-the-shelf software is built for everyone, so it fits nobody exactly. Your team fills the gaps with spreadsheets, sticky notes and copy and paste. You already pay for systems that hold the data. What's missing is the screen built around how your company works. I build internal tools, client portals and mobile apps on top of the systems you already pay for.",
+      "Off-the-shelf software is built for everyone, so it fits nobody exactly. Your team fills the gaps with spreadsheets, sticky notes and copy and paste. You already pay for systems that hold the information. What's missing is the screen built around how your company works. We build internal tools (a screen for your team), client portals (a private page where clients see their own status) and mobile apps, all on top of the systems you already pay for, and you own the code.",
     soundsLike: [
       "Your team keeps a spreadsheet next to the software because the software doesn't fit.",
       "You pay for features you don't use and still can't do the one thing you need.",
@@ -327,8 +341,8 @@ export const SERVICE_LINES: ServiceLine[] = [
     youGet: [
       "Internal tools that show each person the work that's theirs.",
       "Client portals where customers see status, documents and invoices without calling you.",
-      "iOS and Android apps on the booking, CRM or accounting system you already pay for.",
-      "Code you own and plain-English documentation, so you're never stuck with me.",
+      "iPhone and Android apps on the booking, CRM or accounting system you already pay for.",
+      "Code you own and plain-English documentation, so you're never stuck with us.",
     ],
     products: [YOUR_OWN_APP, CLIENT_PORTAL, MOBILE_APP],
   },
@@ -336,9 +350,12 @@ export const SERVICE_LINES: ServiceLine[] = [
     slug: "ai-implementation",
     kind: "spoke",
     title: "AI Implementation",
-    oneLiner: "AI that knows your business, and a team that knows how to use it.",
+    oneLiner: "Put AI to work on your own business, with your team trained to use it and a person approving what it writes.",
+    metaTitle: "AI for your business: set up on your data, with your team trained",
+    metaDescription:
+      "DataSpoke sets up AI on your own business data, trains your team to use it and automates the repeat work so you take on more without hiring. Private, under your own logins, with a person approving every draft. Free 30-minute estimate. Serving CT, NY and the US.",
     problem:
-      "You've tried ChatGPT but it doesn't know anything about your business. Your team uses AI tools inconsistently, or not at all, and the same work still gets retyped every week.",
+      "You've tried ChatGPT but it doesn't know anything about your business. Your team uses AI tools inconsistently, or not at all, and the same work still gets retyped every week. AI implementation means giving an assistant access to your own CRM, calls, documents and numbers under logins you control, training the people who do the work, and letting AI write the first draft while a person approves it. The result is more work handled by the team you already have.",
     soundsLike: [
       "You answer the same \"where is this at?\" questions from your team every day.",
       "Your team uses AI tools inconsistently, or not at all, because nobody set them up for the work.",
@@ -355,9 +372,12 @@ export const SERVICE_LINES: ServiceLine[] = [
     slug: "analytics-data-science",
     kind: "spoke",
     title: "Analytics & Data Science",
-    oneLiner: "Know what's coming, and where the next dollars are.",
+    oneLiner: "See where the money is going and what's coming next, so you decide faster and with proof.",
+    metaTitle: "See where the money is going and what's coming next",
+    metaDescription:
+      "DataSpoke uses your business's own history to show which customers, services and marketing channels actually pay, which customers are about to leave and when to hire. Decisions backed by your numbers, not gut feel. Free 30-minute estimate. Serving CT, NY and the US.",
     problem:
-      "You find out a customer left when the payment stops. You suspect one service loses money but can't prove it. Decisions get made on gut feel and the agency's own report.",
+      "You find out a customer left when the payment stops. You suspect one service loses money but can't prove it. Decisions get made on gut feel and the agency's own report. Analytics means answering those questions from your own history, and data science is the careful version of it: checking that the answer holds up before you act on it. We tell you where to look and prove whether a bet paid off.",
     soundsLike: [
       "You find out a customer left when the payment stops.",
       "You suspect one service or customer type loses money but can't prove it.",
@@ -365,7 +385,7 @@ export const SERVICE_LINES: ServiceLine[] = [
     ],
     youGet: [
       "A short list every morning of what needs attention today.",
-      "Profitability by customer, service and channel.",
+      "Profit by customer, service and channel.",
       "Experiments set up and measured properly, so you know a bet paid off before you double it.",
     ],
     products: [EARLY_WARNINGS, FIND_THE_MARGIN],
@@ -379,29 +399,32 @@ export function getServiceLine(slug: string): ServiceLine | undefined {
   return SERVICE_LINES.find((l) => l.slug === slug);
 }
 
-/** Anchor text for a link to a service page: the name plus the existing one-liner. */
+/** Anchor text for a link to a service page: the name plus the outcome it delivers. */
 export function serviceLinkText(line: { title: string; oneLiner: string }): string {
   return `${line.title}: ${line.oneLiner.replace(/\.\s*$/, "")}`;
 }
 
 /** Copy for the /services overview page. */
 export const SERVICES_PAGE = {
+  metaTitle: "Services: data, dashboards, custom software and AI for your business",
+  metaDescription:
+    "What DataSpoke does for business owners, in plain words: connect your software so nothing gets retyped, know your numbers every Monday, build tools around how you work, put AI to work on your business and see where the money goes. Free 30-minute estimate. CT, NY and the US.",
   eyebrow: "Services",
-  title: "Your data in the middle. Everything else runs on it.",
+  title: "Six ways to run a bigger business with the team you have.",
   lede:
-    "Two hub services get your data captured and organized. Four spokes put it to work. You don't need to know what to ask for. Find the problem that sounds like yours.",
+    "Each service is described by what changes for you, with the technology second. You don't need to know what to ask for. Find the problem that sounds like yours, and the free estimate will tell you where to start.",
   diagramHub: "Your data",
-  hubEyebrow: "The hub",
-  hubTitle: "Start with the data.",
+  hubEyebrow: "The foundation",
+  hubTitle: "Start by getting your information in one place you can trust.",
   hubLede:
-    "Every spoke runs on what the hub collects. Most clients start here, because a dashboard or an AI tool is only as good as the data under it.",
-  spokeEyebrow: "The spokes",
+    "Everything else runs on these two. Most clients start here, because a dashboard or an AI tool is only as good as the information under it.",
+  spokeEyebrow: "What runs on it",
   spokeTitle: "Then put it to work.",
   spokeLede:
-    "Each spoke is a project with a fixed scope. Pick the one that hurts most today. The others get easier once the hub is in place.",
+    "Each of these is a project with a fixed scope and a price you see first. Pick the one that hurts most today. The others get easier once the foundation is in place.",
 };
 
-/** Diagram labels, split into lines so they fit on a phone. */
+/** Diagram labels, split into lines so they fit on a phone. Hub pills are fixed width, so they stay short. */
 export const SERVICE_DIAGRAM_LABELS: Record<ServiceLineSlug, string[]> = {
   capture: ["Capture"],
   organize: ["Organize"],
@@ -430,7 +453,7 @@ export const LINE_LADDERS: Partial<Record<ServiceLineSlug, Ladder>> = {
     eyebrow: "The trust ladder",
     title: "Not every fact is equal.",
     lede:
-      "I collect what your business produces, process it and file each fact on one of four rungs. Each one keeps a link back to its source.",
+      "We collect what your business produces, sort it and file each fact on one of four rungs. Each one keeps a link back to its source.",
     rungs: [
       {
         label: "Decided",
@@ -454,25 +477,25 @@ export const LINE_LADDERS: Partial<Record<ServiceLineSlug, Ladder>> = {
       },
     ],
     caption:
-      "AI and reports lean on the top rungs. When the only answer is hearsay, they say so.",
+      "Reports and AI lean on the top rungs. When the only answer is hearsay, they say so.",
   },
   "metrics-dashboards": {
     eyebrow: "The KPI hierarchy",
     title: "Every number answers to the goal.",
     lede:
-      "A dashboard with forty numbers tells you nothing. I build it from the top down, so each number has a reason to be there and an owner.",
+      "A dashboard with forty numbers tells you nothing. We build it from the top down, so each number has a reason to be there and an owner.",
     rungs: [
       {
         label: "Goal",
         description: "The one outcome the year is about. Revenue, margin or jobs completed.",
       },
       {
-        label: "Lagging KPIs",
+        label: "Results that prove it",
         description:
-          "The numbers that prove you hit it. They tell you what happened, after it happened.",
+          "The numbers that show you hit the goal. They tell you what happened, after it happened.",
       },
       {
-        label: "Leading indicators",
+        label: "Weekly activities that drive it",
         description:
           "The numbers your team can move this week. Response time, quotes sent, calls made.",
       },
@@ -490,18 +513,18 @@ export const LINE_LADDERS: Partial<Record<ServiceLineSlug, Ladder>> = {
 /** Labels for the shared blocks on each line page. */
 export const LINE_PAGE = {
   backLabel: "All services",
-  problemHeading: "The problem",
+  problemHeading: "The problem this solves",
   soundsLikeHeading: "Sounds like you if",
   youGetHeading: "What you get",
-  productsEyebrow: "What I build",
+  productsEyebrow: "What we build",
   productsTitle: "The pieces of this service",
   caseStudiesEyebrow: "Related work",
-  caseStudiesTitle: "Where I've done this before",
+  caseStudiesTitle: "Where we've done this before",
   otherLinesHeading: "Other services",
-  ctaTitle: (title: string) => `Ask me about ${title}.`,
+  ctaTitle: (title: string) => `Ask us about ${title}.`,
   ctaLede:
-    "Tell me what's frustrating you. I'll tell you honestly whether I can fix it, and what it would take.",
-  ctaButton: "Ask about this",
+    "Tell us what's slowing you down. We'll tell you honestly whether we can fix it, and what it would take.",
+  ctaButton: "Ask a question about this service",
   estimateCta: "Book your free estimate",
   seeLine: (title: string) => `See ${title}`,
 };
