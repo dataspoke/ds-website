@@ -8,11 +8,13 @@ import { formatLongDate } from "@/lib/dates";
 export function generateMetadata(): Metadata {
   const posts = getInsightPosts();
   return pageMetadata({
-    title: "Insights: plain-English articles on running a business on its own data",
-    description: posts.length
-      ? "Articles from DataSpoke for business owners on connecting your software, knowing your numbers and putting AI to work without a technical background."
-      : "Articles from DataSpoke for business owners on connecting your software, knowing your numbers and putting AI to work. No posts yet.",
+    title: "Insights: running a business on its own data",
+    description:
+      "Plain-English articles for business owners on connecting your software, knowing your numbers and putting AI to work.",
     path: "/insights",
+    // An empty index is thin. It indexes (and joins the sitemap, see next-sitemap.config.js)
+    // once content/insights has a published post.
+    noIndex: posts.length === 0,
   });
 }
 

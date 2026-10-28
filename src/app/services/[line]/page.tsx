@@ -121,6 +121,12 @@ export default async function ServiceLinePage({ params }: PageProps<"/services/[
               </li>
             ))}
           </ul>
+          <Link
+            href={LINE_PAGE.workLink.href}
+            className="mt-6 inline-block py-2 font-semibold text-primary hover:text-primary/80"
+          >
+            {LINE_PAGE.workLink.label} &rarr;
+          </Link>
         </nav>
       </Section>
     </>

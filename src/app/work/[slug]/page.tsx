@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { generateMetadata as pageMetadata } from "@/lib/metadata";
+import { clipMetaDescription, generateMetadata as pageMetadata } from "@/lib/metadata";
 import { Section } from "@/components/shared/section";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { EstimateCta } from "@/components/shared/estimate-cta";
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
   if (!study) return {};
   return pageMetadata({
     title: study.title,
-    description: `${study.summary.problem} ${study.summary.result}`,
+    description: clipMetaDescription(`${study.summary.problem} ${study.summary.result}`, 155),
     path: `/work/${study.slug}`,
   });
 }
