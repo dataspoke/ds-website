@@ -4,6 +4,7 @@ import { ToolsRowB } from "@/components/home-b/tools-row";
 import { OutcomesB } from "@/components/home-b/outcomes";
 import { UseCasesB } from "@/components/home-b/use-cases";
 import { ServicesB } from "@/components/home-b/services";
+import { DevicesB } from "@/components/home-b/devices";
 import { StepsB } from "@/components/home-b/steps";
 import { AboutStripB } from "@/components/home-b/about-strip";
 import { FaqB, HOME_B_FAQS } from "@/components/home-b/faq";
@@ -28,6 +29,7 @@ export default function HomePage() {
       <ToolsRowB />
       <OutcomesB />
       <UseCasesB />
+      <DevicesB />
       <ServicesB />
       <StepsB />
       <AboutStripB />

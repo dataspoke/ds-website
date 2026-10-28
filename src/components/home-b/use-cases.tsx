@@ -1,14 +1,14 @@
 "use client";
 
 import { useId, useState } from "react";
-import { Headset, Megaphone, PiggyBank, Workflow } from "lucide-react";
+import { Headset, Megaphone, PiggyBank, Route } from "lucide-react";
 import { Section, SectionHead } from "@/components/shared/section";
 import { cn } from "@/lib/utils";
-import { FinanceScene, MarketingScene, OperationsScene, ServiceScene } from "./scenes";
+import { FinanceScene, JourneyScene, MarketingScene, ServiceScene } from "./scenes";
 
 const TABS = [
   { key: "marketing", label: "AI in marketing", icon: Megaphone, caption: "Know which ads pay, and follow up fast.", Scene: MarketingScene },
-  { key: "operations", label: "AI in operations", icon: Workflow, caption: "Information moves on its own between your tools.", Scene: OperationsScene },
+  { key: "journey", label: "Customer journey", icon: Route, caption: "See where customers stall, and where to fix it.", Scene: JourneyScene },
   { key: "finance", label: "Finance and numbers", icon: PiggyBank, caption: "One trustworthy view instead of month-end exports.", Scene: FinanceScene },
   { key: "service", label: "Customer service", icon: Headset, caption: "Replies drafted from your records, approved by you.", Scene: ServiceScene },
 ];

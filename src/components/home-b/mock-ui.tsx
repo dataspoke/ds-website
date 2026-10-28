@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
  * Every number inside these is placeholder sample data, never a claim.
  */
 
-export function IllustrativeBadge({ className }: { className?: string }) {
+export function IllustrativeBadge({ className, sample }: { className?: string; sample?: boolean }) {
   return (
     <span
       className={cn(
@@ -15,7 +15,7 @@ export function IllustrativeBadge({ className }: { className?: string }) {
       )}
     >
       <span className="h-1.5 w-1.5 rounded-full bg-brand" aria-hidden="true" />
-      Illustrative example
+      Illustrative example{sample && <span className="normal-case tracking-normal">· sample data</span>}
     </span>
   );
 }
