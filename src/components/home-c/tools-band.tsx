@@ -1,5 +1,8 @@
 import { TOOLS } from "@/content/home";
 
+/** Seven names is enough for the band; the full list lives on /services. */
+const SHOWN = TOOLS.slice(0, 7);
+
 /** Wordmarks as text only. Vendor brand rules do not permit logos without a partner agreement. */
 export function ToolsBandC() {
   return (
@@ -9,7 +12,7 @@ export function ToolsBandC() {
           Works with the tools you already use
         </p>
         <ul className="flex flex-wrap gap-x-5 gap-y-1.5">
-          {TOOLS.map((tool) => (
+          {SHOWN.map((tool) => (
             <li
               key={tool}
               className="font-display text-[1.05rem] font-bold tracking-tight text-ink/55"

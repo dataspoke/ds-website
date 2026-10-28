@@ -12,7 +12,7 @@ export function ClosingC() {
             Tell us what&apos;s slowing you down.
           </h2>
           <p className="mt-6 max-w-xl text-lg text-white/75">
-            A free 30-minute call, then a written estimate with a price range.
+            A free call, then a written estimate.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
             <EstimateCta
@@ -30,7 +30,7 @@ export function ClosingC() {
           <p className="text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-brand">Who you work with</p>
           <p className="mt-3 font-display text-2xl font-bold tracking-tight">Nick Paul, founder</p>
           <p className="mt-2 text-white/75">
-            One person scopes and builds the work. You own all of it at the end.
+            One person scopes and builds it. You own all of it.
           </p>
           <Link
             href="/about"

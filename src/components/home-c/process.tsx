@@ -23,7 +23,7 @@ const STEPS: Step[] = [
   {
     n: "01",
     title: "Connect",
-    line: "Your CRM, accounting, phones and email start talking.",
+    line: "CRM, accounting, phones and email start talking.",
     icon: (
       <svg viewBox="0 0 48 48" aria-hidden="true" {...stroke}>
         <circle cx="10" cy="12" r="5" />
@@ -36,7 +36,7 @@ const STEPS: Step[] = [
   {
     n: "02",
     title: "Organize",
-    line: "One set of records you own and can trust.",
+    line: "One set of records you can trust.",
     icon: (
       <svg viewBox="0 0 48 48" aria-hidden="true" {...stroke}>
         <rect x="8" y="8" width="32" height="32" rx="3" />
@@ -57,7 +57,7 @@ const STEPS: Step[] = [
   {
     n: "04",
     title: "Grow",
-    line: "See the whole business, decide faster, take on more.",
+    line: "See the whole business and decide faster.",
     icon: (
       <svg viewBox="0 0 48 48" aria-hidden="true" {...stroke}>
         <path d="M6 38l12-13 8 7 16-18" />
@@ -75,7 +75,7 @@ export function ProcessC() {
         <div className="grid gap-4 md:grid-cols-12 md:items-end">
           <p className="eyebrow md:col-span-3">How it works</p>
           <h2 className="text-3xl font-bold leading-[1.1] sm:text-4xl md:col-span-9 md:text-5xl">
-            Four steps. Each one you can see.
+            Four steps, all visible.
           </h2>
         </div>
 
@@ -126,7 +126,7 @@ export function ProcessC() {
 
         <p className="mt-12 text-[0.97rem]">
           <Link href="/approach" className="font-semibold text-primary hover:text-primary/80">
-            See an engagement step by step &rarr;
+            Full process &rarr;
           </Link>
         </p>
       </div>

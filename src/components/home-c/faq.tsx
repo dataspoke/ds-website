@@ -1,15 +1,27 @@
 import { LinkedText } from "@/components/shared/faq-list";
-import { HOME_FAQS } from "@/content/home";
 import type { FaqItem } from "@/types";
 
-const KEEP = new Set([
-  "Who is DataSpoke for?",
-  "How do I get started?",
-  "Do we have to replace the software we already use?",
-]);
-
-/** The three questions shown on the home page. The FAQPage JSON-LD uses this same list. */
-export const HOME_C_FAQS: FaqItem[] = HOME_FAQS.filter((f) => KEEP.has(f.question));
+/**
+ * Three short answers for the home page. Visible text and the FAQPage JSON-LD
+ * both read from this list, so they always match.
+ */
+export const HOME_C_FAQS: FaqItem[] = [
+  {
+    question: "Who is DataSpoke for?",
+    answer:
+      "Established businesses whose CRM, accounting and phone systems should work together.",
+  },
+  {
+    question: "How do I get started?",
+    answer:
+      "Book a free 30-minute estimate. A written plan and price range follows within two days.",
+    link: { label: "free 30-minute estimate", href: "/free-estimate" },
+  },
+  {
+    question: "Do we have to replace the software we already use?",
+    answer: "No. We build on the software you already pay for.",
+  },
+];
 
 export function FaqC() {
   return (

@@ -99,8 +99,8 @@ export function HeroC() {
             {HERO.headline}
           </h1>
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/75 sm:text-xl">
-            We connect the software you already pay for, so the numbers are right, the retyping
-            stops and your team gets hours back every week.
+            We connect the software you already pay for, so the numbers are right and your team
+            gets hours back.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
             <EstimateCta
