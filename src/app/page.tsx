@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import { Hero } from "@/components/home/hero";
-import { ToolsStrip } from "@/components/home/tools-strip";
-import { ProblemStatement } from "@/components/home/problem-statement";
-import { ServiceGrid } from "@/components/home/service-grid";
-import { FeaturedWork } from "@/components/home/featured-work";
-import { HowItWorks } from "@/components/home/how-it-works";
-import { AboutTeaser } from "@/components/home/about-teaser";
-import { HomeFaq } from "@/components/home/home-faq";
-import { CtaBanner } from "@/components/home/cta-banner";
+import { HeroC } from "@/components/home-c/hero";
+import { ToolsBandC } from "@/components/home-c/tools-band";
+import { ProcessC } from "@/components/home-c/process";
+import { DevicesC } from "@/components/home-c/devices";
+import { UseCasesC } from "@/components/home-c/use-cases";
+import { FaqC, HOME_C_FAQS } from "@/components/home-c/faq";
+import { ClosingC } from "@/components/home-c/closing";
 import { FaqPageJsonLd, OrganizationJsonLd } from "@/components/shared/json-ld";
-import { HOME_FAQS } from "@/content/home";
 import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/constants";
 import { generateMetadata as pageMetadata } from "@/lib/metadata";
 
@@ -24,16 +21,14 @@ export default function HomePage() {
   return (
     <>
       <OrganizationJsonLd />
-      <FaqPageJsonLd path="/" faqs={HOME_FAQS} />
-      <Hero />
-      <ToolsStrip />
-      <ProblemStatement />
-      <ServiceGrid />
-      <FeaturedWork />
-      <HowItWorks />
-      <AboutTeaser />
-      <HomeFaq />
-      <CtaBanner />
+      <FaqPageJsonLd path="/" faqs={HOME_C_FAQS} />
+      <HeroC />
+      <ToolsBandC />
+      <ProcessC />
+      <DevicesC />
+      <UseCasesC />
+      <FaqC />
+      <ClosingC />
     </>
   );
 }
