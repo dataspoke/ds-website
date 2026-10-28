@@ -14,7 +14,7 @@ import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/constants";
 import { generateMetadata as pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: `${SITE_NAME} | Grow your business with the data you already have`,
+  title: `${SITE_NAME} | AI and Data Consulting for Business Owners`,
   description: SITE_DESCRIPTION,
   path: "/",
   absoluteTitle: true,

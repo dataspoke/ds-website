@@ -5,7 +5,7 @@ import type { NavItem } from "@/types";
 export const SITE_NAME = "DataSpoke";
 export const SITE_TAGLINE = "Grow your business with the data you already have.";
 export const SITE_DESCRIPTION =
-  "DataSpoke is a data and AI consulting firm in Durham, Connecticut, serving CT, NY and businesses across the US. We connect the software you already use so you know your numbers, save hours of manual work each week and take on more work without hiring. Start with a free 30-minute estimate.";
+  "Data and AI consulting for business owners in CT, NY and across the US. We connect your tools, automate busywork and show your numbers. Free estimate.";
 export const SITE_URL = "https://www.dataspoke.io";
 export const CONTACT_EMAIL = "nick@dataspoke.io";
 export const CONTACT_PHONE = "+1-732-768-4663";

@@ -4,7 +4,7 @@ import type { Expertise, FaqItem, Problem } from "@/types";
 // technology comes second. Claims here stay general: kinds of work, no numbers.
 
 export const HERO = {
-  eyebrow: "Data and AI consulting for established businesses that run on too many tools",
+  eyebrow: "Data and AI consulting for owner-led businesses",
   headline: "Grow your business with the data you already have.",
   lede:
     "DataSpoke connects the software your business already runs on, so your numbers are right, the retyping stops and your team gets hours back every week. Data, dashboards, custom software and AI for businesses in Connecticut, New York and across the US.",
