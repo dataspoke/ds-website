@@ -8,7 +8,7 @@ import { CONTACT_EMAIL, SOCIAL_LINKS } from "@/lib/constants";
 import { STEPS } from "@/content/approach";
 
 export const metadata: Metadata = generateMetadata({
-  title: "Contact DataSpoke: book a free call or send a note",
+  title: "Contact us: book a free call or send a note",
   description:
     "Book a free 30-minute call with DataSpoke in Durham, CT, or send a note about what's slowing your business down. We reply within one business day.",
   path: "/contact",

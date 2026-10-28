@@ -61,6 +61,11 @@ export interface CaseStudy {
   sections: CaseStudySection[];
   featured: boolean;
   /**
+   * Search-result description, <=155 chars, third person. Set it whenever the summary is
+   * written in first person or quotes someone; otherwise it is built from the summary.
+   */
+  metaDescription?: string;
+  /**
    * Git author timestamps for this study's text in src/content/case-studies.ts.
    * published: the commit that introduced it. modified: the last commit that changed it.
    */

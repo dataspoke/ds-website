@@ -261,7 +261,7 @@ export const SERVICE_LINES: ServiceLine[] = [
     kind: "hub",
     title: "Data Capture & Integration",
     oneLiner: "Stop retyping. Every lead, call and invoice lands where it belongs on its own.",
-    metaTitle: "Connect your business software so nothing gets retyped",
+    metaTitle: "Connect your software so nothing gets retyped",
     metaDescription:
       "We connect the CRM, accounting, phone and marketing tools you already use, so leads, calls and invoices flow on their own. Free 30-minute estimate.",
     problem:
@@ -283,7 +283,7 @@ export const SERVICE_LINES: ServiceLine[] = [
     kind: "hub",
     title: "Data Organization & Warehousing",
     oneLiner: "One trustworthy set of records, so everyone works from the same facts.",
-    metaTitle: "Organize your business data into one trustworthy record",
+    metaTitle: "Organize your data into one trustworthy record",
     metaDescription:
       "We turn your calls, emails, documents and spreadsheets into one trustworthy set of records you own, ready for reports and AI. Free 30-minute estimate.",
     problem:
@@ -328,7 +328,7 @@ export const SERVICE_LINES: ServiceLine[] = [
     kind: "spoke",
     title: "Custom Software",
     oneLiner: "Software built around how your business works, so your team stops working around the software.",
-    metaTitle: "Custom software built around how your business works",
+    metaTitle: "Custom software built around how you work",
     metaDescription:
       "Internal tools, client portals and mobile apps on the systems you already pay for. One screen for your team, and you own the code. Free 30-minute estimate.",
     problem:
@@ -351,7 +351,7 @@ export const SERVICE_LINES: ServiceLine[] = [
     kind: "spoke",
     title: "AI Implementation",
     oneLiner: "Put AI to work on your own business, with your team trained to use it and a person approving what it writes.",
-    metaTitle: "AI for your business: set up on your data, with your team trained",
+    metaTitle: "AI on your data so your team gets more done",
     metaDescription:
       "We set up AI on your business data, train your team to use it and automate busywork so your people do more. A person approves every draft. Free estimate.",
     problem:
@@ -373,7 +373,7 @@ export const SERVICE_LINES: ServiceLine[] = [
     kind: "spoke",
     title: "Analytics & Data Science",
     oneLiner: "See where the money is going and what's coming next, so you decide faster and with proof.",
-    metaTitle: "See where the money is going and what's coming next",
+    metaTitle: "See where the money goes and what's coming next",
     metaDescription:
       "We use your business's own history to show which customers, services and channels pay, who is about to leave and when to staff up. Free 30-minute estimate.",
     problem:
