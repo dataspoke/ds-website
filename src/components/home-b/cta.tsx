@@ -11,7 +11,7 @@ export function CtaB() {
             Tell us what&apos;s slowing you down.
           </h2>
           <p className="text-white/75">
-            Free 30-minute call, then a written estimate with a plan and a price range.
+            Free 30-minute call, then a written estimate.
           </p>
         </div>
         <div className="grid justify-items-start gap-2 md:justify-items-end">

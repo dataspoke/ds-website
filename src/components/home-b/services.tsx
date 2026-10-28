@@ -16,7 +16,7 @@ const ICONS: Record<ServiceLineSlug, LucideIcon> = {
 export function ServicesB() {
   return (
     <Section id="services">
-      <SectionHead eyebrow="What we do" title="Two services build the foundation. Four put it to work." />
+      <SectionHead eyebrow="What we do" title="Six services, one foundation." />
       <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {SERVICE_LINES.map((l) => {
           const Icon = ICONS[l.slug];
@@ -36,19 +36,14 @@ export function ServicesB() {
                 >
                   <Icon className="size-5" aria-hidden="true" />
                 </span>
-                <span className="grid gap-0.5">
-                  <span className="font-display font-bold leading-snug">{l.title}</span>
-                  <span className="text-xs font-semibold uppercase tracking-[0.06em] text-muted-foreground">
-                    {hub ? "Foundation" : "Runs on it"}
-                  </span>
-                </span>
+                <span className="font-display font-bold leading-snug">{l.title}</span>
               </Link>
             </li>
           );
         })}
       </ul>
       <Link href="/services" className="mt-8 inline-block font-semibold text-primary hover:text-primary/80">
-        Compare all six services &rarr;
+        All six services &rarr;
       </Link>
     </Section>
   );

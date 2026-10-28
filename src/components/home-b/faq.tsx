@@ -1,14 +1,25 @@
 import { ChevronDown } from "lucide-react";
 import { LinkedText } from "@/components/shared/faq-list";
 import { Section, SectionHead } from "@/components/shared/section";
-import { HOME_FAQS } from "@/content/home";
 import type { FaqItem } from "@/types";
 
-/** A subset of the home FAQs, verbatim, so the FAQPage JSON-LD matches what is shown. */
+/**
+ * Short home FAQs. The same array feeds the visible list and the FAQPage
+ * JSON-LD, so the structured data always matches what is shown.
+ */
 export const HOME_B_FAQS: FaqItem[] = [
-  "How do I get started?",
-  "Do we have to replace the software we already use?",
-].map((q) => HOME_FAQS.find((f) => f.question === q)!);
+  {
+    question: "How do I get started?",
+    answer:
+      "Book a free 30-minute estimate. Within two business days you get a written plan and a price range, with no obligation.",
+    link: { label: "free 30-minute estimate", href: "/free-estimate" },
+  },
+  {
+    question: "Do we have to replace the software we already use?",
+    answer:
+      "No. We build on the systems you already pay for, such as Salesforce, HubSpot, QuickBooks and RingCentral. Nothing has to migrate.",
+  },
+];
 
 export function FaqB() {
   return (

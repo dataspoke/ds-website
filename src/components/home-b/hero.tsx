@@ -2,9 +2,9 @@ import Link from "next/link";
 import { Check, Sparkles, Zap } from "lucide-react";
 import { EstimateCta } from "@/components/shared/estimate-cta";
 import { HERO } from "@/content/home";
-import { Bars, Chip, IllustrativeBadge, Stat, Window } from "./mock-ui";
+import { Bars, IllustrativeBadge, Stat, Window } from "./mock-ui";
 
-const AUTOMATIONS = ["New lead → CRM", "Call notes → customer record", "Paid invoice → books"];
+const AUTOMATIONS = ["New lead → CRM", "Paid invoice → books"];
 
 /** Hero: headline beside a composite of a dashboard, automations and an AI answer. Sample data only. */
 function HeroMock() {
@@ -14,18 +14,17 @@ function HeroMock() {
         className="absolute -inset-6 -z-10 rounded-[2rem] bg-[radial-gradient(60%_60%_at_70%_30%,#d6e6f8_0%,rgba(214,230,248,0)_70%)]"
         aria-hidden="true"
       />
-      <Window title="Your business, this week">
+      <Window title="This week">
         <div className="grid gap-3 p-3 sm:p-4">
           <div className="grid grid-cols-3 gap-2">
-            <Stat label="Revenue" value="$48,200" delta="sample" />
-            <Stat label="Open leads" value="37" delta="sample" />
-            <Stat label="Jobs this week" value="21" delta="sample" />
+            <Stat label="Revenue" value="$48,200" />
+            <Stat label="Open leads" value="37" />
+            <Stat label="Jobs this week" value="21" />
           </div>
           <div className="grid gap-3 sm:grid-cols-[1.4fr_1fr]">
             <div className="rounded-lg border border-border p-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold">Revenue by month</span>
-                <Chip>Sample</Chip>
               </div>
               <div className="mt-3">
                 <Bars values={[42, 48, 45, 56, 60, 58, 66, 71, 69, 78, 84, 90]} highlight={11} />
@@ -78,8 +77,7 @@ export function HeroB() {
             {HERO.headline}
           </h1>
           <p className="lede max-w-lg">
-            We connect the tools you already pay for, so the numbers are right, the retyping stops
-            and AI handles the repetitive parts.
+            We connect the tools you already pay for, so the numbers are right and the retyping stops.
           </p>
           <div className="mt-1 flex flex-wrap items-center gap-x-6 gap-y-3">
             <EstimateCta location="home-hero">{HERO.primaryCta}</EstimateCta>

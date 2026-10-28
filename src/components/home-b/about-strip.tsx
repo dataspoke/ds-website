@@ -10,7 +10,7 @@ export function AboutStripB() {
         <div className="grid gap-1.5">
           <h2 className="text-2xl font-bold leading-tight">Built by Nick Paul, founder of DataSpoke.</h2>
           <p className="text-muted-foreground">
-            You work directly with the person who scopes and builds it, and you own all of it.
+            One person scopes and builds it.
           </p>
         </div>
         <Link href="/about" className="font-semibold text-primary hover:text-primary/80">
