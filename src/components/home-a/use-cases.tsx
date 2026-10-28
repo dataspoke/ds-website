@@ -3,198 +3,249 @@ import { Section, SectionHead } from "@/components/shared/section";
 import { Glyph } from "./illustrations";
 import { USE_CASES_HEAD } from "./content";
 
-const FONT = "var(--font-inter), system-ui, sans-serif";
-const INK = "var(--ink)";
-const MUTED = "#64748b";
-const BRAND = "var(--brand)";
-const TINT = "#eef5fc";
-const TINT_STRONG = "#d6e6f8";
+// All figures below are invented sample data for illustration. The derived
+// columns (cost per lead, cost per sale, margin %, resolution rate) are
+// computed from the inputs so the arithmetic always matches.
 
-function Label({ x, y, children, size = 12, weight = 500, fill = MUTED, anchor = "start" as const }: {
-  x: number; y: number; children: ReactNode; size?: number; weight?: number; fill?: string; anchor?: "start" | "middle" | "end";
-}) {
+const usd = (n: number) => `$${Math.round(n).toLocaleString("en-US")}`;
+const pct = (n: number, d: number) => `${((n / d) * 100).toFixed(1)}%`;
+
+/* ---------- Shared chrome (matches the hub-and-spoke scene style) ---------- */
+
+function Frame({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <text x={x} y={y} fontSize={size} fontWeight={weight} fill={fill} fontFamily={FONT} textAnchor={anchor}>
+    <div role="img" aria-label={label} className="min-w-0 max-w-full rounded-xl border-[1.5px] border-tint-strong bg-tint p-3 text-ink">
       {children}
-    </text>
+    </div>
   );
 }
 
-function Panel({ x, y, w, h, fill = "#fff" }: { x: number; y: number; w: number; h: number; fill?: string }) {
-  return <rect x={x} y={y} width={w} height={h} rx={12} fill={fill} stroke={TINT_STRONG} strokeWidth={1.5} />;
-}
-
-function AiTag({ x, y, text }: { x: number; y: number; text: string }) {
-  const w = text.length * 6.4 + 36;
+function Panel({ title, note, className = "", children }: { title?: string; note?: string; className?: string; children: ReactNode }) {
   return (
-    <g>
-      <rect x={x} y={y} width={w} height={24} rx={12} fill={BRAND} />
-      <Glyph name="sparkle" x={x + 15} y={y + 12} size={14} stroke="#fff" />
-      <Label x={x + 27} y={y + 16} size={11.5} weight={600} fill="#fff">{text}</Label>
-    </g>
+    <div className={`min-w-0 max-w-full rounded-xl border-[1.5px] border-tint-strong bg-white p-3 ${className}`}>
+      {(title || note) && (
+        <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-2 gap-y-0.5">
+          {title && <span className="text-xs font-bold">{title}</span>}
+          {note && <span className="text-[10.5px] text-muted-foreground">{note}</span>}
+        </div>
+      )}
+      {children}
+    </div>
   );
 }
 
-/** Marketing: a lead-source dashboard with an AI-drafted follow-up waiting for approval. */
+function Tile({ label, value, note }: { label: string; value: string; note: string }) {
+  return (
+    <Panel>
+      <div className="text-[10.5px] text-muted-foreground">{label}</div>
+      <div className="mt-1 text-xl font-bold leading-none">{value}</div>
+      <div className="mt-1.5 text-[10px] text-muted-foreground">{note}</div>
+    </Panel>
+  );
+}
+
+function Table({ head, rows, foot }: { head: string[]; rows: (string | number)[][]; foot?: (string | number)[] }) {
+  const cell = (i: number) => (i === 0 ? "text-left" : "text-right");
+  return (
+    <div className="-mx-3 max-w-[calc(100%+1.5rem)] overflow-x-auto px-3">
+      <table className="w-full min-w-[300px] border-collapse text-[11px] leading-tight tabular-nums">
+        <thead>
+          <tr className="text-[10px] uppercase tracking-[0.04em] text-muted-foreground">
+            {head.map((h, i) => (
+              <th key={h} className={`whitespace-nowrap pb-1.5 font-semibold ${cell(i)}`}>{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr key={String(r[0])} className="border-t border-tint-strong">
+              {r.map((c, i) => (
+                <td key={i} className={`whitespace-nowrap py-1.5 ${cell(i)} ${i === 0 ? "font-medium" : ""}`}>{c}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+        {foot && (
+          <tfoot>
+            <tr className="border-t-2 border-tint-strong font-bold">
+              {foot.map((c, i) => (
+                <td key={i} className={`whitespace-nowrap pt-1.5 ${cell(i)}`}>{c}</td>
+              ))}
+            </tr>
+          </tfoot>
+        )}
+      </table>
+    </div>
+  );
+}
+
+/* ---------- Sample data shared by the marketing and finance scenes ---------- */
+
+const SOURCES = [
+  { name: "Google Ads", spend: 4200, leads: 42, sales: 12 },
+  { name: "Meta", spend: 2400, leads: 30, sales: 6 },
+  { name: "Referral", spend: 600, leads: 15, sales: 7 },
+  { name: "Email", spend: 300, leads: 12, sales: 4 },
+];
+const TOTAL_SPEND = SOURCES.reduce((a, s) => a + s.spend, 0); // 7,500
+const TOTAL_LEADS = SOURCES.reduce((a, s) => a + s.leads, 0); // 99
+const TOTAL_SALES = SOURCES.reduce((a, s) => a + s.sales, 0); // 29
+
+/** Marketing: leads by source with spend, cost per lead and cost per sale. */
 function MarketingScene() {
-  const rows = [
-    { name: "Google Ads", v: 0.82, n: "41" },
-    { name: "Referrals", v: 0.58, n: "29" },
-    { name: "Website", v: 0.44, n: "22" },
-    { name: "Social", v: 0.22, n: "11" },
-  ];
+  const max = Math.max(...SOURCES.map((s) => s.leads));
   return (
-    <svg viewBox="0 0 360 240" role="img" aria-label="Sample marketing dashboard: leads by source, with an AI-drafted follow-up awaiting approval" className="block h-auto w-full">
-      <Panel x={8} y={8} w={344} h={224} fill={TINT} />
-      <Panel x={20} y={20} w={200} h={200} />
-      <Label x={32} y={42} size={12} weight={700} fill={INK}>Leads by source</Label>
-      <Label x={32} y={58} size={10.5}>Sample data · this week</Label>
-      {rows.map((r, i) => {
-        const y = 78 + i * 34;
-        return (
-          <g key={r.name}>
-            <Label x={32} y={y + 11} size={11} fill={INK}>{r.name}</Label>
-            <rect x={100} y={y} width={100} height={14} rx={4} fill={TINT} />
-            <rect x={100} y={y} width={100 * r.v} height={14} rx={4} fill={BRAND} />
-            <Label x={100 + 100 * r.v + 6} y={y + 11} size={10.5} weight={600} fill={INK}>{r.n}</Label>
-          </g>
-        );
-      })}
-      <Panel x={232} y={20} w={108} h={200} />
-      <Label x={244} y={42} size={12} weight={700} fill={INK}>New lead</Label>
-      <rect x={244} y={52} width={84} height={8} rx={4} fill={TINT_STRONG} />
-      <rect x={244} y={66} width={60} height={8} rx={4} fill={TINT_STRONG} />
-      <line x1={244} y1={88} x2={328} y2={88} stroke={TINT_STRONG} />
-      <Label x={244} y={108} size={10.5}>Follow-up email</Label>
-      <rect x={244} y={116} width={84} height={6} rx={3} fill={TINT_STRONG} />
-      <rect x={244} y={128} width={76} height={6} rx={3} fill={TINT_STRONG} />
-      <rect x={244} y={140} width={66} height={6} rx={3} fill={TINT_STRONG} />
-      <AiTag x={244} y={160} text="AI draft" />
-      <rect x={244} y={192} width={84} height={20} rx={10} fill={TINT} stroke={BRAND} strokeWidth={1.5} />
-      <Label x={286} y={206} size={10.5} weight={600} fill="var(--primary)" anchor="middle">Approve</Label>
-    </svg>
+    <Frame label="Sample marketing report: leads by source with spend, cost per lead, sales and cost per sale">
+      <Panel title="Leads by source" note="Sample data · this month">
+        <div className="mb-2.5 grid gap-1.5">
+          {SOURCES.map((s) => (
+            <div key={s.name} className="grid grid-cols-[72px_1fr_24px] items-center gap-2 text-[11px]">
+              <span className="truncate">{s.name}</span>
+              <span className="h-2.5 rounded bg-tint">
+                <span className="block h-full rounded bg-brand" style={{ width: `${(s.leads / max) * 100}%` }} />
+              </span>
+              <span className="text-right font-semibold tabular-nums">{s.leads}</span>
+            </div>
+          ))}
+        </div>
+        <Table
+          head={["Source", "Spend", "Leads", "CPL", "Sales", "CPS"]}
+          rows={SOURCES.map((s) => [s.name, usd(s.spend), s.leads, usd(s.spend / s.leads), s.sales, usd(s.spend / s.sales)])}
+          foot={["Total", usd(TOTAL_SPEND), TOTAL_LEADS, usd(TOTAL_SPEND / TOTAL_LEADS), TOTAL_SALES, usd(TOTAL_SPEND / TOTAL_SALES)]}
+        />
+      </Panel>
+    </Frame>
   );
 }
 
-/** Operations: a job flows through four steps on its own, with AI checking the schedule. */
-function OperationsScene() {
-  const steps = [
-    { label: "New job", glyph: "doc" as const },
-    { label: "Scheduled", glyph: "calendar" as const },
-    { label: "Crew notified", glyph: "truck" as const },
-    { label: "Invoice sent", glyph: "dollar" as const },
-  ];
+/** Customer journey: six stages with friction points and optimization opportunities. */
+const STAGES: { name: string; glyph: "search" | "chat" | "doc" | "cart" | "wrench" | "repeat"; warn?: string; opp?: string }[] = [
+  { name: "Discover", glyph: "search", opp: "Reviews on Google" },
+  { name: "Inquire", glyph: "chat", warn: "40% drop-off to quote", opp: "Auto follow-up" },
+  { name: "Quote", glyph: "doc", warn: "Quote takes 3 days", opp: "Instant quote" },
+  { name: "Buy", glyph: "cart", opp: "Online payment" },
+  { name: "Service", glyph: "wrench", warn: "2 reschedules per week" },
+  { name: "Repeat", glyph: "repeat", opp: "Review request" },
+];
+
+function Marker({ kind, text }: { kind: "warn" | "opp"; text: string }) {
+  const warn = kind === "warn";
   return (
-    <svg viewBox="0 0 360 240" role="img" aria-label="Sample operations workflow: a new job is scheduled, the crew is notified and the invoice is sent, with AI checking for schedule conflicts" className="block h-auto w-full">
-      <Panel x={8} y={8} w={344} h={224} fill={TINT} />
-      {steps.map((s, i) => {
-        const x = 50 + i * 86;
-        const y = 104;
-        return (
-          <g key={s.label}>
-            {i > 0 && (
-              <path d={`M${x - 62} ${y} H${x - 32}`} stroke={BRAND} strokeWidth={2.5} strokeLinecap="round" markerEnd="url(#ops-arrow)" />
-            )}
-            <circle cx={x} cy={y} r={26} fill="#fff" stroke={TINT_STRONG} strokeWidth={1.5} />
-            <Glyph name={s.glyph} x={x} y={y} size={24} />
-            <Label x={x} y={y - 40} size={11} weight={600} fill={INK} anchor="middle">{s.label}</Label>
-          </g>
-        );
-      })}
-      <defs>
-        <marker id="ops-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-          <path d="M1 1l5 3-5 3" fill="none" stroke={BRAND} strokeWidth={1.6} strokeLinecap="round" />
-        </marker>
-      </defs>
-      <path d="M136 130 V170 H180" fill="none" stroke={BRAND} strokeWidth={2} strokeDasharray="4 5" strokeLinecap="round" />
-      <path d="M222 170 H270 V130" fill="none" stroke={BRAND} strokeWidth={2} strokeDasharray="4 5" strokeLinecap="round" />
-      <rect x={110} y={182} width={140} height={40} rx={12} fill="#fff" stroke={TINT_STRONG} strokeWidth={1.5} />
-      <AiTag x={120} y={190} text="Conflict check" />
-      <Glyph name="check" x={232} y={202} size={18} />
-      <Label x={340} y={38} size={10.5} anchor="end">No retyping</Label>
-      <Label x={20} y={38} size={10.5}>Sample workflow</Label>
-    </svg>
+    <span
+      className={`inline-flex max-w-full items-start gap-1 rounded-md px-1.5 py-0.5 text-left text-[10px] font-semibold leading-tight ${
+        warn ? "bg-amber-50 text-amber-800 ring-1 ring-amber-300" : "bg-tint text-primary ring-1 ring-brand"
+      }`}
+    >
+      <span aria-hidden className={`mt-px inline-block size-2.5 shrink-0 rounded-full ${warn ? "bg-amber-400" : "bg-brand"}`} />
+      <span className="sr-only">{warn ? "Friction: " : "Opportunity: "}</span>
+      {text}
+    </span>
   );
 }
 
-/** Finance: three KPI tiles and a margin trend, all placeholder figures. */
+function JourneyScene() {
+  return (
+    <Frame label="Sample customer journey map: discover, inquire, quote, buy, service, repeat, with friction points and opportunities marked">
+      <Panel title="Customer journey" note="Sample data">
+        <div className="-mx-3 max-w-[calc(100%+1.5rem)] overflow-x-auto px-3">
+          {/* Below sm: a vertical list (icon beside the stage name and markers). From sm: six columns joined by a line. */}
+          <ol className="grid gap-2.5 sm:min-w-[520px] sm:grid-cols-6 sm:gap-1.5">
+            {STAGES.map((s, i) => (
+              <li
+                key={s.name}
+                className="relative grid grid-cols-[2.5rem_minmax(0,1fr)] content-start items-start gap-x-2.5 gap-y-1 text-left sm:grid-cols-1 sm:justify-items-center sm:gap-1.5 sm:text-center"
+              >
+                {/* Vertical connector (mobile) */}
+                {i < STAGES.length - 1 && <span aria-hidden className="absolute bottom-[-0.625rem] left-5 top-10 w-0.5 -translate-x-1/2 bg-brand/60 sm:hidden" />}
+                {/* Horizontal connector (sm and up) */}
+                {i > 0 && <span aria-hidden className="absolute left-[-50%] right-[50%] top-[19px] hidden h-0.5 bg-brand/60 sm:block" />}
+                <span className="relative row-span-3 grid size-10 place-items-center rounded-full border-[1.5px] border-tint-strong bg-white sm:row-span-1">
+                  <svg viewBox="0 0 24 24" className="size-6" aria-hidden>
+                    <Glyph name={s.glyph} x={12} y={12} size={22} />
+                  </svg>
+                </span>
+                <span className="col-start-2 self-center text-[11px] font-semibold sm:col-start-auto sm:self-auto">{s.name}</span>
+                {s.warn && <span className="col-start-2 sm:col-start-auto"><Marker kind="warn" text={s.warn} /></span>}
+                {s.opp && <span className="col-start-2 sm:col-start-auto"><Marker kind="opp" text={s.opp} /></span>}
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div className="mt-2.5 flex gap-3 border-t border-tint-strong pt-2 text-[10px] text-muted-foreground">
+          <span className="inline-flex items-center gap-1"><span className="size-2 rounded-full bg-amber-400" /> Friction</span>
+          <span className="inline-flex items-center gap-1"><span className="size-2 rounded-full bg-brand" /> Opportunity</span>
+        </div>
+      </Panel>
+    </Frame>
+  );
+}
+
+/** Finance: cost per acquisition (from the marketing totals) and margin by service. */
+const SERVICES = [
+  { name: "Installs", revenue: 48000, cost: 31200 },
+  { name: "Repairs", revenue: 22000, cost: 12100 },
+  { name: "Maintenance", revenue: 15000, cost: 6000 },
+];
+const REV = SERVICES.reduce((a, s) => a + s.revenue, 0); // 85,000
+const COST = SERVICES.reduce((a, s) => a + s.cost, 0); // 49,300
+
 function FinanceScene() {
-  const tiles = [
-    { label: "Cash in", value: "$84k", note: "sample" },
-    { label: "Open invoices", value: "$23k", note: "sample" },
-    { label: "Jobs over budget", value: "3", note: "sample" },
-  ];
-  const trend = [48, 54, 50, 60, 58, 66, 64, 72];
-  const pts = trend.map((v, i) => `${40 + i * 40},${206 - (v - 40) * 2.2}`).join(" ");
   return (
-    <svg viewBox="0 0 360 240" role="img" aria-label="Sample finance dashboard: cash in, open invoices, jobs over budget and a margin trend, all placeholder figures" className="block h-auto w-full">
-      <Panel x={8} y={8} w={344} h={224} fill={TINT} />
-      {tiles.map((t, i) => {
-        const x = 20 + i * 110;
-        return (
-          <g key={t.label}>
-            <Panel x={x} y={20} w={100} h={72} />
-            <Label x={x + 12} y={40} size={10.5}>{t.label}</Label>
-            <Label x={x + 12} y={66} size={20} weight={700} fill={INK}>{t.value}</Label>
-            <Label x={x + 12} y={82} size={9.5}>{t.note}</Label>
-          </g>
-        );
-      })}
-      <Panel x={20} y={104} w={320} h={116} />
-      <Label x={32} y={124} size={12} weight={700} fill={INK}>Margin by month</Label>
-      <Label x={328} y={124} size={10.5} anchor="end">Sample data</Label>
-      {[0, 1, 2].map((i) => (
-        <line key={i} x1={40} x2={320} y1={140 + i * 30} y2={140 + i * 30} stroke={TINT_STRONG} strokeDasharray="2 4" />
-      ))}
-      <polyline points={pts} fill="none" stroke={BRAND} strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx={320} cy={206 - (72 - 40) * 2.2} r={5} fill={BRAND} stroke="#fff" strokeWidth={2} />
-    </svg>
+    <Frame label="Sample finance report: cost per acquisition and margin by service">
+      <div className="mb-3 grid grid-cols-3 gap-3">
+        <Tile label="Marketing spend" value={usd(TOTAL_SPEND)} note="this month" />
+        <Tile label="New customers" value={String(TOTAL_SALES)} note="this month" />
+        <Tile label="Cost per acquisition" value={usd(TOTAL_SPEND / TOTAL_SALES)} note="spend ÷ new customers" />
+      </div>
+      <Panel title="Margin by service" note="Sample data · this month">
+        <Table
+          head={["Service", "Revenue", "Cost", "Margin", "Margin %"]}
+          rows={SERVICES.map((s) => [s.name, usd(s.revenue), usd(s.cost), usd(s.revenue - s.cost), pct(s.revenue - s.cost, s.revenue)])}
+          foot={["Total", usd(REV), usd(COST), usd(REV - COST), pct(REV - COST, REV)]}
+        />
+      </Panel>
+    </Frame>
   );
 }
 
-/** Customer service: before, a stack of unanswered messages; after, AI drafts and a person approves. */
+/** Customer service: response times, weekly ticket volume and resolution rate. */
+const DAYS = [
+  { d: "Mon", n: 31 },
+  { d: "Tue", n: 27 },
+  { d: "Wed", n: 24 },
+  { d: "Thu", n: 22 },
+  { d: "Fri", n: 18 },
+  { d: "Sat", n: 6 },
+];
+const TICKETS = DAYS.reduce((a, x) => a + x.n, 0); // 128
+const RESOLVED = 116;
+
 function ServiceScene() {
+  const max = Math.max(...DAYS.map((x) => x.n));
   return (
-    <svg viewBox="0 0 360 240" role="img" aria-label="Sample customer service before and after: unanswered messages before; AI-drafted replies approved by a person after" className="block h-auto w-full">
-      <Panel x={8} y={8} w={344} h={224} fill={TINT} />
-      <Label x={20} y={32} size={10.5} weight={700} fill={MUTED}>BEFORE</Label>
-      {[0, 1, 2].map((i) => (
-        <g key={i}>
-          <rect x={20} y={42 + i * 54} width={150} height={44} rx={12} fill="#fff" stroke={TINT_STRONG} strokeWidth={1.5} />
-          <Glyph name="chat" x={38} y={64 + i * 54} size={18} stroke={MUTED} />
-          <rect x={54} y={56 + i * 54} width={100} height={6} rx={3} fill={TINT_STRONG} />
-          <rect x={54} y={68 + i * 54} width={70} height={6} rx={3} fill={TINT_STRONG} />
-          <circle cx={158} cy={54 + i * 54} r={5} fill="#f59e0b" />
-        </g>
-      ))}
-      <Label x={95} y={222} size={10.5} anchor="middle">Waiting since Friday</Label>
-      <path d="M180 120 h18" stroke={BRAND} strokeWidth={2.5} strokeLinecap="round" markerEnd="url(#cs-arrow)" />
-      <defs>
-        <marker id="cs-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-          <path d="M1 1l5 3-5 3" fill="none" stroke={BRAND} strokeWidth={1.6} strokeLinecap="round" />
-        </marker>
-      </defs>
-      <Label x={206} y={32} size={10.5} weight={700} fill="var(--primary)">AFTER</Label>
-      <rect x={206} y={42} width={134} height={44} rx={12} fill="#fff" stroke={TINT_STRONG} strokeWidth={1.5} />
-      <Glyph name="chat" x={224} y={64} size={18} stroke={MUTED} />
-      <rect x={240} y={56} width={88} height={6} rx={3} fill={TINT_STRONG} />
-      <rect x={240} y={68} width={60} height={6} rx={3} fill={TINT_STRONG} />
-      <path d="M273 86 v10" stroke={BRAND} strokeWidth={2} strokeLinecap="round" />
-      <rect x={206} y={98} width={134} height={56} rx={12} fill="#fff" stroke={BRAND} strokeWidth={1.5} />
-      <AiTag x={216} y={106} text="Reply drafted" />
-      <rect x={216} y={136} width={110} height={6} rx={3} fill={TINT_STRONG} />
-      <path d="M273 154 v10" stroke={BRAND} strokeWidth={2} strokeLinecap="round" />
-      <rect x={206} y={166} width={134} height={44} rx={12} fill={BRAND} />
-      <Glyph name="check" x={226} y={188} size={18} stroke="#fff" />
-      <Label x={242} y={185} size={11} weight={700} fill="#fff">Approved by Sam</Label>
-      <Label x={242} y={200} size={10} fill="#fff">Sent in minutes</Label>
-    </svg>
+    <Frame label="Sample customer service dashboard: median and average response time, tickets this week and resolution rate">
+      <div className="mb-3 grid grid-cols-2 gap-3">
+        <Tile label="Median response" value="42 min" note="avg 1 h 10 min" />
+        <Tile label="Resolution rate" value={pct(RESOLVED, TICKETS)} note={`${RESOLVED} of ${TICKETS} resolved`} />
+      </div>
+      <Panel title="Tickets this week" note={`${TICKETS} total · sample data`}>
+        <div className="flex h-24 items-end gap-2">
+          {DAYS.map((x) => (
+            <div key={x.d} className="grid flex-1 content-end justify-items-center gap-1 text-[10px] text-muted-foreground">
+              <span className="text-[10.5px] font-semibold tabular-nums text-ink">{x.n}</span>
+              <span className="w-full rounded-t bg-brand" style={{ height: `${(x.n / max) * 56}px` }} />
+              <span>{x.d}</span>
+            </div>
+          ))}
+        </div>
+      </Panel>
+    </Frame>
   );
 }
 
 const SCENES = [
   { title: "AI in marketing", text: "Every lead lands in one place and the follow-up is drafted for you.", scene: <MarketingScene /> },
-  { title: "AI in operations", text: "A job moves from booked to invoiced with nobody retyping it.", scene: <OperationsScene /> },
+  { title: "Customer journey", text: "See where customers stall and where a small fix pays off.", scene: <JourneyScene /> },
   { title: "Finance and numbers", text: "Cash, invoices and margin on one screen, updated on their own.", scene: <FinanceScene /> },
   { title: "Customer service", text: "Replies drafted from your own records. A person approves every one.", scene: <ServiceScene /> },
 ];
@@ -207,11 +258,11 @@ export function UseCases() {
         {SCENES.map((s) => (
           <figure
             key={s.title}
-            className="grid content-start gap-4 rounded-3xl border border-tint-strong bg-gradient-to-b from-white to-tint/60 p-4 sm:p-6"
+            className="grid min-w-0 content-start gap-4 rounded-3xl border border-tint-strong bg-gradient-to-b from-white to-tint/60 p-4 sm:p-6"
           >
-            <div className="grid gap-2">
-              <span className="justify-self-end rounded-full bg-white px-2.5 py-0.5 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground ring-1 ring-tint-strong">
-                Illustrative example
+            <div className="grid min-w-0 gap-2">
+              <span className="max-w-full justify-self-end rounded-full bg-white px-2.5 py-0.5 text-center text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground ring-1 ring-tint-strong">
+                Illustrative example · sample data
               </span>
               {s.scene}
             </div>

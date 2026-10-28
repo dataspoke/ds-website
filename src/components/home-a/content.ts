@@ -35,6 +35,12 @@ export const SERVICES_A_HEAD = {
   allLink: { label: "Compare all six", href: "/services" },
 };
 
+export const EVERY_DEVICE_HEAD = {
+  eyebrow: "Custom software",
+  title: "One view of your business, on any screen.",
+  lede: "We build custom software that runs on phones and dashboards, so owners see the whole business wherever they are.",
+};
+
 export const HOW_A = {
   eyebrow: "How it works",
   title: "See the plan and price first. Own everything at the end.",

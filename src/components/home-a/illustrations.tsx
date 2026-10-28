@@ -61,6 +61,20 @@ export const GLYPHS: Record<string, ReactNode> = {
   ),
   sparkle: <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z" />,
   check: <path d="M5 12.5l4.5 4.5L19 7" />,
+  search: (
+    <>
+      <circle cx="10.5" cy="10.5" r="6.5" />
+      <path d="M15.5 15.5 21 21" />
+    </>
+  ),
+  wrench: <path d="M14.5 4.5a5 5 0 0 0-5.3 6.6L3 17.3V21h3.7l6.2-6.2a5 5 0 0 0 6.6-5.3l-3 3-2.8-.7-.7-2.8z" />,
+  repeat: (
+    <>
+      <path d="M4 10a7 7 0 0 1 12-4.5L19 8" />
+      <path d="M19 3v5h-5M20 14a7 7 0 0 1-12 4.5L5 16" />
+      <path d="M5 21v-5h5" />
+    </>
+  ),
 };
 
 export function Glyph({
