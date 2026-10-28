@@ -17,12 +17,12 @@ const ICONS: Record<ServiceLineSlug, LucideIcon> = {
 
 /** Short, owner-facing line per service for the icon cards. */
 const BLURBS: Record<ServiceLineSlug, string> = {
-  capture: "Leads, calls and invoices land where they belong on their own.",
-  organize: "One trustworthy set of records for the whole team.",
-  "metrics-dashboards": "Know your numbers every Monday, no report-building.",
-  "custom-software": "Tools built around how your business actually works.",
-  "ai-implementation": "AI set up on your own business, with a person approving.",
-  "analytics-data-science": "See where the money goes and what's coming next.",
+  capture: "Leads and invoices land where they belong.",
+  organize: "One trustworthy set of records.",
+  "metrics-dashboards": "Know your numbers every Monday.",
+  "custom-software": "Built around how you work.",
+  "ai-implementation": "AI on your data, a person approving.",
+  "analytics-data-science": "Where money goes, what's next.",
 };
 
 export function ServicesA() {

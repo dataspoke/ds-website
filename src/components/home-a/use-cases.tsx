@@ -1,13 +1,13 @@
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import { Section, SectionHead } from "@/components/shared/section";
-import { Glyph } from "./illustrations";
 import { USE_CASES_HEAD } from "./content";
+import { UseCaseTabs, type UseCaseTab } from "./use-case-tabs";
 
 // All figures below are invented sample data for illustration. The derived
-// columns (cost per lead, cost per sale, margin %, resolution rate) are
+// columns (cost per sale, drop-off %, margin %, resolution rate) are
 // computed from the inputs so the arithmetic always matches.
 
-const usd = (n: number) => `$${Math.round(n).toLocaleString("en-US")}`;
+const usd = (n: number) => `${n < 0 ? "-" : ""}$${Math.abs(Math.round(n)).toLocaleString("en-US")}`;
 const pct = (n: number, d: number) => `${((n / d) * 100).toFixed(1)}%`;
 
 /* ---------- Shared chrome (matches the hub-and-spoke scene style) ---------- */
@@ -34,17 +34,27 @@ function Panel({ title, note, className = "", children }: { title?: string; note
   );
 }
 
-function Tile({ label, value, note }: { label: string; value: string; note: string }) {
+function Tile({ label, value, note }: { label: string; value: string; note?: string }) {
   return (
     <Panel>
       <div className="text-[10.5px] text-muted-foreground">{label}</div>
       <div className="mt-1 text-xl font-bold leading-none">{value}</div>
-      <div className="mt-1.5 text-[10px] text-muted-foreground">{note}</div>
+      {note && <div className="mt-1.5 text-[10px] text-muted-foreground">{note}</div>}
     </Panel>
   );
 }
 
-function Table({ head, rows, foot }: { head: string[]; rows: (string | number)[][]; foot?: (string | number)[] }) {
+function Table({
+  head,
+  rows,
+  foot,
+  rowClass,
+}: {
+  head: string[];
+  rows: (string | number)[][];
+  foot?: (string | number)[];
+  rowClass?: (row: (string | number)[]) => string;
+}) {
   const cell = (i: number) => (i === 0 ? "text-left" : "text-right");
   return (
     <div className="-mx-3 max-w-[calc(100%+1.5rem)] overflow-x-auto px-3">
@@ -58,7 +68,7 @@ function Table({ head, rows, foot }: { head: string[]; rows: (string | number)[]
         </thead>
         <tbody>
           {rows.map((r) => (
-            <tr key={String(r[0])} className="border-t border-tint-strong">
+            <tr key={String(r[0])} className={`border-t border-tint-strong ${rowClass?.(r) ?? ""}`}>
               {r.map((c, i) => (
                 <td key={i} className={`whitespace-nowrap py-1.5 ${cell(i)} ${i === 0 ? "font-medium" : ""}`}>{c}</td>
               ))}
@@ -82,50 +92,47 @@ function Table({ head, rows, foot }: { head: string[]; rows: (string | number)[]
 /* ---------- Sample data shared by the marketing and finance scenes ---------- */
 
 const SOURCES = [
-  { name: "Google Ads", spend: 4200, leads: 42, sales: 12 },
-  { name: "Meta", spend: 2400, leads: 30, sales: 6 },
-  { name: "Referral", spend: 600, leads: 15, sales: 7 },
-  { name: "Email", spend: 300, leads: 12, sales: 4 },
+  { name: "Google Ads", spend: 4200, sales: 12 },
+  { name: "Meta", spend: 2400, sales: 6 },
+  { name: "Referral", spend: 600, sales: 7 },
 ];
-const TOTAL_SPEND = SOURCES.reduce((a, s) => a + s.spend, 0); // 7,500
-const TOTAL_LEADS = SOURCES.reduce((a, s) => a + s.leads, 0); // 99
-const TOTAL_SALES = SOURCES.reduce((a, s) => a + s.sales, 0); // 29
 
 /** Marketing: leads by source with spend, cost per lead and cost per sale. */
 function MarketingScene() {
-  const max = Math.max(...SOURCES.map((s) => s.leads));
+  const max = Math.max(...SOURCES.map((s) => s.sales));
   return (
-    <Frame label="Sample marketing report: leads by source with spend, cost per lead, sales and cost per sale">
-      <Panel title="Leads by source" note="Sample data · this month">
-        <div className="mb-2.5 grid gap-1.5">
+    <Frame label="Sample marketing report: sales by source with spend and cost per sale">
+      <Panel title="Sales by source">
+        <div className="mb-2.5 grid gap-1.5" aria-hidden>
           {SOURCES.map((s) => (
-            <div key={s.name} className="grid grid-cols-[72px_1fr_24px] items-center gap-2 text-[11px]">
-              <span className="truncate">{s.name}</span>
-              <span className="h-2.5 rounded bg-tint">
-                <span className="block h-full rounded bg-brand" style={{ width: `${(s.leads / max) * 100}%` }} />
-              </span>
-              <span className="text-right font-semibold tabular-nums">{s.leads}</span>
+            <div key={s.name} className="h-2.5 rounded bg-tint">
+              <span className="block h-full rounded bg-brand" style={{ width: `${(s.sales / max) * 100}%` }} />
             </div>
           ))}
         </div>
         <Table
-          head={["Source", "Spend", "Leads", "CPL", "Sales", "CPS"]}
-          rows={SOURCES.map((s) => [s.name, usd(s.spend), s.leads, usd(s.spend / s.leads), s.sales, usd(s.spend / s.sales)])}
-          foot={["Total", usd(TOTAL_SPEND), TOTAL_LEADS, usd(TOTAL_SPEND / TOTAL_LEADS), TOTAL_SALES, usd(TOTAL_SPEND / TOTAL_SALES)]}
+          head={["Source", "Spend", "Sales", "CPS"]}
+          rows={SOURCES.map((s) => [s.name, usd(s.spend), s.sales, usd(s.spend / s.sales)])}
         />
       </Panel>
     </Frame>
   );
 }
 
-/** Customer journey: six stages with friction points and optimization opportunities. */
-const STAGES: { name: string; glyph: "search" | "chat" | "doc" | "cart" | "wrench" | "repeat"; warn?: string; opp?: string }[] = [
-  { name: "Discover", glyph: "search", opp: "Reviews on Google" },
-  { name: "Inquire", glyph: "chat", warn: "40% drop-off to quote", opp: "Auto follow-up" },
-  { name: "Quote", glyph: "doc", warn: "Quote takes 3 days", opp: "Instant quote" },
-  { name: "Buy", glyph: "cart", opp: "Online payment" },
-  { name: "Service", glyph: "wrench", warn: "2 reschedules per week" },
-  { name: "Repeat", glyph: "repeat", opp: "Review request" },
+/** Operations: a four-stage funnel with the drop-off between stages computed from the counts. */
+const FUNNEL = [
+  { name: "Inquiries", n: 400 },
+  { name: "Quotes sent", n: 180 },
+  { name: "Jobs won", n: 60 },
+  { name: "Repeat customers", n: 22 },
+];
+/** Stall at each step: what the numbers say, and the fix. Lost counts come from FUNNEL. */
+const lost = (i: number) => FUNNEL[i].n - FUNNEL[i + 1].n;
+const dropPct = (i: number) => Math.round((lost(i) / FUNNEL[i].n) * 100);
+const STALLS = [
+  { warn: `${lost(0)} of ${FUNNEL[0].n} never quoted`, opp: "Instant quote" },
+  { warn: `Quotes sit 9 days, no follow-up. ${lost(1)} of ${FUNNEL[1].n} never won`, opp: "Auto follow-up" },
+  { warn: `${lost(2)} of ${FUNNEL[2].n} don't return`, opp: "Repeat reminder" },
 ];
 
 function Marker({ kind, text }: { kind: "warn" | "opp"; text: string }) {
@@ -137,72 +144,68 @@ function Marker({ kind, text }: { kind: "warn" | "opp"; text: string }) {
       }`}
     >
       <span aria-hidden className={`mt-px inline-block size-2.5 shrink-0 rounded-full ${warn ? "bg-amber-400" : "bg-brand"}`} />
-      <span className="sr-only">{warn ? "Friction: " : "Opportunity: "}</span>
       {text}
     </span>
   );
 }
 
-function JourneyScene() {
+function FunnelScene() {
+  const top = FUNNEL[0].n;
   return (
-    <Frame label="Sample customer journey map: discover, inquire, quote, buy, service, repeat, with friction points and opportunities marked">
-      <Panel title="Customer journey" note="Sample data">
-        <div className="-mx-3 max-w-[calc(100%+1.5rem)] overflow-x-auto px-3">
-          {/* Below sm: a vertical list (icon beside the stage name and markers). From sm: six columns joined by a line. */}
-          <ol className="grid gap-2.5 sm:min-w-[520px] sm:grid-cols-6 sm:gap-1.5">
-            {STAGES.map((s, i) => (
-              <li
-                key={s.name}
-                className="relative grid grid-cols-[2.5rem_minmax(0,1fr)] content-start items-start gap-x-2.5 gap-y-1 text-left sm:grid-cols-1 sm:justify-items-center sm:gap-1.5 sm:text-center"
-              >
-                {/* Vertical connector (mobile) */}
-                {i < STAGES.length - 1 && <span aria-hidden className="absolute bottom-[-0.625rem] left-5 top-10 w-0.5 -translate-x-1/2 bg-brand/60 sm:hidden" />}
-                {/* Horizontal connector (sm and up) */}
-                {i > 0 && <span aria-hidden className="absolute left-[-50%] right-[50%] top-[19px] hidden h-0.5 bg-brand/60 sm:block" />}
-                <span className="relative row-span-3 grid size-10 place-items-center rounded-full border-[1.5px] border-tint-strong bg-white sm:row-span-1">
-                  <svg viewBox="0 0 24 24" className="size-6" aria-hidden>
-                    <Glyph name={s.glyph} x={12} y={12} size={22} />
-                  </svg>
-                </span>
-                <span className="col-start-2 self-center text-[11px] font-semibold sm:col-start-auto sm:self-auto">{s.name}</span>
-                {s.warn && <span className="col-start-2 sm:col-start-auto"><Marker kind="warn" text={s.warn} /></span>}
-                {s.opp && <span className="col-start-2 sm:col-start-auto"><Marker kind="opp" text={s.opp} /></span>}
-              </li>
-            ))}
-          </ol>
-        </div>
-        <div className="mt-2.5 flex gap-3 border-t border-tint-strong pt-2 text-[10px] text-muted-foreground">
-          <span className="inline-flex items-center gap-1"><span className="size-2 rounded-full bg-amber-400" /> Friction</span>
-          <span className="inline-flex items-center gap-1"><span className="size-2 rounded-full bg-brand" /> Opportunity</span>
+    <Frame
+      label={`Sample sales funnel: ${FUNNEL.map((f) => `${f.name} ${f.n}`).join(", ")}, with the drop-off between stages, where customers stall and the fix at each stall`}
+    >
+      <Panel>
+        {/* Below md: stacked, stage then stall. From md: stages left to right with the stall between. */}
+        <div className="grid gap-2 md:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] md:items-stretch">
+          {FUNNEL.map((f, i) => (
+            <Fragment key={f.name}>
+              <div className="min-w-0 rounded-xl border-[1.5px] border-tint-strong bg-tint p-3">
+                <div className="text-[10.5px] text-muted-foreground">{f.name}</div>
+                <div className="mt-1 text-xl font-bold leading-none tabular-nums">{f.n}</div>
+                <div className="mt-2 h-2 rounded bg-white" aria-hidden>
+                  <span className="block h-full rounded bg-brand" style={{ width: `${(f.n / top) * 100}%` }} />
+                </div>
+              </div>
+              {i < FUNNEL.length - 1 && (
+                <div className="ml-4 grid content-start justify-items-start gap-1 border-l-2 border-amber-300 py-1 pl-3 md:ml-0 md:w-36 md:content-center md:justify-items-center md:border-0 md:px-1 md:py-0 md:text-center">
+                  <span className="text-[11px] font-bold tabular-nums text-amber-800 before:content-['↓_'] md:before:content-none md:after:content-['_→']">{`${dropPct(i)}% drop`}</span>
+                  <Marker kind="warn" text={STALLS[i].warn} />
+                  <Marker kind="opp" text={STALLS[i].opp} />
+                </div>
+              )}
+            </Fragment>
+          ))}
         </div>
       </Panel>
     </Frame>
   );
 }
 
-/** Finance: cost per acquisition (from the marketing totals) and margin by service. */
-const SERVICES = [
-  { name: "Installs", revenue: 48000, cost: 31200 },
-  { name: "Repairs", revenue: 22000, cost: 12100 },
-  { name: "Maintenance", revenue: 15000, cost: 6000 },
+/** Finance: margin by job type for one sample home-services company. One job type loses money. */
+const JOB_TYPES = [
+  { name: "Furnace installs", revenue: 48000, cost: 33600 },
+  { name: "Service calls", revenue: 21000, cost: 15120 },
+  { name: "Water heaters", revenue: 18000, cost: 11700 },
+  { name: "Duct cleaning", revenue: 6400, cost: 7100 },
 ];
-const REV = SERVICES.reduce((a, s) => a + s.revenue, 0); // 85,000
-const COST = SERVICES.reduce((a, s) => a + s.cost, 0); // 49,300
+const REV = JOB_TYPES.reduce((a, s) => a + s.revenue, 0); // 93,400
+const COST = JOB_TYPES.reduce((a, s) => a + s.cost, 0); // 67,520
+const LEAK = JOB_TYPES.find((s) => s.cost > s.revenue)!;
 
 function FinanceScene() {
   return (
-    <Frame label="Sample finance report: cost per acquisition and margin by service">
-      <div className="mb-3 grid grid-cols-3 gap-3">
-        <Tile label="Marketing spend" value={usd(TOTAL_SPEND)} note="this month" />
-        <Tile label="New customers" value={String(TOTAL_SALES)} note="this month" />
-        <Tile label="Cost per acquisition" value={usd(TOTAL_SPEND / TOTAL_SALES)} note="spend ÷ new customers" />
-      </div>
-      <Panel title="Margin by service" note="Sample data · this month">
+    <Frame label={`Sample finance report for a home-services company: margin by job type, with ${LEAK.name.toLowerCase()} losing ${usd(LEAK.cost - LEAK.revenue)}`}>
+      <Panel title="Margin by job type" note="home-services company">
         <Table
-          head={["Service", "Revenue", "Cost", "Margin", "Margin %"]}
-          rows={SERVICES.map((s) => [s.name, usd(s.revenue), usd(s.cost), usd(s.revenue - s.cost), pct(s.revenue - s.cost, s.revenue)])}
+          head={["Job type", "Revenue", "Cost", "Margin", "%"]}
+          rows={JOB_TYPES.map((s) => [s.name, usd(s.revenue), usd(s.cost), usd(s.revenue - s.cost), pct(s.revenue - s.cost, s.revenue)])}
           foot={["Total", usd(REV), usd(COST), usd(REV - COST), pct(REV - COST, REV)]}
+          rowClass={(r) => (r[0] === LEAK.name ? "bg-red-50 font-semibold text-red-700" : "")}
         />
+        <p className="mt-2.5 rounded-lg border border-red-200 bg-red-50 px-2.5 py-2 text-[11px] leading-snug text-red-800">
+          <strong>Here&rsquo;s the leak:</strong>{` ${LEAK.name} lost ${usd(LEAK.cost - LEAK.revenue)} on ${usd(LEAK.revenue)} of revenue.`}
+        </p>
       </Panel>
     </Frame>
   );
@@ -215,20 +218,18 @@ const DAYS = [
   { d: "Wed", n: 24 },
   { d: "Thu", n: 22 },
   { d: "Fri", n: 18 },
-  { d: "Sat", n: 6 },
 ];
-const TICKETS = DAYS.reduce((a, x) => a + x.n, 0); // 128
-const RESOLVED = 116;
+const TICKETS = DAYS.reduce((a, x) => a + x.n, 0); // 122
+const RESOLVED = 110;
 
 function ServiceScene() {
   const max = Math.max(...DAYS.map((x) => x.n));
   return (
-    <Frame label="Sample customer service dashboard: median and average response time, tickets this week and resolution rate">
+    <Frame label="Sample customer service dashboard: tickets this week and resolution rate">
       <div className="mb-3 grid grid-cols-2 gap-3">
-        <Tile label="Median response" value="42 min" note="avg 1 h 10 min" />
-        <Tile label="Resolution rate" value={pct(RESOLVED, TICKETS)} note={`${RESOLVED} of ${TICKETS} resolved`} />
+        <Tile label="Resolution rate" value={pct(RESOLVED, TICKETS)} note={`${RESOLVED} of ${TICKETS}`} />
       </div>
-      <Panel title="Tickets this week" note={`${TICKETS} total · sample data`}>
+      <Panel title="Tickets this week">
         <div className="flex h-24 items-end gap-2">
           {DAYS.map((x) => (
             <div key={x.d} className="grid flex-1 content-end justify-items-center gap-1 text-[10px] text-muted-foreground">
@@ -243,36 +244,18 @@ function ServiceScene() {
   );
 }
 
-const SCENES = [
-  { title: "AI in marketing", text: "Every lead lands in one place and the follow-up is drafted for you.", scene: <MarketingScene /> },
-  { title: "Customer journey", text: "See where customers stall and where a small fix pays off.", scene: <JourneyScene /> },
-  { title: "Finance and numbers", text: "Cash, invoices and margin on one screen, updated on their own.", scene: <FinanceScene /> },
-  { title: "Customer service", text: "Replies drafted from your own records. A person approves every one.", scene: <ServiceScene /> },
+const TABS: UseCaseTab[] = [
+  { label: "Sales & Marketing", caption: "Every lead, one place.", scene: <MarketingScene /> },
+  { label: "Operations", caption: "Where customers stall.", scene: <FunnelScene /> },
+  { label: "Finance", caption: "Margin, one screen.", scene: <FinanceScene /> },
+  { label: "Customer Service", caption: "Drafted replies, human-approved.", scene: <ServiceScene /> },
 ];
 
 export function UseCases() {
   return (
     <Section id="use-cases">
       <SectionHead eyebrow={USE_CASES_HEAD.eyebrow} title={USE_CASES_HEAD.title} />
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
-        {SCENES.map((s) => (
-          <figure
-            key={s.title}
-            className="grid min-w-0 content-start gap-4 rounded-3xl border border-tint-strong bg-gradient-to-b from-white to-tint/60 p-4 sm:p-6"
-          >
-            <div className="grid min-w-0 gap-2">
-              <span className="max-w-full justify-self-end rounded-full bg-white px-2.5 py-0.5 text-center text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground ring-1 ring-tint-strong">
-                Illustrative example · sample data
-              </span>
-              {s.scene}
-            </div>
-            <figcaption className="grid gap-1 px-1">
-              <h3 className="text-xl font-bold">{s.title}</h3>
-              <p className="text-muted-foreground">{s.text}</p>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
+      <UseCaseTabs tabs={TABS} />
     </Section>
   );
 }

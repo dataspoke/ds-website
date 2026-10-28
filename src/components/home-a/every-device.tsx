@@ -2,47 +2,55 @@ import type { ReactNode } from "react";
 import { Section, SectionHead } from "@/components/shared/section";
 import { EVERY_DEVICE_HEAD } from "./content";
 
-// Sample owner overview, shared by all three screens so the numbers always
-// match. All figures are invented for illustration.
+// Sample field-service app for an invented trades company. Layout and UI
+// patterns are modeled on the DropGym staff app (bottom tab bar, rounded
+// cards, time-first schedule rows with a status pill, big-numeral home
+// tiles). All names, jobs and figures are invented. One data set feeds all
+// three screens so the numbers always match.
 const usd = (n: number) => `$${n.toLocaleString("en-US")}`;
 
-const OVERVIEW = {
-  revenue: 84200,
-  leads: 132,
-  jobsOpen: 47,
-  jobsWeek: 12,
-  cash: 61500,
-};
+const COMPANY = "Saltmarsh Plumbing & Heating";
 
-/** Weekly revenue trend (sample), oldest first. */
-const TREND = [16.1, 17.4, 16.9, 18.8, 19.6, 19.2, 20.7, 21.5];
+type Status = "done" | "on site" | "en route" | "scheduled";
 
-const WEEK_JOBS = [
-  { day: "Mon", n: 3 },
-  { day: "Tue", n: 2 },
-  { day: "Wed", n: 3 },
-  { day: "Thu", n: 2 },
-  { day: "Fri", n: 2 },
-]; // sums to OVERVIEW.jobsWeek (12)
-
-const TILES = [
-  { label: "Revenue", value: usd(OVERVIEW.revenue), note: "this month" },
-  { label: "Leads", value: String(OVERVIEW.leads), note: "this month" },
-  { label: "Jobs", value: String(OVERVIEW.jobsOpen), note: `open · ${OVERVIEW.jobsWeek} this week` },
-  { label: "Cash", value: usd(OVERVIEW.cash), note: "on hand" },
+const JOBS: { time: string; job: string; crew: string; status: Status }[] = [
+  { time: "7:30", job: "Boiler service", crew: "Luis", status: "done" },
+  { time: "9:30", job: "Water heater", crew: "Luis", status: "on site" },
+  { time: "10:00", job: "Drain clearing", crew: "Dana", status: "en route" },
+  { time: "1:30", job: "Repipe estimate", crew: "Priya", status: "scheduled" },
 ];
 
-const ARIA = `Sample owner overview: revenue ${usd(OVERVIEW.revenue)} this month, ${OVERVIEW.leads} leads, ${OVERVIEW.jobsOpen} open jobs with ${OVERVIEW.jobsWeek} this week, cash on hand ${usd(OVERVIEW.cash)}, and a rising revenue trend`;
+const CREW = ["Luis", "Dana", "Priya"].map((name) => {
+  const now = JOBS.find((j) => j.crew === name && (j.status === "on site" || j.status === "en route"));
+  const next = JOBS.find((j) => j.crew === name && j.status === "scheduled");
+  const done = JOBS.filter((j) => j.crew === name && j.status === "done").length;
+  return { name, now, next, done };
+});
 
-/* ---------- Screen contents ---------- */
+const OVERDUE = [
+  { id: "#1042", job: "Repipe", amount: 5400, days: 31 },
+  { id: "#1057", job: "Water heater", amount: 2250, days: 24 },
+  { id: "#1061", job: "Boiler service", amount: 640, days: 19 },
+];
+const OVERDUE_COUNT = 7; // three listed, four more
+const OVERDUE_TOTAL = 12840; // includes the four not listed
+const LEADS_TO_FOLLOW_UP = 9;
+const CASH = 61500;
+/** Cash in bank by week (sample, thousands), oldest first; the last point is CASH. */
+const CASH_TREND = [48.2, 51.0, 49.6, 53.3, 55.1, 54.4, 58.9, CASH / 1000];
+const JOBS_DONE = JOBS.filter((j) => j.status === "done").length;
+
+const ARIA = `Sample field-service app for ${COMPANY}: ${JOBS.length} jobs today with ${JOBS_DONE} done, crew status for ${CREW.length} technicians, ${OVERDUE_COUNT} overdue invoices totalling ${usd(OVERDUE_TOTAL)}, ${LEADS_TO_FOLLOW_UP} leads needing follow-up and ${usd(CASH)} cash`;
+
+/* ---------- Shared UI ---------- */
 
 function Sparkline({ className = "" }: { className?: string }) {
   const w = 100;
   const h = 32;
-  const min = Math.min(...TREND);
-  const max = Math.max(...TREND);
-  const pts = TREND.map((v, i) => {
-    const x = (i / (TREND.length - 1)) * w;
+  const min = Math.min(...CASH_TREND);
+  const max = Math.max(...CASH_TREND);
+  const pts = CASH_TREND.map((v, i) => {
+    const x = (i / (CASH_TREND.length - 1)) * w;
     const y = h - 3 - ((v - min) / (max - min)) * (h - 6);
     return [x, y] as const;
   });
@@ -58,83 +66,174 @@ function Sparkline({ className = "" }: { className?: string }) {
   );
 }
 
-function Tile({ label, value, note, big }: { label: string; value: string; note: string; big?: boolean }) {
+const STATUS: Record<Status, { dot: string; pill: string }> = {
+  done: { dot: "bg-emerald-500", pill: "border-emerald-300 bg-emerald-50 text-emerald-700" },
+  "on site": { dot: "bg-brand", pill: "border-brand bg-tint text-primary" },
+  "en route": { dot: "bg-amber-400", pill: "border-amber-300 bg-amber-50 text-amber-800" },
+  scheduled: { dot: "bg-tint-strong", pill: "border-tint-strong bg-white text-muted-foreground" },
+};
+
+function Pill({ status }: { status: Status }) {
   return (
-    <div className="min-w-0 rounded-lg border border-tint-strong bg-white p-2">
-      <div className="truncate text-[9px] text-muted-foreground">{label}</div>
-      <div className={`mt-0.5 truncate font-bold leading-none tabular-nums ${big ? "text-base" : "text-[13px]"}`}>{value}</div>
-      <div className="mt-1 truncate text-[8px] text-muted-foreground">{note}</div>
+    <span className={`shrink-0 rounded-full border px-1.5 py-px text-[7px] font-extrabold uppercase tracking-[0.08em] ${STATUS[status].pill}`}>
+      {status}
+    </span>
+  );
+}
+
+function Card({ className = "", children }: { className?: string; children: ReactNode }) {
+  return <div className={`min-w-0 rounded-xl border border-tint-strong bg-white ${className}`}>{children}</div>;
+}
+
+function JobRow({ j }: { j: (typeof JOBS)[number] }) {
+  return (
+    <div className="flex items-center gap-2 px-2 py-1.5">
+      <span className="w-7 shrink-0 text-right text-[10px] font-bold tabular-nums leading-none">{j.time}</span>
+      <span className="min-w-0 flex-1">
+        <span className="block text-[9px] font-semibold leading-tight">{j.job}</span>
+        <span className="flex items-center gap-1 text-[8px] text-muted-foreground">
+          <span aria-hidden className={`size-1.5 rounded-full ${STATUS[j.status].dot}`} />
+          {j.crew}
+        </span>
+      </span>
+      <Pill status={j.status} />
     </div>
   );
 }
 
-function ScreenHead({ title }: { title: string }) {
+function Avatar({ name, size = "size-6" }: { name: string; size?: string }) {
   return (
-    <div className="flex items-center justify-between">
-      <span className="text-[10px] font-bold">{title}</span>
-      <span className="text-[8px] text-muted-foreground">Today</span>
+    <span
+      data-initial={name[0]}
+      className={`grid ${size} shrink-0 place-items-center rounded-full bg-brand text-[8px] font-bold text-white before:content-[attr(data-initial)]`}
+      aria-hidden
+    />
+  );
+}
+
+function CrewRow({ c }: { c: (typeof CREW)[number] }) {
+  const status: Status = c.now?.status ?? (c.next ? "scheduled" : "done");
+  const line = c.now ? c.now.job : c.next ? `Next ${c.next.time}` : `${c.done} done`;
+  return (
+    <div className="flex items-center gap-2 px-2 py-1.5">
+      <Avatar name={c.name} />
+      <span className="min-w-0 flex-1">
+        <span className="block text-[9px] font-semibold leading-tight">{c.name}</span>
+        <span className="flex items-center gap-1 text-[8px] leading-tight text-muted-foreground">
+          <span aria-hidden className={`size-1.5 shrink-0 rounded-full ${STATUS[status].dot}`} />
+          {line}
+        </span>
+      </span>
+      <Pill status={status} />
     </div>
   );
 }
 
-/** Phone layout: four tiles and the trend. */
-function PhoneScreen() {
+function Tile({ label, value, sub, alert, big }: { label: string; value: string; sub?: string; alert?: boolean; big?: boolean }) {
+  return (
+    <Card className={`p-2 ${alert ? "border-red-200 bg-red-50" : ""}`}>
+      <div className="truncate text-[7px] uppercase tracking-[0.08em] text-muted-foreground">{label}</div>
+      <div className={`mt-0.5 truncate font-bold leading-none tabular-nums ${big ? "text-base" : "text-[13px]"} ${alert ? "text-red-700" : ""}`}>{value}</div>
+      {sub && <div className="mt-0.5 truncate text-[7.5px] text-muted-foreground">{sub}</div>}
+    </Card>
+  );
+}
+
+function ScreenHead({ title, sub }: { title: string; sub?: string }) {
+  return (
+    <div className="flex items-end justify-between">
+      <span>
+        <span className="block text-[11px] font-bold leading-none">{title}</span>
+        {sub && <span className="mt-0.5 block text-[7.5px] text-muted-foreground">{sub}</span>}
+      </span>
+      <Avatar name="S" size="size-5" />
+    </div>
+  );
+}
+
+/** Bottom tab bar, as on the staff app. Icons are simple shapes; the active tab is tinted. */
+function TabBar({ active }: { active: number }) {
+  return (
+    <div aria-hidden className="grid grid-cols-4 border-t border-tint-strong bg-white px-1 py-1.5">
+      {[0, 1, 2, 3].map((i) => (
+        <span key={i} className="grid justify-items-center gap-0.5">
+          <span className={`h-2.5 w-3 rounded-[3px] ${i === active ? "bg-brand" : "bg-tint-strong"}`} />
+          <span className={`h-1 w-4 rounded ${i === active ? "bg-brand/60" : "bg-tint-strong/70"}`} />
+        </span>
+      ))}
+    </div>
+  );
+}
+
+/* ---------- Screen contents ---------- */
+
+/** Phone 1: today's jobs in time order. */
+function JobsScreen() {
   return (
     <div className="grid gap-2 bg-tint p-2.5 text-ink">
-      <ScreenHead title="Overview" />
-      <div className="grid grid-cols-2 gap-1.5">
-        {TILES.map((t) => (
-          <Tile key={t.label} {...t} />
+      <ScreenHead title="Jobs today" sub={`${JOBS.length} jobs · ${JOBS_DONE} done`} />
+      <Card className="divide-y divide-tint-strong">
+        {JOBS.map((j) => (
+          <JobRow key={j.time + j.crew} j={j} />
         ))}
-      </div>
-      <div className="rounded-lg border border-tint-strong bg-white p-2">
-        <div className="text-[8px] text-muted-foreground">Revenue trend · 8 weeks</div>
-        <Sparkline className="mt-1 h-7" />
-      </div>
+      </Card>
     </div>
   );
 }
 
-/** Desktop layout: same numbers with a little more room for detail. */
-function DesktopScreen() {
-  const max = Math.max(...WEEK_JOBS.map((j) => j.n));
+/** Phone 2: who is where right now. */
+function CrewScreen() {
+  const out = CREW.filter((c) => c.now).length;
   return (
-    <div className="grid h-full grid-cols-[52px_1fr] bg-tint text-ink">
-      <div aria-hidden className="grid content-start gap-2 border-r border-tint-strong bg-white p-2.5">
-        <span className="size-5 rounded-md bg-brand" />
-        {[1, 2, 3, 4].map((i) => (
-          <span key={i} className={`h-1.5 rounded ${i === 1 ? "bg-brand/50" : "bg-tint-strong"}`} />
+    <div className="grid gap-2 bg-tint p-2.5 text-ink">
+      <ScreenHead title="Crew" sub={`${out} of ${CREW.length} out`} />
+      <Card className="divide-y divide-tint-strong">
+        {CREW.map((c) => (
+          <CrewRow key={c.name} c={c} />
+        ))}
+      </Card>
+    </div>
+  );
+}
+
+/** Desktop: the owner's overview with the same jobs and crew behind the tiles. */
+function DesktopScreen() {
+  const nav = ["Overview", "Jobs", "Crew", "Invoices"];
+  return (
+    <div className="grid h-full grid-cols-[64px_1fr] bg-tint text-ink">
+      <div className="grid content-start gap-1.5 border-r border-tint-strong bg-white p-2">
+        <span aria-hidden className="mb-1 h-3 w-3 rounded bg-brand" />
+        {nav.map((n, i) => (
+          <span key={n} className={`rounded px-1.5 py-1 text-[7.5px] font-semibold ${i === 0 ? "bg-tint text-primary" : "text-muted-foreground"}`}>
+            {n}
+          </span>
         ))}
       </div>
       <div className="grid content-start gap-2 p-2.5">
-        <ScreenHead title="Owner overview" />
+        <ScreenHead title={COMPANY} />
         <div className="grid grid-cols-4 gap-1.5">
-          {TILES.map((t) => (
-            <Tile key={t.label} {...t} big />
-          ))}
+          <Tile label={`${OVERDUE_COUNT} overdue invoices`} value={usd(OVERDUE_TOTAL)} alert big />
+          <Tile label="Open leads" value={String(LEADS_TO_FOLLOW_UP)} big />
+          <Tile label="Jobs today" value={String(JOBS.length)} sub={`${JOBS_DONE} done`} big />
+          <Tile label="Cash" value={usd(CASH)} big />
         </div>
-        <div className="grid grid-cols-[3fr_2fr] gap-1.5">
-          <div className="rounded-lg border border-tint-strong bg-white p-2">
-            <div className="flex justify-between text-[8px] text-muted-foreground">
-              <span>Revenue trend · 8 weeks</span>
-              <span>weekly</span>
-            </div>
+        <div className="grid grid-cols-2 gap-1.5">
+          <Card>
+            <div className="border-b border-tint-strong px-2 py-1 text-[7.5px] font-bold uppercase tracking-[0.08em] text-muted-foreground">Overdue invoices</div>
+            {OVERDUE.map((o) => (
+              <div key={o.id} className="flex items-center gap-1.5 border-b border-tint-strong px-2 py-1 text-[8px] last:border-0">
+                <span className="w-8 shrink-0 font-semibold tabular-nums text-muted-foreground">{o.id}</span>
+                <span className="min-w-0 flex-1 truncate font-semibold">{o.job}</span>
+                <span className="shrink-0 text-red-700">{`${o.days}d`}</span>
+                <span className="w-10 shrink-0 text-right font-bold tabular-nums">{usd(o.amount)}</span>
+              </div>
+            ))}
+            <div className="px-2 py-1 text-[7.5px] text-muted-foreground">+{OVERDUE_COUNT - OVERDUE.length} more</div>
+          </Card>
+          <Card className="p-2">
+            <div className="text-[7.5px] font-bold uppercase tracking-[0.08em] text-muted-foreground">Cash</div>
             <Sparkline className="mt-1 h-12" />
-          </div>
-          <div className="rounded-lg border border-tint-strong bg-white p-2">
-            <div className="text-[8px] text-muted-foreground">Jobs this week · {OVERVIEW.jobsWeek}</div>
-            <div className="mt-1.5 grid gap-1">
-              {WEEK_JOBS.map((j) => (
-                <div key={j.day} className="grid grid-cols-[22px_1fr_10px] items-center gap-1 text-[8px]">
-                  <span>{j.day}</span>
-                  <span className="h-1.5 rounded bg-tint">
-                    <span className="block h-full rounded bg-brand" style={{ width: `${(j.n / max) * 100}%` }} />
-                  </span>
-                  <span className="text-right font-semibold tabular-nums">{j.n}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          </Card>
         </div>
       </div>
     </div>
@@ -147,7 +246,7 @@ function Phone({ kind, children }: { kind: "android" | "ios"; children: ReactNod
   const ios = kind === "ios";
   return (
     <div
-      className={`relative mx-auto w-full max-w-[172px] bg-ink p-[6px] shadow-xl shadow-ink/20 ${ios ? "rounded-[2.1rem]" : "rounded-[1.35rem]"}`}
+      className={`relative mx-auto w-full max-w-[196px] bg-ink p-[6px] shadow-xl shadow-ink/20 ${ios ? "rounded-[2.1rem]" : "rounded-[1.35rem]"}`}
     >
       {/* side buttons */}
       <span aria-hidden className="absolute -left-[2px] top-[22%] h-7 w-[2px] rounded-l bg-ink/80" />
@@ -155,7 +254,7 @@ function Phone({ kind, children }: { kind: "android" | "ios"; children: ReactNod
       <div className={`relative overflow-hidden bg-tint ${ios ? "rounded-[1.75rem]" : "rounded-[1rem]"}`}>
         {/* status bar with camera cut-out */}
         <div className="relative flex h-6 items-end justify-between bg-tint px-3 pb-0.5 text-[7px] font-semibold text-ink">
-          <span>9:41</span>
+          <span aria-hidden className="h-1.5 w-5 rounded-sm bg-ink/70" />
           {ios ? (
             <span aria-hidden className="absolute left-1/2 top-1.5 h-[9px] w-10 -translate-x-1/2 rounded-full bg-ink" />
           ) : (
@@ -205,17 +304,19 @@ function Laptop({ children }: { children: ReactNode }) {
 export function EveryDeviceA() {
   return (
     <Section id="every-device">
-      <SectionHead eyebrow={EVERY_DEVICE_HEAD.eyebrow} title={EVERY_DEVICE_HEAD.title} lede={EVERY_DEVICE_HEAD.lede} />
+      <SectionHead eyebrow={EVERY_DEVICE_HEAD.eyebrow} title={EVERY_DEVICE_HEAD.title} />
       <figure className="mt-10 grid gap-4 rounded-3xl border border-tint-strong bg-gradient-to-b from-white to-tint/60 p-4 sm:p-6">
         <span className="max-w-full justify-self-end rounded-full bg-white px-2.5 py-0.5 text-center text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground ring-1 ring-tint-strong">
           Illustrative example · sample data
         </span>
-        <div role="img" aria-label={`${ARIA}, shown identically on two phones and a laptop`} className="grid grid-cols-2 items-end gap-x-4 gap-y-8 lg:grid-cols-[180px_180px_1fr] lg:gap-x-8">
+        <div role="img" aria-label={`${ARIA}, on two phones and a laptop`} className="grid grid-cols-2 items-end gap-x-4 gap-y-8 lg:grid-cols-[200px_200px_1fr] lg:gap-x-8">
           <Phone kind="android">
-            <PhoneScreen />
+            <JobsScreen />
+            <TabBar active={0} />
           </Phone>
           <Phone kind="ios">
-            <PhoneScreen />
+            <CrewScreen />
+            <TabBar active={2} />
           </Phone>
           <div className="col-span-2 lg:col-span-1">
             <Laptop>
@@ -223,7 +324,7 @@ export function EveryDeviceA() {
             </Laptop>
           </div>
         </div>
-        <figcaption className="text-center text-sm text-muted-foreground">Same numbers on every phone and every desktop.</figcaption>
+        <figcaption className="text-center text-sm text-muted-foreground">Crew on phones, owner on desktop, same numbers.</figcaption>
       </figure>
     </Section>
   );

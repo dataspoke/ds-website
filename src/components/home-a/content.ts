@@ -1,14 +1,13 @@
-import { HOME_FAQS } from "@/content/home";
 import type { FaqItem } from "@/types";
 
 // Homepage-only copy for the illustration-led design. Short on purpose: the
 // pictures carry the explanation. Claims stay general, no numbers.
 
 export const HERO_A = {
-  lede: "We connect the software you already pay for, so your numbers are right and the busywork runs itself.",
+  lede: "We connect the software you already pay for, so your numbers are right and busywork runs itself.",
   chips: ["Accurate numbers", "Less retyping", "Faster decisions"],
   primaryCta: "Book your free estimate",
-  secondaryCta: { label: "See the services", href: "/services" },
+  secondaryCta: { label: "All services", href: "/services" },
 };
 
 export const TOOLS_A = [
@@ -26,28 +25,27 @@ export const TOOLS_A = [
 
 export const USE_CASES_HEAD = {
   eyebrow: "Where it helps",
-  title: "Four places AI and connected data pay off.",
+  title: "Four places it pays off.",
 };
 
 export const SERVICES_A_HEAD = {
   eyebrow: "What we do",
-  title: "Six services. Start with the foundation, add what you need.",
+  title: "Start with the foundation.",
   allLink: { label: "Compare all six", href: "/services" },
 };
 
 export const EVERY_DEVICE_HEAD = {
   eyebrow: "Custom software",
   title: "One view of your business, on any screen.",
-  lede: "We build custom software that runs on phones and dashboards, so owners see the whole business wherever they are.",
 };
 
 export const HOW_A = {
   eyebrow: "How it works",
-  title: "See the plan and price first. Own everything at the end.",
+  title: "See the plan and price first.",
   steps: [
-    { title: "Free 30-minute estimate", text: "Tell us what's slowing you down." },
-    { title: "Written plan and price", text: "Fixed scope, agreed before any build." },
-    { title: "Build and hand over", text: "You own every account and every line of code." },
+    { title: "Free 30-minute estimate", text: "No obligation." },
+    { title: "Written plan and price", text: "Fixed scope, agreed upfront." },
+    { title: "Build and hand over", text: "You own all of it." },
   ],
   moreLink: { label: "How an engagement works", href: "/approach" },
 };
@@ -57,17 +55,28 @@ export const FAQ_A_HEAD = {
   title: "Before you call",
 };
 
-/** Three of the site FAQs, text unchanged, so the FAQPage schema matches what is on the page. */
-export const FAQS_A: FaqItem[] = HOME_FAQS.filter((f) =>
-  [
-    "Who is DataSpoke for?",
-    "How do I get started?",
-    "Do we have to replace the software we already use?",
-  ].includes(f.question)
-);
+/** Three short Q&As. The FAQPage JSON-LD on the page is built from this same array. */
+export const FAQS_A: FaqItem[] = [
+  {
+    question: "Who is DataSpoke for?",
+    answer:
+      "Established businesses that pay for several tools, such as a CRM, accounting and a phone system, and want them working together.",
+  },
+  {
+    question: "How do I get started?",
+    answer:
+      "Book a free 30-minute estimate. Within two business days you get a written plan and price range.",
+    link: { label: "free 30-minute estimate", href: "/free-estimate" },
+  },
+  {
+    question: "Do we have to replace the software we already use?",
+    answer:
+      "No. We build on what you already pay for, and your data stays in accounts you control.",
+  },
+];
 
 export const CTA_A = {
   title: "Tell us what's slowing you down.",
-  text: "A free 30-minute call, then a written estimate with a plan and a price range.",
+  text: "A free 30-minute call, then a written plan and price.",
   button: "Book your free estimate",
 };
