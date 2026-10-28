@@ -14,9 +14,9 @@ export const FREE_ESTIMATE = {
     eyebrow: "What you get",
     title: "A plan you can act on, or walk away from.",
     items: [
-      "A 30-minute call about the tools you run, the information they hold and the result you want: more work handled without hiring, numbers you can trust, hours back each week.",
+      "A 30-minute call about the tools you run, the information they hold and the result you want: a team that gets more done, numbers you can trust, hours back each week.",
       "A written estimate with a recommended plan and a price range, sent within two business days.",
-      "No obligation. You keep the estimate whether or not you hire us.",
+      "No obligation. You keep the estimate whether or not you work with us.",
     ],
   },
   how: {
@@ -80,7 +80,7 @@ export const ESTIMATE_FAQS: FaqItem[] = [
   {
     question: "Who is this for?",
     answer:
-      "Established businesses, from owner-run to mid-size, that already run on several tools and want those tools, the information in them and the next project to fit together. Most owners come to us wanting to know their numbers, save hours of manual work or take on more work without hiring. We work with companies in Connecticut, New York and across the United States.",
+      "Established businesses, from owner-run to mid-size, that already run on several tools and want those tools, the information in them and the next project to fit together. Most owners come to us wanting to know their numbers, save hours of manual work or help their team do more. We work with companies in Connecticut, New York and across the United States.",
   },
   {
     question: "Is this the Data & AI Assessment?",

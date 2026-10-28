@@ -87,7 +87,7 @@ export const PROBLEMS: Problem[] = [
   {
     title: "Growth means more admin, not more profit.",
     description:
-      "Every new customer adds follow-ups, invoices and status calls. Right now the only way to handle more of them is to hire someone to do the busywork.",
+      "Every new customer adds follow-ups, invoices and status calls. Right now your team spends its day on busywork instead of the customers in front of them.",
   },
 ];
 
@@ -144,7 +144,7 @@ export const HOME_FAQS: FaqItem[] = [
   {
     question: "Who is DataSpoke for?",
     answer:
-      "Established businesses, from owner-run to mid-size, that already pay for several tools such as a CRM, accounting software and a phone system, and want them to work together. Owners who want to know their numbers and take on more work without hiring come to us most often. We work with companies in Connecticut, New York and across the United States. You do not need a technical background.",
+      "Established businesses, from owner-run to mid-size, that already pay for several tools such as a CRM, accounting software and a phone system, and want them to work together. Owners who want to know their numbers and give their team the tools and processes to do more come to us most often. We work with companies in Connecticut, New York and across the United States. You do not need a technical background.",
   },
   {
     question: "How do I get started?",

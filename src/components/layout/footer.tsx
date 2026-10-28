@@ -18,7 +18,7 @@ export function Footer({ navItems }: { navItems: NavItem[] }) {
             <Logo />
             <p className="text-sm text-muted-foreground">
               Data, dashboards, custom software and AI that help established businesses know their
-              numbers and take on more work without hiring. {SERVICE_AREA}
+              numbers and help their teams do more. {SERVICE_AREA}
             </p>
             <p className="text-sm font-semibold text-ink select-all">{CONTACT_EMAIL}</p>
           </div>

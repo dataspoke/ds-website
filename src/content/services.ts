@@ -185,7 +185,7 @@ const AI_READY_COMPANY: Product = {
   result:
     "A company playbook that updates itself from the documents your team already edits, and a team that knows how to put AI to work on it.",
   soundsLike: [
-    "New hires learn the job by shadowing, because the written process is outdated or missing.",
+    "New team members learn the job by shadowing, because the written process is outdated or missing.",
     "Your team uses AI tools inconsistently, or not at all, because nobody set them up for the work.",
     "You'd like to use AI but aren't sure what it would even have access to.",
   ],
@@ -203,7 +203,7 @@ const AUTOMATE_THE_BUSYWORK: Product = {
   description:
     "Hours back every week for the people you already have. Any job someone does the same way every week runs itself: intake, follow-up, matching payments to invoices, sending reports. Where AI can do the work, it writes the draft and a person approves it.",
   result:
-    "You take on more customers without adding admin staff, and nobody retypes what the business already knows.",
+    "Your team handles more customers with less admin, and nobody retypes what the business already knows.",
   soundsLike: [
     "The same report gets rebuilt by hand every Monday.",
     "Proposals, intake forms and follow-ups are written from scratch each time.",
@@ -222,11 +222,11 @@ const EARLY_WARNINGS: Product = {
   description:
     "You hear about problems while there is still time to fix them. A customer about to leave, a job drifting over budget, a quarter that needs two more crews, cash getting tight. We use your own history to flag the signals that matter and to forecast what's coming.",
   result:
-    "You call the customer before they call you, and you hire before the rush instead of during it.",
+    "You call the customer before they call you, and you plan staffing before the rush instead of during it.",
   soundsLike: [
     "You find out a customer left when the payment stops.",
     "Jobs go over budget and you learn about it at invoicing.",
-    "Hiring always happens in a panic.",
+    "Staffing up always happens in a panic.",
   ],
   youGet: [
     "A short list every morning of what needs attention today.",
@@ -353,7 +353,7 @@ export const SERVICE_LINES: ServiceLine[] = [
     oneLiner: "Put AI to work on your own business, with your team trained to use it and a person approving what it writes.",
     metaTitle: "AI for your business: set up on your data, with your team trained",
     metaDescription:
-      "DataSpoke sets up AI on your own business data, trains your team to use it and automates the repeat work so you take on more without hiring. Private, under your own logins, with a person approving every draft. Free 30-minute estimate. Serving CT, NY and the US.",
+      "We set up AI on your business data, train your team to use it and automate busywork so your people do more. A person approves every draft. Free estimate.",
     problem:
       "You've tried ChatGPT but it doesn't know anything about your business. Your team uses AI tools inconsistently, or not at all, and the same work still gets retyped every week. AI implementation means giving an assistant access to your own CRM, calls, documents and numbers under logins you control, training the people who do the work, and letting AI write the first draft while a person approves it. The result is more work handled by the team you already have.",
     soundsLike: [
@@ -375,7 +375,7 @@ export const SERVICE_LINES: ServiceLine[] = [
     oneLiner: "See where the money is going and what's coming next, so you decide faster and with proof.",
     metaTitle: "See where the money is going and what's coming next",
     metaDescription:
-      "DataSpoke uses your business's own history to show which customers, services and marketing channels actually pay, which customers are about to leave and when to hire. Decisions backed by your numbers, not gut feel. Free 30-minute estimate. Serving CT, NY and the US.",
+      "We use your business's own history to show which customers, services and channels pay, who is about to leave and when to staff up. Free 30-minute estimate.",
     problem:
       "You find out a customer left when the payment stops. You suspect one service loses money but can't prove it. Decisions get made on gut feel and the agency's own report. Analytics means answering those questions from your own history, and data science is the careful version of it: checking that the answer holds up before you act on it. We tell you where to look and prove whether a bet paid off.",
     soundsLike: [

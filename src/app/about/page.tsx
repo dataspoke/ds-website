@@ -13,7 +13,7 @@ import { SOCIAL_LINKS } from "@/lib/constants";
 export const metadata: Metadata = generateMetadata({
   title: "About Nick Paul, founder of DataSpoke in Durham, CT",
   description:
-    "Nick Paul founded DataSpoke, a data and AI consulting firm in Durham, Connecticut. He is a data scientist, software developer and Army Engineer veteran who has spent five years helping business owners connect their software, know their numbers and take on more work without hiring.",
+    "Nick Paul founded DataSpoke in Durham, CT. Data scientist, developer and Army veteran helping owners connect their software so teams do more.",
   path: "/about",
 });
 
@@ -40,7 +40,7 @@ const FIT = {
   yes: [
     "Established businesses past $1M in annual revenue, from owner-run to mid-size",
     "You already pay for a CRM, accounting software and a phone system, and they don't talk",
-    "You want to know your numbers, save hours of manual work and take on more work without hiring",
+    "You want to know your numbers, save hours of manual work and help your team do more",
     "You don't have a technical background, and you don't want to need one",
   ],
   no: [
@@ -64,8 +64,8 @@ export default function AboutPage() {
           <div className="grid max-w-2xl gap-5">
             <p className="eyebrow">About</p>
             <h1 className="text-4xl font-extrabold leading-[1.1] sm:text-5xl md:text-[2.6rem] lg:text-5xl">
-              I&apos;m Nick Paul. I help business owners know their numbers and take on more
-              work without hiring.
+              I&apos;m Nick Paul. I help business owners know their numbers and give their
+              teams the data to do more.
             </h1>
             <p className="lede">
               DataSpoke is based in Durham, Connecticut, and works with businesses in CT, NY and
