@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
-import { Hero } from "@/components/home/hero";
-import { ToolsStrip } from "@/components/home/tools-strip";
-import { ProblemStatement } from "@/components/home/problem-statement";
-import { ServiceGrid } from "@/components/home/service-grid";
-import { FeaturedWork } from "@/components/home/featured-work";
-import { HowItWorks } from "@/components/home/how-it-works";
-import { AboutTeaser } from "@/components/home/about-teaser";
-import { HomeFaq } from "@/components/home/home-faq";
-import { CtaBanner } from "@/components/home/cta-banner";
+import { HeroA } from "@/components/home-a/hero";
+import { UseCases } from "@/components/home-a/use-cases";
+import { ServicesA } from "@/components/home-a/services";
+import { EveryDeviceA } from "@/components/home-a/every-device";
+import { HowItWorksA } from "@/components/home-a/how-it-works";
+import { FaqA } from "@/components/home-a/faq";
+import { CtaA } from "@/components/home-a/cta";
+import { FAQS_A } from "@/components/home-a/content";
 import { FaqPageJsonLd, OrganizationJsonLd } from "@/components/shared/json-ld";
-import { HOME_FAQS } from "@/content/home";
 import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/constants";
 import { generateMetadata as pageMetadata } from "@/lib/metadata";
 
@@ -24,16 +22,14 @@ export default function HomePage() {
   return (
     <>
       <OrganizationJsonLd />
-      <FaqPageJsonLd path="/" faqs={HOME_FAQS} />
-      <Hero />
-      <ToolsStrip />
-      <ProblemStatement />
-      <ServiceGrid />
-      <FeaturedWork />
-      <HowItWorks />
-      <AboutTeaser />
-      <HomeFaq />
-      <CtaBanner />
+      <FaqPageJsonLd path="/" faqs={FAQS_A} />
+      <HeroA />
+      <UseCases />
+      <ServicesA />
+      <EveryDeviceA />
+      <HowItWorksA />
+      <FaqA />
+      <CtaA />
     </>
   );
 }
