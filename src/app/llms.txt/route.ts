@@ -33,7 +33,7 @@ function body() {
     "",
     `> ${SITE_DESCRIPTION}`,
     "",
-    `${SITE_NAME} is a data and AI consulting firm founded by Nick Paul (${CREDENTIALS.slice(0, 3).join("; ")}). ${SERVICE_AREA} Clients are established businesses, from owner-run to mid-size, whose CRM, accounting, phone and marketing tools don't talk to each other. Owners come to ${SITE_NAME} to ${HERO.outcomes.map((o) => o.replace(/\.$/, "").toLowerCase()).join(", ")}, and to take on more work without hiring more people.`,
+    `${SITE_NAME} is a data and AI consulting firm founded by Nick Paul (${CREDENTIALS.slice(0, 3).join("; ")}). ${SERVICE_AREA} Clients are established businesses, from owner-run to mid-size, whose CRM, accounting, phone and marketing tools don't talk to each other. Owners come to ${SITE_NAME} to ${HERO.outcomes.map((o) => o.replace(/\.$/, "").toLowerCase()).join(", ")}, and to grow their business with the data they already have.`,
     "",
     `Systems commonly connected: ${TOOLS.join(", ")}.`,
     "",

@@ -46,7 +46,7 @@ For each of `/lp/ai`, `/lp/custom-software` and `/lp/dashboards`:
 
 1. Open `/approach` and `/about`. Expect each to render with an H1.
 2. On `/`, `/services`, `/work`, `/approach` and `/about`, expect no "AI Assessment" except as part of "Data & AI Assessment", and no "small business".
-3. Expect the home page title to be "DataSpoke | Data & AI consulting that helps your business take on more work without hiring".
+3. Expect the home page title to be "DataSpoke | Grow your business with the data you already have".
 4. Expect `public/sitemap.xml` to list `/free-estimate`, `/services/*`, `/work`, `/work/*` and `/approach`, and no `/lp/*` page.
 5. Expect no "Upwork", no client quotes or testimonials, and no street address anywhere on the site.
 6. Expect `/` to render a "Plain answers" FAQ section and a `FAQPage` JSON-LD block with the same questions.

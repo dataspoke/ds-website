@@ -5,7 +5,7 @@ import type { Expertise, FaqItem, Problem } from "@/types";
 
 export const HERO = {
   eyebrow: "Data and AI consulting for established businesses that run on too many tools",
-  headline: "Take on more work without hiring more people.",
+  headline: "Grow your business with the data you already have.",
   lede:
     "DataSpoke connects the software your business already runs on, so your numbers are right, the retyping stops and your team gets hours back every week. Data, dashboards, custom software and AI for businesses in Connecticut, New York and across the US.",
   /** Three outcomes under the lede, in the spot the proof line used to hold. */
