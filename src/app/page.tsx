@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { HeroC } from "@/components/home-c/hero";
 import { ToolsBandC } from "@/components/home-c/tools-band";
 import { ProcessC } from "@/components/home-c/process";
+import { DevicesC } from "@/components/home-c/devices";
 import { UseCasesC } from "@/components/home-c/use-cases";
 import { FaqC, HOME_C_FAQS } from "@/components/home-c/faq";
 import { ClosingC } from "@/components/home-c/closing";
@@ -24,6 +25,7 @@ export default function HomePage() {
       <HeroC />
       <ToolsBandC />
       <ProcessC />
+      <DevicesC />
       <UseCasesC />
       <FaqC />
       <ClosingC />
