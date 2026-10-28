@@ -7,7 +7,7 @@ import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { EstimateCta } from "@/components/shared/estimate-cta";
 import { ArticleJsonLd } from "@/components/shared/json-ld";
 import { SummaryBox } from "@/components/work/summary-box";
-import { WORK_COPY, getCaseStudy, getLine } from "@/components/work/copy";
+import { WORK_COPY, caseStudyDescription, getCaseStudy, getLine } from "@/components/work/copy";
 import { CASE_STUDIES } from "@/content/case-studies";
 import { serviceLinkText } from "@/content/services";
 import { SITE_URL } from "@/lib/constants";
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
   if (!study) return {};
   return pageMetadata({
     title: study.title,
-    description: `${study.summary.problem} ${study.summary.result}`,
+    description: caseStudyDescription(study),
     path: `/work/${study.slug}`,
   });
 }
@@ -57,7 +57,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
       {study.dates && (
         <ArticleJsonLd
           headline={study.title}
-          description={`${study.summary.problem} ${study.summary.result}`}
+          description={caseStudyDescription(study)}
           path={`/work/${study.slug}`}
           datePublished={study.dates.published}
           dateModified={study.dates.modified}

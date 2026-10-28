@@ -53,7 +53,7 @@ export const RETAINER_NOTE =
 export const APPROACH_PAGE = {
   metaTitle: "How working with DataSpoke goes, step by step",
   metaDescription:
-    "How DataSpoke works with business owners: a free 30-minute estimate, an optional two-week Data & AI Assessment, fixed-scope projects you own, a clean hand-over and an optional monthly retainer. Plus the simple method we use to pick the numbers that run a business.",
+    "How we work: a free 30-minute estimate, an optional two-week Data & AI Assessment, fixed-scope projects you own, a hand-over and an optional retainer.",
   eyebrow: "Approach",
   title: "You see the plan and the price first. You own everything at the end.",
   lede:

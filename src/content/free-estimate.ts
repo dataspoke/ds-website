@@ -3,9 +3,9 @@ import type { FaqItem } from "@/types";
 
 export const FREE_ESTIMATE = {
   path: FREE_ESTIMATE_PATH,
-  metaTitle: "Free 30-minute estimate for data, dashboards, software and AI work",
+  metaTitle: "Free 30-minute estimate: data, dashboards and AI",
   metaDescription:
-    "Book a free 30-minute estimate with DataSpoke. Tell us what's slowing your business down, and within two business days you get a written plan and a price range. No obligation. Serving Connecticut, New York and businesses across the US.",
+    "Tell us what's slowing your business down. Within two business days you get a written plan and a price range. Free 30-minute estimate, no obligation.",
   eyebrow: "For established businesses, from owner-run to mid-size",
   headline: "Free 30-minute data & AI estimate",
   lede: "A call about what's slowing your business down and the tools you already use. Then a written estimate with a recommended plan and a price range. No obligation.",
