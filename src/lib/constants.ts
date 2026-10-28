@@ -3,9 +3,9 @@ import type { NavItem } from "@/types";
 // Site-wide config. Page copy lives in src/content/*.
 
 export const SITE_NAME = "DataSpoke";
-export const SITE_TAGLINE = "Your business, running on its own data.";
+export const SITE_TAGLINE = "Grow your business with the data you already have.";
 export const SITE_DESCRIPTION =
-  "DataSpoke connects the software an established business already runs on into one picture the owner controls, makes it ready for AI, and builds the dashboards, automations and analysis that turn it into better decisions.";
+  "Data and AI consulting for business owners in CT, NY and across the US. We connect your tools, automate busywork and show your numbers. Free estimate.";
 export const SITE_URL = "https://www.dataspoke.io";
 export const CONTACT_EMAIL = "nick@dataspoke.io";
 export const CONTACT_PHONE = "+1-732-768-4663";
@@ -22,6 +22,8 @@ export const FREE_ESTIMATE_PATH = "/free-estimate";
 export const LP_FREE_ESTIMATE_PATH = "/lp/free-estimate";
 export const PRIVACY_PATH = "/privacy";
 export const LOCATION = "Durham, CT";
+/** Plain-English service area, used in page copy. No street address anywhere on the site. */
+export const SERVICE_AREA = "Based in Durham, Connecticut. Serving CT, NY and clients across the US.";
 
 export const NAV_ITEMS: NavItem[] = [
   { label: "Services", href: "/services" },
@@ -52,16 +54,7 @@ export const SOCIAL_LINKS = {
   linkedinServices: "https://www.linkedin.com/services/page/a800a0347a5aa45b29",
   clutch: "https://clutch.co/profile/dataspoke",
   goodfirms: "https://www.goodfirms.co/company/dataspoke",
-  upwork: "https://www.upwork.com/freelancers/~013f135f6dfc7660c7",
 };
-
-/** Public profile facts, read 2026-10-15. No quotes, earnings, job count, or badge artwork. */
-export const UPWORK_PROOF = {
-  rating: "5.0",
-  clientCount: 28,
-  jobSuccess: "100% Job Success",
-  badge: "Top Rated Plus",
-} as const;
 
 // GA4. Loaded on every page from the root layout.
 // AiReferralTracker sends ai_referral and sets user property ai_source.

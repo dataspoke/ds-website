@@ -10,9 +10,8 @@ import { ASSESSMENT, RETAINER_NOTE } from "@/content/approach";
 import { HUB_LINES, SERVICES_PAGE, SPOKE_LINES } from "@/content/services";
 
 export const metadata: Metadata = generateMetadata({
-  title: "Data, dashboards, custom software and AI",
-  description:
-    "Data in the middle, everything else running on it. Capture and organize your company's data, then put it to work with dashboards, custom software, AI and analytics. For established businesses past $1M in revenue.",
+  title: SERVICES_PAGE.metaTitle,
+  description: SERVICES_PAGE.metaDescription,
   path: "/services",
 });
 

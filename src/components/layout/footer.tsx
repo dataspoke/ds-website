@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Logo } from "@/components/shared/logo";
 import {
   CONTACT_EMAIL,
+  SERVICE_AREA,
   SITE_NAME,
   SOCIAL_LINKS,
   TRADEMARK_NOTE,
@@ -16,8 +17,8 @@ export function Footer({ navItems }: { navItems: NavItem[] }) {
           <div className="grid max-w-sm gap-3">
             <Logo />
             <p className="text-sm text-muted-foreground">
-              Data, dashboards, custom software and AI for established businesses. Working with
-              clients nationwide.
+              Data, dashboards, custom software and AI that help established businesses know their
+              numbers and help their teams do more. {SERVICE_AREA}
             </p>
             <p className="text-sm font-semibold text-ink select-all">{CONTACT_EMAIL}</p>
           </div>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { EstimateCta } from "@/components/shared/estimate-cta";
 import { SpokeDiagram } from "@/components/shared/spoke-diagram";
-import { ProofLine } from "@/components/home/proof-line";
+import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { HERO } from "@/content/home";
 
 export function Hero() {
@@ -14,7 +14,18 @@ export function Hero() {
             {HERO.headline}
           </h1>
           <p className="lede max-w-xl">{HERO.lede}</p>
-          <ProofLine className="max-w-xl" />
+          <ul className="grid max-w-xl gap-2 border-l-4 border-brand py-1 pl-4">
+            {HERO.outcomes.map((outcome) => (
+              <SpokeBullet
+                key={outcome}
+                as="li"
+                size="list"
+                className="text-[1.05rem] font-semibold leading-snug text-foreground"
+              >
+                {outcome}
+              </SpokeBullet>
+            ))}
+          </ul>
           <div className="mt-1 flex flex-wrap items-center gap-x-6 gap-y-3">
             <EstimateCta location="home-hero">{HERO.primaryCta}</EstimateCta>
             <Link

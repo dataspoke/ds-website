@@ -3,20 +3,20 @@ import type { FaqItem } from "@/types";
 
 export const FREE_ESTIMATE = {
   path: FREE_ESTIMATE_PATH,
-  metaTitle: "Free 30-minute data & AI estimate",
+  metaTitle: "Free 30-minute estimate for data, dashboards, software and AI work",
   metaDescription:
-    "A free 30-minute call about your tools, data, and goals, then a written estimate with a plan and price range within two business days. No obligation.",
-  eyebrow: "For established businesses",
+    "Book a free 30-minute estimate with DataSpoke. Tell us what's slowing your business down, and within two business days you get a written plan and a price range. No obligation. Serving Connecticut, New York and businesses across the US.",
+  eyebrow: "For established businesses, from owner-run to mid-size",
   headline: "Free 30-minute data & AI estimate",
-  lede: "A call about your tools, your data, and your goals. Then a written estimate with a recommended plan and a price range. No obligation.",
+  lede: "A call about what's slowing your business down and the tools you already use. Then a written estimate with a recommended plan and a price range. No obligation.",
   cta: "Book your free estimate",
   youGet: {
     eyebrow: "What you get",
     title: "A plan you can act on, or walk away from.",
     items: [
-      "A 30-minute call about the tools you run, the data they hold, and the goals you care about.",
+      "A 30-minute call about the tools you run, the information they hold and the result you want: a team that gets more done, numbers you can trust, hours back each week.",
       "A written estimate with a recommended plan and a price range, sent within two business days.",
-      "No obligation. You keep the estimate whether or not you hire us.",
+      "No obligation. You keep the estimate whether or not you work with us.",
     ],
   },
   how: {
@@ -32,7 +32,7 @@ export const FREE_ESTIMATE = {
         label: "Step 2",
         title: "30-minute call",
         description:
-          "We talk through your tools, your data, and what you want to change. No deck required.",
+          "We talk through your tools, your data and what you want to change. No preparation and no technical background needed.",
       },
       {
         label: "Step 3",
@@ -65,7 +65,7 @@ export const ESTIMATE_FAQS: FaqItem[] = [
   {
     question: "What happens on the call?",
     answer:
-      "We ask about the software you already pay for, where your data lives, and what you want to be different. You don't need to prepare anything. Bring the problem that is costing time or money.",
+      "We ask about the software you already pay for, where your information lives and what you want to be different. You don't need to prepare anything or know any technical terms. Bring the problem that is costing you time or money.",
   },
   {
     question: "What is in the written estimate?",
@@ -75,12 +75,12 @@ export const ESTIMATE_FAQS: FaqItem[] = [
   {
     question: "Is there any cost or commitment?",
     answer:
-      "The call and the written estimate are free. There is no obligation to continue. If we are not the right fit, we will say so.",
+      "No. The call and the written estimate are free, and there is no obligation to continue. If we are not the right fit, we will say so and point you to someone who is.",
   },
   {
     question: "Who is this for?",
     answer:
-      "Established businesses that already run on several tools and want those tools, the data, and the next project to fit together. We work with companies across the United States.",
+      "Established businesses, from owner-run to mid-size, that already run on several tools and want those tools, the information in them and the next project to fit together. Most owners come to us wanting to know their numbers, save hours of manual work or help their team do more. We work with companies in Connecticut, New York and across the United States.",
   },
   {
     question: "Is this the Data & AI Assessment?",

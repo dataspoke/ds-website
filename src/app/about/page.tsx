@@ -7,14 +7,13 @@ import { ExpertiseSection } from "@/components/home/expertise";
 import { CtaBanner } from "@/components/home/cta-banner";
 import { ProofLine } from "@/components/home/proof-line";
 import { PersonJsonLd } from "@/components/shared/json-ld";
-import { UpworkCredential } from "@/components/shared/upwork-proof";
 import { CREDENTIALS } from "@/content/home";
 import { SOCIAL_LINKS } from "@/lib/constants";
 
 export const metadata: Metadata = generateMetadata({
-  title: "About Nick Paul",
+  title: "About Nick Paul, founder of DataSpoke in Durham, CT",
   description:
-    "Nick Paul runs DataSpoke. He's a data scientist and software developer, an Army Engineer officer and combat veteran, with a B.S. in mathematics and an M.S. in operations research. For five years he has built analytics, automation, custom software and AI for established businesses nationwide.",
+    "Nick Paul founded DataSpoke in Durham, CT. Data scientist, developer and Army veteran helping owners connect their software so teams do more.",
   path: "/about",
 });
 
@@ -39,9 +38,10 @@ const PRINCIPLES = [
 
 const FIT = {
   yes: [
-    "Established businesses past $1M in annual revenue",
+    "Established businesses past $1M in annual revenue, from owner-run to mid-size",
     "You already pay for a CRM, accounting software and a phone system, and they don't talk",
-    "You want numbers you can trust and a team that can use AI on real work",
+    "You want to know your numbers, save hours of manual work and help your team do more",
+    "You don't have a technical background, and you don't want to need one",
   ],
   no: [
     "You want a website or a logo (I'll point you to someone good)",
@@ -64,12 +64,14 @@ export default function AboutPage() {
           <div className="grid max-w-2xl gap-5">
             <p className="eyebrow">About</p>
             <h1 className="text-4xl font-extrabold leading-[1.1] sm:text-5xl md:text-[2.6rem] lg:text-5xl">
-              I&apos;m Nick Paul. I help established businesses run on their own data.
+              I&apos;m Nick Paul. I help business owners know their numbers and give their
+              teams the data to do more.
             </h1>
             <p className="lede">
-              The name is the whole idea. Your business is the hub. Every tool you use is a spoke.
-              My job is making the spokes carry data to the hub, so you can see the business
-              clearly and so AI has something real to work with.
+              DataSpoke is based in Durham, Connecticut, and works with businesses in CT, NY and
+              across the US. The name is the whole idea. Your business is the hub. Every tool you
+              use is a spoke. My job is making the spokes carry information to the hub, so you can
+              see the business clearly and so AI has something real to work with.
             </p>
             <p className="text-muted-foreground">
               I learned operations as an Army Engineer officer, leading soldiers in combat zones.
@@ -107,7 +109,6 @@ export default function AboutPage() {
                 LinkedIn &rarr;
               </a>
             </div>
-            <UpworkCredential />
           </div>
         </div>
       </Section>

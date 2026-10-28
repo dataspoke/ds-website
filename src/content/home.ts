@@ -1,18 +1,27 @@
-import type { Expertise, Problem } from "@/types";
+import type { Expertise, FaqItem, Problem } from "@/types";
+
+// Homepage copy. Every section leads with what changes for the owner, and the
+// technology comes second. Claims here stay general: kinds of work, no numbers.
 
 export const HERO = {
-  eyebrow: "For established businesses past $1M in revenue that run on too many tools",
-  headline: "Your business, running on its own data.",
+  eyebrow: "Data and AI consulting for owner-led businesses",
+  headline: "Grow your business with the data you already have.",
   lede:
-    "I capture what your business already produces, organize it into something you can trust, and build the dashboards, software and AI that run on it.",
+    "DataSpoke connects the software your business already runs on, so your numbers are right, the retyping stops and your team gets hours back every week. Data, dashboards, custom software and AI for businesses in Connecticut, New York and across the US.",
+  /** Three outcomes under the lede, in the spot the proof line used to hold. */
+  outcomes: [
+    "Know your numbers without chasing spreadsheets.",
+    "Save hours of manual work every week.",
+    "See where the money is going and decide faster.",
+  ],
   primaryCta: "Book your free estimate",
-  secondaryCta: { label: "See the services", href: "/services" },
+  secondaryCta: { label: "See what each service does for you", href: "/services" },
 };
 
-/** The proof line. Shown on the home hero and the About page. */
+/** Nick's own result, shown on the About page only. Not a client testimonial. */
 export const PROOF_LINE = {
   claim: "I doubled my revenue in the last year by running my own business on these tools.",
-  offer: "I can do the same for yours.",
+  offer: "I can set the same thing up for yours.",
 };
 
 /** Spokes on the hero diagram: one per area of the business, clockwise from the top. */
@@ -59,49 +68,49 @@ export const TOOLS = TOOL_GROUPS.flatMap((g) => g.tools);
 
 export const PROBLEMS_HEAD = {
   eyebrow: "Sound familiar?",
-  title: "Your business knows more than you can see.",
+  title: "You're running a bigger business than your tools let you see.",
   lede:
-    "Most businesses produce more data than they can use. It's spread across SaaS tools, calls, meetings, Slack and public records, and almost none of it is in one place.",
+    "Most businesses already have the information they need. It's spread across the CRM, the accounting software, the phone system, email and people's heads, and nobody has time to pull it together.",
 };
 
 export const PROBLEMS: Problem[] = [
   {
-    title: "The big systems don't talk to each other.",
+    title: "Your programs don't talk to each other.",
     description:
-      "CRM, accounting, scheduling, phones. Each one is right about its own piece and wrong about the whole. Month-end means exporting four reports and hoping they match.",
+      "Sales, accounting, scheduling and phones each hold part of the story. Month-end means exporting four reports and hoping they match, and someone spends hours retyping what one program already knows into another.",
   },
   {
-    title: "Data you produce every day and never use.",
+    title: "You find out too late.",
     description:
-      "Every call, meeting, email and Slack thread is a record of the business. So are the public records about your market. Almost none of it is captured anywhere you can look at it, and AI can't reach any of it.",
+      "A customer left, a job went over budget, a lead sat all weekend. The signs were there in your own records. Nobody had a way to see them in time.",
   },
   {
-    title: "Things that live only in people's heads.",
+    title: "Growth means more admin, not more profit.",
     description:
-      "How a job really gets quoted. Why that customer left. What the Tuesday process actually is. If someone quits, it's gone.",
+      "Every new customer adds follow-ups, invoices and status calls. Right now your team spends its day on busywork instead of the customers in front of them.",
   },
 ];
 
 export const PROBLEMS_CLOSE =
-  "Capturing that pile is the first step. Organizing it into something you can trust is the second. Every dashboard, app and AI tool runs on those two.";
+  "The fix is the same in every case. Get the information flowing into one place you own, make sure it can be trusted, then put it to work in dashboards, software and AI that do the repetitive parts for you.";
 
 /** Home: hub-and-spoke grid of the six service lines. */
 export const SERVICES_HEAD = {
-  eyebrow: "What I do",
-  title: "Two foundations. Four things to build on them.",
+  eyebrow: "What we do",
+  title: "Six services, each described by what changes for you.",
   lede:
-    "Capture and Organize are the hub. Every dashboard, app and AI tool I build runs on them. Most clients start at the hub and add spokes as they go.",
-  hubLabel: "The hub",
-  spokeLabel: "The spokes",
-  allLink: { label: "See all services", href: "/services" },
+    "Two services get your information flowing into one place you own and make it trustworthy. Four put it to work. Most clients start with the first two, then add what their business needs most.",
+  hubLabel: "The foundation",
+  spokeLabel: "What runs on it",
+  allLink: { label: "Compare all six services", href: "/services" },
 };
 
 /** Home: featured case studies. */
 export const WORK_HEAD = {
   eyebrow: "Work",
   title: "What this looks like in a real business.",
-  lede: "Industry and size only. My clients' names and numbers stay theirs.",
-  allLink: { label: "See all work", href: "/work" },
+  lede: "Industry and size only. Our clients' names and numbers stay theirs.",
+  allLink: { label: "Read all the case studies", href: "/work" },
   readLabel: "Read the case study",
 };
 
@@ -109,18 +118,57 @@ export const WORK_HEAD = {
 export const HOW_HEAD = {
   eyebrow: "How it works",
   title: "Three steps, no surprises.",
-  moreLink: { label: "See the full approach", href: "/approach" },
+  moreLink: { label: "See how an engagement works, step by step", href: "/approach" },
 };
 
-/** Home: about teaser. */
+/** Home: about teaser. Nick speaks in the first person here and on the About page. */
 export const ABOUT_TEASER = {
   eyebrow: "About",
-  title: "I'm Nick Paul. I help established businesses run on their own data.",
+  title: "I'm Nick Paul, founder of DataSpoke.",
   paragraphs: [
-    "The name is the whole idea. Your business is the hub. Every tool you use is a spoke. My job is making the spokes carry data to the hub, so you can see the business clearly and so AI has something real to work with.",
-    "You talk to the person doing the work. Plain English, no jargon. You own all of it, documented, so you're never locked in.",
+    "The name is the whole idea. Your business is the hub. Every tool you use is a spoke. DataSpoke makes the spokes carry information to the hub, so you can see the business clearly and so AI has something real to work with.",
+    "You work directly with the person who scopes and builds the work. Plain English, no jargon. You own all of it, documented, so you're never locked in.",
   ],
 };
+
+/**
+ * Home: direct answers to the questions a buyer asks first. Rendered as the
+ * visible FAQ and as FAQPage structured data, so assistants can quote them.
+ */
+export const HOME_FAQS_HEAD = {
+  eyebrow: "Plain answers",
+  title: "The questions people ask before they call.",
+};
+
+export const HOME_FAQS: FaqItem[] = [
+  {
+    question: "Who is DataSpoke for?",
+    answer:
+      "Established businesses, from owner-run to mid-size, that already pay for several tools such as a CRM, accounting software and a phone system, and want them to work together. Owners who want to know their numbers and give their team the tools and processes to do more come to us most often. We work with companies in Connecticut, New York and across the United States. You do not need a technical background.",
+  },
+  {
+    question: "How do I get started?",
+    answer:
+      "Book a free 30-minute estimate. You describe what is slowing your business down, and we ask about the tools you use. Within two business days you get a written estimate with a recommended plan and a price range. There is no obligation, and you keep the estimate either way.",
+    link: { label: "free 30-minute estimate", href: "/free-estimate" },
+  },
+  {
+    question: "What do I actually get?",
+    answer:
+      "Depending on the project: your systems connected so information moves on its own, one trustworthy set of records, dashboards that update themselves, software built around how your team works, AI set up on your own business with your people trained to use it, or analysis that shows where the money is going. Every project has a fixed scope, a price and a finish line you agree to before work starts, and you own every account and every line of code at the end.",
+  },
+  {
+    question: "How long does it take?",
+    answer:
+      "The free estimate is one 30-minute call, with the written estimate in your hands within two business days. If you want a full map of your systems first, the Data & AI Assessment takes two weeks at a fixed price. Build projects after that are fixed-scope, and the finish line is part of the plan you approve. Nothing is built until you have seen the plan and the price.",
+    link: { label: "Data & AI Assessment", href: "/approach#assessment" },
+  },
+  {
+    question: "Do we have to replace the software we already use?",
+    answer:
+      "No. DataSpoke builds on top of the systems you already pay for, such as Salesforce, HubSpot, QuickBooks, Xero, RingCentral, Google Workspace, Clio and Mindbody. Nothing has to migrate, and your data stays in accounts you control.",
+  },
+];
 
 export const EXPERTISE: Expertise[] = [
   {

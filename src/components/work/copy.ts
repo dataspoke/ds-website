@@ -8,17 +8,16 @@ import type { CaseStudy, ServiceLine, ServiceLineSlug } from "@/types";
 export const WORK_COPY = {
   index: {
     eyebrow: "Work",
-    proofLine:
-      "I doubled my revenue in the last year by running my own business on these tools. I can do the same for yours.",
-    lede: "Here is what I built for other businesses. Each one reads in under a minute: the problem, what I built and the result.",
-    filterLabel: "Filter by service line",
+    title: "What this looks like in a real business.",
+    lede: "Each case study reads in under a minute: the problem, what DataSpoke built and what changed. Industry and size only. Clients' names and numbers stay theirs.",
+    filterLabel: "Filter by service",
     allLabel: "All",
     showing: (line: string) => `Showing work in ${line}.`,
-    empty: "No case studies in this line yet. Here is everything else.",
+    empty: "No case studies for this service yet. Here is everything else.",
     readMore: "Read the case study",
-    metaTitle: "Case studies",
+    metaTitle: "Case studies: the problem, what we built and what changed",
     metaDescription:
-      "Case studies from established businesses: the problem, what I built and the result. Dashboards, custom software, AI and analytics built on the systems they already run.",
+      "Case studies from DataSpoke: how connecting a business's software, building dashboards, custom apps and AI on the systems it already runs changed day-to-day work. Industry and size only, no client names.",
   },
   detail: {
     backLabel: "All work",
@@ -26,12 +25,13 @@ export const WORK_COPY = {
     problem: "Problem",
     built: "Built",
     result: "Result",
-    sourcesHeading: "What I connected",
-    linesHeading: "Service lines",
+    sourcesHeading: "What was connected",
+    linesHeading: "Services used",
     ctaHeading: "Want the same for your business?",
-    ctaLede: "Tell me what's slowing you down. I'll tell you honestly whether I can fix it.",
-    ctaBook: "Book a 30-minute call",
-    ctaContact: "Or send me a message",
+    ctaLede:
+      "Tell us what's slowing you down. A free 30-minute call, then a written estimate with a plan and a price range.",
+    ctaBook: "Book your free estimate",
+    ctaContact: "Or send us a message",
   },
 } as const;
 

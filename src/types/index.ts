@@ -25,7 +25,12 @@ export interface ServiceLine {
   /** Hub lines are the foundation every spoke builds on. */
   kind: "hub" | "spoke";
   title: string;
+  /** The outcome for the owner, in plain words. Doubles as the page h1. */
   oneLiner: string;
+  /** Browser-tab and search-result title, in buyers' words. */
+  metaTitle: string;
+  /** Search-result description. Whole sentences, in buyers' words. */
+  metaDescription: string;
   problem: string;
   soundsLike: string[];
   youGet: string[];
@@ -41,7 +46,7 @@ export interface CaseStudy {
   slug: string;
   title: string;
   industry: string;
-  /** Headcount band, e.g. "20–50 staff". */
+  /** Team size band, e.g. "20–50 staff". */
   size: string;
   /** Optional annual revenue band, e.g. "$1–5M revenue". Shown only when set. */
   revenueBand?: string;

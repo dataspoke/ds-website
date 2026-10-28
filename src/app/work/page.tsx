@@ -27,7 +27,7 @@ export default async function WorkPage({ searchParams }: PageProps<"/work">) {
 
   return (
     <Section tight>
-      <SectionHead as="h1" eyebrow={copy.eyebrow} title={copy.proofLine} lede={copy.lede} />
+      <SectionHead as="h1" eyebrow={copy.eyebrow} title={copy.title} lede={copy.lede} />
 
       <div className="mt-10 grid gap-3">
         <LineFilter activeLine={activeLine} />
