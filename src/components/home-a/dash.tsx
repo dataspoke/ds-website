@@ -49,6 +49,8 @@ const FORMATS = {
   dur: (v: number) => `${Math.floor(Math.round(v) / 60)}m ${Math.round(v) % 60}s`,
   dec: (v: number) => v.toFixed(1),
   usd: (v: number) => `$${Math.round(v).toLocaleString("en-US")}`,
+  /** Thousands of dollars, e.g. $873K. */
+  usdK: (v: number) => `$${Math.round(v).toLocaleString("en-US")}K`,
 };
 
 /** Counts up from 0 to `to` once the surrounding panel is in view. Shows the final text otherwise. */

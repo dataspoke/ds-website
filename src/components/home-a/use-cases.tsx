@@ -265,7 +265,73 @@ function OpsScene() {
   );
 }
 
-/* ---------- Finance: closed vs projected revenue against costs ---------- */
+/* ---------- Finance: weighted pipeline by stage ---------- */
+
+/** Open pipeline in $K by stage, with each stage's close rate over the last 12 months. */
+const STAGES = [
+  { name: "Qualified", value: 1240, rate: 10 },
+  { name: "Proposal sent", value: 860, rate: 25 },
+  { name: "Negotiation", value: 540, rate: 50 },
+  { name: "Verbal yes", value: 310, rate: 85 },
+];
+const expected = (x: (typeof STAGES)[number]) => Math.round((x.value * x.rate) / 100);
+const IN_PIPELINE = STAGES.reduce((a, x) => a + x.value, 0); // 2,950
+const EXPECTED = STAGES.reduce((a, x) => a + expected(x), 0); // 873
+const STAGE_MAX = Math.max(...STAGES.map((x) => x.value));
+/** $K to "$860K" or "$1.24M". */
+const money = (k: number) => (k >= 1000 ? `$${(k / 1000).toFixed(2).replace(/\.?0+$/, "")}M` : `$${k}K`);
+
+function PipelineValueScene() {
+  return (
+    <Feature
+      pain="Our deals take 90 days to close. I can't tell what's actually coming in."
+      headline="Know what your pipeline is really worth."
+      body="We weight each open deal by its stage's real close rate."
+      decision={{ q: "Can we afford to add a person this quarter?", a: `Yes. ${money(EXPECTED)} is expected in the next 90 days.` }}
+      label={`Sample chart, pipeline by stage with expected value in the next 90 days: ${STAGES.map((x) => `${x.name} ${money(x.value)} at ${x.rate}% close rate, ${money(expected(x))} expected`).join("; ")}. In pipeline ${money(IN_PIPELINE)}, expected ${money(EXPECTED)}.`}
+    >
+      <DashPanel title="Pipeline by stage · expected in 90 days">
+        <div className={s.body}>
+          <div className={s.legend} aria-hidden>
+            <span>
+              <i style={{ background: "var(--mute)" }} />
+              In pipeline
+            </span>
+            <span>
+              <i style={{ background: "var(--hi)" }} />
+              Expected
+            </span>
+          </div>
+          <div className="mt-2">
+            {STAGES.map((x, k) => (
+              <div key={x.name} className={s.pr}>
+                <span className={s.prName}>{x.name}</span>
+                <span className={s.prTrack} style={vars({ "--w": `${(x.value / STAGE_MAX) * 100}%`, "--e": `${x.rate}%`, "--d": `${k * 90}ms` })}>
+                  <b />
+                </span>
+                <span className={s.prNums}>{`${money(x.value)} · ${x.rate}% · ${money(expected(x))}`}</span>
+              </div>
+            ))}
+          </div>
+          <div className={s.prTotal}>
+            <span>{`In pipeline ${money(IN_PIPELINE)}`}</span>
+            <span>
+              {"→ Expected "}
+              <strong>
+                <CountUp to={EXPECTED} format="usdK">
+                  {money(EXPECTED)}
+                </CountUp>
+              </strong>
+            </span>
+          </div>
+          <p className={s.foot}>Close rates from your last 12 months of deals.</p>
+        </div>
+      </DashPanel>
+    </Feature>
+  );
+}
+
+/* ---------- Finance (previous version): closed vs projected revenue against costs ---------- */
 
 /**
  * $K by month. Oct–Dec are actuals (all closed). Jan–Mar stack signed work
@@ -287,7 +353,8 @@ const CLEARS = REVENUE.find((x) => x.ahead && x.m === "Feb")!;
 /** Cost line points in a 0–100 box: x from first to last column centre, y from the top. */
 const COST_POINTS = REVENUE.map((x, i) => `${(i / (REVENUE.length - 1)) * 100},${100 - (x.cost / REV_MAX) * 86}`).join(" ");
 
-function RevenueCostScene() {
+/** Not shown right now; kept so the closed-vs-projected view can come back. */
+export function RevenueCostScene() {
   return (
     <Feature
       pain="I don't know what next quarter looks like, or if we'll cover our costs."
@@ -494,7 +561,7 @@ const TABS: UseCaseTab[] = [
   { label: "Speed to lead", scene: <PipelineScene /> },
   { label: "Intake", scene: <IntakeScene /> },
   { label: "Operations", scene: <OpsScene /> },
-  { label: "Finance", scene: <RevenueCostScene /> },
+  { label: "Finance", scene: <PipelineValueScene /> },
   { label: "Hiring", scene: <HiringScene /> },
   { label: "Calls", scene: <CallsScene /> },
 ];
