@@ -8,10 +8,12 @@ const InView = createContext(false);
 const reducedMotion = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /**
- * Dark dashboard panel from prototype 6. When it scrolls into view (or its tab
- * is shown) it sets data-in, which the CSS uses to grow bars and fade rows in.
+ * Chart panel from prototype 6: one short title and one chart. Light by
+ * default; variant="dark" brings back the near-black dashboard look. When it
+ * scrolls into view (or its tab is shown) it sets data-in, which the CSS uses
+ * to grow bars and fade rows in.
  */
-export function DashPanel({ section, title, children }: { section: string; title: string; children: ReactNode }) {
+export function DashPanel({ title, variant = "light", children }: { title: string; variant?: "light" | "dark"; children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
 
@@ -32,20 +34,8 @@ export function DashPanel({ section, title, children }: { section: string; title
   }, []);
 
   return (
-    <div ref={ref} className={s.panel} data-in={inView ? "" : undefined}>
-      <div className={s.bar}>
-        <div className={s.dots} aria-hidden>
-          <span />
-          <span />
-          <span />
-        </div>
-        <div className={s.title}>
-          <span>{section}</span>
-          <span className={s.sep}>/</span>
-          <b>{title}</b>
-        </div>
-        <span className={s.live}>Synced</span>
-      </div>
+    <div ref={ref} className={variant === "dark" ? `${s.panel} ${s.dark}` : s.panel} data-in={inView ? "" : undefined}>
+      <div className={s.title}>{title}</div>
       <InView.Provider value={inView}>{children}</InView.Provider>
     </div>
   );
@@ -56,6 +46,7 @@ const FORMATS = {
   pct: (v: number) => `${Math.round(v)}%`,
   dur: (v: number) => `${Math.floor(Math.round(v) / 60)}m ${Math.round(v) % 60}s`,
   dec: (v: number) => v.toFixed(1),
+  usd: (v: number) => `$${Math.round(v).toLocaleString("en-US")}`,
 };
 
 /** Counts up from 0 to `to` once the surrounding panel is in view. Shows the final text otherwise. */
