@@ -188,6 +188,33 @@ function SalesScene() {
   );
 }
 
+/* ---------- Personas: who actually buys ---------- */
+
+/** Close rate by customer type, last 12 months. */
+const PERSONAS = [
+  { name: "Referred by a customer", v: 42 },
+  { name: "Established business", v: 31 },
+  { name: "First-time buyer", v: 14 },
+  { name: "Price shopper", v: 6 },
+];
+const BEST = PERSONAS.reduce((a, x) => (x.v > a.v ? x : a));
+
+function PersonasScene() {
+  return (
+    <Feature
+      pain="My team spends all day chasing leads that never buy."
+      headline="Know your best customer. Stop chasing bad leads."
+      body="We profile who actually buys, then score every new lead so your team calls the best ones first."
+      decision={{ q: "Which leads do we chase, and which do we drop?", a: "Call referrals first. Send price shoppers an email." }}
+      label={`Sample chart, close rate by customer type: ${PERSONAS.map((x) => `${x.name} ${x.v}%`).join(", ")}. ${BEST.name} close best.`}
+    >
+      <DashPanel title="Close rate by customer type">
+        <HBars rows={PERSONAS} hi={BEST.name} fmt="pct" />
+      </DashPanel>
+    </Feature>
+  );
+}
+
 /* ---------- Pipeline: speed to lead ---------- */
 
 const RESPONSE = [
@@ -570,6 +597,7 @@ function CallsScene() {
 
 const TABS: UseCaseTab[] = [
   { label: "Marketing", scene: <SalesScene /> },
+  { label: "Personas", scene: <PersonasScene /> },
   { label: "Speed to lead", scene: <PipelineScene /> },
   { label: "Intake", scene: <IntakeScene /> },
   { label: "Operations", scene: <OpsScene /> },
