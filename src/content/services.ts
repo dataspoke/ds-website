@@ -408,7 +408,7 @@ export function serviceLinkText(line: { title: string; oneLiner: string }): stri
 export const SERVICES_PAGE = {
   metaTitle: "Services: data, dashboards, software and AI",
   metaDescription:
-    "Grow your business with the data you already have: connect your software, know your numbers, build tools and put AI to work. Free 30-minute estimate.",
+    "Grow your business with data you already have: connect your software, know your numbers, build tools and put AI to work. Free 30-minute estimate.",
   eyebrow: "Services",
   title: "Six ways to run a bigger business with the team you have.",
   lede:
