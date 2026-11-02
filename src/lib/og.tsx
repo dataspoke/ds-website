@@ -10,24 +10,16 @@ export const OG_COLORS = {
   tint: "#eef5fc",
 };
 
-/** Same geometry as LogoMark in components/shared/logo.tsx. */
+/** Same geometry as WheelMark in components/shared/logo.tsx. */
 export function OgMark({ px, color = OG_COLORS.brand }: { px: number; color?: string }) {
   return (
-    <svg width={px} height={px} viewBox="0 0 100 100">
-      <g stroke={color} strokeWidth="5" fill={color}>
-        <line x1="50" y1="50" x2="50" y2="10" />
-        <line x1="50" y1="50" x2="85" y2="30" />
-        <line x1="50" y1="50" x2="85" y2="70" />
-        <line x1="50" y1="50" x2="50" y2="90" />
-        <line x1="50" y1="50" x2="15" y2="70" />
-        <line x1="50" y1="50" x2="15" y2="30" />
-        <circle cx="50" cy="50" r="14" />
-        <circle cx="50" cy="10" r="8" />
-        <circle cx="85" cy="30" r="8" />
-        <circle cx="85" cy="70" r="8" />
-        <circle cx="50" cy="90" r="8" />
-        <circle cx="15" cy="70" r="8" />
-        <circle cx="15" cy="30" r="8" />
+    <svg width={px} height={px} viewBox="0 0 48 48">
+      <circle cx="24" cy="24" r="19.5" fill="none" stroke={color} strokeWidth="3.5" />
+      <circle cx="24" cy="24" r="4.6" fill={color} />
+      <g stroke={color} strokeWidth="3" strokeLinecap="round">
+        {[0, 60, 120, 180, 240, 300].map((deg) => (
+          <line key={deg} x1="24" y1="15.2" x2="24" y2="9.2" transform={`rotate(${deg} 24 24)`} />
+        ))}
       </g>
     </svg>
   );
