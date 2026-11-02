@@ -25,7 +25,7 @@ export const TOOLS_A = [
 
 export const USE_CASES_HEAD = {
   eyebrow: "Where it helps",
-  title: "Five places it pays off.",
+  title: "What it looks like in practice.",
 };
 
 export const SERVICES_A_HEAD = {

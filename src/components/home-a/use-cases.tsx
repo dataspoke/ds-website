@@ -23,8 +23,6 @@ function Feature({
   pain,
   headline,
   body,
-  big,
-  bigLabel,
   label,
   children,
 }: {
@@ -33,8 +31,6 @@ function Feature({
   /** The end state we deliver. */
   headline: string;
   body: string;
-  big: string;
-  bigLabel: string;
   /** Text alternative for the chart. */
   label: string;
   children: ReactNode;
@@ -45,10 +41,6 @@ function Feature({
         <p className="max-w-md text-[0.95rem] italic leading-snug text-muted-foreground">&ldquo;{pain}&rdquo;</p>
         <h3 className="mt-4 max-w-[18ch] font-display text-[1.7rem] font-bold leading-[1.1] tracking-tight text-ink sm:text-[2.1rem]">{headline}</h3>
         <p className="mt-4 max-w-md text-muted-foreground">{body}</p>
-        <div className="mt-6 border-t border-tint-strong pt-5">
-          <div className="font-display text-4xl font-bold leading-none tracking-tight text-primary tabular-nums sm:text-5xl">{big}</div>
-          <div className="mt-2 text-sm text-muted-foreground">{bigLabel}</div>
-        </div>
       </div>
       <div role="img" aria-label={label} className="grid min-w-0">
         {children}
@@ -124,8 +116,6 @@ function SalesScene() {
       pain="I spend $20K a month on marketing and don't know what's working."
       headline="Every dollar tied to a sale. Cut the spend that doesn't close."
       body="We follow each lead from ad to closed deal, so you judge channels by cost per sale."
-      big={usd(cps(WORST))}
-      bigLabel={`Cost per sale from ${WORST.name.toLowerCase()}, the cheapest leads`}
       label={`Sample report, cost per lead and cost per sale by channel: ${CHANNELS.map((c) => `${c.name} ${usd(c.cpl)} and ${usd(cps(c))}`).join("; ")}. ${WORST.name} has the lowest cost per lead and the highest cost per sale.`}
     >
       <DashPanel title="Cost per lead vs. cost per sale">
@@ -171,7 +161,6 @@ const RESPONSE = [
   { name: "Over 1 hour", v: 8 },
 ];
 const FAST = RESPONSE[0];
-const SLOW = RESPONSE[RESPONSE.length - 1];
 
 function PipelineScene() {
   return (
@@ -179,8 +168,6 @@ function PipelineScene() {
       pain="Leads go cold. Nobody follows up."
       headline="Every lead called in 5 minutes. Nothing slips."
       body="We time every lead to first contact and alert your team before it goes cold."
-      big={`${Math.round(FAST.v / SLOW.v)}×`}
-      bigLabel="Close rate when leads are called within 5 minutes"
       label={`Sample chart, close rate by response time: ${RESPONSE.map((r) => `${r.name} ${r.v}%`).join(", ")}.`}
     >
       <DashPanel title="Close rate by response time">
@@ -206,8 +193,6 @@ function OpsScene() {
       pain="We're busy but always behind, and everything runs through me."
       headline="Work moves without you approving every step."
       body="We show where work waits on you, then set rules so routine approvals run themselves."
-      big={`${BOTTLENECK.v} days`}
-      bigLabel={`Median time ${BOTTLENECK.name.toLowerCase()}, the slowest step`}
       label={`Sample chart, median days per step: ${STEPS.map((x) => `${x.name} ${x.v}`).join(", ")}.`}
     >
       <DashPanel title="Median days per step">
@@ -234,8 +219,6 @@ function MarginScene() {
       pain="I can't see what each project makes after costs. I don't know how we're doing until the books close."
       headline="See profit on every project while it's still running."
       body="We match costs to each project as they land, so a losing job shows up while you can still fix it."
-      big={FMT.spct(LOSER.v)}
-      bigLabel={`Project ${LOSER.name}, caught mid-project, not at month end`}
       label={`Sample chart, margin by project this month: ${PROJECTS.map((p) => `${p.name} ${FMT.spct(p.v)}`).join(", ")}. Project ${LOSER.name} is losing money.`}
     >
       <DashPanel title="Margin by project · this month">
@@ -266,8 +249,6 @@ export function ForecastScene() {
       pain="I don't know how next quarter will go until it's over."
       headline="Know next quarter before it happens."
       body="We forecast from your real pipeline, so the number you plan with is the one you hit."
-      big="7%"
-      bigLabel="Forecast error, down from 24%"
       label={`Sample revenue chart in thousands: ${MONTHS.map((x) => `${x.m} ${x.v}${x.forecast ? " forecast" : ""}`).join(", ")}.`}
     >
       <DashPanel title="Revenue, actual and forecast">
@@ -321,8 +302,6 @@ function CallsScene() {
       pain="We lose deals and I don't know why."
       headline="Know why you lose, and fix it before the next call."
       body="We tag every lost-deal call with the reason the customer actually gave."
-      big="1 in 3"
-      bigLabel="Losses with the wrong reason in the CRM"
       label={`Sample call analysis, lost deals by reason: ${REASONS.map((r) => `${r.name} ${r.v}`).join(", ")}. Slow response is the surprise.`}
     >
       <DashPanel title="Lost deals by reason, from the calls">
@@ -334,7 +313,7 @@ function CallsScene() {
 
 const TABS: UseCaseTab[] = [
   { label: "Sales", scene: <SalesScene /> },
-  { label: "Pipeline", scene: <PipelineScene /> },
+  { label: "Speed to lead", scene: <PipelineScene /> },
   { label: "Operations", scene: <OpsScene /> },
   { label: "Finance", scene: <MarginScene /> },
   { label: "Calls", scene: <CallsScene /> },
