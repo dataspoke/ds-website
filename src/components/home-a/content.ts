@@ -31,6 +31,7 @@ export const USE_CASES_HEAD = {
 export const SERVICES_A_HEAD = {
   eyebrow: "What we do",
   title: "Start with the foundation.",
+  lede: "Each step builds on the one before it.",
   allLink: { label: "Compare all six", href: "/services" },
 };
 

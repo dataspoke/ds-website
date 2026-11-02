@@ -7,14 +7,9 @@ const InView = createContext(false);
 
 const reducedMotion = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/**
- * Chart panel from prototype 6: one short title and one chart. Light by
- * default; variant="dark" brings back the near-black dashboard look. When it
- * scrolls into view (or its tab is shown) it sets data-in, which the CSS uses
- * to grow bars and fade rows in.
- */
-export function DashPanel({ title, variant = "light", children }: { title: string; variant?: "light" | "dark"; children: ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null);
+/** True once the element has scrolled into view; stays true after that. */
+export function useInView<T extends Element>(threshold = 0.18) {
+  const ref = useRef<T>(null);
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
@@ -27,11 +22,23 @@ export function DashPanel({ title, variant = "light", children }: { title: strin
           io.disconnect();
         }
       },
-      { threshold: 0.18 }
+      { threshold }
     );
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [threshold]);
+
+  return [ref, inView] as const;
+}
+
+/**
+ * Chart panel from prototype 6: one short title and one chart. Light by
+ * default; variant="dark" brings back the near-black dashboard look. When it
+ * scrolls into view (or its tab is shown) it sets data-in, which the CSS uses
+ * to grow bars and fade rows in.
+ */
+export function DashPanel({ title, variant = "light", children }: { title: string; variant?: "light" | "dark"; children: ReactNode }) {
+  const [ref, inView] = useInView<HTMLDivElement>();
 
   return (
     <div ref={ref} className={variant === "dark" ? `${s.panel} ${s.dark}` : s.panel} data-in={inView ? "" : undefined}>
