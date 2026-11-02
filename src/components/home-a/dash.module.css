@@ -80,7 +80,7 @@
   font-size: 16px;
 }
 .table th {
-  padding: 0 0 10px;
+  padding: 0 0 6px;
   font-size: 13px;
   font-weight: 500;
   color: var(--text-3);
@@ -88,7 +88,8 @@
   white-space: nowrap;
 }
 .table td {
-  padding: 14px 0;
+  padding: 7px 0;
+  line-height: 1.3;
   border-top: 1px solid var(--line);
   color: var(--text-2);
   font-variant-numeric: tabular-nums;
@@ -124,19 +125,46 @@
   color: var(--hi);
 }
 .callout {
-  margin-top: 16px;
+  margin-top: 10px;
   font-size: 14px;
   font-weight: 600;
   color: var(--hi);
 }
 
 /* Horizontal bars */
+/* Column sizes live in variables so a reference line can be placed over the bar tracks. */
+.bars {
+  --lc: 11rem;
+  --vc: 3.5rem;
+  --gp: 16px;
+  position: relative;
+}
 .hb {
   display: grid;
-  grid-template-columns: minmax(0, 11rem) 1fr 3.5rem;
+  grid-template-columns: var(--lc) minmax(0, 1fr) var(--vc);
   align-items: center;
-  gap: 16px;
+  gap: var(--gp);
   padding: 9px 0;
+}
+/* Dashed vertical reference (e.g. 100% capacity) at fraction --r of the bar track. */
+.bars.withRef {
+  padding-top: 22px;
+}
+.refV {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--lc) + var(--gp) + (100% - var(--lc) - var(--vc) - 2 * var(--gp)) * var(--r));
+  border-left: 1.5px dashed var(--text-2);
+}
+.refV span {
+  position: absolute;
+  top: 0;
+  right: 6px;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--text-2);
+  white-space: nowrap;
 }
 .l {
   font-size: 15px;
@@ -222,7 +250,7 @@
 }
 .cols {
   position: relative;
-  height: 200px;
+  height: 180px;
   margin-top: 30px;
   align-items: end;
   border-bottom: 1px solid var(--line);
@@ -264,50 +292,34 @@
 .hiBar {
   background: var(--hi);
 }
-/* Forecast but not highlighted: slate stripes. */
-.hatchMute {
-  background: repeating-linear-gradient(135deg, rgba(100, 116, 139, 0.42) 0 4px, rgba(100, 116, 139, 0.1) 4px 8px);
-  box-shadow: inset 0 0 0 1.5px #94a3b8;
+/* Lower segment of a stacked column: square top so it meets the segment above. */
+.flat {
+  border-radius: 0;
 }
-/* Short cost marker across a column, at height --c. */
-.cost {
+.hatchLight {
+  background: repeating-linear-gradient(135deg, rgba(var(--hi-rgb), 0.38) 0 4px, rgba(var(--hi-rgb), 0.1) 4px 8px);
+}
+/* Cost line across column centres: the svg spans first to last centre and wipes in left to right. */
+.costLine {
   position: absolute;
-  left: -4px;
-  right: -4px;
-  bottom: var(--c);
-  height: 3px;
-  border-radius: 2px;
-  background: var(--text);
-  opacity: 0;
-  transition: opacity 0.4s 1s;
+  top: 0;
+  left: calc((100% - 5 * var(--g)) / 12);
+  width: calc(100% - (100% - 5 * var(--g)) / 6);
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  clip-path: inset(-10px 100% -10px -10px);
+  transition: clip-path 1.2s var(--ease) 0.6s;
 }
-/* Flat dashed reference line across the columns, at height --y. */
-.refLine {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: var(--y);
-  border-top: 1.5px dashed var(--text-2);
-  opacity: 0;
-  transition: opacity 0.4s 0.8s;
+[data-in] .costLine {
+  clip-path: inset(-10px -10px -10px -10px);
 }
-/* One label above one column, right-aligned so it never runs past the chart. */
-.flag {
-  position: absolute;
-  right: 0;
-  bottom: calc(var(--h) + 8px);
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--hi);
-  white-space: nowrap;
-  opacity: 0;
-  transition: opacity 0.4s 1s;
-}
-[data-in] .cost,
-[data-in] .refLine,
-[data-in] .flag {
-  opacity: 1;
+.costLine polyline {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
 }
 .chartHead {
   display: flex;
@@ -328,19 +340,14 @@
   border-radius: 2px;
   background: var(--text);
 }
-.legend i.dashKey {
-  width: 16px;
-  height: 0;
-  border-radius: 0;
-  border-top: 1.5px dashed var(--text-2);
-}
 
 /* Between the 4th and 5th of six columns: four column widths plus 3.5 gaps. */
 .today {
   position: absolute;
   top: -14px;
   bottom: 0;
-  left: calc((100% - 5 * var(--g)) * 4 / 6 + 3.5 * var(--g));
+  /* After column --n (default 4) of six: n column widths plus n - 0.5 gaps. */
+  left: calc((100% - 5 * var(--g)) * var(--n, 4) / 6 + (var(--n, 4) - 0.5) * var(--g));
   width: 0;
   border-left: 1.5px dashed var(--text-3);
 }
@@ -368,9 +375,10 @@
   .body {
     padding: 14px 18px 20px;
   }
-  .hb {
-    grid-template-columns: minmax(0, 7.5rem) 1fr 3rem;
-    gap: 12px;
+  .bars {
+    --lc: 7.5rem;
+    --vc: 3rem;
+    --gp: 12px;
   }
   .l {
     font-size: 14px;

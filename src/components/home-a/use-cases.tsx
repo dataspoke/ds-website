@@ -23,6 +23,7 @@ function Feature({
   pain,
   headline,
   body,
+  decision,
   label,
   children,
 }: {
@@ -31,6 +32,8 @@ function Feature({
   /** The end state we deliver. */
   headline: string;
   body: string;
+  /** The decision the owner is trying to make, and what the chart says to do. */
+  decision: { q: string; a: string };
   /** Text alternative for the chart. */
   label: string;
   children: ReactNode;
@@ -41,6 +44,13 @@ function Feature({
         <p className="max-w-md text-[0.95rem] italic leading-snug text-muted-foreground">&ldquo;{pain}&rdquo;</p>
         <h3 className="mt-4 max-w-[18ch] font-display text-[1.7rem] font-bold leading-[1.1] tracking-tight text-ink sm:text-[2.1rem]">{headline}</h3>
         <p className="mt-4 max-w-md text-muted-foreground">{body}</p>
+        <div className="mt-5 max-w-md rounded-r-lg border-l-[3px] border-primary bg-tint px-4 py-3">
+          <div className="text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-primary">The decision</div>
+          <p className="mt-1 text-[0.95rem] leading-snug text-ink">
+            <strong className="font-semibold">{decision.q}</strong>{" "}
+            <span className="whitespace-nowrap">→</span> {decision.a}
+          </p>
+        </div>
       </div>
       <div role="img" aria-label={label} className="grid min-w-0">
         {children}
@@ -61,14 +71,26 @@ const FMT: Record<Fmt, (v: number) => string> = {
  * Horizontal bars. `hi` names the one highlighted row; its value counts up.
  * With a negative value the track gets a zero line and that bar runs left of it.
  */
-function HBars({ rows, hi, fmt }: { rows: { name: string; v: number }[]; hi: string; fmt: Fmt }) {
-  const max = Math.max(...rows.map((r) => r.v));
+function HBars({
+  rows,
+  hi,
+  fmt,
+  refAt,
+}: {
+  rows: { name: string; v: number }[];
+  hi: string;
+  fmt: Fmt;
+  /** Optional dashed vertical reference line at this value, with its label. */
+  refAt?: { v: number; label: string };
+}) {
+  const max = Math.max(...rows.map((r) => r.v), refAt?.v ?? 0);
   const min = Math.min(0, ...rows.map((r) => r.v));
   const span = max - min;
   const zero = (-min / span) * 100; // % from the left where 0 sits
   const signed = min < 0;
   return (
     <div className={s.body}>
+      <div className={cx(s.bars, refAt && s.withRef)}>
       {rows.map((r, k) => {
         const on = r.name === hi;
         return (
@@ -95,6 +117,12 @@ function HBars({ rows, hi, fmt }: { rows: { name: string; v: number }[]; hi: str
           </div>
         );
       })}
+      {refAt && (
+        <div className={s.refV} style={vars({ "--r": String(refAt.v / span) })} aria-hidden>
+          <span>{refAt.label}</span>
+        </div>
+      )}
+      </div>
     </div>
   );
 }
@@ -107,7 +135,6 @@ const CHANNELS = [
   { name: "Google Ads", campaign: "Non-branded · service + city", leads: 388, sales: 41, cpl: 92 },
   { name: "Google LSA", campaign: "Local Services Ads", leads: 263, sales: 38, cpl: 61 },
   { name: "Meta", campaign: "Lead form · spring promo", leads: 301, sales: 9, cpl: 29 },
-  { name: "Google Business Profile", campaign: "Organic calls & forms", leads: 176, sales: 31, cpl: 0 },
 ];
 const cps = (c: (typeof CHANNELS)[number]) => (c.leads * c.cpl) / c.sales;
 const WORST = CHANNELS.reduce((a, c) => (cps(c) > cps(a) ? c : a)); // lowest CPL, highest CPS
@@ -117,7 +144,8 @@ function SalesScene() {
     <Feature
       pain="I spend $20K a month on marketing and don't know what's working."
       headline="Every dollar tied to a sale. Cut the spend that doesn't close."
-      body="We follow each lead from ad to closed deal, so you judge channels by cost per sale."
+      body="We tie each lead to the sale it became, so you judge channels by cost per sale."
+      decision={{ q: "Where should next month's ad budget go?", a: "Shift Meta spend to Google LSA." }}
       label={`Sample report, cost per lead and cost per sale by channel: ${CHANNELS.map((c) => `${c.name} ${c.campaign} ${c.cpl ? `${usd(c.cpl)} and ${usd(cps(c))}` : "organic, no ad cost"}`).join("; ")}. ${WORST.name} has the lowest cost per lead and the highest cost per sale.`}
     >
       <DashPanel title="Cost per lead vs. cost per sale">
@@ -135,7 +163,7 @@ function SalesScene() {
                 <tr key={`${c.name}-${c.campaign}`} className={cx(c === WORST && s.hiRow)} style={vars({ "--d": `${k * 90}ms` })}>
                   <td>
                     {c.name}
-                    <span className="block text-xs font-normal text-muted-foreground">{c.campaign}</span>
+                    <span className="block text-xs leading-tight font-normal text-muted-foreground">{c.campaign}</span>
                   </td>
                   <td>{c.cpl ? usd(c.cpl) : "—"}</td>
                   <td>
@@ -174,7 +202,8 @@ function PipelineScene() {
     <Feature
       pain="Leads go cold. Nobody follows up."
       headline="Every lead called in 5 minutes. Nothing slips."
-      body="We time every lead to first contact and alert your team before it goes cold."
+      body="We time every lead to first contact and alert your team before it cools."
+      decision={{ q: "Do we need someone answering leads after hours?", a: "Yes. Slow replies close at a third the rate." }}
       label={`Sample chart, close rate by response time: ${RESPONSE.map((r) => `${r.name} ${r.v}%`).join(", ")}.`}
     >
       <DashPanel title="Close rate by response time">
@@ -200,6 +229,7 @@ function IntakeScene() {
       pain="Leads come in, and then I don't know what happens to them."
       headline="See exactly where leads stall, and who to call today."
       body="We track every lead through intake and flag the ones sitting too long."
+      decision={{ q: "Where do we fix intake first?", a: "Follow-up after the appointment is set." }}
       label={`Sample chart, leads stuck 7 or more days by stage: ${STUCK.map((x) => `${x.name} ${x.v}`).join(", ")}. Most are stuck at ${STALL.name.toLowerCase()}.`}
     >
       <DashPanel title="Leads stuck 7+ days, by stage">
@@ -224,7 +254,8 @@ function OpsScene() {
     <Feature
       pain="We're busy but always behind, and everything runs through me."
       headline="Work moves without you approving every step."
-      body="We show where work waits on you, then set rules so routine approvals run themselves."
+      body="We show where work waits on you, then automate the routine approvals."
+      decision={{ q: "Which step do we fix first?", a: "Let managers approve jobs under $5K." }}
       label={`Sample chart, median days per step: ${STEPS.map((x) => `${x.name} ${x.v}`).join(", ")}.`}
     >
       <DashPanel title="Median days per step">
@@ -234,65 +265,81 @@ function OpsScene() {
   );
 }
 
-/* ---------- Finance: revenue and cost forecast ---------- */
+/* ---------- Finance: closed vs projected revenue against costs ---------- */
 
-/** $K by month. Jul–Oct actual, Nov–Dec forecast. Dec is where margin narrows. */
-const PLAN = [
-  { m: "Jul", rev: 412, cost: 341 },
-  { m: "Aug", rev: 438, cost: 352 },
-  { m: "Sep", rev: 401, cost: 349 },
-  { m: "Oct", rev: 467, cost: 371 },
-  { m: "Nov", rev: 489, cost: 384, forecast: true },
-  { m: "Dec", rev: 455, cost: 392, forecast: true },
+/**
+ * $K by month. Oct–Dec are actuals (all closed). Jan–Mar stack signed work
+ * (closed) under weighted pipeline (projected). Costs step up in Jan when a
+ * new crew starts.
+ */
+const REVENUE = [
+  { m: "Oct", closed: 412, projected: 0, cost: 352 },
+  { m: "Nov", closed: 438, projected: 0, cost: 360 },
+  { m: "Dec", closed: 467, projected: 0, cost: 371 },
+  { m: "Jan", closed: 318, projected: 176, cost: 398, ahead: true },
+  { m: "Feb", closed: 205, projected: 314, cost: 405, ahead: true },
+  { m: "Mar", closed: 122, projected: 428, cost: 412, ahead: true },
 ];
-const margin = (x: (typeof PLAN)[number]) => Math.round(((x.rev - x.cost) / x.rev) * 100);
-const TIGHT = PLAN[PLAN.length - 1]; // Dec
-const PLAN_MAX = 500;
+const REV_MAX = 560;
 const pctOf = (v: number, max: number) => `${(v / max) * 86}%`;
+const PAST = REVENUE.filter((x) => !x.ahead).length; // today line sits after these
+const CLEARS = REVENUE.find((x) => x.ahead && x.m === "Feb")!;
+/** Cost line points in a 0–100 box: x from first to last column centre, y from the top. */
+const COST_POINTS = REVENUE.map((x, i) => `${(i / (REVENUE.length - 1)) * 100},${100 - (x.cost / REV_MAX) * 86}`).join(" ");
 
 function RevenueCostScene() {
   return (
     <Feature
       pain="I don't know what next quarter looks like, or if we'll cover our costs."
       headline="See next quarter's revenue and costs before they happen."
-      body="We forecast from your real pipeline and spending, so you plan with numbers you'll actually hit."
-      label={`Sample chart in thousands, revenue and costs by month: ${PLAN.map((x) => `${x.m} revenue ${x.rev}, costs ${x.cost}${x.forecast ? " (forecast)" : ""}`).join("; ")}. ${TIGHT.m} margin narrows to ${margin(TIGHT)}%.`}
+      body="We forecast from signed work, your weighted pipeline and your costs."
+      decision={{ q: "Can we add a crew in January?", a: "Yes. Projected revenue covers it by February." }}
+      label={`Sample chart in thousands. Actual revenue Oct ${REVENUE[0].closed}, Nov ${REVENUE[1].closed}, Dec ${REVENUE[2].closed}. ${REVENUE.filter((x) => x.ahead).map((x) => `${x.m} closed ${x.closed} plus projected ${x.projected}, total ${x.closed + x.projected}`).join("; ")}. Costs ${REVENUE.map((x) => `${x.m} ${x.cost}`).join(", ")}. By ${CLEARS.m}, revenue clears the new costs.`}
     >
-      <DashPanel title="Revenue and costs, $K">
+      <DashPanel title="Revenue: closed vs. projected, $K">
         <div className={s.body}>
           <div className={s.chartHead}>
             <div className={s.legend} aria-hidden>
               <span>
-                <i style={{ background: "var(--mute)" }} />
-                Revenue
+                <i style={{ background: "var(--hi)" }} />
+                Closed
               </span>
               <span>
-                <i className={s.hatchMute} />
-                Forecast
+                <i className={s.hatchLight} />
+                Projected
               </span>
               <span>
                 <i className={s.lineKey} />
                 Costs
               </span>
             </div>
-            <span className={s.hiNote}>{`${TIGHT.m} margin ${margin(TIGHT)}%`}</span>
+            <span className={s.hiNote}>{`${CLEARS.m}: revenue clears new costs`}</span>
           </div>
           <div className={s.cols}>
-            {PLAN.map((x, k) => (
-              <div key={x.m} className={s.col} title={`${x.m} · revenue $${x.rev}K, costs $${x.cost}K${x.forecast ? " (forecast)" : ""}`}>
+            {REVENUE.map((x, k) => (
+              <div
+                key={x.m}
+                className={s.col}
+                title={`${x.m} · ${x.ahead ? `closed $${x.closed}K, projected $${x.projected}K` : `actual $${x.closed}K`}, costs $${x.cost}K`}
+              >
+                {x.projected > 0 && (
+                  <span className={cx(s.colBar, s.hatchLight)} style={vars({ "--h": pctOf(x.projected, REV_MAX), "--d": `${k * 80 + 200}ms` })} />
+                )}
                 <span
-                  className={cx(s.colBar, x === TIGHT ? s.hatch : x.forecast && s.hatchMute)}
-                  style={vars({ "--h": pctOf(x.rev, PLAN_MAX), "--d": `${k * 80}ms` })}
+                  className={cx(s.colBar, x.ahead && s.hiBar, x.projected > 0 && s.flat)}
+                  style={vars({ "--h": pctOf(x.closed, REV_MAX), "--d": `${k * 80}ms` })}
                 />
-                <span className={s.cost} style={vars({ "--c": pctOf(x.cost, PLAN_MAX) })} />
               </div>
             ))}
-            <div className={s.today} aria-hidden>
+            <svg className={s.costLine} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
+              <polyline points={COST_POINTS} vectorEffect="non-scaling-stroke" />
+            </svg>
+            <div className={s.today} style={vars({ "--n": String(PAST) })} aria-hidden>
               <span>Today</span>
             </div>
           </div>
           <div className={s.months} aria-hidden>
-            {PLAN.map((x) => (
+            {REVENUE.map((x) => (
               <span key={x.m}>{x.m}</span>
             ))}
           </div>
@@ -302,56 +349,28 @@ function RevenueCostScene() {
   );
 }
 
-/* ---------- Hiring: booked hours vs team capacity ---------- */
+/* ---------- Hiring: which role is at capacity ---------- */
 
-const BOOKED = [
-  { m: "Jan", v: 1240 },
-  { m: "Feb", v: 1310 },
-  { m: "Mar", v: 1420 },
-  { m: "Apr", v: 1560 },
-  { m: "May", v: 1690 },
-  { m: "Jun", v: 1780 },
+/** Booked work as a share of each role's capacity, next 90 days. */
+const ROLES = [
+  { name: "Field crew", v: 86 },
+  { name: "Project managers", v: 94 },
+  { name: "Estimators", v: 112 },
+  { name: "Office", v: 71 },
 ];
-const CAPACITY = 1520;
-const HOURS_MAX = 1800;
-const FIRST_OVER = BOOKED.find((x) => x.v > CAPACITY)!;
-const hrs = (n: number) => n.toLocaleString("en-US");
+const OVER = ROLES.reduce((a, r) => (r.v > a.v ? r : a));
 
 function HiringScene() {
   return (
     <Feature
       pain="I can't tell if we need to hire, or if we can afford to."
       headline="Know when to hire before your team is buried."
-      body="We compare booked work against team capacity, so you hire ahead of demand instead of after."
-      label={`Sample chart, booked hours by month: ${BOOKED.map((x) => `${x.m} ${hrs(x.v)}`).join(", ")}. Team capacity is ${hrs(CAPACITY)} hours; booked work passes it in ${FIRST_OVER.m}.`}
+      body="We compare booked work against each role's capacity, so you hire ahead of demand."
+      decision={{ q: "Who do we hire next, and when?", a: "An estimator, before March." }}
+      label={`Sample chart, booked work as a share of capacity over the next 90 days: ${ROLES.map((r) => `${r.name} ${r.v}%`).join(", ")}. ${OVER.name} are over capacity.`}
     >
-      <DashPanel title="Booked hours vs. team capacity">
-        <div className={s.body}>
-          <div className={s.legend} aria-hidden>
-            <span>
-              <i className={s.dashKey} />
-              {`Team capacity ${hrs(CAPACITY)} hrs`}
-            </span>
-          </div>
-          <div className={s.cols}>
-            {BOOKED.map((x, k) => (
-              <div key={x.m} className={s.col} title={`${x.m} · ${hrs(x.v)} hrs booked`}>
-                {x === FIRST_OVER && (
-                  <span className={s.flag} style={vars({ "--h": pctOf(x.v, HOURS_MAX) })}>
-                    {`${x.m}: over capacity`}
-                  </span>
-                )}
-                <span className={cx(s.colBar, x.v > CAPACITY && s.hiBar)} style={vars({ "--h": pctOf(x.v, HOURS_MAX), "--d": `${k * 80}ms` })} />
-              </div>
-            ))}
-            <div className={s.refLine} style={vars({ "--y": pctOf(CAPACITY, HOURS_MAX) })} aria-hidden />
-          </div>
-          <div className={s.months} aria-hidden>
-            {BOOKED.map((x) => (
-              <span key={x.m}>{x.m}</span>
-            ))}
-          </div>
-        </div>
+      <DashPanel title="Booked vs. capacity, next 90 days">
+        <HBars rows={ROLES} hi={OVER.name} fmt="pct" refAt={{ v: 100, label: "100% capacity" }} />
       </DashPanel>
     </Feature>
   );
@@ -375,6 +394,7 @@ export function MarginScene() {
       pain="I can't see what each project makes after costs. I don't know how we're doing until the books close."
       headline="See profit on every project while it's still running."
       body="We match costs to each project as they land, so a losing job shows up while you can still fix it."
+      decision={{ q: "Which project needs attention now?", a: `${LOSER.name}, before it closes at a loss.` }}
       label={`Sample chart, margin by project this month: ${PROJECTS.map((p) => `${p.name} ${FMT.spct(p.v)}`).join(", ")}. Project ${LOSER.name} is losing money.`}
     >
       <DashPanel title="Margin by project · this month">
@@ -405,6 +425,7 @@ export function ForecastScene() {
       pain="I don't know how next quarter will go until it's over."
       headline="Know next quarter before it happens."
       body="We forecast from your real pipeline, so the number you plan with is the one you hit."
+      decision={{ q: "What will next quarter bring in?", a: "Plan on the forecast, not last quarter." }}
       label={`Sample revenue chart in thousands: ${MONTHS.map((x) => `${x.m} ${x.v}${x.forecast ? " forecast" : ""}`).join(", ")}.`}
     >
       <DashPanel title="Revenue, actual and forecast">
@@ -457,7 +478,8 @@ function CallsScene() {
     <Feature
       pain="We lose deals and I don't know why."
       headline="Know why you lose, and fix it before the next call."
-      body="We tag every lost-deal call with the reason the customer actually gave."
+      body="We tag every lost-deal call with the reason the customer gave."
+      decision={{ q: "What do we fix to win more deals?", a: "Response time, before cutting price." }}
       label={`Sample call analysis, lost deals by reason: ${REASONS.map((r) => `${r.name} ${r.v}`).join(", ")}. Slow response is the surprise.`}
     >
       <DashPanel title="Lost deals by reason, from the calls">
