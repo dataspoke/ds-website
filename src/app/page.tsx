@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { HeroA } from "@/components/home-a/hero";
 import { UseCases } from "@/components/home-a/use-cases";
 import { ServicesA } from "@/components/home-a/services";
-import { EveryDeviceA } from "@/components/home-a/every-device";
 import { HowItWorksA } from "@/components/home-a/how-it-works";
 import { FaqA } from "@/components/home-a/faq";
 import { CtaA } from "@/components/home-a/cta";
@@ -26,7 +25,6 @@ export default function HomePage() {
       <HeroA />
       <UseCases />
       <ServicesA />
-      <EveryDeviceA />
       <HowItWorksA />
       <FaqA />
       <CtaA />
