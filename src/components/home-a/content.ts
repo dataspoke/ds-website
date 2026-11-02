@@ -5,7 +5,7 @@ import type { FaqItem } from "@/types";
 
 export const HERO_A = {
   lede: "We connect the software you already pay for, so your numbers are right and busywork runs itself.",
-  chips: ["Accurate numbers", "Faster decisions", "Record revenue"],
+  chips: ["Accurate numbers", "Better decisions", "Grow faster"],
   primaryCta: "Book your free estimate",
   secondaryCta: { label: "All services", href: "/services" },
 };
