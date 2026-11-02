@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { LogoMark } from "@/components/shared/logo";
+import { WheelMark } from "@/components/shared/logo";
 import { cn } from "@/lib/utils";
 
 type SpokeBulletProps = {
@@ -11,7 +11,7 @@ type SpokeBulletProps = {
 };
 
 /*
- * Brand bullets. `heading` uses the full logo mark (hub and six spokes) next
+ * Brand bullets. `heading` uses the full logo mark (the wagon wheel) next
  * to an h3; `list` uses a plain dot, since the mark gets busy at small sizes.
  *
  * The marker is exactly one line box tall (`h-[1lh]`) and centres its glyph
@@ -53,7 +53,7 @@ export function SpokeBullet({
     <Tag className={cn("flex items-start", s.row, className)}>
       <span className={cn("inline-flex h-[1lh] shrink-0 items-center", s.marker)} aria-hidden="true">
         {size === "heading" ? (
-          <LogoMark className={cn("h-[26px] w-[26px]", t.mark)} />
+          <WheelMark className={cn("h-[26px] w-[26px]", t.mark)} />
         ) : (
           <span className={cn("h-2 w-2 shrink-0 rounded-full", t.dot)} />
         )}

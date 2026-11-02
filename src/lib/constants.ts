@@ -3,7 +3,7 @@ import type { NavItem } from "@/types";
 // Site-wide config. Page copy lives in src/content/*.
 
 export const SITE_NAME = "DataSpoke";
-export const SITE_TAGLINE = "Grow your business with the data you already have.";
+export const SITE_TAGLINE = "Grow your business with data you already have.";
 export const SITE_DESCRIPTION =
   "Data and AI consulting for business owners in CT, NY and across the US. We connect your tools, automate busywork and show your numbers. Free estimate.";
 export const SITE_URL = "https://www.dataspoke.io";
