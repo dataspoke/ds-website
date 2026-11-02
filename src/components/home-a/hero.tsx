@@ -16,7 +16,15 @@ export function HeroA() {
         <div className="grid gap-5">
           <p className="eyebrow">{HERO.eyebrow}</p>
           <h1 className="text-[2.3rem] font-extrabold leading-[1.08] tracking-[-0.025em] sm:text-5xl lg:text-[3.5rem]">
-            {HERO.headline}
+            {HERO.headline.split(/(data)/).map((part, i) =>
+              part === "data" ? (
+                <span key={i} className="text-brand">
+                  {part}
+                </span>
+              ) : (
+                part
+              ),
+            )}
           </h1>
           <p className="lede max-w-lg">{HERO_A.lede}</p>
           <ul className="flex flex-wrap gap-2">
