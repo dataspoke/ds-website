@@ -1,3 +1,4 @@
+import type { SVGProps } from "react";
 import { SITE_NAME } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -24,9 +25,9 @@ export function LogoMark({ className }: { className?: string }) {
 }
 
 /** Wagon-wheel mark ("A · Floating spokes"): rim, hub and six short spokes between them. */
-export function WheelMark({ className }: { className?: string }) {
+export function WheelMark(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 48 48" aria-hidden="true" className={className}>
+    <svg viewBox="0 0 48 48" aria-hidden="true" {...props}>
       <circle cx="24" cy="24" r="19.5" fill="none" stroke="currentColor" strokeWidth="3.5" />
       <circle cx="24" cy="24" r="4.6" fill="currentColor" />
       <g stroke="currentColor" strokeWidth="3" strokeLinecap="round">

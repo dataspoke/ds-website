@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { WheelMark } from "@/components/shared/logo";
 
 const FONT = "var(--font-inter), system-ui, sans-serif";
 
@@ -105,32 +106,9 @@ export function Glyph({
   );
 }
 
-/** The DataSpoke mark as a scalable group, drawn on white. */
+/** The DataSpoke wheel mark in white, centred on (cx, cy) with radius r. */
 function HubMark({ cx, cy, r }: { cx: number; cy: number; r: number }) {
-  const s = r / 50;
-  return (
-    <g transform={`translate(${cx - r} ${cy - r}) scale(${s})`} stroke="#fff" fill="#fff">
-      <g strokeWidth="5">
-        <line x1="50" y1="50" x2="50" y2="14" />
-        <line x1="50" y1="50" x2="81" y2="32" />
-        <line x1="50" y1="50" x2="81" y2="68" />
-        <line x1="50" y1="50" x2="50" y2="86" />
-        <line x1="50" y1="50" x2="19" y2="68" />
-        <line x1="50" y1="50" x2="19" y2="32" />
-      </g>
-      <circle cx="50" cy="50" r="13" />
-      {[
-        [50, 14],
-        [81, 32],
-        [81, 68],
-        [50, 86],
-        [19, 68],
-        [19, 32],
-      ].map(([x, y]) => (
-        <circle key={`${x}-${y}`} cx={x} cy={y} r="7" />
-      ))}
-    </g>
-  );
+  return <WheelMark x={cx - r} y={cy - r} width={r * 2} height={r * 2} color="#fff" />;
 }
 
 const HERO_SPOKES: { name: string; glyph: keyof typeof GLYPHS }[] = [

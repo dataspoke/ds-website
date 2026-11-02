@@ -5,7 +5,8 @@ import { cn } from "@/lib/utils";
 
 export interface UseCaseTab {
   label: string;
-  caption: string;
+  /** Optional line under the scene. Scenes that carry their own headline omit it. */
+  caption?: string;
   scene: ReactNode;
 }
 
@@ -116,7 +117,7 @@ export function UseCaseTabs({ tabs }: { tabs: UseCaseTab[] }) {
                 </span>
                 {t.scene}
               </div>
-              <figcaption className="px-1 text-muted-foreground">{t.caption}</figcaption>
+              {t.caption && <figcaption className="px-1 text-muted-foreground">{t.caption}</figcaption>}
             </div>
           </figure>
         ))}
