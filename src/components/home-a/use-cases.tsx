@@ -184,6 +184,31 @@ function PipelineScene() {
   );
 }
 
+/* ---------- Intake: where leads stall ---------- */
+
+const STUCK = [
+  { name: "New lead", v: 12 },
+  { name: "Contacted", v: 9 },
+  { name: "Appointment set", v: 23 },
+  { name: "Proposal sent", v: 14 },
+];
+const STALL = STUCK.reduce((a, x) => (x.v > a.v ? x : a));
+
+function IntakeScene() {
+  return (
+    <Feature
+      pain="Leads come in, and then I don't know what happens to them."
+      headline="See exactly where leads stall, and who to call today."
+      body="We track every lead through intake and flag the ones sitting too long."
+      label={`Sample chart, leads stuck 7 or more days by stage: ${STUCK.map((x) => `${x.name} ${x.v}`).join(", ")}. Most are stuck at ${STALL.name.toLowerCase()}.`}
+    >
+      <DashPanel title="Leads stuck 7+ days, by stage">
+        <HBars rows={STUCK} hi={STALL.name} fmt="int" />
+      </DashPanel>
+    </Feature>
+  );
+}
+
 /* ---------- Operations: the bottleneck step ---------- */
 
 const STEPS = [
@@ -209,7 +234,130 @@ function OpsScene() {
   );
 }
 
-/* ---------- Finance: margin by project while it runs ---------- */
+/* ---------- Finance: revenue and cost forecast ---------- */
+
+/** $K by month. Jul–Oct actual, Nov–Dec forecast. Dec is where margin narrows. */
+const PLAN = [
+  { m: "Jul", rev: 412, cost: 341 },
+  { m: "Aug", rev: 438, cost: 352 },
+  { m: "Sep", rev: 401, cost: 349 },
+  { m: "Oct", rev: 467, cost: 371 },
+  { m: "Nov", rev: 489, cost: 384, forecast: true },
+  { m: "Dec", rev: 455, cost: 392, forecast: true },
+];
+const margin = (x: (typeof PLAN)[number]) => Math.round(((x.rev - x.cost) / x.rev) * 100);
+const TIGHT = PLAN[PLAN.length - 1]; // Dec
+const PLAN_MAX = 500;
+const pctOf = (v: number, max: number) => `${(v / max) * 86}%`;
+
+function RevenueCostScene() {
+  return (
+    <Feature
+      pain="I don't know what next quarter looks like, or if we'll cover our costs."
+      headline="See next quarter's revenue and costs before they happen."
+      body="We forecast from your real pipeline and spending, so you plan with numbers you'll actually hit."
+      label={`Sample chart in thousands, revenue and costs by month: ${PLAN.map((x) => `${x.m} revenue ${x.rev}, costs ${x.cost}${x.forecast ? " (forecast)" : ""}`).join("; ")}. ${TIGHT.m} margin narrows to ${margin(TIGHT)}%.`}
+    >
+      <DashPanel title="Revenue and costs, $K">
+        <div className={s.body}>
+          <div className={s.chartHead}>
+            <div className={s.legend} aria-hidden>
+              <span>
+                <i style={{ background: "var(--mute)" }} />
+                Revenue
+              </span>
+              <span>
+                <i className={s.hatchMute} />
+                Forecast
+              </span>
+              <span>
+                <i className={s.lineKey} />
+                Costs
+              </span>
+            </div>
+            <span className={s.hiNote}>{`${TIGHT.m} margin ${margin(TIGHT)}%`}</span>
+          </div>
+          <div className={s.cols}>
+            {PLAN.map((x, k) => (
+              <div key={x.m} className={s.col} title={`${x.m} · revenue $${x.rev}K, costs $${x.cost}K${x.forecast ? " (forecast)" : ""}`}>
+                <span
+                  className={cx(s.colBar, x === TIGHT ? s.hatch : x.forecast && s.hatchMute)}
+                  style={vars({ "--h": pctOf(x.rev, PLAN_MAX), "--d": `${k * 80}ms` })}
+                />
+                <span className={s.cost} style={vars({ "--c": pctOf(x.cost, PLAN_MAX) })} />
+              </div>
+            ))}
+            <div className={s.today} aria-hidden>
+              <span>Today</span>
+            </div>
+          </div>
+          <div className={s.months} aria-hidden>
+            {PLAN.map((x) => (
+              <span key={x.m}>{x.m}</span>
+            ))}
+          </div>
+        </div>
+      </DashPanel>
+    </Feature>
+  );
+}
+
+/* ---------- Hiring: booked hours vs team capacity ---------- */
+
+const BOOKED = [
+  { m: "Jan", v: 1240 },
+  { m: "Feb", v: 1310 },
+  { m: "Mar", v: 1420 },
+  { m: "Apr", v: 1560 },
+  { m: "May", v: 1690 },
+  { m: "Jun", v: 1780 },
+];
+const CAPACITY = 1520;
+const HOURS_MAX = 1800;
+const FIRST_OVER = BOOKED.find((x) => x.v > CAPACITY)!;
+const hrs = (n: number) => n.toLocaleString("en-US");
+
+function HiringScene() {
+  return (
+    <Feature
+      pain="I can't tell if we need to hire, or if we can afford to."
+      headline="Know when to hire before your team is buried."
+      body="We compare booked work against team capacity, so you hire ahead of demand instead of after."
+      label={`Sample chart, booked hours by month: ${BOOKED.map((x) => `${x.m} ${hrs(x.v)}`).join(", ")}. Team capacity is ${hrs(CAPACITY)} hours; booked work passes it in ${FIRST_OVER.m}.`}
+    >
+      <DashPanel title="Booked hours vs. team capacity">
+        <div className={s.body}>
+          <div className={s.legend} aria-hidden>
+            <span>
+              <i className={s.dashKey} />
+              {`Team capacity ${hrs(CAPACITY)} hrs`}
+            </span>
+          </div>
+          <div className={s.cols}>
+            {BOOKED.map((x, k) => (
+              <div key={x.m} className={s.col} title={`${x.m} · ${hrs(x.v)} hrs booked`}>
+                {x === FIRST_OVER && (
+                  <span className={s.flag} style={vars({ "--h": pctOf(x.v, HOURS_MAX) })}>
+                    {`${x.m}: over capacity`}
+                  </span>
+                )}
+                <span className={cx(s.colBar, x.v > CAPACITY && s.hiBar)} style={vars({ "--h": pctOf(x.v, HOURS_MAX), "--d": `${k * 80}ms` })} />
+              </div>
+            ))}
+            <div className={s.refLine} style={vars({ "--y": pctOf(CAPACITY, HOURS_MAX) })} aria-hidden />
+          </div>
+          <div className={s.months} aria-hidden>
+            {BOOKED.map((x) => (
+              <span key={x.m}>{x.m}</span>
+            ))}
+          </div>
+        </div>
+      </DashPanel>
+    </Feature>
+  );
+}
+
+/* ---------- Finance (previous version): margin by project while it runs ---------- */
 
 /** Margin by project this month, in percent. One project is losing money. */
 const PROJECTS = [
@@ -220,7 +368,8 @@ const PROJECTS = [
 ];
 const LOSER = PROJECTS.reduce((a, p) => (p.v < a.v ? p : a));
 
-function MarginScene() {
+/** Not shown right now; kept so the margin view can come back. */
+export function MarginScene() {
   return (
     <Feature
       pain="I can't see what each project makes after costs. I don't know how we're doing until the books close."
@@ -319,10 +468,12 @@ function CallsScene() {
 }
 
 const TABS: UseCaseTab[] = [
-  { label: "Sales", scene: <SalesScene /> },
+  { label: "Marketing", scene: <SalesScene /> },
   { label: "Speed to lead", scene: <PipelineScene /> },
+  { label: "Intake", scene: <IntakeScene /> },
   { label: "Operations", scene: <OpsScene /> },
-  { label: "Finance", scene: <MarginScene /> },
+  { label: "Finance", scene: <RevenueCostScene /> },
+  { label: "Hiring", scene: <HiringScene /> },
   { label: "Calls", scene: <CallsScene /> },
 ];
 
