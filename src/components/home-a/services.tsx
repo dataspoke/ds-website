@@ -27,7 +27,7 @@ const BLURBS: Record<ServiceLineSlug, string> = {
 
 export function ServicesA() {
   return (
-    <Section tint id="services">
+    <Section tint tight id="services">
       <SectionHead eyebrow={SERVICES_A_HEAD.eyebrow} title={SERVICES_A_HEAD.title} />
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {SERVICE_LINES.map((line) => {

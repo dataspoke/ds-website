@@ -7,7 +7,7 @@ const GLYPHS = ["phone", "doc", "check"] as const;
 
 export function HowItWorksA() {
   return (
-    <Section id="how">
+    <Section tight id="how">
       <SectionHead eyebrow={HOW_A.eyebrow} title={HOW_A.title} />
       <ol className="mt-10 grid gap-6 md:grid-cols-3">
         {HOW_A.steps.map((step, i) => (

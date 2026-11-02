@@ -4,7 +4,7 @@ import { CTA_A } from "./content";
 
 export function CtaA() {
   return (
-    <section id="contact-cta" className="py-16 sm:py-24">
+    <section id="contact-cta" className="py-12 sm:py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#5f9ee8] to-[#1f63b5] px-6 py-12 text-white sm:px-12 sm:py-16">
           <svg aria-hidden="true" viewBox="0 0 100 100" className="pointer-events-none absolute -right-10 -top-10 h-64 w-64 opacity-15">

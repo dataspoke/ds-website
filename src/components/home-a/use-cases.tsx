@@ -608,7 +608,7 @@ const TABS: UseCaseTab[] = [
 
 export function UseCases() {
   return (
-    <Section id="use-cases">
+    <Section tight id="use-cases">
       <SectionHead eyebrow={USE_CASES_HEAD.eyebrow} title={USE_CASES_HEAD.title} />
       <UseCaseTabs tabs={TABS} />
     </Section>

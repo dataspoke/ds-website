@@ -6,7 +6,7 @@ import { FAQS_A, FAQ_A_HEAD } from "./content";
 /** Collapsible Q&As. The text is identical to the FAQPage JSON-LD on the page. */
 export function FaqA() {
   return (
-    <Section id="faq" className="pt-0 sm:pt-0">
+    <Section tight id="faq" className="pt-0 sm:pt-0">
       <SectionHead eyebrow={FAQ_A_HEAD.eyebrow} title={FAQ_A_HEAD.title} />
       <div className="mt-8 grid max-w-3xl gap-3">
         {FAQS_A.map((faq, i) => (
