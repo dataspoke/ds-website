@@ -23,7 +23,7 @@ export function Header({ navItems }: { navItems: NavItem[] }) {
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur-md">
       <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between gap-3 px-4 sm:gap-6 sm:px-6">
         <Link href="/" aria-label="DataSpoke home" className="shrink-0">
-          <Logo />
+          <Logo mark="wheel" />
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">

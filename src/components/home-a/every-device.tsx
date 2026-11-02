@@ -2,22 +2,22 @@ import type { ReactNode } from "react";
 import { Section, SectionHead } from "@/components/shared/section";
 import { EVERY_DEVICE_HEAD } from "./content";
 
-// Sample field-service app for an invented trades company. Layout and UI
+// Sample field-service app for an invented service company. Layout and UI
 // patterns are modeled on the DropGym staff app (bottom tab bar, rounded
 // cards, time-first schedule rows with a status pill, big-numeral home
 // tiles). All names, jobs and figures are invented. One data set feeds all
 // three screens so the numbers always match.
 const usd = (n: number) => `$${n.toLocaleString("en-US")}`;
 
-const COMPANY = "Saltmarsh Plumbing & Heating";
+const COMPANY = "Hollis & Reed Services";
 
 type Status = "done" | "on site" | "en route" | "scheduled";
 
 const JOBS: { time: string; job: string; crew: string; status: Status }[] = [
-  { time: "7:30", job: "Boiler service", crew: "Luis", status: "done" },
-  { time: "9:30", job: "Water heater", crew: "Luis", status: "on site" },
-  { time: "10:00", job: "Drain clearing", crew: "Dana", status: "en route" },
-  { time: "1:30", job: "Repipe estimate", crew: "Priya", status: "scheduled" },
+  { time: "7:30", job: "Annual service", crew: "Luis", status: "done" },
+  { time: "9:30", job: "Install", crew: "Luis", status: "on site" },
+  { time: "10:00", job: "Repair call", crew: "Dana", status: "en route" },
+  { time: "1:30", job: "Site estimate", crew: "Priya", status: "scheduled" },
 ];
 
 const CREW = ["Luis", "Dana", "Priya"].map((name) => {
@@ -28,14 +28,14 @@ const CREW = ["Luis", "Dana", "Priya"].map((name) => {
 });
 
 const OVERDUE = [
-  { id: "#1042", job: "Repipe", amount: 5400, days: 31 },
-  { id: "#1057", job: "Water heater", amount: 2250, days: 24 },
-  { id: "#1061", job: "Boiler service", amount: 640, days: 19 },
+  { id: "#4187", job: "Install", amount: 5386, days: 31 },
+  { id: "#4302", job: "Repair call", amount: 2247, days: 24 },
+  { id: "#4356", job: "Annual service", amount: 639, days: 19 },
 ];
 const OVERDUE_COUNT = 7; // three listed, four more
-const OVERDUE_TOTAL = 12840; // includes the four not listed
+const OVERDUE_TOTAL = 12918; // includes the four not listed
 const LEADS_TO_FOLLOW_UP = 9;
-const CASH = 61500;
+const CASH = 61842;
 /** Cash in bank by week (sample, thousands), oldest first; the last point is CASH. */
 const CASH_TREND = [48.2, 51.0, 49.6, 53.3, 55.1, 54.4, 58.9, CASH / 1000];
 const JOBS_DONE = JOBS.filter((j) => j.status === "done").length;
@@ -146,7 +146,7 @@ function ScreenHead({ title, sub }: { title: string; sub?: string }) {
         <span className="block text-[11px] font-bold leading-none">{title}</span>
         {sub && <span className="mt-0.5 block text-[7.5px] text-muted-foreground">{sub}</span>}
       </span>
-      <Avatar name="S" size="size-5" />
+      <Avatar name="H" size="size-5" />
     </div>
   );
 }

@@ -23,7 +23,22 @@ export function LogoMark({ className }: { className?: string }) {
   );
 }
 
-export function Logo({ className }: { className?: string }) {
+/** Wagon-wheel mark ("A · Floating spokes"): rim, hub and six short spokes between them. */
+export function WheelMark({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden="true" className={className}>
+      <circle cx="24" cy="24" r="19.5" fill="none" stroke="currentColor" strokeWidth="3.5" />
+      <circle cx="24" cy="24" r="4.6" fill="currentColor" />
+      <g stroke="currentColor" strokeWidth="3" strokeLinecap="round">
+        {[0, 60, 120, 180, 240, 300].map((deg) => (
+          <line key={deg} x1="24" y1="15.2" x2="24" y2="9.2" transform={`rotate(${deg} 24 24)`} />
+        ))}
+      </g>
+    </svg>
+  );
+}
+
+export function Logo({ className, mark = "spoke" }: { className?: string; mark?: "spoke" | "wheel" }) {
   return (
     <span
       className={cn(
@@ -31,7 +46,7 @@ export function Logo({ className }: { className?: string }) {
         className
       )}
     >
-      <LogoMark className="h-8 w-8" />
+      {mark === "wheel" ? <WheelMark className="h-8 w-8" /> : <LogoMark className="h-8 w-8" />}
       {SITE_NAME}
     </span>
   );
