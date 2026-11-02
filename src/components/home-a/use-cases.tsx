@@ -20,7 +20,7 @@ const cx = (...c: (string | false | undefined)[]) => c.filter(Boolean).join(" ")
 /* ---------- Layout: copy on the left, chart panel on the right ---------- */
 
 function Feature({
-  group,
+  pain,
   headline,
   body,
   big,
@@ -28,7 +28,9 @@ function Feature({
   label,
   children,
 }: {
-  group: string;
+  /** The owner's pain, in their words. */
+  pain: string;
+  /** The end state we deliver. */
   headline: string;
   body: string;
   big: string;
@@ -40,8 +42,8 @@ function Feature({
   return (
     <div className="grid min-w-0 items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] lg:gap-12">
       <div className="min-w-0">
-        <div className="text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{group}</div>
-        <h3 className="mt-3 max-w-[18ch] font-display text-[1.7rem] font-bold leading-[1.1] tracking-tight text-ink sm:text-[2.1rem]">{headline}</h3>
+        <p className="max-w-md text-[0.95rem] italic leading-snug text-muted-foreground">&ldquo;{pain}&rdquo;</p>
+        <h3 className="mt-4 max-w-[18ch] font-display text-[1.7rem] font-bold leading-[1.1] tracking-tight text-ink sm:text-[2.1rem]">{headline}</h3>
         <p className="mt-4 max-w-md text-muted-foreground">{body}</p>
         <div className="mt-6 border-t border-tint-strong pt-5">
           <div className="font-display text-4xl font-bold leading-none tracking-tight text-primary tabular-nums sm:text-5xl">{big}</div>
@@ -55,16 +57,24 @@ function Feature({
   );
 }
 
-type Fmt = "pct" | "dec" | "int";
+type Fmt = "pct" | "spct" | "dec" | "int";
 const FMT: Record<Fmt, (v: number) => string> = {
   pct: (v) => `${v}%`,
+  spct: (v) => `${v < 0 ? "−" : ""}${Math.abs(v)}%`,
   dec: (v) => v.toFixed(1),
   int: (v) => String(v),
 };
 
-/** Horizontal bars. `hi` names the one highlighted row; its value counts up. */
+/**
+ * Horizontal bars. `hi` names the one highlighted row; its value counts up.
+ * With a negative value the track gets a zero line and that bar runs left of it.
+ */
 function HBars({ rows, hi, fmt }: { rows: { name: string; v: number }[]; hi: string; fmt: Fmt }) {
   const max = Math.max(...rows.map((r) => r.v));
+  const min = Math.min(0, ...rows.map((r) => r.v));
+  const span = max - min;
+  const zero = (-min / span) * 100; // % from the left where 0 sits
+  const signed = min < 0;
   return (
     <div className={s.body}>
       {rows.map((r, k) => {
@@ -72,8 +82,14 @@ function HBars({ rows, hi, fmt }: { rows: { name: string; v: number }[]; hi: str
         return (
           <div key={r.name} className={cx(s.hb, on && s.hi)}>
             <span className={s.l}>{r.name}</span>
-            <span className={s.t}>
-              <b style={vars({ "--w": `${(r.v / max) * 100}%`, "--d": `${k * 90}ms` })} />
+            <span className={s.t} style={signed ? vars({ "--z": `${zero}%` }) : undefined}>
+              <b
+                style={vars({
+                  "--w": `${(Math.abs(r.v) / span) * 100}%`,
+                  "--x": `${r.v < 0 ? zero + (r.v / span) * 100 : zero}%`,
+                  "--d": `${k * 90}ms`,
+                })}
+              />
             </span>
             <span className={s.v}>
               {on ? (
@@ -105,8 +121,8 @@ const WORST = CHANNELS.reduce((a, c) => (cps(c) > cps(a) ? c : a)); // lowest CP
 function SalesScene() {
   return (
     <Feature
-      group="Sales · spend to revenue"
-      headline="Your cheapest leads can be your most expensive sales."
+      pain="I spend $20K a month on marketing and don't know what's working."
+      headline="Every dollar tied to a sale. Cut the spend that doesn't close."
       body="We follow each lead from ad to closed deal, so you judge channels by cost per sale."
       big={usd(cps(WORST))}
       bigLabel={`Cost per sale from ${WORST.name.toLowerCase()}, the cheapest leads`}
@@ -147,28 +163,28 @@ function SalesScene() {
   );
 }
 
-/* ---------- Pipeline: close rate falls as deals sit ---------- */
+/* ---------- Pipeline: speed to lead ---------- */
 
-const AGES = [
-  { name: "0–3 days", v: 52 },
-  { name: "4–7 days", v: 46 },
-  { name: "8–14 days", v: 31 },
-  { name: "15+ days", v: 16 },
+const RESPONSE = [
+  { name: "Under 5 min", v: 24 },
+  { name: "5–60 min", v: 13 },
+  { name: "Over 1 hour", v: 8 },
 ];
-const STALE = AGES[AGES.length - 1];
+const FAST = RESPONSE[0];
+const SLOW = RESPONSE[RESPONSE.length - 1];
 
 function PipelineScene() {
   return (
     <Feature
-      group="Pipeline · stuck deals"
-      headline="Deals that sit 14+ days close at a third the rate."
-      body="We flag the deals going cold, so your team knows who to call today."
-      big={`${AGES[0].v}% → ${STALE.v}%`}
-      bigLabel="Close rate, fresh deals vs. 15+ days in stage"
-      label={`Sample chart, close rate by days in stage: ${AGES.map((a) => `${a.name} ${a.v}%`).join(", ")}.`}
+      pain="Leads go cold. Nobody follows up."
+      headline="Every lead called in 5 minutes. Nothing slips."
+      body="We time every lead to first contact and alert your team before it goes cold."
+      big={`${Math.round(FAST.v / SLOW.v)}×`}
+      bigLabel="Close rate when leads are called within 5 minutes"
+      label={`Sample chart, close rate by response time: ${RESPONSE.map((r) => `${r.name} ${r.v}%`).join(", ")}.`}
     >
-      <DashPanel title="Close rate by days in stage">
-        <HBars rows={AGES} hi={STALE.name} fmt="pct" />
+      <DashPanel title="Close rate by response time">
+        <HBars rows={RESPONSE} hi={FAST.name} fmt="pct" />
       </DashPanel>
     </Feature>
   );
@@ -187,9 +203,9 @@ const BOTTLENECK = STEPS.reduce((a, x) => (x.v > a.v ? x : a));
 function OpsScene() {
   return (
     <Feature
-      group="Operations · bottlenecks"
-      headline="Find the step that slows everything else down."
-      body="We show where work waits, so you fix the bottleneck instead of adding headcount."
+      pain="We're busy but always behind, and everything runs through me."
+      headline="Work moves without you approving every step."
+      body="We show where work waits on you, then set rules so routine approvals run themselves."
       big={`${BOTTLENECK.v} days`}
       bigLabel={`Median time ${BOTTLENECK.name.toLowerCase()}, the slowest step`}
       label={`Sample chart, median days per step: ${STEPS.map((x) => `${x.name} ${x.v}`).join(", ")}.`}
@@ -201,7 +217,35 @@ function OpsScene() {
   );
 }
 
-/* ---------- Finance: forecast from the real pipeline ---------- */
+/* ---------- Finance: margin by project while it runs ---------- */
+
+/** Margin by project this month, in percent. One project is losing money. */
+const PROJECTS = [
+  { name: "#1042", v: 34 },
+  { name: "#1047", v: 29 },
+  { name: "#1051", v: 22 },
+  { name: "#1058", v: -4 },
+];
+const LOSER = PROJECTS.reduce((a, p) => (p.v < a.v ? p : a));
+
+function MarginScene() {
+  return (
+    <Feature
+      pain="I can't see what each project makes after costs. I don't know how we're doing until the books close."
+      headline="See profit on every project while it's still running."
+      body="We match costs to each project as they land, so a losing job shows up while you can still fix it."
+      big={FMT.spct(LOSER.v)}
+      bigLabel={`Project ${LOSER.name}, caught mid-project, not at month end`}
+      label={`Sample chart, margin by project this month: ${PROJECTS.map((p) => `${p.name} ${FMT.spct(p.v)}`).join(", ")}. Project ${LOSER.name} is losing money.`}
+    >
+      <DashPanel title="Margin by project · this month">
+        <HBars rows={PROJECTS} hi={LOSER.name} fmt="spct" />
+      </DashPanel>
+    </Feature>
+  );
+}
+
+/* ---------- Finance (previous version): forecast from the real pipeline ---------- */
 
 /** Revenue in $K. The first four months are actual, the last two forecast. */
 const MONTHS = [
@@ -215,10 +259,11 @@ const MONTHS = [
 const NEXT = MONTHS.find((x) => x.forecast)!; // the one labelled column
 const MAX_K = 500;
 
-function ForecastScene() {
+/** Not shown right now; kept so the forecast tab can come back. */
+export function ForecastScene() {
   return (
     <Feature
-      group="Finance · forecasting"
+      pain="I don't know how next quarter will go until it's over."
       headline="Know next quarter before it happens."
       body="We forecast from your real pipeline, so the number you plan with is the one you hit."
       big="7%"
@@ -273,8 +318,8 @@ const SURPRISE = "Slow response";
 function CallsScene() {
   return (
     <Feature
-      group="Calls · lost deals"
-      headline="Slow replies lose more deals than price."
+      pain="We lose deals and I don't know why."
+      headline="Know why you lose, and fix it before the next call."
       body="We tag every lost-deal call with the reason the customer actually gave."
       big="1 in 3"
       bigLabel="Losses with the wrong reason in the CRM"
@@ -291,7 +336,7 @@ const TABS: UseCaseTab[] = [
   { label: "Sales", scene: <SalesScene /> },
   { label: "Pipeline", scene: <PipelineScene /> },
   { label: "Operations", scene: <OpsScene /> },
-  { label: "Finance", scene: <ForecastScene /> },
+  { label: "Finance", scene: <MarginScene /> },
   { label: "Calls", scene: <CallsScene /> },
 ];
 

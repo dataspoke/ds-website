@@ -44,6 +44,8 @@ export function DashPanel({ title, variant = "light", children }: { title: strin
 const FORMATS = {
   int: (v: number) => Math.round(v).toLocaleString("en-US"),
   pct: (v: number) => `${Math.round(v)}%`,
+  /** Signed percent with a true minus sign. */
+  spct: (v: number) => `${Math.round(v) < 0 ? "−" : ""}${Math.abs(Math.round(v))}%`,
   dur: (v: number) => `${Math.floor(Math.round(v) / 60)}m ${Math.round(v) % 60}s`,
   dec: (v: number) => v.toFixed(1),
   usd: (v: number) => `$${Math.round(v).toLocaleString("en-US")}`,
