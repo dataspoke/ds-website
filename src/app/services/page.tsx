@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { generateMetadata } from "@/lib/metadata";
 import { Section, SectionHead } from "@/components/shared/section";
 import { Assessment } from "@/components/home/assessment";
@@ -7,7 +8,7 @@ import { LegacyAnchorRedirect } from "@/components/services/legacy-anchor-redire
 import { LineCard } from "@/components/services/line-card";
 import { ServicesMap } from "@/components/services/services-map";
 import { ASSESSMENT, RETAINER_NOTE } from "@/content/approach";
-import { HUB_LINES, SERVICES_PAGE, SPOKE_LINES } from "@/content/services";
+import { HUB_LINES, LINE_PAGE, SERVICES_PAGE, SPOKE_LINES } from "@/content/services";
 
 export const metadata: Metadata = generateMetadata({
   title: SERVICES_PAGE.metaTitle,
@@ -70,6 +71,12 @@ export default function ServicesPage() {
             <LineCard key={l.slug} line={l} />
           ))}
         </div>
+        <Link
+          href={LINE_PAGE.workLink.href}
+          className="mt-8 inline-block py-2 font-semibold text-primary hover:text-primary/80"
+        >
+          {LINE_PAGE.workLink.label} &rarr;
+        </Link>
       </Section>
 
       <Section tint tight>

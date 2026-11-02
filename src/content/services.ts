@@ -261,9 +261,9 @@ export const SERVICE_LINES: ServiceLine[] = [
     kind: "hub",
     title: "Data Capture & Integration",
     oneLiner: "Stop retyping. Every lead, call and invoice lands where it belongs on its own.",
-    metaTitle: "Connect your business software so nothing gets retyped",
+    metaTitle: "Connect your software so nothing gets retyped",
     metaDescription:
-      "DataSpoke connects the CRM, accounting, phone and marketing tools your business already uses, so leads, calls and invoices flow between them on their own. Save hours of manual work each week and never miss a lead. Free 30-minute estimate. Serving CT, NY and the US.",
+      "We connect the CRM, accounting, phone and marketing tools you already use, so leads, calls and invoices flow on their own. Free 30-minute estimate.",
     problem:
       "Your CRM, accounting software, scheduler and phone system each know part of the story, and someone on your team spends hours a week carrying information between them by hand. Leads wait in inboxes. Calls, emails and texts hold facts about your customers that never get written down anywhere you can find. Integration is the plain word for fixing that: we connect the programs you already pay for so the information moves on its own.",
     soundsLike: [
@@ -283,9 +283,9 @@ export const SERVICE_LINES: ServiceLine[] = [
     kind: "hub",
     title: "Data Organization & Warehousing",
     oneLiner: "One trustworthy set of records, so everyone works from the same facts.",
-    metaTitle: "Organize your business data into one trustworthy record",
+    metaTitle: "Organize your data into one trustworthy record",
     metaDescription:
-      "DataSpoke turns the calls, emails, documents and spreadsheets your business produces into one organized, trustworthy set of records you own. End the argument about whose number is right and give AI something real to read. Free 30-minute estimate. CT, NY and nationwide.",
+      "We turn your calls, emails, documents and spreadsheets into one trustworthy set of records you own, ready for reports and AI. Free 30-minute estimate.",
     problem:
       "Once the information is captured, it's still a pile. Two documents disagree. A decision was made on a call and nobody can find it. A report says one thing and the accounting software says another. We sort the pile into organized records of clients, projects, decisions and policies, and we mark each fact with how far you can trust it. A data warehouse is the plain word for where that organized copy lives: one central, well-kept store of your business information that you own and that your reports, software and AI all read from.",
     soundsLike: [
@@ -306,9 +306,9 @@ export const SERVICE_LINES: ServiceLine[] = [
     kind: "spoke",
     title: "Metrics & Dashboards",
     oneLiner: "Know your numbers every Monday without anyone building a report.",
-    metaTitle: "Business dashboards that show you your numbers every Monday",
+    metaTitle: "Dashboards that show your numbers every Monday",
     metaDescription:
-      "DataSpoke builds dashboards and weekly scorecards that update themselves from the systems your business already runs. Know your numbers, end the debate about whose report is right and see which marketing actually pays. Free 30-minute estimate. Serving CT, NY and the US.",
+      "Dashboards and weekly scorecards that update themselves from the systems you already run. Know your numbers every Monday. Free 30-minute estimate.",
     problem:
       "Month-end means exporting four reports and hoping they match. The leadership meeting starts with a debate about whose number is right, and nobody can say which numbers actually move the goal. A dashboard is a page of your key numbers that updates itself from your real systems. Routine reports belong there, built once and the same every week, not rebuilt by hand or re-asked of an AI chat window every Monday.",
     soundsLike: [
@@ -328,9 +328,9 @@ export const SERVICE_LINES: ServiceLine[] = [
     kind: "spoke",
     title: "Custom Software",
     oneLiner: "Software built around how your business works, so your team stops working around the software.",
-    metaTitle: "Custom software built around how your business works",
+    metaTitle: "Custom software built around how you work",
     metaDescription:
-      "DataSpoke builds internal tools, client portals and mobile apps on top of the systems your business already pays for. Your team works in one screen built for them, clients answer their own status questions, and you own the code. Free 30-minute estimate. CT, NY and nationwide.",
+      "Internal tools, client portals and mobile apps on the systems you already pay for. One screen for your team, and you own the code. Free 30-minute estimate.",
     problem:
       "Off-the-shelf software is built for everyone, so it fits nobody exactly. Your team fills the gaps with spreadsheets, sticky notes and copy and paste. You already pay for systems that hold the information. What's missing is the screen built around how your company works. We build internal tools (a screen for your team), client portals (a private page where clients see their own status) and mobile apps, all on top of the systems you already pay for, and you own the code.",
     soundsLike: [
@@ -351,7 +351,7 @@ export const SERVICE_LINES: ServiceLine[] = [
     kind: "spoke",
     title: "AI Implementation",
     oneLiner: "Put AI to work on your own business, with your team trained to use it and a person approving what it writes.",
-    metaTitle: "AI for your business: set up on your data, with your team trained",
+    metaTitle: "AI on your data so your team gets more done",
     metaDescription:
       "We set up AI on your business data, train your team to use it and automate busywork so your people do more. A person approves every draft. Free estimate.",
     problem:
@@ -373,7 +373,7 @@ export const SERVICE_LINES: ServiceLine[] = [
     kind: "spoke",
     title: "Analytics & Data Science",
     oneLiner: "See where the money is going and what's coming next, so you decide faster and with proof.",
-    metaTitle: "See where the money is going and what's coming next",
+    metaTitle: "See where the money goes and what's coming next",
     metaDescription:
       "We use your business's own history to show which customers, services and channels pay, who is about to leave and when to staff up. Free 30-minute estimate.",
     problem:
@@ -406,9 +406,9 @@ export function serviceLinkText(line: { title: string; oneLiner: string }): stri
 
 /** Copy for the /services overview page. */
 export const SERVICES_PAGE = {
-  metaTitle: "Services: data, dashboards, custom software and AI for your business",
+  metaTitle: "Services: data, dashboards, software and AI",
   metaDescription:
-    "What DataSpoke does for business owners, in plain words: connect your software so nothing gets retyped, know your numbers every Monday, build tools around how you work, put AI to work on your business and see where the money goes. Free 30-minute estimate. CT, NY and the US.",
+    "Grow your business with the data you already have: connect your software, know your numbers, build tools and put AI to work. Free 30-minute estimate.",
   eyebrow: "Services",
   title: "Six ways to run a bigger business with the team you have.",
   lede:
@@ -527,6 +527,7 @@ export const LINE_PAGE = {
   ctaButton: "Ask a question about this service",
   estimateCta: "Book your free estimate",
   seeLine: (title: string) => `See ${title}`,
+  workLink: { label: "See what we've built for other businesses", href: "/work" },
 };
 
 /**

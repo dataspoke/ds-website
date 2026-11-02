@@ -11,7 +11,7 @@ import { CREDENTIALS } from "@/content/home";
 import { SOCIAL_LINKS } from "@/lib/constants";
 
 export const metadata: Metadata = generateMetadata({
-  title: "About Nick Paul, founder of DataSpoke in Durham, CT",
+  title: "About Nick Paul, DataSpoke founder in Durham, CT",
   description:
     "Nick Paul founded DataSpoke in Durham, CT. Data scientist, developer and Army veteran helping owners connect their software so teams do more.",
   path: "/about",

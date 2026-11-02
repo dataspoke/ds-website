@@ -199,6 +199,10 @@ const ALL_CASE_STUDIES: CaseStudy[] = [
       },
     ],
     featured: true,
+    // The summary is in Nick's voice, so search results get a third-person version.
+    // Source for the claim: "What changed" above ("Over the last year that let me double my revenue").
+    metaDescription:
+      "Calls, five inboxes, client notes and time tracking ate the hours meant for clients. Running on this system, the owner doubled revenue over the past year.",
     // fe56d73 (2026-10-06T14:21:26-04:00) added this study. No later commit changed its text.
     dates: {
       published: "2026-10-06T14:21:26-04:00",
