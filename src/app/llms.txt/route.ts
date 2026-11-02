@@ -8,7 +8,8 @@ import {
   SITE_NAME,
   SITE_URL,
 } from "@/lib/constants";
-import { CREDENTIALS, HERO, HOME_FAQS, TOOLS } from "@/content/home";
+import { CREDENTIALS, HERO, TOOLS } from "@/content/home";
+import { FAQS_A } from "@/components/home-a/content";
 import { FREE_ESTIMATE } from "@/content/free-estimate";
 import { SERVICE_PAGE_EXTRAS } from "@/content/service-pages";
 import { HUB_LINES, SPOKE_LINES } from "@/content/services";
@@ -33,13 +34,13 @@ function body() {
     "",
     `> ${SITE_DESCRIPTION}`,
     "",
-    `${SITE_NAME} is a data and AI consulting firm founded by Nick Paul (${CREDENTIALS.slice(0, 3).join("; ")}). ${SERVICE_AREA} Clients are established businesses, from owner-run to mid-size, whose CRM, accounting, phone and marketing tools don't talk to each other. Owners come to ${SITE_NAME} to ${HERO.outcomes.map((o) => o.replace(/\.$/, "").toLowerCase()).join(", ")}, and to grow their business with the data they already have.`,
+    `${SITE_NAME} is a data and AI consulting firm founded by Nick Paul (${CREDENTIALS.slice(0, 3).join("; ")}). ${SERVICE_AREA} Clients are established businesses, from owner-run to mid-size, whose CRM, accounting, phone and marketing tools don't talk to each other. Owners come to ${SITE_NAME} to ${HERO.outcomes.map((o) => o.replace(/\.$/, "").toLowerCase()).join(", ")}, and to grow their business with data they already have.`,
     "",
     `Systems commonly connected: ${TOOLS.join(", ")}.`,
     "",
     "## Quick answers",
     "",
-    ...HOME_FAQS.map((f) => `- ${f.question} ${f.answer}`),
+    ...FAQS_A.map((f) => `- ${f.question} ${f.answer}`),
     "",
     "## Services",
     "",

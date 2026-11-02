@@ -21,6 +21,8 @@ export function UseCaseTabs({ tabs }: { tabs: UseCaseTab[] }) {
   const [selected, setSelected] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const trackRef = useRef<HTMLDivElement>(null);
+  const stripRef = useRef<HTMLDivElement>(null);
+  const mounted = useRef(false);
   // Index a tab press is scrolling the track towards; scroll events are ignored until it lands.
   const target = useRef<number | null>(null);
 
@@ -55,13 +57,26 @@ export function UseCaseTabs({ tabs }: { tabs: UseCaseTab[] }) {
   };
 
   // Keep the selected tab in view when the tab bar itself scrolls (narrow screens).
+  // Scrolls only the strip, sideways, and never on first render, so the page never moves.
   useEffect(() => {
-    tabRefs.current[selected]?.scrollIntoView({ block: "nearest", inline: "nearest" });
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
+    }
+    const strip = stripRef.current;
+    const tab = tabRefs.current[selected];
+    if (!strip || !tab || strip.scrollWidth <= strip.clientWidth + 1) return;
+    const pad = 16;
+    const left = tab.getBoundingClientRect().left - strip.getBoundingClientRect().left + strip.scrollLeft;
+    const right = left + tab.offsetWidth;
+    if (left - pad < strip.scrollLeft) strip.scrollTo({ left: left - pad, behavior: "smooth" });
+    else if (right + pad > strip.scrollLeft + strip.clientWidth)
+      strip.scrollTo({ left: right + pad - strip.clientWidth, behavior: "smooth" });
   }, [selected]);
 
   return (
     <div className="mt-8 grid min-w-0 gap-4">
-      <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div ref={stripRef} className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         <div role="tablist" aria-label="Use cases" className="flex w-max gap-2 border-b border-tint-strong pb-px sm:w-auto">
           {tabs.map((t, i) => {
             const on = i === selected;

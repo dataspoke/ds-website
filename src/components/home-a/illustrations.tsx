@@ -186,7 +186,7 @@ export function HeroIllustration({ className }: { className?: string }) {
         />
       ))}
       {nodes.map((n, i) => (
-        <circle key={`p-${n.name}`} cx={n.x} cy={n.y} r={4} fill="var(--brand)">
+        <circle key={`p-${n.name}`} cx={n.x} cy={n.y} r={4} fill="var(--brand)" className="motion-reduce:hidden">
           <animateMotion
             dur={`${3.2 + (i % 3) * 0.6}s`}
             repeatCount="indefinite"

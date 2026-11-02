@@ -53,7 +53,7 @@ export function HeroA() {
         <p className="text-center text-sm text-muted-foreground">Works with the tools you already use</p>
         <ul className="mt-3 flex flex-wrap justify-center gap-x-6 gap-y-2">
           {TOOLS_A.map((t) => (
-            <li key={t} className="font-display text-[1rem] font-bold tracking-tight text-muted-foreground/70">
+            <li key={t} className="font-display text-[1rem] font-bold tracking-tight text-muted-foreground">
               {t}
             </li>
           ))}

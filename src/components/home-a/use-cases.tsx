@@ -206,7 +206,7 @@ function PersonasScene() {
       headline="Know your best customer. Stop chasing bad leads."
       body="We profile who actually buys, then score every new lead so your team calls the best ones first."
       decision={{ q: "Which leads do we chase, and which do we drop?", a: "Call referrals first. Send price shoppers an email." }}
-      label={`Sample chart, close rate by customer type: ${PERSONAS.map((x) => `${x.name} ${x.v}%`).join(", ")}. ${BEST.name} close best.`}
+      label={`Sample chart, close rate by customer type: ${PERSONAS.map((x) => `${x.name} ${x.v}%`).join(", ")}. The best: ${BEST.name.toLowerCase()}, at ${BEST.v}%.`}
     >
       <DashPanel title="Close rate by customer type">
         <HBars rows={PERSONAS} hi={BEST.name} fmt="pct" />
