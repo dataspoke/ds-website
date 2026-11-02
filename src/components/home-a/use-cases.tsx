@@ -103,9 +103,11 @@ function HBars({ rows, hi, fmt }: { rows: { name: string; v: number }[]; hi: str
 
 /** By channel, last 90 days. Spend = leads × CPL; CPS is computed from spend and sales. */
 const CHANNELS = [
-  { name: "Google Search", leads: 612, sales: 71, cpl: 52 },
-  { name: "Lead marketplace", leads: 540, sales: 18, cpl: 31 },
-  { name: "Paid social", leads: 377, sales: 22, cpl: 44 },
+  { name: "Google Ads", campaign: "Branded search", leads: 214, sales: 49, cpl: 38 },
+  { name: "Google Ads", campaign: "Non-branded · service + city", leads: 388, sales: 41, cpl: 92 },
+  { name: "Google LSA", campaign: "Local Services Ads", leads: 263, sales: 38, cpl: 61 },
+  { name: "Meta", campaign: "Lead form · spring promo", leads: 301, sales: 9, cpl: 29 },
+  { name: "Google Business Profile", campaign: "Organic calls & forms", leads: 176, sales: 31, cpl: 0 },
 ];
 const cps = (c: (typeof CHANNELS)[number]) => (c.leads * c.cpl) / c.sales;
 const WORST = CHANNELS.reduce((a, c) => (cps(c) > cps(a) ? c : a)); // lowest CPL, highest CPS
@@ -116,7 +118,7 @@ function SalesScene() {
       pain="I spend $20K a month on marketing and don't know what's working."
       headline="Every dollar tied to a sale. Cut the spend that doesn't close."
       body="We follow each lead from ad to closed deal, so you judge channels by cost per sale."
-      label={`Sample report, cost per lead and cost per sale by channel: ${CHANNELS.map((c) => `${c.name} ${usd(c.cpl)} and ${usd(cps(c))}`).join("; ")}. ${WORST.name} has the lowest cost per lead and the highest cost per sale.`}
+      label={`Sample report, cost per lead and cost per sale by channel: ${CHANNELS.map((c) => `${c.name} ${c.campaign} ${c.cpl ? `${usd(c.cpl)} and ${usd(cps(c))}` : "organic, no ad cost"}`).join("; ")}. ${WORST.name} has the lowest cost per lead and the highest cost per sale.`}
     >
       <DashPanel title="Cost per lead vs. cost per sale">
         <div className={s.body}>
@@ -130,16 +132,21 @@ function SalesScene() {
             </thead>
             <tbody>
               {CHANNELS.map((c, k) => (
-                <tr key={c.name} className={cx(c === WORST && s.hiRow)} style={vars({ "--d": `${k * 90}ms` })}>
-                  <td>{c.name}</td>
-                  <td>{usd(c.cpl)}</td>
+                <tr key={`${c.name}-${c.campaign}`} className={cx(c === WORST && s.hiRow)} style={vars({ "--d": `${k * 90}ms` })}>
+                  <td>
+                    {c.name}
+                    <span className="block text-xs font-normal text-muted-foreground">{c.campaign}</span>
+                  </td>
+                  <td>{c.cpl ? usd(c.cpl) : "—"}</td>
                   <td>
                     {c === WORST ? (
                       <CountUp to={Math.round(cps(c))} format="usd">
                         {usd(cps(c))}
                       </CountUp>
-                    ) : (
+                    ) : c.cpl ? (
                       usd(cps(c))
+                    ) : (
+                      "—"
                     )}
                   </td>
                 </tr>
