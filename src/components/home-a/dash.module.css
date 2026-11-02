@@ -368,46 +368,9 @@
   text-align: center;
 }
 
-/* Weighted pipeline: a muted bar for each stage's pipeline value, filled with
-   the expected amount; the numbers sit beside the bar (under it on phones). */
-.pr {
-  display: grid;
-  grid-template-columns: 8rem minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 4px 14px;
-  padding: 6px 0;
-}
-.prName {
-  font-size: 15px;
+/* Weighted pipeline table: total row and a worked example under it. */
+.table td.num {
   color: var(--text);
-}
-.prTrack {
-  display: block;
-  width: 0;
-  height: 14px;
-  overflow: hidden;
-  border-radius: 5px;
-  background: var(--mute);
-  transition: width 1s var(--ease) var(--d, 0ms);
-}
-[data-in] .prTrack {
-  width: var(--w);
-}
-.prTrack b {
-  display: block;
-  width: 0;
-  height: 100%;
-  background: var(--hi);
-  transition: width 0.9s var(--ease) calc(var(--d, 0ms) + 500ms);
-}
-[data-in] .prTrack b {
-  width: var(--e);
-}
-.prNums {
-  font-size: 13px;
-  color: var(--text-2);
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
 }
 .prTotal {
   display: flex;
@@ -415,9 +378,9 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 4px 12px;
-  margin-top: 8px;
-  padding-top: 12px;
-  border-top: 1px solid var(--line);
+  margin-top: 2px;
+  padding-top: 10px;
+  border-top: 1.5px solid var(--text-3);
   font-size: 15px;
   color: var(--text-2);
   font-variant-numeric: tabular-nums;
@@ -428,17 +391,20 @@
   color: var(--hi);
 }
 .foot {
-  margin-top: 10px;
+  margin-top: 2px;
   font-size: 12px;
   color: var(--text-3);
 }
+.example {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--text-2);
+  font-variant-numeric: tabular-nums;
+}
 
 @media (max-width: 760px) {
-  .pr {
-    grid-template-columns: 6.5rem minmax(0, 1fr);
-  }
-  .prNums {
-    grid-column: 2;
+  /* Long stage names wrap rather than widen the table. */
+  .table td:first-child {
     white-space: normal;
   }
   .title {
@@ -465,6 +431,12 @@
   }
   .cols {
     height: 160px;
+  }
+}
+@media (max-width: 480px) {
+  /* The worked example under the table still explains the average sale. */
+  .hideSm {
+    display: none;
   }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -267,56 +267,65 @@ function OpsScene() {
 
 /* ---------- Finance: weighted pipeline by stage ---------- */
 
-/** Open pipeline in $K by stage, with each stage's close rate over the last 12 months. */
+/**
+ * Open pipeline by stage: deal count, pipeline value in $K and the win rate
+ * over the last 12 months. Average sale = pipeline ÷ deals, and expected =
+ * pipeline × win rate (the same as deals × average × win rate).
+ */
 const STAGES = [
-  { name: "Qualified", value: 1240, rate: 10 },
-  { name: "Proposal sent", value: 860, rate: 25 },
-  { name: "Negotiation", value: 540, rate: 50 },
-  { name: "Verbal yes", value: 310, rate: 85 },
+  { name: "Discovery call", deals: 40, pipeline: 1240, rate: 10 },
+  { name: "Needs assessment", deals: 24, pipeline: 860, rate: 25 },
+  { name: "Proposal sent", deals: 15, pipeline: 540, rate: 50 },
+  { name: "Contract out", deals: 8, pipeline: 310, rate: 85 },
 ];
-const expected = (x: (typeof STAGES)[number]) => Math.round((x.value * x.rate) / 100);
-const IN_PIPELINE = STAGES.reduce((a, x) => a + x.value, 0); // 2,950
+const avgSale = (x: (typeof STAGES)[number]) => x.pipeline / x.deals;
+const expected = (x: (typeof STAGES)[number]) => Math.round((x.pipeline * x.rate) / 100);
+const DEALS = STAGES.reduce((a, x) => a + x.deals, 0); // 87
+const IN_PIPELINE = STAGES.reduce((a, x) => a + x.pipeline, 0); // 2,950
 const EXPECTED = STAGES.reduce((a, x) => a + expected(x), 0); // 873
-const STAGE_MAX = Math.max(...STAGES.map((x) => x.value));
+const EXAMPLE = STAGES[2]; // Proposal sent
 /** $K to "$860K" or "$1.24M". */
 const money = (k: number) => (k >= 1000 ? `$${(k / 1000).toFixed(2).replace(/\.?0+$/, "")}M` : `$${k}K`);
+/** Average sale in $K with one decimal, e.g. "$35.8K". */
+const avgK = (k: number) => `$${k.toFixed(1)}K`;
 
 function PipelineValueScene() {
   return (
     <Feature
       pain="Our deals take 90 days to close. I can't tell what's actually coming in."
       headline="Know what your pipeline is really worth."
-      body="We weight each open deal by its stage's real close rate."
+      body="We multiply each stage's deals by your average sale and real win rate."
       decision={{ q: "Can we afford to add a person this quarter?", a: `Yes. ${money(EXPECTED)} is expected in the next 90 days.` }}
-      label={`Sample chart, pipeline by stage with expected value in the next 90 days: ${STAGES.map((x) => `${x.name} ${money(x.value)} at ${x.rate}% close rate, ${money(expected(x))} expected`).join("; ")}. In pipeline ${money(IN_PIPELINE)}, expected ${money(EXPECTED)}.`}
+      label={`Sample table, pipeline by stage for the next 90 days: ${STAGES.map((x) => `${x.name} ${x.deals} deals, average sale ${avgK(avgSale(x))}, win rate ${x.rate}%, expected ${money(expected(x))}`).join("; ")}. ${DEALS} deals, ${money(IN_PIPELINE)} in pipeline, ${money(EXPECTED)} expected.`}
     >
-      <DashPanel title="Pipeline by stage · expected in 90 days">
+      <DashPanel title="Pipeline by stage · next 90 days">
         <div className={s.body}>
-          <div className={s.legend} aria-hidden>
-            <span>
-              <i style={{ background: "var(--mute)" }} />
-              In pipeline
-            </span>
-            <span>
-              <i style={{ background: "var(--hi)" }} />
-              Expected
-            </span>
-          </div>
-          <div className="mt-2">
-            {STAGES.map((x, k) => (
-              <div key={x.name} className={s.pr}>
-                <span className={s.prName}>{x.name}</span>
-                <span className={s.prTrack} style={vars({ "--w": `${(x.value / STAGE_MAX) * 100}%`, "--e": `${x.rate}%`, "--d": `${k * 90}ms` })}>
-                  <b />
-                </span>
-                <span className={s.prNums}>{`${money(x.value)} · ${x.rate}% · ${money(expected(x))}`}</span>
-              </div>
-            ))}
-          </div>
+          <table className={s.table}>
+            <thead>
+              <tr>
+                <th>Stage</th>
+                <th>Deals</th>
+                <th className={s.hideSm}>Avg sale</th>
+                <th>Win rate</th>
+                <th>Expected</th>
+              </tr>
+            </thead>
+            <tbody>
+              {STAGES.map((x, k) => (
+                <tr key={x.name} style={vars({ "--d": `${k * 90}ms` })}>
+                  <td>{x.name}</td>
+                  <td>{x.deals}</td>
+                  <td className={s.hideSm}>{avgK(avgSale(x))}</td>
+                  <td>{`${x.rate}%`}</td>
+                  <td className={s.num}>{money(expected(x))}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
           <div className={s.prTotal}>
-            <span>{`In pipeline ${money(IN_PIPELINE)}`}</span>
+            <span>{`${DEALS} deals · ${money(IN_PIPELINE)} in pipeline`}</span>
             <span>
-              {"→ Expected "}
+              {"Expected "}
               <strong>
                 <CountUp to={EXPECTED} format="usdK">
                   {money(EXPECTED)}
@@ -324,7 +333,10 @@ function PipelineValueScene() {
               </strong>
             </span>
           </div>
-          <p className={s.foot}>Close rates from your last 12 months of deals.</p>
+          <p className={s.example}>
+            {`e.g. ${EXAMPLE.name}: ${EXAMPLE.deals} deals × ${avgK(avgSale(EXAMPLE))} × ${EXAMPLE.rate}% = ${money(expected(EXAMPLE))}`}
+          </p>
+          <p className={s.foot}>Win rates from your last 12 months of deals.</p>
         </div>
       </DashPanel>
     </Feature>
