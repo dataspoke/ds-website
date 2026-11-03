@@ -126,7 +126,7 @@ export function EstimateOffer({
         <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-background">
           <iframe
             src={embedUrl}
-            title="Book a free 30-minute data and AI estimate"
+            title="Book a free AI strategy call"
             className="h-[720px] w-full"
             loading="lazy"
           />

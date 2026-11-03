@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { generateMetadata } from "@/lib/metadata";
 import { Section } from "@/components/shared/section";
-import { BookCall } from "@/components/shared/book-call";
+import { EstimateCta } from "@/components/shared/estimate-cta";
 import { ContactForm } from "@/components/contact/contact-form";
 import { CONTACT_EMAIL, SOCIAL_LINKS } from "@/lib/constants";
 import { STEPS } from "@/content/approach";
 
 export const metadata: Metadata = generateMetadata({
-  title: "Contact us: book a free call or send a note",
+  title: "Book your free AI strategy call",
   description:
-    "Book a free 30-minute call with DataSpoke in Durham, CT, or send a note about what's slowing your business down. We reply within one business day.",
+    "Book your free AI strategy call with DataSpoke in Durham, CT, or send a note about what's slowing your business down. We reply within one business day.",
   path: "/contact",
 });
 
@@ -24,21 +24,24 @@ export default function ContactPage() {
             Let&apos;s talk about what&apos;s slowing you down.
           </h1>
           <p className="lede">
-            The fastest route is a free 30-minute call. If you&apos;d rather write, the form goes
-            straight to us and you get a reply within one business day.
+            The fastest route is a free AI strategy call: 30 minutes, then a written estimate with a
+            recommended plan and a price range within two business days. No obligation. If you&apos;d
+            rather write, the form goes straight to us and you get a reply within one business day.
           </p>
         </div>
 
         <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <div className="grid content-start gap-8">
             <div className="grid gap-4 rounded-2xl border border-border p-6 sm:p-8">
-              <h2 className="text-2xl font-bold">Book a free 30-minute call</h2>
+              <h2 className="text-2xl font-bold">Book your free AI strategy call</h2>
               <p className="text-muted-foreground">
                 Pick a time that suits you. You&apos;ll get a calendar invite with a video link.
                 Come with whatever is slowing your business down. No preparation and no technical
                 background needed.
               </p>
-              <BookCall className="justify-self-start">Pick a time</BookCall>
+              <EstimateCta location="contact" className="justify-self-start">
+                Book your free AI strategy call
+              </EstimateCta>
             </div>
 
             <div className="grid gap-3">

@@ -1,4 +1,4 @@
-import { BookCall } from "@/components/shared/book-call";
+import { EstimateCta } from "@/components/shared/estimate-cta";
 import { AssessmentJsonLd } from "@/components/shared/json-ld";
 import { Section, SectionHead } from "@/components/shared/section";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
@@ -43,14 +43,10 @@ export function Assessment({ tint = false }: { tint?: boolean }) {
               ))}
             </div>
           </div>
-          <p className="font-display text-[2rem] font-extrabold tracking-tight">
-            {ASSESSMENT.price}{" "}
-            <span className="font-sans text-base font-medium tracking-normal text-muted-foreground">
-              {ASSESSMENT.terms}
-            </span>
-          </p>
-          <BookCall className="justify-self-start">{ASSESSMENT.cta}</BookCall>
-          <p className="text-sm text-muted-foreground">{ASSESSMENT.credit}</p>
+          <p className="text-muted-foreground">{ASSESSMENT.scope}</p>
+          <EstimateCta location="assessment" className="justify-self-start">
+            {ASSESSMENT.cta}
+          </EstimateCta>
         </div>
       </div>
     </Section>

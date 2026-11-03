@@ -6,7 +6,7 @@ import type { FaqItem } from "@/types";
 export const HERO_A = {
   lede: "We connect the software you already pay for, so your numbers are right and busywork runs itself.",
   chips: ["Accurate numbers", "Better decisions", "Grow faster"],
-  primaryCta: "Book your free estimate",
+  primaryCta: "Book your free AI strategy call",
   secondaryCta: { label: "All services", href: "/services" },
 };
 
@@ -42,10 +42,10 @@ export const EVERY_DEVICE_HEAD = {
 
 export const HOW_A = {
   eyebrow: "How it works",
-  title: "See the plan and price first.",
+  title: "See the plan and price range first.",
   steps: [
-    { title: "Free 30-minute estimate", text: "No obligation." },
-    { title: "Written plan and price", text: "Fixed scope, agreed upfront." },
+    { title: "Free AI strategy call", text: "30 minutes. No obligation." },
+    { title: "Written estimate and price range", text: "Within two business days." },
     { title: "Build and hand over", text: "You own all of it." },
   ],
   moreLink: { label: "How an engagement works", href: "/approach" },
@@ -66,8 +66,8 @@ export const FAQS_A: FaqItem[] = [
   {
     question: "How do I get started?",
     answer:
-      "Book a free 30-minute estimate. Within two business days you get a written plan and price range.",
-    link: { label: "free 30-minute estimate", href: "/free-estimate" },
+      "Book a free AI strategy call. After the 30-minute call, you get a written estimate with a recommended plan and a price range within two business days. No obligation.",
+    link: { label: "free AI strategy call", href: "/free-estimate" },
   },
   {
     question: "Do we have to replace the software we already use?",
@@ -78,6 +78,6 @@ export const FAQS_A: FaqItem[] = [
 
 export const CTA_A = {
   title: "Tell us what's slowing you down.",
-  text: "A free 30-minute call, then a written plan and price.",
-  button: "Book your free estimate",
+  text: "A free 30-minute call, then a written estimate with a plan and price range.",
+  button: "Book your free AI strategy call",
 };

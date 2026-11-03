@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BookCall } from "@/components/shared/book-call";
+import { EstimateCta } from "@/components/shared/estimate-cta";
 import { Section, SectionHead } from "@/components/shared/section";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { LpProductCard } from "@/components/lp/lp-product-card";
@@ -10,7 +10,7 @@ import { generateMetadata as pageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = pageMetadata({
   title: "AI-Ready Company",
   description:
-    "Connect your systems, make your company AI-ready and automate the busywork. A two-week Data & AI Assessment, then a plan.",
+    "Connect your systems, make your company AI-ready and automate the busywork. Start with a free AI strategy call.",
   path: "/lp/ai",
   noIndex: true,
 });
@@ -25,7 +25,9 @@ export default function LpAiPage() {
             {LP_AI.headline}
           </h1>
           <p className="lede max-w-xl">{LP_AI.lede}</p>
-          <BookCall className="justify-self-start">{LP_AI.ctaLabel}</BookCall>
+          <EstimateCta location="lp-ai-hero" className="justify-self-start">
+            {LP_AI.ctaLabel}
+          </EstimateCta>
         </div>
       </Section>
 
@@ -65,19 +67,19 @@ export default function LpAiPage() {
           </div>
 
           <div className="grid gap-5 rounded-2xl border border-border bg-background p-6 sm:p-8">
-            <p className="font-display text-[2rem] font-extrabold tracking-tight">
-              {LP_AI.assessment.price}{" "}
-              <span className="font-sans text-base font-medium tracking-normal text-muted-foreground">
-                {LP_AI.assessment.terms}
-              </span>
-            </p>
-            <BookCall className="justify-self-start">{LP_AI.ctaLabel}</BookCall>
-            <p className="text-sm text-muted-foreground">{LP_AI.assessment.credit}</p>
+            <p className="text-muted-foreground">{LP_AI.assessment.scope}</p>
+            <EstimateCta location="lp-ai-assessment" className="justify-self-start">
+              {LP_AI.ctaLabel}
+            </EstimateCta>
           </div>
         </div>
       </Section>
 
-      <LpCtaBanner title="One senior consultant. No hand-offs." ctaLabel={LP_AI.ctaLabel} />
+      <LpCtaBanner
+        title="One senior consultant. No hand-offs."
+        ctaLabel={LP_AI.ctaLabel}
+        estimateLocation="lp-ai-banner"
+      />
     </>
   );
 }

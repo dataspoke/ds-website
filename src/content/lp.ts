@@ -1,5 +1,6 @@
 // Copy for the /lp/* landing pages. These pages have no site nav and one CTA
-// (BookCall), so copy here is self-contained and doesn't link elsewhere.
+// (BookCall, or EstimateCta on /lp/ai), so copy here is self-contained and
+// doesn't link elsewhere.
 //
 // Audience: established businesses past $1M in revenue. Owners and
 // leadership teams, not one-person shops.
@@ -19,9 +20,7 @@ export interface LpAssessment {
   name: string;
   lede: string;
   includes: string[];
-  price: string;
-  terms: string;
-  credit: string;
+  scope: string;
 }
 
 /** Shown on every /lp/* page. */
@@ -81,18 +80,16 @@ export const LP_AI = {
   assessment: {
     name: "Data & AI Assessment",
     lede:
-      "Two weeks. I inventory every system and data source your company runs on, score how connected and AI‑ready it is today and hand you a prioritized plan. You keep the plan whether or not we work together.",
+      "Two weeks. We list every system and data source your company runs on, score how connected and AI‑ready it is today and hand you a prioritized plan. You keep the plan whether or not we work together.",
     includes: [
-      "A map of every tool, who uses it and what data lives there",
+      "A map of every tool, who uses it and what information lives there",
       "A connected-data score and an AI‑readiness score, with the gaps named",
       "The three projects worth doing first, with what each would cost and return",
       "A 60-minute walkthrough with you and your leadership team",
     ],
-    price: "$999",
-    terms: "fixed price · 2 weeks",
-    credit: "Credited toward your first project if you go ahead.",
+    scope: "A deeper two-week review of your systems and data, scoped on your free AI strategy call.",
   } as LpAssessment,
-  ctaLabel: "Book the assessment call",
+  ctaLabel: "Start with a free AI strategy call",
 };
 
 export const LP_CUSTOM_SOFTWARE = {

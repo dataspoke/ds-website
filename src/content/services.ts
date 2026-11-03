@@ -263,7 +263,7 @@ export const SERVICE_LINES: ServiceLine[] = [
     oneLiner: "Stop retyping. Every lead, call and invoice lands where it belongs on its own.",
     metaTitle: "Connect your software so nothing gets retyped",
     metaDescription:
-      "We connect the CRM, accounting, phone and marketing tools you already use, so leads, calls and invoices flow on their own. Free 30-minute estimate.",
+      "We connect the CRM, accounting, phone and marketing tools you already use, so leads, calls and invoices flow on their own. Free AI strategy call.",
     problem:
       "Your CRM, accounting software, scheduler and phone system each know part of the story, and someone on your team spends hours a week carrying information between them by hand. Leads wait in inboxes. Calls, emails and texts hold facts about your customers that never get written down anywhere you can find. Integration is the plain word for fixing that: we connect the programs you already pay for so the information moves on its own.",
     soundsLike: [
@@ -285,7 +285,7 @@ export const SERVICE_LINES: ServiceLine[] = [
     oneLiner: "One trustworthy set of records, so everyone works from the same facts.",
     metaTitle: "Organize your data into one trustworthy record",
     metaDescription:
-      "We turn your calls, emails, documents and spreadsheets into one trustworthy set of records you own, ready for reports and AI. Free 30-minute estimate.",
+      "We turn your calls, emails, documents and spreadsheets into one trustworthy set of records you own, ready for reports and AI. Free AI strategy call.",
     problem:
       "Once the information is captured, it's still a pile. Two documents disagree. A decision was made on a call and nobody can find it. A report says one thing and the accounting software says another. We sort the pile into organized records of clients, projects, decisions and policies, and we mark each fact with how far you can trust it. A data warehouse is the plain word for where that organized copy lives: one central, well-kept store of your business information that you own and that your reports, software and AI all read from.",
     soundsLike: [
@@ -308,7 +308,7 @@ export const SERVICE_LINES: ServiceLine[] = [
     oneLiner: "Know your numbers every Monday without anyone building a report.",
     metaTitle: "Dashboards that show your numbers every Monday",
     metaDescription:
-      "Dashboards and weekly scorecards that update themselves from the systems you already run. Know your numbers every Monday. Free 30-minute estimate.",
+      "Dashboards and weekly scorecards that update themselves from the systems you already run. Know your numbers every Monday. Free AI strategy call.",
     problem:
       "Month-end means exporting four reports and hoping they match. The leadership meeting starts with a debate about whose number is right, and nobody can say which numbers actually move the goal. A dashboard is a page of your key numbers that updates itself from your real systems. Routine reports belong there, built once and the same every week, not rebuilt by hand or re-asked of an AI chat window every Monday.",
     soundsLike: [
@@ -330,7 +330,7 @@ export const SERVICE_LINES: ServiceLine[] = [
     oneLiner: "Software built around how your business works, so your team stops working around the software.",
     metaTitle: "Custom software built around how you work",
     metaDescription:
-      "Internal tools, client portals and mobile apps on the systems you already pay for. One screen for your team, and you own the code. Free 30-minute estimate.",
+      "Internal tools, client portals and mobile apps on the systems you already pay for. One screen for your team, and you own the code. Free AI strategy call.",
     problem:
       "Off-the-shelf software is built for everyone, so it fits nobody exactly. Your team fills the gaps with spreadsheets, sticky notes and copy and paste. You already pay for systems that hold the information. What's missing is the screen built around how your company works. We build internal tools (a screen for your team), client portals (a private page where clients see their own status) and mobile apps, all on top of the systems you already pay for, and you own the code.",
     soundsLike: [
@@ -353,7 +353,7 @@ export const SERVICE_LINES: ServiceLine[] = [
     oneLiner: "Put AI to work on your own business, with your team trained to use it and a person approving what it writes.",
     metaTitle: "AI on your data so your team gets more done",
     metaDescription:
-      "We set up AI on your business data, train your team to use it and automate busywork so your people do more. A person approves every draft. Free estimate.",
+      "We set up AI on your business data, train your team to use it and automate busywork. A person approves every draft. Free AI strategy call.",
     problem:
       "You've tried ChatGPT but it doesn't know anything about your business. Your team uses AI tools inconsistently, or not at all, and the same work still gets retyped every week. AI implementation means giving an assistant access to your own CRM, calls, documents and numbers under logins you control, training the people who do the work, and letting AI write the first draft while a person approves it. The result is more work handled by the team you already have.",
     soundsLike: [
@@ -375,7 +375,7 @@ export const SERVICE_LINES: ServiceLine[] = [
     oneLiner: "See where the money is going and what's coming next, so you decide faster and with proof.",
     metaTitle: "See where the money goes and what's coming next",
     metaDescription:
-      "We use your business's own history to show which customers, services and channels pay, who is about to leave and when to staff up. Free 30-minute estimate.",
+      "We use your business's own history to show which customers, services and channels pay, who is about to leave and when to staff up. Free AI strategy call.",
     problem:
       "You find out a customer left when the payment stops. You suspect one service loses money but can't prove it. Decisions get made on gut feel and the agency's own report. Analytics means answering those questions from your own history, and data science is the careful version of it: checking that the answer holds up before you act on it. We tell you where to look and prove whether a bet paid off.",
     soundsLike: [
@@ -408,11 +408,11 @@ export function serviceLinkText(line: { title: string; oneLiner: string }): stri
 export const SERVICES_PAGE = {
   metaTitle: "Services: data, dashboards, software and AI",
   metaDescription:
-    "Grow your business with data you already have: connect your software, know your numbers, build tools and put AI to work. Free 30-minute estimate.",
+    "Grow your business with data you already have: connect your software, know your numbers, build tools and put AI to work. Free AI strategy call.",
   eyebrow: "Services",
   title: "Six ways to run a bigger business with the team you have.",
   lede:
-    "Each service is described by what changes for you, with the technology second. You don't need to know what to ask for. Find the problem that sounds like yours, and the free estimate will tell you where to start.",
+    "Each service is described by what changes for you, with the technology second. You don't need to know what to ask for. Find the problem that sounds like yours, and the free AI strategy call will tell you where to start.",
   diagramHub: "Your data",
   hubEyebrow: "The foundation",
   hubTitle: "Start by getting your information in one place you can trust.",
@@ -525,7 +525,7 @@ export const LINE_PAGE = {
   ctaLede:
     "Tell us what's slowing you down. We'll tell you honestly whether we can fix it, and what it would take.",
   ctaButton: "Ask a question about this service",
-  estimateCta: "Book your free estimate",
+  estimateCta: "Book your free AI strategy call",
   seeLine: (title: string) => `See ${title}`,
   workLink: { label: "See what we've built for other businesses", href: "/work" },
 };

@@ -5,7 +5,7 @@ import type { NavItem } from "@/types";
 export const SITE_NAME = "DataSpoke";
 export const SITE_TAGLINE = "Grow your business with data you already have.";
 export const SITE_DESCRIPTION =
-  "Data and AI consulting for business owners in CT, NY and across the US. We connect your tools, automate busywork and show your numbers. Free estimate.";
+  "Data and AI consulting for business owners in CT, NY and across the US. We connect tools, automate busywork and show your numbers. Free AI strategy call.";
 export const SITE_URL = "https://www.dataspoke.io";
 export const CONTACT_EMAIL = "nick@dataspoke.io";
 export const CONTACT_PHONE = "+1-732-768-4663";
@@ -34,6 +34,7 @@ export const NAV_ITEMS: NavItem[] = [
 ];
 
 // One option per service line slug (src/content/services.ts), so /contact?service=<slug> preselects.
+// "assessment" and "other" have no service page: "assessment" maps to /approach#assessment.
 export const SERVICE_OPTIONS = [
   { value: "assessment", label: "Start with the Data & AI Assessment" },
   { value: "capture", label: "Get all our systems feeding one place" },

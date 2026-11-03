@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { BOOKING_URL, FREE_ESTIMATE_PATH, LP_FREE_ESTIMATE_PATH } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-/** GA4 event for every click that starts the free-estimate booking path. */
+/** GA4 event for every click that starts the free AI strategy call booking path. */
 export function trackEstimateCta(location: string) {
   sendGAEvent("event", "estimate_cta_click", { cta_location: location });
 }
@@ -31,7 +31,7 @@ interface EstimateCtaProps {
 }
 
 /**
- * Primary path into the free estimate. On other pages this goes to
+ * Primary path into the free AI strategy call. On other pages this goes to
  * /free-estimate. On /free-estimate and /lp/free-estimate it scrolls to the
  * booking widget, so campaign parameters on the page URL stay put.
  * External mode opens the calendar in a new tab when the embed cannot.

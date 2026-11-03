@@ -11,13 +11,13 @@ export function CtaBanner({ note }: { note?: ReactNode }) {
           Not sure where to start? Tell us what&apos;s slowing you down.
         </h2>
         <p className="lede">
-          A free 30-minute call, then a written estimate with a plan and a price range. We&apos;ll
-          tell you honestly whether we can fix it. If the answer is no, we&apos;ll point you to
+          A free AI strategy call: 30 minutes, then a written estimate with a recommended plan and
+          a price range within two business days. No obligation. We&apos;ll tell you honestly whether we can fix it. If the answer is no, we&apos;ll point you to
           who can.
         </p>
         {note}
         <div className="mt-1 flex flex-wrap items-center gap-x-6 gap-y-3">
-          <EstimateCta location="home-banner">Book your free estimate</EstimateCta>
+          <EstimateCta location="home-banner">Book your free AI strategy call</EstimateCta>
           <span className="text-muted-foreground">
             or email <span className="font-semibold text-foreground select-all">{CONTACT_EMAIL}</span>
           </span>

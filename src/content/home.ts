@@ -14,7 +14,7 @@ export const HERO = {
     "Save hours of manual work every week.",
     "See where the money is going and decide faster.",
   ],
-  primaryCta: "Book your free estimate",
+  primaryCta: "Book your free AI strategy call",
   secondaryCta: { label: "See what each service does for you", href: "/services" },
 };
 
@@ -149,8 +149,8 @@ export const HOME_FAQS: FaqItem[] = [
   {
     question: "How do I get started?",
     answer:
-      "Book a free 30-minute estimate. You describe what is slowing your business down, and we ask about the tools you use. Within two business days you get a written estimate with a recommended plan and a price range. There is no obligation, and you keep the estimate either way.",
-    link: { label: "free 30-minute estimate", href: "/free-estimate" },
+      "Book a free AI strategy call (30 minutes). You describe what is slowing your business down, and we ask about the tools you use. Within two business days you get a written estimate with a recommended plan and a price range. There is no obligation, and you keep the estimate either way.",
+    link: { label: "free AI strategy call", href: "/free-estimate" },
   },
   {
     question: "What do I actually get?",
@@ -160,7 +160,7 @@ export const HOME_FAQS: FaqItem[] = [
   {
     question: "How long does it take?",
     answer:
-      "The free estimate is one 30-minute call, with the written estimate in your hands within two business days. If you want a full map of your systems first, the Data & AI Assessment takes two weeks at a fixed price. Build projects after that are fixed-scope, and the finish line is part of the plan you approve. Nothing is built until you have seen the plan and the price.",
+      "The free AI strategy call is one 30-minute call, with the written estimate in your hands within two business days. If you want a full map of your systems first, the Data & AI Assessment is a deeper two-week review of your systems and data, scoped on that call. Build projects after that are fixed-scope, and the finish line is part of the plan you approve. Nothing is built until you have seen the plan and the price.",
     link: { label: "Data & AI Assessment", href: "/approach#assessment" },
   },
   {

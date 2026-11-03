@@ -48,7 +48,7 @@ export function Header({ navItems }: { navItems: NavItem[] }) {
             hideIconOnMobile
             className="h-11 px-3 text-[0.95rem] sm:px-4"
           >
-            Free estimate
+            Free AI strategy call
           </EstimateCta>
           <button
             className="rounded-md p-2 sm:p-2.5 lg:hidden"

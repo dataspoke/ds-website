@@ -2,19 +2,17 @@ import type { Step } from "@/types";
 
 export const ASSESSMENT = {
   name: "Data & AI Assessment",
-  price: "$999",
-  terms: "fixed price · 2 weeks",
   lede:
-    "Two weeks. We list every system and data source your company runs on, score how connected and AI‑ready it is today and hand you a prioritized plan. You keep the plan whether or not we work together.",
+    "Two weeks. We list every system and data source your company runs on, score how connected and AI‑ready it is today and hand you a prioritized written plan. You keep the plan whether or not we work together.",
   includes: [
     "A map of every tool, who uses it and what information lives there",
     "A connected-data score and an AI‑readiness score, with the gaps named",
     "The three projects worth doing first, with what each would cost and return",
     "A 60-minute walkthrough with you and your leadership team",
   ],
-  credit: "Credited toward your first project if you go ahead.",
+  scope: "A deeper two-week review of your systems and data, scoped on your free AI strategy call.",
   sampleLabel: "Example scorecard: home-services company",
-  cta: "Book an assessment call",
+  cta: "Start with a free AI strategy call",
   sampleScores: [
     { label: "Sales (CRM)", score: 8 },
     { label: "Marketing (Ads)", score: 4 },
@@ -28,15 +26,15 @@ export const ASSESSMENT = {
 export const STEPS: Step[] = [
   {
     label: "Step 1",
-    title: "Free 30-minute estimate",
+    title: "Free AI strategy call",
     description:
-      "You tell us what's slowing your business down. We tell you honestly whether we can fix it, and you get a written estimate with a plan and a price range within two business days.",
+      "A free 30-minute call. You tell us what's slowing your business down. We tell you honestly whether we can fix it, and you get a written estimate with a recommended plan and a price range within two business days. No obligation.",
   },
   {
     label: "Step 2",
     title: "Data & AI Assessment, if you want the full map",
     description:
-      "Two weeks, fixed price. You get the map of your systems, the scores and a written plan with prices before any build work starts.",
+      "A deeper two-week review of your systems and data, scoped on your free AI strategy call. You get the map of your systems, the scores and a written plan with prices before any build work starts.",
   },
   {
     label: "Step 3",
@@ -53,11 +51,11 @@ export const RETAINER_NOTE =
 export const APPROACH_PAGE = {
   metaTitle: "How working with DataSpoke goes, step by step",
   metaDescription:
-    "How we work: a free 30-minute estimate, an optional two-week Data & AI Assessment, fixed-scope projects you own, a hand-over and an optional retainer.",
+    "How we work: a free AI strategy call, an optional two-week Data & AI Assessment, fixed-scope projects you own, a hand-over and an optional retainer.",
   eyebrow: "Approach",
   title: "You see the plan and the price first. You own everything at the end.",
   lede:
-    "Every engagement follows the same four phases, starting with a free 30-minute estimate. Nothing is built until you have agreed to a scope, a price and a finish line.",
+    "Every engagement follows the same four phases, starting with a free AI strategy call. Nothing is built until you have agreed to a scope, a price and a finish line.",
 };
 
 export const PHASES: Step[] = [
@@ -65,7 +63,7 @@ export const PHASES: Step[] = [
     label: "Phase 1",
     title: ASSESSMENT.name,
     description:
-      "Two weeks, fixed price. We map every system and data source, score where you stand and write the plan. You keep the plan either way.",
+      "Two weeks, scoped on your free AI strategy call. We map every system and data source, score where you stand and write the plan. You keep the plan either way.",
   },
   {
     label: "Phase 2",
