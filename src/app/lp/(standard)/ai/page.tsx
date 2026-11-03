@@ -25,7 +25,7 @@ export default function LpAiPage() {
             {LP_AI.headline}
           </h1>
           <p className="lede max-w-xl">{LP_AI.lede}</p>
-          <EstimateCta location="lp-ai-hero" className="justify-self-start">
+          <EstimateCta location="lp-ai-hero" lp className="justify-self-start max-sm:h-auto max-sm:min-h-11 max-sm:whitespace-normal max-sm:py-2.5">
             {LP_AI.ctaLabel}
           </EstimateCta>
         </div>
@@ -56,7 +56,7 @@ export default function LpAiPage() {
       <Section tint>
         <div className="grid items-start gap-9 lg:grid-cols-2 lg:gap-14">
           <div className="grid gap-5">
-            <SectionHead eyebrow="Start here" title={LP_AI.assessment.name} lede={LP_AI.assessment.lede} />
+            <SectionHead eyebrow="If you want the full map" title={LP_AI.assessment.name} lede={LP_AI.assessment.lede} />
             <ul className="grid gap-3">
               {LP_AI.assessment.includes.map((item) => (
                 <SpokeBullet key={item} as="li" size="list" className="text-muted-foreground">
@@ -68,7 +68,11 @@ export default function LpAiPage() {
 
           <div className="grid gap-5 rounded-2xl border border-border bg-background p-6 sm:p-8">
             <p className="text-muted-foreground">{LP_AI.assessment.scope}</p>
-            <EstimateCta location="lp-ai-assessment" className="justify-self-start">
+            <EstimateCta
+              location="lp-ai-assessment"
+              lp
+              className="justify-self-start max-sm:h-auto max-sm:min-h-11 max-sm:whitespace-normal max-sm:py-2.5"
+            >
               {LP_AI.ctaLabel}
             </EstimateCta>
           </div>
@@ -76,7 +80,7 @@ export default function LpAiPage() {
       </Section>
 
       <LpCtaBanner
-        title="One senior consultant. No hand-offs."
+        title={LP_AI.bannerTitle}
         ctaLabel={LP_AI.ctaLabel}
         estimateLocation="lp-ai-banner"
       />

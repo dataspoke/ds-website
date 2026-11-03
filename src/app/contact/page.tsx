@@ -35,12 +35,12 @@ export default function ContactPage() {
             <div className="grid gap-4 rounded-2xl border border-border p-6 sm:p-8">
               <h2 className="text-2xl font-bold">Book your free AI strategy call</h2>
               <p className="text-muted-foreground">
-                Pick a time that suits you. You&apos;ll get a calendar invite with a video link.
-                Come with whatever is slowing your business down. No preparation and no technical
+                See what the call covers and what you get afterward, then pick a slot there. Come
+                with whatever is slowing your business down. No preparation and no technical
                 background needed.
               </p>
               <EstimateCta location="contact" className="justify-self-start">
-                Book your free AI strategy call
+                See how the call works
               </EstimateCta>
             </div>
 

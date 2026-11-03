@@ -17,6 +17,11 @@ export const BOOKING_URL = "https://calendar.app.google/jzAtxw6Pjtwz8WDV9";
  */
 export const BOOKING_EMBED_URL =
   "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1ug-9sT7CsY63Cypht12egXKITsJwCyHhyx-Hs85nJyxHcby5GlWqOuVqBWix1vFC83Byi3Eah?gv=true";
+/**
+ * The offer is now called "Free AI strategy call", but the URL intentionally
+ * stays /free-estimate (as do FREE_ESTIMATE_* names and the estimate_cta_click
+ * event) so existing links, ads and analytics keep working. Don't rename it.
+ */
 export const FREE_ESTIMATE_PATH = "/free-estimate";
 /** Ad landing page. Same offer as /free-estimate, with no site navigation. */
 export const LP_FREE_ESTIMATE_PATH = "/lp/free-estimate";

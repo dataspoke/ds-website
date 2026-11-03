@@ -12,8 +12,8 @@ export function CtaBanner({ note }: { note?: ReactNode }) {
         </h2>
         <p className="lede">
           A free AI strategy call: 30 minutes, then a written estimate with a recommended plan and
-          a price range within two business days. No obligation. We&apos;ll tell you honestly whether we can fix it. If the answer is no, we&apos;ll point you to
-          who can.
+          a price range within two business days. No obligation. We&apos;ll tell you honestly
+          whether we can fix it. If the answer is no, we&apos;ll point you to who can.
         </p>
         {note}
         <div className="mt-1 flex flex-wrap items-center gap-x-6 gap-y-3">

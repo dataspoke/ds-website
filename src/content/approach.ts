@@ -10,7 +10,7 @@ export const ASSESSMENT = {
     "The three projects worth doing first, with what each would cost and return",
     "A 60-minute walkthrough with you and your leadership team",
   ],
-  scope: "A deeper two-week review of your systems and data, scoped on your free AI strategy call.",
+  scope: "Scoped and priced on your free AI strategy call.",
   sampleLabel: "Example scorecard: home-services company",
   cta: "Start with a free AI strategy call",
   sampleScores: [
@@ -53,7 +53,7 @@ export const APPROACH_PAGE = {
   metaDescription:
     "How we work: a free AI strategy call, an optional two-week Data & AI Assessment, fixed-scope projects you own, a hand-over and an optional retainer.",
   eyebrow: "Approach",
-  title: "You see the plan and the price first. You own everything at the end.",
+  title: "You see a plan and a price before anything is built. You own everything at the end.",
   lede:
     "Every engagement follows the same four phases, starting with a free AI strategy call. Nothing is built until you have agreed to a scope, a price and a finish line.",
 };

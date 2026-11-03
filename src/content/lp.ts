@@ -1,6 +1,7 @@
 // Copy for the /lp/* landing pages. These pages have no site nav and one CTA
-// (BookCall, or EstimateCta on /lp/ai), so copy here is self-contained and
-// doesn't link elsewhere.
+// (BookCall, or EstimateCta on /lp/ai, which goes to /lp/free-estimate with the
+// visitor's utm_* params), so copy here is self-contained and doesn't link
+// elsewhere. /lp/ai is written in the first person singular throughout.
 //
 // Audience: established businesses past $1M in revenue. Owners and
 // leadership teams, not one-person shops.
@@ -80,15 +81,16 @@ export const LP_AI = {
   assessment: {
     name: "Data & AI Assessment",
     lede:
-      "Two weeks. We list every system and data source your company runs on, score how connected and AI‑ready it is today and hand you a prioritized plan. You keep the plan whether or not we work together.",
+      "Two weeks. I list every system and data source your company runs on, score how connected and AI‑ready it is today and hand you a prioritized plan. You keep the plan whether or not you hire me to build it.",
     includes: [
       "A map of every tool, who uses it and what information lives there",
       "A connected-data score and an AI‑readiness score, with the gaps named",
       "The three projects worth doing first, with what each would cost and return",
-      "A 60-minute walkthrough with you and your leadership team",
+      "A 60-minute walkthrough where I take you and your leadership team through it",
     ],
-    scope: "A deeper two-week review of your systems and data, scoped on your free AI strategy call.",
+    scope: "Scoped and priced on your free AI strategy call.",
   } as LpAssessment,
+  bannerTitle: "I do the work myself. No hand-offs.",
   ctaLabel: "Start with a free AI strategy call",
 };
 

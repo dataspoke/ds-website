@@ -10,7 +10,7 @@ export function Assessment({ tint = false }: { tint?: boolean }) {
       <AssessmentJsonLd />
       <div className="grid items-start gap-9 lg:grid-cols-2 lg:gap-14">
         <div className="grid gap-5">
-          <SectionHead eyebrow="Start here" title={`The ${ASSESSMENT.name}`} lede={ASSESSMENT.lede} />
+          <SectionHead eyebrow="If you want the full map" title={`The ${ASSESSMENT.name}`} lede={ASSESSMENT.lede} />
           <ul className="grid gap-3">
             {ASSESSMENT.includes.map((item) => (
               <SpokeBullet key={item} as="li" size="list" className="text-muted-foreground">
@@ -44,7 +44,10 @@ export function Assessment({ tint = false }: { tint?: boolean }) {
             </div>
           </div>
           <p className="text-muted-foreground">{ASSESSMENT.scope}</p>
-          <EstimateCta location="assessment" className="justify-self-start">
+          <EstimateCta
+            location="assessment"
+            className="justify-self-start max-sm:h-auto max-sm:min-h-11 max-sm:whitespace-normal max-sm:py-2.5"
+          >
             {ASSESSMENT.cta}
           </EstimateCta>
         </div>

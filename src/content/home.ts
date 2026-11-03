@@ -149,8 +149,8 @@ export const HOME_FAQS: FaqItem[] = [
   {
     question: "How do I get started?",
     answer:
-      "Book a free AI strategy call (30 minutes). You describe what is slowing your business down, and we ask about the tools you use. Within two business days you get a written estimate with a recommended plan and a price range. There is no obligation, and you keep the estimate either way.",
-    link: { label: "free AI strategy call", href: "/free-estimate" },
+      "Book a free 30-minute AI strategy call. You describe what is slowing your business down, and we ask about the tools you use. Within two business days you get a written estimate with a recommended plan and a price range. There is no obligation, and you keep the estimate either way.",
+    link: { label: "free 30-minute AI strategy call", href: "/free-estimate" },
   },
   {
     question: "What do I actually get?",

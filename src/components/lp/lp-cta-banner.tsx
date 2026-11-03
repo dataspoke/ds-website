@@ -6,7 +6,10 @@ import { ProofLine } from "@/components/lp/proof-line";
 interface LpCtaBannerProps {
   title: string;
   ctaLabel: string;
-  /** Send the CTA to the free AI strategy call page instead of the calendar, tracked under this GA location. */
+  /**
+   * Send the CTA to /lp/free-estimate (utm_* carried over) instead of the
+   * calendar, tracked under this GA location.
+   */
   estimateLocation?: string;
 }
 
@@ -18,7 +21,7 @@ export function LpCtaBanner({ title, ctaLabel, estimateLocation }: LpCtaBannerPr
         <h2 className="text-2xl font-bold leading-[1.15] sm:text-3xl">{title}</h2>
         <ProofLine />
         {estimateLocation ? (
-          <EstimateCta location={estimateLocation} className="justify-self-start">
+          <EstimateCta location={estimateLocation} lp className="justify-self-start max-sm:h-auto max-sm:min-h-11 max-sm:whitespace-normal max-sm:py-2.5">
             {ctaLabel}
           </EstimateCta>
         ) : (

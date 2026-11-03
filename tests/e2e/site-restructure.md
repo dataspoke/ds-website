@@ -26,7 +26,7 @@ For each of `/lp/ai`, `/lp/custom-software` and `/lp/dashboards`:
 
 1. Open the page.
 2. Expect no site navigation: no links to Services, Work, Approach or About, and no menu button. A logo linking home is fine.
-3. On `/lp/custom-software` and `/lp/dashboards`, expect at least one "Book a call" style link to the booking URL. On `/lp/ai`, expect every "Start with a free AI strategy call" button to link to `/free-estimate`, and no "$999" or "Credited toward" text.
+3. On `/lp/custom-software` and `/lp/dashboards`, expect at least one "Book a call" style link to the booking URL. On `/lp/ai`, expect every "Start with a free AI strategy call" button (hero, assessment and closing banner) to link to `/lp/free-estimate`, and no "$999" or "Credited toward" text. Then open `/lp/ai?utm_source=google&utm_campaign=test&gclid=x` and expect each of those buttons to link to `/lp/free-estimate?utm_source=google&utm_campaign=test` (utm_* passed through, other params dropped).
 4. Expect `<meta name="robots" content="noindex, nofollow">`.
 5. Expect a page title of the form "<Page> | DataSpoke", with "DataSpoke" only once.
 

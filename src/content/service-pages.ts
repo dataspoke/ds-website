@@ -2,10 +2,10 @@ import type { FaqItem, ServiceLineSlug, TextLink } from "@/types";
 
 // Service-page FAQ and engagement copy, written so the first sentence of each
 // answer is the answer. Only restates claims already published on the site:
-// the two-week Data & AI Assessment, the free AI strategy call (a free 30-minute
-// call, then a written estimate with a recommended plan and a price range
-// within two business days), ownership, who the
-// work is for, and the systems listed on the home page.
+// the two-week Data & AI Assessment, the free AI strategy call (a free
+// 30-minute call, then a written estimate with a recommended plan and a price
+// range within two business days), ownership, who the work is for, and the
+// systems listed on the home page.
 // Do not add prices, clients, results, timelines, or guarantees here.
 
 const estimate: TextLink = { label: "free AI strategy call", href: "/free-estimate" };
@@ -51,7 +51,7 @@ export interface ServicePageExtra {
 const estimateStep = {
   label: "Step 1",
   title: "Free AI strategy call",
-  links: [estimate, assessment],
+  links: [{ ...estimate, label: "free 30-minute AI strategy call" }, assessment],
 };
 
 const assessmentStep = {
@@ -82,7 +82,7 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
         {
           ...estimateStep,
           description:
-            "Book a free AI strategy call (30 minutes). You tell us where leads and records fall between tools. We tell you honestly whether we can fix it and whether the Data & AI Assessment is the right place to start. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
+            "Book a free 30-minute AI strategy call. You tell us where leads and records fall between tools. We tell you honestly whether we can fix it and whether the Data & AI Assessment is the right place to start. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
         },
         {
           ...assessmentStep,
@@ -171,7 +171,7 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
         {
           ...estimateStep,
           description:
-            "Book a free AI strategy call (30 minutes). Tell us where two documents disagree, or where a decision lived on a call and then disappeared. We tell you honestly whether this is the right project and whether the Data & AI Assessment should come first. You get a written estimate with a recommended plan and a price range within two business days. No obligation.",
+            "Book a free 30-minute AI strategy call. Tell us where two documents disagree, or where a decision lived on a call and then disappeared. We tell you honestly whether this is the right project and whether the Data & AI Assessment should come first. You get a written estimate with a recommended plan and a price range within two business days. No obligation.",
         },
         {
           ...assessmentStep,
@@ -251,7 +251,7 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
         {
           ...estimateStep,
           description:
-            "Book a free AI strategy call (30 minutes). Bring the meeting that starts with an argument about whose number is right. We tell you honestly whether a scorecard is the right first project or whether the Data & AI Assessment should map the systems first. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
+            "Book a free 30-minute AI strategy call. Bring the meeting that starts with an argument about whose number is right. We tell you honestly whether a scorecard is the right first project or whether the Data & AI Assessment should map the systems first. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
         },
         {
           ...assessmentStep,
@@ -328,7 +328,7 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
         {
           ...estimateStep,
           description:
-            "Book a free AI strategy call (30 minutes). Show us the spreadsheet your team keeps next to the software, or the status clients email you to ask for. We tell you honestly whether an internal tool, a portal or a mobile app is the right build, and whether the Data & AI Assessment should come first. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
+            "Book a free 30-minute AI strategy call. Show us the spreadsheet your team keeps next to the software, or the status clients email you to ask for. We tell you honestly whether an internal tool, a portal or a mobile app is the right build, and whether the Data & AI Assessment should come first. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
         },
         {
           ...assessmentStep,
@@ -403,7 +403,7 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
         {
           ...estimateStep,
           description:
-            "Book a free AI strategy call (30 minutes). Tell us the question your team asks you every day, or the job someone retypes every week. We tell you honestly whether AI is the right next project and whether the Data & AI Assessment should score readiness first. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
+            "Book a free 30-minute AI strategy call. Tell us the question your team asks you every day, or the job someone retypes every week. We tell you honestly whether AI is the right next project and whether the Data & AI Assessment should score readiness first. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
         },
         {
           ...assessmentStep,
@@ -483,7 +483,7 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
         {
           ...estimateStep,
           description:
-            "Book a free AI strategy call (30 minutes). Bring the decision you're making on gut feel, or on a report you don't trust. We tell you honestly whether we can answer it and whether the Data & AI Assessment is the right place to start. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
+            "Book a free 30-minute AI strategy call. Bring the decision you're making on gut feel, or on a report you don't trust. We tell you honestly whether we can answer it and whether the Data & AI Assessment is the right place to start. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
         },
         {
           ...assessmentStep,
