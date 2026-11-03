@@ -21,7 +21,7 @@ export function Header({ navItems }: { navItems: NavItem[] }) {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur-md">
-      <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between gap-3 px-4 sm:gap-6 sm:px-6">
+      <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between gap-2 px-4 sm:gap-6 sm:px-6">
         <Link href="/" aria-label="DataSpoke home" className="shrink-0">
           <Logo />
         </Link>
@@ -41,17 +41,18 @@ export function Header({ navItems }: { navItems: NavItem[] }) {
           ))}
         </nav>
 
-        <div className="flex items-center gap-1 sm:gap-2">
+        <div className="flex items-center gap-0.5 sm:gap-2">
           <EstimateCta
             location="header"
             size="default"
             hideIconOnMobile
-            className="h-11 px-3 text-[0.95rem] sm:px-4"
+            className="h-11 px-2 text-sm sm:px-4 sm:text-[0.95rem]"
           >
-            Free estimate
+            <span className="sm:hidden">Free call</span>
+            <span className="max-sm:hidden">Free AI strategy call</span>
           </EstimateCta>
           <button
-            className="rounded-md p-2 sm:p-2.5 lg:hidden"
+            className="rounded-md p-1.5 sm:p-2.5 lg:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}

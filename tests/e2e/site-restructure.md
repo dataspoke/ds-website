@@ -10,7 +10,7 @@ Run every scenario at 375px and 1280px wide. On every page, the document must be
 3. Expect to land on `/services/custom-software`.
 4. Click the first case study in "Where we've done this before".
 5. Expect to land on `/work/<slug>` for that case study.
-6. Expect the case study's "Book your free estimate" button and the header "Free estimate" button both to point to `/free-estimate`.
+6. Expect the case study's "Book your free AI strategy call" button and the header "Free AI strategy call" button both to point to `/free-estimate`.
 
 ## b. Filter the work page
 
@@ -26,7 +26,7 @@ For each of `/lp/ai`, `/lp/custom-software` and `/lp/dashboards`:
 
 1. Open the page.
 2. Expect no site navigation: no links to Services, Work, Approach or About, and no menu button. A logo linking home is fine.
-3. Expect at least one "Book a call" style link to the booking URL.
+3. On `/lp/custom-software` and `/lp/dashboards`, expect at least one "Book a call" style link to the booking URL. On `/lp/ai`, expect every "Start with a free AI strategy call" button (hero, assessment and closing banner) to link to `/lp/free-estimate`, and no "$999" or "Credited toward" text. Then open `/lp/ai?utm_source=google&utm_campaign=test&gclid=x` and expect each of those buttons to link to `/lp/free-estimate?utm_source=google&utm_campaign=test` (utm_* passed through, other params dropped).
 4. Expect `<meta name="robots" content="noindex, nofollow">`.
 5. Expect a page title of the form "<Page> | DataSpoke", with "DataSpoke" only once.
 

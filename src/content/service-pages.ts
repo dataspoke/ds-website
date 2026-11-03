@@ -2,12 +2,13 @@ import type { FaqItem, ServiceLineSlug, TextLink } from "@/types";
 
 // Service-page FAQ and engagement copy, written so the first sentence of each
 // answer is the answer. Only restates claims already published on the site:
-// the $999 fixed-price two-week Data & AI Assessment, the free 30-minute
-// estimate with a written plan within two business days, ownership, who the
-// work is for, and the systems listed on the home page.
+// the two-week Data & AI Assessment, the free AI strategy call (a free
+// 30-minute call, then a written estimate with a recommended plan and a price
+// range within two business days), ownership, who the work is for, and the
+// systems listed on the home page.
 // Do not add prices, clients, results, timelines, or guarantees here.
 
-const estimate: TextLink = { label: "free 30-minute estimate", href: "/free-estimate" };
+const estimate: TextLink = { label: "free AI strategy call", href: "/free-estimate" };
 const assessment: TextLink = { label: "Data & AI Assessment", href: "/approach#assessment" };
 const approach: TextLink = { label: "Approach page", href: "/approach" };
 
@@ -49,8 +50,8 @@ export interface ServicePageExtra {
 
 const estimateStep = {
   label: "Step 1",
-  title: "Free 30-minute estimate",
-  links: [estimate, assessment],
+  title: "Free AI strategy call",
+  links: [{ ...estimate, label: "free 30-minute AI strategy call" }, assessment],
 };
 
 const assessmentStep = {
@@ -66,7 +67,7 @@ const handOverStep = {
 
 /** The same fit answer on every page, with the line-specific trigger in front of it. */
 function fitAnswer(trigger: string) {
-  return `Yes, if you run an established business past $1M in annual revenue, anywhere in the United States, and ${trigger} You do not need a technical background. You talk to the people who scope and build the work, with no account manager and no hand-off to a junior team. If you want a website or a logo, we'll point you to someone good. If you're looking for the cheapest hourly rate, or you want a tool built without changing how anyone works, we'll say so on the free 30-minute estimate.`;
+  return `Yes, if you run an established business past $1M in annual revenue, anywhere in the United States, and ${trigger} You do not need a technical background. You talk to the people who scope and build the work, with no account manager and no hand-off to a junior team. If you want a website or a logo, we'll point you to someone good. If you're looking for the cheapest hourly rate, or you want a tool built without changing how anyone works, we'll say so on the free AI strategy call.`;
 }
 
 export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
@@ -81,12 +82,12 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
         {
           ...estimateStep,
           description:
-            "Book a free 30-minute estimate. You tell us where leads and records fall between tools. We tell you honestly whether we can fix it and whether the Data & AI Assessment is the right place to start. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
+            "Book a free 30-minute AI strategy call. You tell us where leads and records fall between tools. We tell you honestly whether we can fix it and whether the Data & AI Assessment is the right place to start. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
         },
         {
           ...assessmentStep,
           description:
-            "When you want the full map first, the Data & AI Assessment is two weeks at a fixed $999. We list every system and data source, score how connected it is, and name the three projects worth doing first, with what each would cost and return. You keep the plan either way, and the fee is credited toward your first project if you go ahead.",
+            "When you want the full map first, the Data & AI Assessment is a deeper two-week review of your systems and data, scoped on your free AI strategy call. We list every system and data source, score how connected it is, and name the three projects worth doing first, with what each would cost and return. You keep the written plan either way.",
         },
         {
           label: "Step 3",
@@ -113,19 +114,19 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
       {
         question: "What does it cost to connect our systems?",
         answer:
-          "It depends on how many tools are involved, so there is no menu price. Book a free 30-minute estimate and you get a written estimate with a recommended plan and a price range within two business days, with no obligation. If the right first step is a full map of every tool, who uses it and what information lives there, that is the Data & AI Assessment: two weeks at a fixed $999, including a 60-minute walkthrough with you and your leadership team. You keep the plan either way, and the fee is credited toward your first project if you go ahead.",
+          "It depends on how many tools are involved, so there is no menu price. Book a free AI strategy call: a 30-minute call, then a written estimate with a recommended plan and a price range within two business days, with no obligation. If the right first step is a full map of every tool, who uses it and what information lives there, that is the Data & AI Assessment: a deeper two-week review of your systems and data, scoped on that call, including a 60-minute walkthrough with you and your leadership team. You keep the written plan either way.",
         links: [estimate, assessment],
       },
       {
         question: "How long does it take to connect our systems?",
         answer:
-          "The estimate is one 30-minute call, and the written plan is in your hands within two business days. The Data & AI Assessment, if you want the map before any build, takes two weeks. Connection work after that is a fixed-scope project taken from the plan, with a price, a finish line and a result you can check. Nothing is built until you have seen the plan and the price.",
+          "The free AI strategy call is one 30-minute call, and the written estimate is in your hands within two business days. The Data & AI Assessment, if you want the map before any build, takes two weeks. Connection work after that is a fixed-scope project taken from the plan, with a price, a finish line and a result you can check. Nothing is built until you have seen the plan and the price.",
         links: [assessment],
       },
       {
         question: "Which systems can you connect?",
         answer:
-          "The ones your business already pays for. Systems we commonly connect include Salesforce, HubSpot, GoHighLevel and Lawmatics for the CRM; QuickBooks, Xero, Bookkeep, Stripe, Gusto and ADP for finance; RingCentral, Zoom and Fathom for calls and meetings; Google Ads and Meta Ads for marketing; Slack, Google Workspace and Airtable for the team; and Clio and Mindbody where the work lives in industry software. The free 30-minute estimate names which of those your project actually needs. Nothing has to migrate off them.",
+          "The ones your business already pays for. Systems we commonly connect include Salesforce, HubSpot, GoHighLevel and Lawmatics for the CRM; QuickBooks, Xero, Bookkeep, Stripe, Gusto and ADP for finance; RingCentral, Zoom and Fathom for calls and meetings; Google Ads and Meta Ads for marketing; Slack, Google Workspace and Airtable for the team; and Clio and Mindbody where the work lives in industry software. The free AI strategy call names which of those your project actually needs. Nothing has to migrate off them.",
         links: [estimate],
       },
       {
@@ -147,7 +148,7 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
       {
         question: "How do we start, and what comes next?",
         answer:
-          "Book a free 30-minute estimate and bring the spot where information falls on the floor. We will tell you honestly whether connecting your systems is the right first project. Most clients start here, because a dashboard or an AI tool is only as good as the information under it. If the records still disagree once they are captured, Data Organization & Warehousing comes next. Metrics & Dashboards, Custom Software, AI Implementation and Analytics & Data Science sit on that foundation.",
+          "Book a free AI strategy call and bring the spot where information falls on the floor. We will tell you honestly whether connecting your systems is the right first project. Most clients start here, because a dashboard or an AI tool is only as good as the information under it. If the records still disagree once they are captured, Data Organization & Warehousing comes next. Metrics & Dashboards, Custom Software, AI Implementation and Analytics & Data Science sit on that foundation.",
         links: [
           estimate,
           lineLink.organize,
@@ -170,12 +171,12 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
         {
           ...estimateStep,
           description:
-            "Book a free 30-minute estimate. Tell us where two documents disagree, or where a decision lived on a call and then disappeared. We tell you honestly whether this is the right project and whether the Data & AI Assessment should come first. You get a written estimate with a recommended plan and a price range within two business days. No obligation.",
+            "Book a free 30-minute AI strategy call. Tell us where two documents disagree, or where a decision lived on a call and then disappeared. We tell you honestly whether this is the right project and whether the Data & AI Assessment should come first. You get a written estimate with a recommended plan and a price range within two business days. No obligation.",
         },
         {
           ...assessmentStep,
           description:
-            "The Data & AI Assessment is two weeks at a fixed $999. We map every tool, who uses it and what information lives there, then score how connected and how AI-ready it is, with the gaps named. You keep the plan whether or not we work together, and the fee is credited toward your first project if you go ahead.",
+            "The Data & AI Assessment is a deeper two-week review of your systems and data, scoped on your free AI strategy call. We map every tool, who uses it and what information lives there, then score how connected and how AI-ready it is, with the gaps named. You keep the written plan whether or not we work together.",
         },
         {
           label: "Step 3",
@@ -196,7 +197,7 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
       {
         question: "What does it cost to organize our data?",
         answer:
-          "There is no rate card for this, because the size of the pile varies a lot. Start with a free 30-minute estimate. You get a written estimate with a recommended plan and a price range within two business days, and there is no obligation to continue. A full inventory, a connected-data score and an AI-readiness score are the Data & AI Assessment: two weeks, fixed price, $999, including a 60-minute walkthrough with you and your leadership team. You keep the plan whether or not we work together. The fee is credited toward your first project if you go ahead.",
+          "There is no rate card for this, because the size of the pile varies a lot. Start with a free AI strategy call. After the 30-minute call you get a written estimate with a recommended plan and a price range within two business days, and there is no obligation to continue. A full inventory, a connected-data score and an AI-readiness score are the Data & AI Assessment: a deeper two-week review of your systems and data, scoped on that call, including a 60-minute walkthrough with you and your leadership team. You keep the written plan whether or not we work together.",
         links: [estimate, assessment],
       },
       {
@@ -250,12 +251,12 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
         {
           ...estimateStep,
           description:
-            "Book a free 30-minute estimate. Bring the meeting that starts with an argument about whose number is right. We tell you honestly whether a scorecard is the right first project or whether the Data & AI Assessment should map the systems first. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
+            "Book a free 30-minute AI strategy call. Bring the meeting that starts with an argument about whose number is right. We tell you honestly whether a scorecard is the right first project or whether the Data & AI Assessment should map the systems first. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
         },
         {
           ...assessmentStep,
           description:
-            "The Data & AI Assessment is two weeks at a fixed $999. We list every source the numbers come from, score how connected they are, and name the three projects worth doing first, with what each would cost and return. You get a 60-minute walkthrough with your leadership team. You keep the plan either way, and the fee is credited toward your first project if you go ahead.",
+            "The Data & AI Assessment is a deeper two-week review of your systems and data, scoped on your free AI strategy call. We list every source the numbers come from, score how connected they are, and name the three projects worth doing first, with what each would cost and return. You get a 60-minute walkthrough with your leadership team. You keep the written plan either way.",
         },
         {
           label: "Step 3",
@@ -276,13 +277,13 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
       {
         question: "How much does a dashboard cost?",
         answer:
-          "It depends on how many numbers and how many systems, so there is no price list. Book a free 30-minute estimate and you get a written estimate with a recommended plan and a price range within two business days, with no obligation. If the numbers can't be trusted until every system is mapped, the Data & AI Assessment is two weeks at a fixed $999. It names the three projects worth doing first, with what each would cost and return, and includes a 60-minute walkthrough with you and your leadership team. The fee is credited toward your first project if you go ahead. You keep the plan either way.",
+          "It depends on how many numbers and how many systems, so there is no price list. Book a free AI strategy call: a 30-minute call, then a written estimate with a recommended plan and a price range within two business days, with no obligation. If the numbers can't be trusted until every system is mapped, the Data & AI Assessment is a deeper two-week review of your systems and data, scoped on that call. It names the three projects worth doing first, with what each would cost and return, and includes a 60-minute walkthrough with you and your leadership team. You keep the written plan either way.",
         links: [estimate, assessment],
       },
       {
         question: "How long until we have a scorecard we can use on Monday?",
         answer:
-          "The free 30-minute estimate is one call, with a written plan within two business days. The Data & AI Assessment, if you start there, takes two weeks and hands you the map, the scores and a written plan with prices before any build work starts. The dashboard itself is a fixed-scope project from that plan: a price, a finish line and a result you can check. We build the scorecard to update itself from the systems you already use, so Monday's definitions are the same next Monday. We don't quote a build length until the estimate, because a weekly scorecard and a set of monthly reports that send themselves are different projects.",
+          "The free AI strategy call is one 30-minute call, with a written estimate within two business days. The Data & AI Assessment, if you start there, takes two weeks and hands you the map, the scores and a written plan with prices before any build work starts. The dashboard itself is a fixed-scope project from that plan: a price, a finish line and a result you can check. We build the scorecard to update itself from the systems you already use, so Monday's definitions are the same next Monday. We don't quote a build length until the written estimate, because a weekly scorecard and a set of monthly reports that send themselves are different projects.",
         links: [estimate, assessment],
       },
       {
@@ -327,12 +328,12 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
         {
           ...estimateStep,
           description:
-            "Book a free 30-minute estimate. Show us the spreadsheet your team keeps next to the software, or the status clients email you to ask for. We tell you honestly whether an internal tool, a portal or a mobile app is the right build, and whether the Data & AI Assessment should come first. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
+            "Book a free 30-minute AI strategy call. Show us the spreadsheet your team keeps next to the software, or the status clients email you to ask for. We tell you honestly whether an internal tool, a portal or a mobile app is the right build, and whether the Data & AI Assessment should come first. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
         },
         {
           ...assessmentStep,
           description:
-            "The Data & AI Assessment is two weeks at a fixed $999 when you want every system mapped before anyone writes code. We name the three projects worth doing first, with what each would cost and return, and walk through it with you and your leadership team for 60 minutes. You keep the plan either way. The fee is credited toward your first project if you go ahead.",
+            "The Data & AI Assessment is a deeper two-week review of your systems and data, scoped on your free AI strategy call, for when you want every system mapped before anyone writes code. We name the three projects worth doing first, with what each would cost and return, and walk through it with you and your leadership team for 60 minutes. You keep the written plan either way.",
         },
         {
           label: "Step 3",
@@ -353,13 +354,13 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
       {
         question: "How much does custom software cost?",
         answer:
-          "An internal tool, a client portal and a mobile app are different projects, so there is no single price. Book a free 30-minute estimate and you get a written estimate with a recommended plan and a price range within two business days, with no obligation. When you want every system mapped before anyone writes code, the Data & AI Assessment is two weeks at a fixed $999, with a 60-minute walkthrough, credited toward your first project if you go ahead. You keep the plan either way. Each build after that is fixed-scope: a price, a finish line and a result you can check, all seen before work starts.",
+          "An internal tool, a client portal and a mobile app are different projects, so there is no single price. Book a free AI strategy call: a 30-minute call, then a written estimate with a recommended plan and a price range within two business days, with no obligation. When you want every system mapped before anyone writes code, the Data & AI Assessment is a deeper two-week review of your systems and data, scoped on that call, with a 60-minute walkthrough. You keep the written plan either way. Each build after that is fixed-scope: a price, a finish line and a result you can check, all seen before work starts.",
         links: [estimate, assessment],
       },
       {
         question: "How long does it take to build an app?",
         answer:
-          "The free 30-minute estimate is one call, and the written plan follows within two business days. The Data & AI Assessment, if you start there, is two weeks. We don't publish a standard build time, because it depends on how your team actually works and which systems the screen has to sit on. The finish line is part of the plan you approve. Nothing is built until you have seen the price.",
+          "The free AI strategy call is one 30-minute call, and the written estimate follows within two business days. The Data & AI Assessment, if you start there, is two weeks. We don't publish a standard build time, because it depends on how your team actually works and which systems the screen has to sit on. The finish line is part of the plan you approve. Nothing is built until you have seen the price.",
         links: [estimate, assessment],
       },
       {
@@ -402,12 +403,12 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
         {
           ...estimateStep,
           description:
-            "Book a free 30-minute estimate. Tell us the question your team asks you every day, or the job someone retypes every week. We tell you honestly whether AI is the right next project and whether the Data & AI Assessment should score readiness first. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
+            "Book a free 30-minute AI strategy call. Tell us the question your team asks you every day, or the job someone retypes every week. We tell you honestly whether AI is the right next project and whether the Data & AI Assessment should score readiness first. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
         },
         {
           ...assessmentStep,
           description:
-            "The Data & AI Assessment is two weeks at a fixed $999. We map what AI would be able to see, score how AI-ready the company is, and name the gaps. You get the three projects worth doing first, with what each would cost and return, and a 60-minute walkthrough with your leadership team. You keep the plan either way. The fee is credited toward your first project if you go ahead.",
+            "The Data & AI Assessment is a deeper two-week review of your systems and data, scoped on your free AI strategy call. We map what AI would be able to see, score how AI-ready the company is, and name the gaps. You get the three projects worth doing first, with what each would cost and return, and a 60-minute walkthrough with your leadership team. You keep the written plan either way.",
         },
         {
           label: "Step 3",
@@ -433,13 +434,13 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
       {
         question: "What does AI implementation cost?",
         answer:
-          "A private assistant, hands-on training and automations are separate fixed-scope projects, so there is no single price. Book a free 30-minute estimate and you get a written estimate with a recommended plan and a price range within two business days, with no obligation. If you want a score of what AI can even see before we build anything, that is the Data & AI Assessment: two weeks at a fixed $999, with a 60-minute walkthrough with you and your leadership team. You keep the plan either way, and the fee is credited toward your first project if you go ahead.",
+          "A private assistant, hands-on training and automations are separate fixed-scope projects, so there is no single price. Book a free AI strategy call: a 30-minute call, then a written estimate with a recommended plan and a price range within two business days, with no obligation. If you want a score of what AI can even see before we build anything, that is the Data & AI Assessment: a deeper two-week review of your systems and data, scoped on that call, with a 60-minute walkthrough with you and your leadership team. You keep the written plan either way.",
         links: [estimate, assessment],
       },
       {
         question: "How long until the team is using it on real work?",
         answer:
-          "You can have a written plan within two business days of the free 30-minute estimate. The Data & AI Assessment that scores AI-readiness takes two weeks. Training, the company playbook and custom tools come after that, each with a price and a finish line from the plan. Where AI does the work, it drafts and a person approves. That review is part of the build, not a phase added later. We don't quote a build length until we've seen the work.",
+          "You can have a written estimate within two business days of the free AI strategy call. The Data & AI Assessment that scores AI-readiness takes two weeks. Training, the company playbook and custom tools come after that, each with a price and a finish line from the plan. Where AI does the work, it drafts and a person approves. That review is part of the build, not a phase added later. We don't quote a build length until we've seen the work.",
         links: [estimate, assessment],
       },
       {
@@ -482,12 +483,12 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
         {
           ...estimateStep,
           description:
-            "Book a free 30-minute estimate. Bring the decision you're making on gut feel, or on a report you don't trust. We tell you honestly whether we can answer it and whether the Data & AI Assessment is the right place to start. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
+            "Book a free 30-minute AI strategy call. Bring the decision you're making on gut feel, or on a report you don't trust. We tell you honestly whether we can answer it and whether the Data & AI Assessment is the right place to start. A written estimate with a recommended plan and a price range follows within two business days. No obligation.",
         },
         {
           ...assessmentStep,
           description:
-            "The Data & AI Assessment is two weeks at a fixed $999. We map the finance, CRM and marketing sources the question depends on, score the gaps, and name the three projects worth doing first, with what each would cost and return. You keep the plan either way, and the fee is credited toward your first project if you go ahead.",
+            "The Data & AI Assessment is a deeper two-week review of your systems and data, scoped on your free AI strategy call. We map the finance, CRM and marketing sources the question depends on, score the gaps, and name the three projects worth doing first, with what each would cost and return. You keep the written plan either way.",
         },
         {
           label: "Step 3",
@@ -508,13 +509,13 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
       {
         question: "How much do analytics and data science cost?",
         answer:
-          "A morning list of what needs attention, a profit view and a prospect list are different fixed-scope projects, so there is no posted price. Book a free 30-minute estimate and you get a written estimate with a recommended plan and a price range within two business days, with no obligation. The Data & AI Assessment is the two-week, $999 way to map every source, score where you stand and name the three projects worth doing first, with what each would cost and return. It includes a 60-minute walkthrough with you and your leadership team. That fee is credited toward your first project if you go ahead. You keep the plan either way.",
+          "A morning list of what needs attention, a profit view and a prospect list are different fixed-scope projects, so there is no posted price. Book a free AI strategy call: a 30-minute call, then a written estimate with a recommended plan and a price range within two business days, with no obligation. The Data & AI Assessment is a deeper two-week review of your systems and data, scoped on that call, to map every source, score where you stand and name the three projects worth doing first, with what each would cost and return. It includes a 60-minute walkthrough with you and your leadership team. You keep the written plan either way.",
         links: [estimate, assessment],
       },
       {
         question: "How long before we can see margin, or what's coming?",
         answer:
-          "The free 30-minute estimate says which question comes first, with a written plan within two business days. The Data & AI Assessment, if you start there, takes two weeks and gives you the map, the scores and a written plan with prices before any build work starts. The analysis project after that has a finish line you approve up front. We don't publish one standard duration, because a list of customers going quiet and a full view of profit by service are different sizes of work.",
+          "The free AI strategy call says which question comes first, with a written estimate within two business days. The Data & AI Assessment, if you start there, takes two weeks and gives you the map, the scores and a written plan with prices before any build work starts. The analysis project after that has a finish line you approve up front. We don't publish one standard duration, because a list of customers going quiet and a full view of profit by service are different sizes of work.",
         links: [estimate, assessment],
       },
       {

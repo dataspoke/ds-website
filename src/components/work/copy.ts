@@ -30,8 +30,8 @@ export const WORK_COPY = {
     linesHeading: "Services used",
     ctaHeading: "Want the same for your business?",
     ctaLede:
-      "Tell us what's slowing you down. A free 30-minute call, then a written estimate with a plan and a price range.",
-    ctaBook: "Book your free estimate",
+      "Tell us what's slowing you down. A free 30-minute call, then a written estimate with a recommended plan and a price range within two business days. No obligation.",
+    ctaBook: "Book your free AI strategy call",
     ctaContact: "Or send us a message",
   },
 } as const;

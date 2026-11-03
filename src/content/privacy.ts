@@ -28,7 +28,7 @@ export const PRIVACY = {
     {
       title: "Booking a call",
       paragraphs: [
-        "The calendar on the free estimate pages is Google Calendar. What you type there is handled by Google. Google's privacy policy covers that page.",
+        "The calendar on the free AI strategy call pages is Google Calendar. What you type there is handled by Google. Google's privacy policy covers that page.",
       ],
     },
     {

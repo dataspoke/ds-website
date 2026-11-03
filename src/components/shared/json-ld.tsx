@@ -14,7 +14,7 @@ import {
 // Stable ids let search engines join the business, its founder and its services across pages.
 const ORG_ID = `${SITE_URL}/#organization`;
 const PERSON_ID = `${SITE_URL}/about#nick-paul`;
-const ASSESSMENT_ID = `${SITE_URL}/approach#data-ai-assessment`;
+const ASSESSMENT_ID = `${SITE_URL}/approach#assessment`;
 const ESTIMATE_ID = `${SITE_URL}${FREE_ESTIMATE.path}#service`;
 
 const provider = {
@@ -236,7 +236,7 @@ export function FaqPageJsonLd({
   return <LdScript data={data} />;
 }
 
-/** Free estimate offer. Rendered only on /free-estimate, with the FAQ block on that page. */
+/** Free AI strategy call offer. Rendered only on /free-estimate, with the FAQ block on that page. */
 export function EstimateJsonLd() {
   const pageUrl = `${SITE_URL}${FREE_ESTIMATE.path}`;
   const service = {
@@ -253,7 +253,8 @@ export function EstimateJsonLd() {
       price: "0",
       priceCurrency: "USD",
       url: pageUrl,
-      description: "Free 30-minute call and a written estimate. No obligation.",
+      description:
+        "Free 30-minute call, then a written estimate with a recommended plan and a price range within two business days. No obligation.",
     },
   };
   return (
@@ -264,9 +265,8 @@ export function EstimateJsonLd() {
   );
 }
 
-/** The priced assessment. Rendered only where the assessment block is on the page. */
+/** The Data & AI Assessment. Rendered only where the assessment block is on the page. */
 export function AssessmentJsonLd() {
-  const price = ASSESSMENT.price.replace(/[^0-9.]/g, "");
   const data = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -276,13 +276,6 @@ export function AssessmentJsonLd() {
     url: `${SITE_URL}/approach#assessment`,
     provider,
     areaServed,
-    offers: {
-      "@type": "Offer",
-      price,
-      priceCurrency: "USD",
-      description: `${ASSESSMENT.terms}. ${ASSESSMENT.credit}`,
-      url: `${SITE_URL}/contact`,
-    },
   };
   return <LdScript data={data} />;
 }

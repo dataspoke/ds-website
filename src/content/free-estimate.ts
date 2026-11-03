@@ -3,13 +3,13 @@ import type { FaqItem } from "@/types";
 
 export const FREE_ESTIMATE = {
   path: FREE_ESTIMATE_PATH,
-  metaTitle: "Free 30-minute estimate: data, dashboards and AI",
+  metaTitle: "Free AI strategy call, then a written estimate",
   metaDescription:
-    "Tell us what's slowing your business down. Within two business days you get a written plan and a price range. Free 30-minute estimate, no obligation.",
+    "Free AI strategy call: 30 minutes, then a written estimate with a recommended plan and a price range within two business days. No obligation.",
   eyebrow: "For established businesses, from owner-run to mid-size",
-  headline: "Free 30-minute data & AI estimate",
-  lede: "A call about what's slowing your business down and the tools you already use. Then a written estimate with a recommended plan and a price range. No obligation.",
-  cta: "Book your free estimate",
+  headline: "Free AI strategy call",
+  lede: "A free 30-minute call about what's slowing your business down and the tools you already use. Then a written estimate with a recommended plan and a price range within two business days. No obligation.",
+  cta: "Book your free AI strategy call",
   youGet: {
     eyebrow: "What you get",
     title: "A plan you can act on, or walk away from.",
@@ -45,14 +45,14 @@ export const FREE_ESTIMATE = {
   services: {
     eyebrow: "What it covers",
     title: "Any of the work we do.",
-    lede: "The estimate can cover any of these. On the call we'll say which ones fit, and which to leave for later.",
+    lede: "The call and the written estimate can cover any of these. On the call we'll say which ones fit, and which to leave for later.",
   },
   booking: {
     eyebrow: "Book a time",
     title: "Pick a 30-minute slot.",
     /** Used where the page has no second link out to the calendar. */
-    embedLede: "The calendar below is the same booking page we use for this estimate.",
-    lede: "The calendar below is the same booking page we use for this estimate. If it does not load, open it in a new tab.",
+    embedLede: "The calendar below is the same booking page we use for this call.",
+    lede: "The calendar below is the same booking page we use for this call. If it does not load, open it in a new tab.",
     fallback: "Open the booking page",
   },
   faq: {
@@ -85,7 +85,7 @@ export const ESTIMATE_FAQS: FaqItem[] = [
   {
     question: "Is this the Data & AI Assessment?",
     answer:
-      "No. This is a free call and a written estimate. The Data & AI Assessment is a separate two-week engagement at a fixed price, for a full map of your systems and a scored plan. We'll tell you on the call if that is the better next step. The details are on the Approach page.",
+      "No. The free AI strategy call is a 30-minute call, then a written estimate. The Data & AI Assessment is a deeper two-week review of your systems and data, with a full map of your systems and a scored written plan. If it is the better next step, we scope it with you on the call. The details are on the Approach page.",
     link: { label: "Approach page", href: "/approach#assessment" },
   },
   {

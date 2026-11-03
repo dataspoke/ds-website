@@ -13,7 +13,7 @@ export const metadata: Metadata = pageMetadata({
 });
 
 /**
- * Distraction-free ad page for the free estimate. Reading the query string
+ * Distraction-free ad page for the free AI strategy call. Reading the query string
  * keeps utm_* on the embedded calendar. The hero button scrolls to #book,
  * so those params also stay on this page's URL.
  */

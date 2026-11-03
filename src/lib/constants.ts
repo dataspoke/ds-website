@@ -5,7 +5,7 @@ import type { NavItem } from "@/types";
 export const SITE_NAME = "DataSpoke";
 export const SITE_TAGLINE = "Grow your business with data you already have.";
 export const SITE_DESCRIPTION =
-  "Data and AI consulting for business owners in CT, NY and across the US. We connect your tools, automate busywork and show your numbers. Free estimate.";
+  "Data and AI consulting for business owners in CT, NY and across the US. We connect tools, automate busywork and show your numbers. Free AI strategy call.";
 export const SITE_URL = "https://www.dataspoke.io";
 export const CONTACT_EMAIL = "nick@dataspoke.io";
 export const CONTACT_PHONE = "+1-732-768-4663";
@@ -17,6 +17,11 @@ export const BOOKING_URL = "https://calendar.app.google/jzAtxw6Pjtwz8WDV9";
  */
 export const BOOKING_EMBED_URL =
   "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1ug-9sT7CsY63Cypht12egXKITsJwCyHhyx-Hs85nJyxHcby5GlWqOuVqBWix1vFC83Byi3Eah?gv=true";
+/**
+ * The offer is now called "Free AI strategy call", but the URL intentionally
+ * stays /free-estimate (as do FREE_ESTIMATE_* names and the estimate_cta_click
+ * event) so existing links, ads and analytics keep working. Don't rename it.
+ */
 export const FREE_ESTIMATE_PATH = "/free-estimate";
 /** Ad landing page. Same offer as /free-estimate, with no site navigation. */
 export const LP_FREE_ESTIMATE_PATH = "/lp/free-estimate";
@@ -34,6 +39,7 @@ export const NAV_ITEMS: NavItem[] = [
 ];
 
 // One option per service line slug (src/content/services.ts), so /contact?service=<slug> preselects.
+// "assessment" and "other" have no service page: "assessment" maps to /approach#assessment.
 export const SERVICE_OPTIONS = [
   { value: "assessment", label: "Start with the Data & AI Assessment" },
   { value: "capture", label: "Get all our systems feeding one place" },
