@@ -10,7 +10,7 @@ import { STEPS } from "@/content/approach";
 export const metadata: Metadata = generateMetadata({
   title: "Book your free AI strategy call",
   description:
-    "Book your free AI strategy call with DataSpoke in Durham, CT, or send a note about what's slowing your business down. We reply within one business day.",
+    "Book your free AI strategy call with DataSpoke, or send a note about what's slowing your business down. We reply within one business day.",
   path: "/contact",
 });
 
@@ -75,7 +75,7 @@ export default function ContactPage() {
                 >
                   LinkedIn
                 </a>{" "}
-                · Durham, CT · Serving CT, NY and clients nationwide
+                · Serving clients nationwide
               </p>
             </div>
           </div>

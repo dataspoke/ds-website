@@ -5,10 +5,9 @@ import type { NavItem } from "@/types";
 export const SITE_NAME = "DataSpoke";
 export const SITE_TAGLINE = "Grow your business with data you already have.";
 export const SITE_DESCRIPTION =
-  "Data and AI consulting for business owners in CT, NY and across the US. We connect tools, automate busywork and show your numbers. Free AI strategy call.";
+  "Data and AI consulting for business owners across the US. We connect tools, automate busywork and show your numbers. Free AI strategy call.";
 export const SITE_URL = "https://www.dataspoke.io";
 export const CONTACT_EMAIL = "nick@dataspoke.io";
-export const CONTACT_PHONE = "+1-732-768-4663";
 export const BOOKING_URL = "https://calendar.app.google/jzAtxw6Pjtwz8WDV9";
 /**
  * Same appointment schedule as BOOKING_URL. The short link sends
@@ -26,9 +25,14 @@ export const FREE_ESTIMATE_PATH = "/free-estimate";
 /** Ad landing page. Same offer as /free-estimate, with no site navigation. */
 export const LP_FREE_ESTIMATE_PATH = "/lp/free-estimate";
 export const PRIVACY_PATH = "/privacy";
-export const LOCATION = "Durham, CT";
 /** Plain-English service area, used in page copy. No street address anywhere on the site. */
-export const SERVICE_AREA = "Based in Durham, Connecticut. Serving CT, NY and clients across the US.";
+export const SERVICE_AREA = "Serving clients across the United States.";
+
+/**
+ * /work is taken down (redirected to /about) until clients approve their case studies.
+ * Set to true to bring it back. next-sitemap.config.js repeats this value; keep both in sync.
+ */
+export const WORK_PUBLISHED = false;
 
 export const NAV_ITEMS: NavItem[] = [
   { label: "Services", href: "/services" },

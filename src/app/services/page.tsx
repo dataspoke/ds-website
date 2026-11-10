@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { WORK_PUBLISHED } from "@/lib/constants";
 import { generateMetadata } from "@/lib/metadata";
 import { Section, SectionHead } from "@/components/shared/section";
 import { Assessment } from "@/components/home/assessment";
@@ -71,12 +72,14 @@ export default function ServicesPage() {
             <LineCard key={l.slug} line={l} />
           ))}
         </div>
-        <Link
-          href={LINE_PAGE.workLink.href}
-          className="mt-8 inline-block py-2 font-semibold text-primary hover:text-primary/80"
-        >
-          {LINE_PAGE.workLink.label} &rarr;
-        </Link>
+        {WORK_PUBLISHED && (
+          <Link
+            href={LINE_PAGE.workLink.href}
+            className="mt-8 inline-block py-2 font-semibold text-primary hover:text-primary/80"
+          >
+            {LINE_PAGE.workLink.label} &rarr;
+          </Link>
+        )}
       </Section>
 
       <Section tint tight>

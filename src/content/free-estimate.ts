@@ -80,7 +80,7 @@ export const ESTIMATE_FAQS: FaqItem[] = [
   {
     question: "Who is this for?",
     answer:
-      "Established businesses, from owner-run to mid-size, that already run on several tools and want those tools, the information in them and the next project to fit together. Most owners come to us wanting to know their numbers, save hours of manual work or help their team do more. We work with companies in Connecticut, New York and across the United States.",
+      "Established businesses, from owner-run to mid-size, that already run on several tools and want those tools, the information in them and the next project to fit together. Most owners come to us wanting to know their numbers, save hours of manual work or help their team do more. We work with companies across the United States.",
   },
   {
     question: "Is this the Data & AI Assessment?",
@@ -91,6 +91,6 @@ export const ESTIMATE_FAQS: FaqItem[] = [
   {
     question: "Who will be on the call?",
     answer:
-      "Someone from our senior team, the same people who do the work. We're a small team. You will not be passed to a junior salesperson.",
+      "Someone from our senior team, the same people who do the work. You will not be passed to a junior salesperson.",
   },
 ];

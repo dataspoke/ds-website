@@ -11,9 +11,9 @@ import { CREDENTIALS } from "@/content/home";
 import { SOCIAL_LINKS } from "@/lib/constants";
 
 export const metadata: Metadata = generateMetadata({
-  title: "About Nick Paul, DataSpoke founder in Durham, CT",
+  title: "About Nick Paul, DataSpoke founder",
   description:
-    "Nick Paul founded DataSpoke in Durham, CT. Data scientist, developer and Army veteran helping owners connect their software so teams do more.",
+    "Nick Paul founded DataSpoke. Data scientist, developer and Army veteran helping owners connect their software so teams do more.",
   path: "/about",
 });
 
@@ -68,8 +68,7 @@ export default function AboutPage() {
               teams the data to do more.
             </h1>
             <p className="lede">
-              DataSpoke is based in Durham, Connecticut, and works with businesses in CT, NY and
-              across the US. The name is the whole idea. Your business is the hub. Every tool you
+              DataSpoke works with businesses across the US. The name is the whole idea. Your business is the hub. Every tool you
               use is a spoke. My job is making the spokes carry information to the hub, so you can
               see the business clearly and so AI has something real to work with.
             </p>

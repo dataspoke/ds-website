@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { Section, SectionHead } from "@/components/shared/section";
 import { CASE_STUDIES } from "@/content/case-studies";
+import { WORK_PUBLISHED } from "@/lib/constants";
 import { LINE_PAGE } from "@/content/services";
 import type { ServiceLineSlug } from "@/types";
 
 /** Case studies tagged with this line. Renders nothing when there are none. */
 export function RelatedCaseStudies({ line }: { line: ServiceLineSlug }) {
+  if (!WORK_PUBLISHED) return null;
   const studies = CASE_STUDIES.filter((c) => c.lines.includes(line));
   if (studies.length === 0) return null;
   return (

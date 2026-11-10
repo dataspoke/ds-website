@@ -9,7 +9,7 @@ export const PRIVACY = {
     "What DataSpoke collects on this website: page visits in Google Analytics, messages sent through the contact form, and bookings made on Google Calendar.",
   eyebrow: "Privacy",
   title: "What this website collects",
-  lede: "DataSpoke is a small team. This page says what we collect on this site and what we do with it.",
+  lede: "This page says what DataSpoke collects on this site and what we do with it.",
   sections: [
     {
       title: "Page visits",
