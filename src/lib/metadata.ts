@@ -86,8 +86,6 @@ export const defaultMetadata: Metadata = {
     "custom software for business",
     "AI implementation for business",
     "data and AI assessment",
-    "data consultant Connecticut",
-    "data consultant New York",
   ],
   openGraph: {
     type: "website",

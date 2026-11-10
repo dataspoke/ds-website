@@ -1,6 +1,8 @@
-import { NAV_ITEMS } from "@/lib/constants";
+import { NAV_ITEMS as ALL_NAV_ITEMS, WORK_PUBLISHED } from "@/lib/constants";
 import { getInsightPosts } from "@/lib/insights";
 import type { NavItem } from "@/types";
+
+const NAV_ITEMS = WORK_PUBLISHED ? ALL_NAV_ITEMS : ALL_NAV_ITEMS.filter((item) => item.href !== "/work");
 
 /** Site nav. Insights stays off the list until content/insights has a published post. */
 export function getNavItems(): NavItem[] {

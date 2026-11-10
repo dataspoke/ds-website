@@ -6,6 +6,7 @@ import { FaqPageJsonLd, ServiceJsonLd } from "@/components/shared/json-ld";
 import { FaqList } from "@/components/shared/faq-list";
 import { Section, SectionHead } from "@/components/shared/section";
 import { EstimateCta } from "@/components/shared/estimate-cta";
+import { WORK_PUBLISHED } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { EngagementSection } from "@/components/services/engagement";
 import { BulletList, ListLabel, ProductDetail } from "@/components/services/product-detail";
@@ -121,12 +122,14 @@ export default async function ServiceLinePage({ params }: PageProps<"/services/[
               </li>
             ))}
           </ul>
-          <Link
-            href={LINE_PAGE.workLink.href}
-            className="mt-6 inline-block py-2 font-semibold text-primary hover:text-primary/80"
-          >
-            {LINE_PAGE.workLink.label} &rarr;
-          </Link>
+          {WORK_PUBLISHED && (
+            <Link
+              href={LINE_PAGE.workLink.href}
+              className="mt-6 inline-block py-2 font-semibold text-primary hover:text-primary/80"
+            >
+              {LINE_PAGE.workLink.label} &rarr;
+            </Link>
+          )}
         </nav>
       </Section>
     </>

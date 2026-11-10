@@ -11,7 +11,7 @@ export const ASSESSMENT = {
     "A 60-minute walkthrough with you and your leadership team",
   ],
   scope: "Scoped and priced on your free AI strategy call.",
-  sampleLabel: "Example scorecard: home-services company",
+  sampleLabel: "Illustrative example: home-services company (sample scores)",
   cta: "Start with a free AI strategy call",
   sampleScores: [
     { label: "Sales (CRM)", score: 8 },

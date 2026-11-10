@@ -40,7 +40,7 @@ const LEAD_FLOW: Product = {
     "Every lead in your CRM within minutes, with the customer's original message attached.",
     "An instant, friendly acknowledgment so the customer knows a real company got their request.",
     "Follow-up that starts and stops on its own based on what the lead actually does.",
-    "A phone line that can take intake questions and route the call when nobody can pick up.",
+    "Missed calls logged in the CRM with a text-back, so no caller is lost.",
   ],
 };
 

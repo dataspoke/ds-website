@@ -4,7 +4,6 @@ import { CREDENTIALS } from "@/content/home";
 import type { ServiceLine } from "@/types";
 import {
   CONTACT_EMAIL,
-  CONTACT_PHONE,
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
@@ -47,8 +46,6 @@ const organizationSameAs = [
 ];
 
 const organizationAreaServed = [
-  { "@type": "State", name: "Connecticut" },
-  { "@type": "State", name: "New York" },
   { "@type": "Country", name: "United States" },
 ];
 
@@ -76,7 +73,6 @@ export function OrganizationJsonLd() {
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "sales",
-      telephone: CONTACT_PHONE,
       email: CONTACT_EMAIL,
       url: `${SITE_URL}/contact`,
       availableLanguage: ["English"],
@@ -84,8 +80,6 @@ export function OrganizationJsonLd() {
     },
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Durham",
-      addressRegion: "CT",
       addressCountry: "US",
     },
     areaServed: organizationAreaServed,

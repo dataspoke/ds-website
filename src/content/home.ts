@@ -7,7 +7,7 @@ export const HERO = {
   eyebrow: "Data and AI consulting for owner-led businesses",
   headline: "Grow your business with data you already have.",
   lede:
-    "DataSpoke connects the software your business already runs on, so your numbers are right, the retyping stops and your team gets hours back every week. Data, dashboards, custom software and AI for businesses in Connecticut, New York and across the US.",
+    "DataSpoke connects the software your business already runs on, so your numbers are right, the retyping stops and your team gets hours back every week. Data, dashboards, custom software and AI for businesses across the US.",
   /** Three outcomes under the lede, in the spot the proof line used to hold. */
   outcomes: [
     "Know your numbers without chasing spreadsheets.",
@@ -144,7 +144,7 @@ export const HOME_FAQS: FaqItem[] = [
   {
     question: "Who is DataSpoke for?",
     answer:
-      "Established businesses, from owner-run to mid-size, that already pay for several tools such as a CRM, accounting software and a phone system, and want them to work together. Owners who want to know their numbers and give their team the tools and processes to do more come to us most often. We work with companies in Connecticut, New York and across the United States. You do not need a technical background.",
+      "Established businesses, from owner-run to mid-size, that already pay for several tools such as a CRM, accounting software and a phone system, and want them to work together. Owners who want to know their numbers and give their team the tools and processes to do more come to us most often. We work with companies across the United States. You do not need a technical background.",
   },
   {
     question: "How do I get started?",

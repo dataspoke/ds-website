@@ -100,6 +100,9 @@ function lastmodFor(pagePath) {
   return new Date(date).toISOString();
 }
 
+// Mirrors WORK_PUBLISHED in src/lib/constants.ts (this file is CommonJS and cannot import it). Keep both in sync.
+const WORK_PUBLISHED = false;
+
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: "https://www.dataspoke.io",
@@ -125,9 +128,10 @@ module.exports = {
     "/lp/*",
     // /insights is noindex until a post is published (see src/app/insights/page.tsx).
     ...(posts.length === 0 ? ["/insights"] : []),
+    ...(WORK_PUBLISHED ? [] : ["/work", "/work/*"]),
   ],
   // /work renders per request (the ?line= filter), so next-sitemap doesn't find it in the static output.
-  additionalPaths: async (config) => [await config.transform(config, "/work")],
+  additionalPaths: async (config) => (WORK_PUBLISHED ? [await config.transform(config, "/work")] : []),
   transform: async (config, pagePath) => ({
     loc: pagePath,
     lastmod: lastmodFor(pagePath),

@@ -7,6 +7,7 @@ import {
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
+  WORK_PUBLISHED,
 } from "@/lib/constants";
 import { CREDENTIALS, HERO, TOOLS } from "@/content/home";
 import { FAQS_A } from "@/components/home-a/content";
@@ -83,14 +84,14 @@ function body() {
     "",
     `${KPI_HIERARCHY.title} ${KPI_HIERARCHY.lede}`,
     "",
-    ...(CASE_STUDIES.length
+    ...(WORK_PUBLISHED && CASE_STUDIES.length
       ? ["## Case studies", "", ...CASE_STUDIES.map(caseStudyEntry), ""]
       : []),
     "## Pages",
     "",
     `- [Home](${SITE_URL}): what ${SITE_NAME} does for business owners and who it's for`,
     `- [Services](${SITE_URL}/services): the six services, each described by what changes for the owner`,
-    `- [Work](${SITE_URL}/work): case studies, filterable by service`,
+    ...(WORK_PUBLISHED ? [`- [Work](${SITE_URL}/work): case studies, filterable by service`] : []),
     `- [Approach](${SITE_URL}/approach): the ${ASSESSMENT.name}, then build, hand-over and retainer, plus how the numbers that run a business get picked`,
     `- [About](${SITE_URL}/about): Nick Paul's background and how he works`,
     `- [${FREE_ESTIMATE.headline}](${SITE_URL}${FREE_ESTIMATE.path}): ${FREE_ESTIMATE.lede}`,
