@@ -56,7 +56,7 @@ export function UseCaseTabs({ tabs }: { tabs: UseCaseTab[] }) {
     setSelected(i);
   };
 
-  // Keep the selected tab in view when the tab bar itself scrolls (narrow screens).
+  // Keep the selected tab in view when the tab bar itself scrolls (sm and up, when the tabs overflow).
   // Scrolls only the strip, sideways, and never on first render, so the page never moves.
   useEffect(() => {
     if (!mounted.current) {
@@ -95,7 +95,7 @@ export function UseCaseTabs({ tabs }: { tabs: UseCaseTab[] }) {
                 onClick={() => select(i)}
                 onKeyDown={(e) => onKeyDown(e, i)}
                 className={cn(
-                  "whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors",
+                  "whitespace-nowrap rounded-full border px-3.5 py-2 text-sm font-semibold transition-colors",
                   "sm:-mb-px sm:rounded-none sm:rounded-t-lg sm:border-0 sm:border-b-2 sm:px-4 sm:py-2.5 sm:text-[0.95rem]",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white",
                   on

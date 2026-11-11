@@ -5,7 +5,7 @@
 1. **Take /work down.** Five of the six case studies are held back until clients approve them, so the page shows one entry. That entry is Nick's own business, not a client's. Five of the six service filters say "No case studies for this service yet." Every service page also links there as "See what we've built for other businesses". Steps are in section 2.
 2. **Remove Connecticut and New York everywhere a visitor sees them.** They appear in the footer on every page, the link-share image, the homepage Google description, the About page, the Contact page and the free-estimate FAQ. About 12 places in all, fixed mainly by editing 3 constants.
 3. **Remove "small" in two live places.** The privacy page and the free-estimate FAQ both say "We're a small team".
-4. **Nothing else looks unfinished.** I found no lorem ipsum, TODOs, "coming soon" text, broken internal links or old prices (the $999 Assessment price is gone). Home-page sample data is labelled illustrative. `/insights` is empty, but it is already hidden from the nav and from Google.
+4. **Nothing else looks unfinished.** I found no lorem ipsum, TODOs, "coming soon" text, broken internal links or old prices (the $999 Assessment price is gone). Home-page sample data is labelled illustrative (the use-case tabs dropped their visible label on 2026-11-11, Nick's call; screen-reader labels still say "Sample chart"). `/insights` is empty, but it is already hidden from the nav and from Google.
 5. **Behind the scenes:** the structured data still carries a phone number and a Durham, CT address. Some unused old home-page code still holds the Connecticut copy. Neither is visible, but both conflict with the rules.
 
 **Method:** I read every route under `src/app`, the content files, the nav, the footer, the sitemap config and `llms.txt`. I grepped for placeholders, prices, place names and the banned words. I checked that every internal link and anchor resolves to a route or an `id` in the repo. The review covers the repo at this branch; I did not compare it against the live deployed site.
@@ -45,7 +45,7 @@
 
 - I found no lorem ipsum, TODO, FIXME, "coming soon" or TBD in page copy.
 - No dollar price is quoted anywhere. The $999 Assessment price was removed in `b85a9f6`, and every pricing answer points to the free AI strategy call. The "$1M in revenue" lines are audience qualifiers, not prices. The free-estimate JSON-LD `Offer price: "0"` correctly describes a free call.
-- The home-page dashboards and use cases carry "Illustrative example · sample data" (`src/components/home-a/use-case-tabs.tsx:131`, `every-device.tsx:310`).
+- The home-page dashboards carry "Illustrative example · sample data" (`every-device.tsx:310`). The use-case tabs dropped it on 2026-11-11 (Nick: "It's obviously sample data").
 - Every internal link resolves. That includes `/approach#assessment` (`src/components/home/assessment.tsx:9`) and the product anchors such as `#lead-flow` (`src/components/services/product-detail.tsx:28`).
 - The LP pages under `/lp/*` are `noindex`, kept out of the sitemap and carry no nav. That is intended.
 - There are no client names, no review quotes and no Upwork mentions. The About page's client examples are anonymous ("a law firm", "a home-services contractor").
