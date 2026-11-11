@@ -36,7 +36,6 @@ export const WORK_PUBLISHED = false;
 
 export const NAV_ITEMS: NavItem[] = [
   { label: "Services", href: "/services" },
-  { label: "Industries", href: "/industries" },
   { label: "Work", href: "/work" },
   { label: "Approach", href: "/approach" },
   { label: "About", href: "/about" },

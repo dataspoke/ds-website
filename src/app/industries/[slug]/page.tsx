@@ -4,13 +4,22 @@ import { notFound } from "next/navigation";
 import {
   CalendarClock,
   ChevronDown,
+  Database,
+  FileCheck,
   FileSpreadsheet,
   GitCompareArrows,
   Inbox,
   Keyboard,
   Megaphone,
+  Repeat,
+  ShieldCheck,
+  Smartphone,
+  Split,
   Target,
+  Truck,
+  UserMinus,
   UserSearch,
+  Users,
   VideoOff,
   type LucideIcon,
 } from "lucide-react";
@@ -54,6 +63,15 @@ const ICONS: Record<ProblemIcon, LucideIcon> = {
   target: Target,
   "user-search": UserSearch,
   "file-spreadsheet": FileSpreadsheet,
+  "user-minus": UserMinus,
+  smartphone: Smartphone,
+  split: Split,
+  users: Users,
+  truck: Truck,
+  repeat: Repeat,
+  "file-check": FileCheck,
+  database: Database,
+  "shield-check": ShieldCheck,
 };
 
 export async function generateMetadata({ params }: PageProps<"/industries/[slug]">): Promise<Metadata> {
@@ -79,6 +97,8 @@ export default async function IndustryPage({ params }: PageProps<"/industries/[s
     { name: industry.name, path },
   ];
   const cards = industry.build.cards.map((card) => ({ ...card, service: buildCardService(card) }));
+  // Two build cards can point at the same service; list each service once in the offer catalog.
+  const offers = [...new Map(cards.map((c) => [c.service.href, { name: c.service.title, path: c.service.href }])).values()];
 
   return (
     <>
@@ -89,7 +109,7 @@ export default async function IndustryPage({ params }: PageProps<"/industries/[s
         path={path}
         serviceType={INDUSTRY_SERVICE_TYPE}
         audience={industry.audienceType}
-        offers={cards.map((c) => ({ name: c.service.title, path: c.service.href }))}
+        offers={offers}
       />
       <FaqPageJsonLd path={path} faqs={industry.faqs} />
 
@@ -164,7 +184,9 @@ export default async function IndustryPage({ params }: PageProps<"/industries/[s
 
       <Section tint>
         <SectionHead title={industry.stats.title} lede={industry.stats.intro} />
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
+        <div
+          className={cn("mt-10 grid gap-4", industry.stats.tiles.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3")}
+        >
           {industry.stats.tiles.map((tile) => (
             <div key={tile.figure} className="grid content-start rounded-xl border border-tint-strong bg-background p-6">
               <p className="font-display text-4xl font-extrabold tracking-tight text-primary">{tile.figure}</p>
