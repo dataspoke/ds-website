@@ -64,6 +64,9 @@ function pageSources(pagePath) {
     return ["src/app/services/[line]", "src/content/services.ts", "src/content/service-pages.ts", "src/components/services"];
   }
   if (pagePath.startsWith("/work/")) return ["src/app/work/[slug]", "src/components/work"];
+  if (pagePath === "/industries" || pagePath.startsWith("/industries/")) {
+    return ["src/app/industries", "src/content/industries.ts", "src/components/industries"];
+  }
   const sources = {
     "/": ["src/app/page.tsx", "src/content/home.ts", "src/components/home"],
     "/about": ["src/app/about", "src/content/home.ts", "src/components/home"],
