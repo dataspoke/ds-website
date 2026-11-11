@@ -177,16 +177,19 @@ export const INDUSTRIES: Industry[] = [
         {
           figure: "33%",
           label: "of 500 firms replied to a prospective client's email",
+          // Primary source: https://www.clio.com/about/press/clio-latest-legal-trends-report/
           source: "Down from 40% in 2019. Clio, Legal Trends Report, 2024.",
         },
         {
           figure: "48%",
           label: "of firms were essentially unreachable by phone",
+          // Primary source: https://www.clio.com/about/press/clio-latest-legal-trends-report/
           source: "Only 40% answered calls, down from 56% in 2019. Clio, Legal Trends Report, 2024.",
         },
         {
           figure: "38%",
           label: "average utilization: about 3 of every 8 working hours billed",
+          // Primary source: https://www.clio.com/resources/legal-trends/ (2025 report, Appendix A, p. 62)
           source: "Firms collect on roughly 2.4 hours of work per day. Clio, Legal Trends Report, 2025.",
         },
       ],
@@ -323,16 +326,19 @@ export const INDUSTRIES: Industry[] = [
         {
           figure: "74%",
           label: "of residential contractors see AI as a way to run more efficiently",
+          // Primary source: https://servicetitan.com/press/servicetitan-report-finds-74-of-residential-contractors-see-ai-as-key
           source: "Only about 25% use it. ServiceTitan, Residential State of the Trades Report, 2026.",
         },
         {
           figure: "4%",
           label: "of roofing and exteriors contractors use AI built into their CRM",
+          // Primary source: https://www.servicetitan.com/blog/roofing-exteriors-market-report-2026
           source: "ServiceTitan, Roofing & Exteriors Market Report, 2026.",
         },
         {
           figure: "598,000",
           label: "specialty trade contractor establishments, employing about 5.3 million people",
+          // Primary source: https://www.bls.gov/iag/tgs/iag238.htm (preliminary figures)
           source:
             "About 598,000. U.S. Bureau of Labor Statistics, Industries at a Glance, NAICS 238, 2026, preliminary.",
         },
