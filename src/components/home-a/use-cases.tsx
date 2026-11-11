@@ -20,20 +20,15 @@ const cx = (...c: (string | false | undefined)[]) => c.filter(Boolean).join(" ")
 /* ---------- Layout: copy on the left, chart panel on the right ---------- */
 
 function Feature({
-  pain,
-  headline,
-  body,
-  decision,
+  question,
+  answer,
   label,
   children,
 }: {
-  /** The owner's pain, in their words. */
-  pain: string;
-  /** The end state we deliver. */
-  headline: string;
-  body: string;
-  /** The decision the owner is trying to make, and what the chart says to do. */
-  decision: { q: string; a: string };
+  /** The decision the owner is trying to make. Every scene leads with one. */
+  question: string;
+  /** What the chart says to do. */
+  answer: string;
   /** Text alternative for the chart. */
   label: string;
   children: ReactNode;
@@ -41,16 +36,8 @@ function Feature({
   return (
     <div className="grid min-w-0 items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] lg:gap-12">
       <div className="min-w-0">
-        <p className="max-w-md text-[0.95rem] italic leading-snug text-muted-foreground">&ldquo;{pain}&rdquo;</p>
-        <h3 className="mt-4 max-w-[18ch] font-display text-[1.7rem] font-bold leading-[1.1] tracking-tight text-ink sm:text-[2.1rem]">{headline}</h3>
-        <p className="mt-4 max-w-md text-muted-foreground">{body}</p>
-        <div className="mt-5 max-w-md rounded-r-lg border-l-[3px] border-primary bg-tint px-4 py-3">
-          <div className="text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-primary">The decision</div>
-          <p className="mt-1 text-[0.95rem] leading-snug text-ink">
-            <strong className="font-semibold">{decision.q}</strong>{" "}
-            <span className="whitespace-nowrap">→</span> {decision.a}
-          </p>
-        </div>
+        <h3 className="max-w-[18ch] text-balance font-display text-[1.7rem] font-bold leading-[1.1] tracking-tight text-ink sm:text-[2.1rem]">{question}</h3>
+        <p className="mt-4 max-w-md text-lg font-medium leading-snug text-primary sm:text-xl">{answer}</p>
       </div>
       <div role="img" aria-label={label} className="grid min-w-0">
         {children}
@@ -142,10 +129,8 @@ const WORST = CHANNELS.reduce((a, c) => (cps(c) > cps(a) ? c : a)); // lowest CP
 function SalesScene() {
   return (
     <Feature
-      pain="I spend $20K a month on marketing and don't know what's working."
-      headline="Every dollar tied to a sale. Cut the spend that doesn't close."
-      body="We tie each lead to the sale it became, so you judge channels by cost per sale."
-      decision={{ q: "Where should next month's ad budget go?", a: "Shift Meta spend to Google LSA." }}
+      question="Where should next month's ad budget go?"
+      answer="Shift Meta spend to Google LSA."
       label={`Sample report, cost per lead and cost per sale by channel: ${CHANNELS.map((c) => `${c.name} ${c.campaign} ${c.cpl ? `${usd(c.cpl)} and ${usd(cps(c))}` : "organic, no ad cost"}`).join("; ")}. ${WORST.name} has the lowest cost per lead and the highest cost per sale.`}
     >
       <DashPanel title="Cost per lead vs. cost per sale">
@@ -202,10 +187,8 @@ const BEST = PERSONAS.reduce((a, x) => (x.v > a.v ? x : a));
 function PersonasScene() {
   return (
     <Feature
-      pain="My team spends all day chasing leads that never buy."
-      headline="Know your best customer. Stop chasing bad leads."
-      body="We profile who actually buys, then score every new lead so your team calls the best ones first."
-      decision={{ q: "Which leads do we chase, and which do we drop?", a: "Call referrals first. Send price shoppers an email." }}
+      question="Which leads do we call first?"
+      answer="Referrals. Price shoppers get an email."
       label={`Sample chart, close rate by customer type: ${PERSONAS.map((x) => `${x.name} ${x.v}%`).join(", ")}. The best: ${BEST.name.toLowerCase()}, at ${BEST.v}%.`}
     >
       <DashPanel title="Close rate by customer type">
@@ -227,10 +210,8 @@ const FAST = RESPONSE[0];
 function PipelineScene() {
   return (
     <Feature
-      pain="Leads go cold. Nobody follows up."
-      headline="Every lead called in 5 minutes. Nothing slips."
-      body="We time every lead to first contact and alert your team before it cools."
-      decision={{ q: "Do we need someone answering leads after hours?", a: "Yes. Slow replies close at a third the rate." }}
+      question="Do we need someone on leads after hours?"
+      answer="Yes. Slow replies close at a third the rate."
       label={`Sample chart, close rate by response time: ${RESPONSE.map((r) => `${r.name} ${r.v}%`).join(", ")}.`}
     >
       <DashPanel title="Close rate by response time">
@@ -253,10 +234,8 @@ const STALL = STUCK.reduce((a, x) => (x.v > a.v ? x : a));
 function IntakeScene() {
   return (
     <Feature
-      pain="Leads come in, and then I don't know what happens to them."
-      headline="See exactly where leads stall, and who to call today."
-      body="We track every lead through intake and flag the ones sitting too long."
-      decision={{ q: "Where do we fix intake first?", a: "Follow-up after the appointment is set." }}
+      question="Where do leads stall?"
+      answer="After the appointment is set. Fix follow-up there."
       label={`Sample chart, leads stuck 7 or more days by stage: ${STUCK.map((x) => `${x.name} ${x.v}`).join(", ")}. Most are stuck at ${STALL.name.toLowerCase()}.`}
     >
       <DashPanel title="Leads stuck 7+ days, by stage">
@@ -279,10 +258,8 @@ const BOTTLENECK = STEPS.reduce((a, x) => (x.v > a.v ? x : a));
 function OpsScene() {
   return (
     <Feature
-      pain="We're busy but always behind, and everything runs through me."
-      headline="Work moves without you approving every step."
-      body="We show where work waits on you, then automate the routine approvals."
-      decision={{ q: "Which step do we fix first?", a: "Let managers approve jobs under $5K." }}
+      question="Where does work wait on you?"
+      answer="Approvals. Let managers sign off on jobs under $5K."
       label={`Sample chart, median days per step: ${STEPS.map((x) => `${x.name} ${x.v}`).join(", ")}.`}
     >
       <DashPanel title="Median days per step">
@@ -319,10 +296,8 @@ const avgK = (k: number) => `$${k.toFixed(1)}K`;
 function PipelineValueScene() {
   return (
     <Feature
-      pain="Our deals take 90 days to close. I can't tell what's actually coming in."
-      headline="Know what your pipeline is really worth."
-      body="We multiply each stage's deals by your average sale and real win rate."
-      decision={{ q: "Can we afford to add a person this quarter?", a: `Yes. ${money(EXPECTED)} is expected in the next 90 days.` }}
+      question="Can we afford to add a person this quarter?"
+      answer={`Yes. ${money(EXPECTED)} is expected in the next 90 days.`}
       label={`Sample table, pipeline by stage for the next 90 days: ${STAGES.map((x) => `${x.name} ${x.deals} deals, average sale ${avgK(avgSale(x))}, win rate ${x.rate}%, expected ${money(expected(x))}`).join("; ")}. ${DEALS} deals, ${money(IN_PIPELINE)} in pipeline, ${money(EXPECTED)} expected.`}
     >
       <DashPanel title="Pipeline by stage · next 90 days">
@@ -396,10 +371,8 @@ const COST_POINTS = REVENUE.map((x, i) => `${(i / (REVENUE.length - 1)) * 100},$
 export function RevenueCostScene() {
   return (
     <Feature
-      pain="I don't know what next quarter looks like, or if we'll cover our costs."
-      headline="See next quarter's revenue and costs before they happen."
-      body="We forecast from signed work, your weighted pipeline and your costs."
-      decision={{ q: "Can we add a crew in January?", a: "Yes. Projected revenue covers it by February." }}
+      question="Can we add a crew in January?"
+      answer="Yes. Projected revenue covers it by February."
       label={`Sample chart in thousands. Actual revenue Oct ${REVENUE[0].closed}, Nov ${REVENUE[1].closed}, Dec ${REVENUE[2].closed}. ${REVENUE.filter((x) => x.ahead).map((x) => `${x.m} closed ${x.closed} plus projected ${x.projected}, total ${x.closed + x.projected}`).join("; ")}. Costs ${REVENUE.map((x) => `${x.m} ${x.cost}`).join(", ")}. By ${CLEARS.m}, revenue clears the new costs.`}
     >
       <DashPanel title="Revenue: closed vs. projected, $K">
@@ -469,10 +442,8 @@ const OVER = ROLES.reduce((a, r) => (r.v > a.v ? r : a));
 function HiringScene() {
   return (
     <Feature
-      pain="I can't tell if we need to hire, or if we can afford to."
-      headline="Know when to hire before your team is buried."
-      body="We compare booked work against each role's capacity, so you hire ahead of demand."
-      decision={{ q: "Who do we hire next, and when?", a: "An estimator, before March." }}
+      question="Who do we hire next?"
+      answer="An estimator, before March."
       label={`Sample chart, booked work as a share of capacity over the next 90 days: ${ROLES.map((r) => `${r.name} ${r.v}%`).join(", ")}. ${OVER.name} are over capacity.`}
     >
       <DashPanel title="Booked vs. capacity, next 90 days">
@@ -497,10 +468,8 @@ const LOSER = PROJECTS.reduce((a, p) => (p.v < a.v ? p : a));
 export function MarginScene() {
   return (
     <Feature
-      pain="I can't see what each project makes after costs. I don't know how we're doing until the books close."
-      headline="See profit on every project while it's still running."
-      body="We match costs to each project as they land, so a losing job shows up while you can still fix it."
-      decision={{ q: "Which project needs attention now?", a: `${LOSER.name}, before it closes at a loss.` }}
+      question="Which project needs attention now?"
+      answer={`${LOSER.name}, before it closes at a loss.`}
       label={`Sample chart, margin by project this month: ${PROJECTS.map((p) => `${p.name} ${FMT.spct(p.v)}`).join(", ")}. Project ${LOSER.name} is losing money.`}
     >
       <DashPanel title="Margin by project · this month">
@@ -528,10 +497,8 @@ const MAX_K = 500;
 export function ForecastScene() {
   return (
     <Feature
-      pain="I don't know how next quarter will go until it's over."
-      headline="Know next quarter before it happens."
-      body="We forecast from your real pipeline, so the number you plan with is the one you hit."
-      decision={{ q: "What will next quarter bring in?", a: "Plan on the forecast, not last quarter." }}
+      question="What will next quarter bring in?"
+      answer="Plan on the forecast, not last quarter."
       label={`Sample revenue chart in thousands: ${MONTHS.map((x) => `${x.m} ${x.v}${x.forecast ? " forecast" : ""}`).join(", ")}.`}
     >
       <DashPanel title="Revenue, actual and forecast">
@@ -582,10 +549,8 @@ const SURPRISE = "Slow response";
 function CallsScene() {
   return (
     <Feature
-      pain="We lose deals and I don't know why."
-      headline="Know why you lose, and fix it before the next call."
-      body="We tag every lost-deal call with the reason the customer gave."
-      decision={{ q: "What do we fix to win more deals?", a: "Response time, before cutting price." }}
+      question="What do we fix to win more deals?"
+      answer="Response time, before cutting price."
       label={`Sample call analysis, lost deals by reason: ${REASONS.map((r) => `${r.name} ${r.v}`).join(", ")}. Slow response is the surprise.`}
     >
       <DashPanel title="Lost deals by reason, from the calls">
