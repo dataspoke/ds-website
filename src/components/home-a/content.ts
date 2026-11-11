@@ -28,6 +28,12 @@ export const USE_CASES_HEAD = {
   title: "What it looks like in practice.",
 };
 
+export const INDUSTRIES_A_HEAD = {
+  eyebrow: "Who we work with",
+  title: "We go deepest in two industries.",
+  allLink: { label: "All industries", href: "/industries" },
+};
+
 export const SERVICES_A_HEAD = {
   eyebrow: "What we do",
   title: "Start with the foundation.",
