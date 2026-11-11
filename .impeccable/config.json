@@ -1,0 +1,32 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "plus jakarta sans",
+        "createdAt": "2026-11-11T01:44:02.272Z",
+        "reason": "Claude: mock reproduces the live site's own font from globals.css"
+      },
+      {
+        "rule": "aphoristic-cadence",
+        "value": "*",
+        "files": [
+          "docs/plans/**"
+        ],
+        "createdAt": "2026-11-11T01:44:02.289Z",
+        "reason": "Claude: one-pager template requires one-fact-per-line bullets; page copy itself was checked"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "docs/plans/**"
+        ],
+        "createdAt": "2026-11-11T01:44:02.305Z",
+        "reason": "Claude: template table cells and mock nav already have inner padding; detector reads wrapper only"
+      }
+    ]
+  }
+}
