@@ -507,7 +507,7 @@ export const INDUSTRIES: Industry[] = [
           figure: "4.6%",
           label: "of members did not use their membership at all",
           // Primary source: https://www.healthandfitness.org/81-million-americans-were-members-of-a-fitness-facility-in-2025-new-hfa-report-finds/
-          source: "The share has fallen. Health & Fitness Association, 2026 US Health & Fitness Consumer Report.",
+          source: "Down from about 10%, an all-time low. Health & Fitness Association, 2026 US Health & Fitness Consumer Report.",
         },
         {
           figure: "23%",
