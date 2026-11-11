@@ -44,15 +44,13 @@ export function Footer({ navItems }: { navItems: NavItem[] }) {
             </ul>
           </nav>
           <ul className="flex flex-wrap gap-x-6 gap-y-0 text-sm">
-            {navItems
-              .filter((item) => item.href !== INDUSTRIES_HUB.path)
-              .map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href} className="inline-block py-2.5 text-muted-foreground hover:text-primary">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="inline-block py-2.5 text-muted-foreground hover:text-primary">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
             <li>
               <a
                 href={SOCIAL_LINKS.linkedinCompany}
