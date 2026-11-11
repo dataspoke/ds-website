@@ -125,13 +125,8 @@ export function UseCaseTabs({ tabs }: { tabs: UseCaseTab[] }) {
               i !== selected && "sm:hidden"
             )}
           >
-            <div className="grid min-w-0 content-start gap-4 rounded-3xl border border-tint-strong bg-gradient-to-b from-white to-tint/60 p-4 sm:p-6">
-              <div className="grid min-w-0 gap-2">
-                <span className="max-w-full justify-self-end rounded-full bg-white px-2.5 py-0.5 text-center text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground ring-1 ring-tint-strong">
-                  Illustrative example · sample data
-                </span>
-                {t.scene}
-              </div>
+            <div className="grid min-w-0 content-start gap-4 pt-4 sm:pt-8">
+              {t.scene}
               {t.caption && <figcaption className="px-1 text-muted-foreground">{t.caption}</figcaption>}
             </div>
           </figure>
