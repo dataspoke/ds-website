@@ -99,7 +99,7 @@ function body() {
     "",
     `- [Home](${SITE_URL}): what ${SITE_NAME} does for business owners and who it's for`,
     `- [Services](${SITE_URL}/services): the six services, each described by what changes for the owner`,
-    `- [Industries](${SITE_URL}${INDUSTRIES_HUB.path}): ${INDUSTRIES_HUB.h1.toLowerCase()}, with a page each for ${INDUSTRIES.map((i) => i.name.toLowerCase()).join(", ")}`,
+    `- [Industries](${SITE_URL}${INDUSTRIES_HUB.path}): industries ${SITE_NAME} has worked in, with a page each for ${INDUSTRIES.map((i) => i.audienceName).slice(0, -1).join(", ")} and ${INDUSTRIES[INDUSTRIES.length - 1].audienceName}`,
     ...(WORK_PUBLISHED ? [`- [Work](${SITE_URL}/work): case studies, filterable by service`] : []),
     `- [Approach](${SITE_URL}/approach): the ${ASSESSMENT.name}, then build, hand-over and retainer, plus how the numbers that run a business get picked`,
     `- [About](${SITE_URL}/about): Nick Paul's background and how he works`,
