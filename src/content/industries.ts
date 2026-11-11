@@ -711,7 +711,7 @@ export const INDUSTRIES: Industry[] = [
       {
         question: "How do you segment customers?",
         answer:
-          "We group customers by what their records show, such as what they buy, how often and how recently. Each segment has a plain definition your team can check, and it updates itself as new orders come in. Marketing and customer service can then reach each group with a message that fits, instead of sending everyone the same email.",
+          "We group customers by what their records show, such as what they buy, how often and how recently. Each segment has a plain definition your team can check, and it updates itself as new orders come in. Marketing and customer service can then reach each group with a message that fits, instead of sending everyone the same email. The segments also feed your reports, so you can see how each group's buying changes over time.",
       },
       {
         question: "Where does our customer data live, and who controls it?",
@@ -721,7 +721,7 @@ export const INDUSTRIES: Industry[] = [
       {
         question: "Do we have to replace our software?",
         answer:
-          "No. We build on the store, shipping, scheduling and accounting systems you already pay for. The goal is for those systems to share information, not for your team to learn a new one.",
+          "No. We build on the store, shipping, scheduling and accounting systems you already pay for. Supplement brands keep their store and shipping tools, and clinics keep their scheduling and billing systems. The goal is for those systems to share information, not for your team to learn a new one.",
       },
       {
         question: "How do we start?",
