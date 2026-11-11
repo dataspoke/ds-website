@@ -7,7 +7,12 @@ import type { FaqItem, ServiceLineSlug, TextLink } from "@/types";
 // names, no call-answering offer. Name only systems DataSpoke has built on;
 // field-service platforms appear only inside a statistic's source.
 
-export type IndustrySlug = "law-firms" | "home-services";
+export type IndustrySlug =
+  | "law-firms"
+  | "home-services"
+  | "gyms-and-fitness"
+  | "health-and-wellness"
+  | "manufacturing";
 
 /** Lucide icon names, mapped to components on the page. */
 export type ProblemIcon =
@@ -19,7 +24,16 @@ export type ProblemIcon =
   | "calendar-clock"
   | "target"
   | "user-search"
-  | "file-spreadsheet";
+  | "file-spreadsheet"
+  | "user-minus"
+  | "smartphone"
+  | "split"
+  | "users"
+  | "truck"
+  | "repeat"
+  | "file-check"
+  | "database"
+  | "shield-check";
 
 export interface IndustryBuildCard {
   title: string;
@@ -55,7 +69,7 @@ export interface Industry {
   definition: string;
   /** YYYY-MM-DD, shown as "Last updated". */
   lastUpdated: string;
-  /** Hub and home page card. */
+  /** Hub page card. */
   card: { body: string };
   problems: { title: string; intro: string; items: { text: string; icon: ProblemIcon }[] };
   build: { title: string; intro: string; cards: IndustryBuildCard[] };
@@ -413,18 +427,487 @@ export const INDUSTRIES: Industry[] = [
       button: CTA_BUTTON,
     },
   },
+  {
+    slug: "gyms-and-fitness",
+    name: "Gyms and fitness",
+    audienceName: "gyms",
+    audienceType: "Gyms and fitness businesses",
+    serviceName: "AI and data consulting for gyms and fitness businesses",
+    metaTitle: "AI and Data Consulting for Gyms and Fitness",
+    metaDescription:
+      "We connect Mindbody, payments and accounting, then build a member app in your brand and reports that flag members at risk. Free AI strategy call.",
+    h1: "AI and data consulting for gyms and fitness: see which members are drifting away while there is time to act.",
+    definition:
+      "DataSpoke is a data and AI consulting firm that works with gyms and fitness businesses across the United States. We connect your booking system, payments and accounting so every member, visit and payment sits in one place you own. Then we build what the business runs on: a member app in your own brand, reports that flag members drifting away, and views of how each trainer and location is doing. You own every account and every line of code.",
+    lastUpdated: "2026-11-10",
+    card: {
+      body: "Booking, payments and member records in one place you own, with a member app in your brand and reports that flag members drifting away.",
+    },
+    problems: {
+      title: "Where members slip away",
+      intro:
+        "Most gyms learn a member has left when the payment stops, even though the signs were in the booking data weeks earlier.",
+      items: [
+        { text: "Visits drop off for weeks before anyone notices.", icon: "user-minus" },
+        { text: "Members book through a generic app the gym can't change.", icon: "smartphone" },
+        { text: "Booking, payment and accounting data sit in separate systems.", icon: "split" },
+        { text: "Nobody can say which trainers keep their clients.", icon: "users" },
+        { text: "Each location's numbers get pulled and lined up by hand.", icon: "file-spreadsheet" },
+      ],
+    },
+    build: {
+      title: "What we build for gyms and fitness businesses",
+      intro:
+        "We build on the booking system you already pay for, and most gyms start by getting their own data into one place they control.",
+      cards: [
+        {
+          title: "Your data in one place you own",
+          body: "A private copy of your booking, payment and member records, kept in accounts you control and updated on its own.",
+          serviceSlug: "organize",
+        },
+        {
+          title: "A member app in your own brand",
+          body: "Members book and cancel in your app, and your booking system still runs the schedule behind it.",
+          serviceSlug: "custom-software",
+        },
+        {
+          title: "Members at risk, flagged in time",
+          body: "A weekly list of members whose visits are falling off, so managers can reach them while there is still time.",
+          serviceSlug: "analytics-data-science",
+        },
+        {
+          title: "Trainer, location and upsell views",
+          body: "See which trainers keep their clients, how each location is trending and where the upsell chances are, without exporting a report.",
+          serviceSlug: "metrics-dashboards",
+        },
+      ],
+    },
+    systems: {
+      title: "Systems we connect for gyms",
+      intro:
+        "We have built on Mindbody for a gym with several locations, and we connect the rest of your tools to it.",
+      primary: ["Mindbody"],
+      common: ["Stripe", "Google Workspace", "QuickBooks"],
+      commonLabel: "Commonly connected",
+      close:
+        "Running a different booking system? Tell us on the free AI strategy call, and we check how it lets data in and out before we promise anything.",
+    },
+    stats: {
+      title: "By the numbers",
+      intro:
+        "Gym membership is at a record high, and keeping those members coming back is where the data helps.",
+      tiles: [
+        {
+          figure: "81 million",
+          label: "Americans belonged to a gym, studio or fitness facility in 2025",
+          // Primary source: https://www.healthandfitness.org/81-million-americans-were-members-of-a-fitness-facility-in-2025-new-hfa-report-finds/
+          source: "An all-time high. Health & Fitness Association, 2026 US Health & Fitness Consumer Report.",
+        },
+        {
+          figure: "4.6%",
+          label: "of members did not use their membership at all",
+          // Primary source: https://www.healthandfitness.org/81-million-americans-were-members-of-a-fitness-facility-in-2025-new-hfa-report-finds/
+          source: "The share has fallen. Health & Fitness Association, 2026 US Health & Fitness Consumer Report.",
+        },
+        {
+          figure: "23%",
+          label: "of members used a personal trainer in 2024",
+          // Primary source: https://www.healthandfitness.org/new-hfa-data-shows-how-77-million-us-fitness-facility-members-work-out/
+          source:
+            "They averaged 21 sessions a year, down from 28 in 2019. Health & Fitness Association, 2025 US Health & Fitness Consumer Report.",
+        },
+      ],
+      close:
+        "More members means more booking history to learn from. We put that history to work, so managers see who is drifting away and which trainers keep their clients in time to act on it.",
+    },
+    outcomes: {
+      heading: "From our work with a gym with several locations:",
+      items: [
+        "Members book in the gym's own app, and the owners own the app, the code and their data.",
+        "Managers get a list of members drifting away while there is still time to reach them.",
+        "Managers see which trainers keep their clients and where the upsell chances are.",
+      ],
+    },
+    steps: {
+      title: "How it works",
+      intro: stepsIntro,
+      items: [
+        {
+          title: "Free AI strategy call",
+          description: "30 minutes on your booking system, your members and where they slip away, and whether we can help.",
+        },
+        sharedSteps.estimate,
+        sharedSteps.build,
+        {
+          title: "Hand over",
+          description:
+            "Every account and line of code in your business's name, with plain-English documentation.",
+        },
+      ],
+      close: "Gyms that want the full map first can start with the two-week Data & AI Assessment.",
+      closeLinks: [assessment],
+      approachLink,
+    },
+    faqTitle: "Questions gym owners ask",
+    faqs: [
+      {
+        question: "What does an AI and data consultant do for a gym?",
+        answer:
+          "An AI and data consultant connects the systems a business already runs, organizes the information in them and puts it to work. For a gym or fitness business, that usually means getting booking, payment and member records into one place you own. Then we build reports that flag members drifting away, views of trainers and locations, and sometimes a member app in your own brand. Most gyms start with their data, because every report after it depends on it.",
+      },
+      {
+        question: "Can you work with Mindbody and the other tools we already use?",
+        answer:
+          "Yes. We have built on Mindbody for a gym with several locations, including a member app that books through it. Payments, accounting and team tools such as Stripe, QuickBooks and Google Workspace can connect to the same records. If you run a different booking system, we check how it lets data in and out on the free AI strategy call, and we tell you plainly what is possible.",
+      },
+      {
+        question: "How do we spot members who are about to cancel?",
+        answer:
+          "We look at each member's booking history for the pattern that comes before a cancellation, such as visits falling off over several weeks. Managers get a weekly list of those members for their own locations, while there is still time to reach them. The same data shows which trainers keep their clients and which members might want more, such as personal training.",
+      },
+      {
+        question: "Who owns our member data and the app?",
+        answer:
+          "You do. Your data sits in accounts your business owns, under logins you control, and a member app we build is yours along with its code. We write down where each kind of data lives and who can see it. Because every account is in your name, you can remove our access at any time.",
+      },
+      {
+        question: "Do we have to replace our booking software?",
+        answer:
+          "No. We build on the booking system you already pay for. It keeps running the schedule, and members can book through it or through your own app. The goal is for your systems to share information, not for your staff to learn a new one.",
+      },
+      {
+        question: "How do we start?",
+        answer:
+          "Book a free AI strategy call. It is a 30-minute call about the tools you run and where members slip away. Within two business days you get a written estimate with a recommended plan and a price range, with no obligation to go ahead. Gyms that want the full map first can start with the two-week Data & AI Assessment.",
+      },
+    ],
+    cta: {
+      title: "See which members are drifting away.",
+      text: "A free 30-minute call about your tools and your members, then a written estimate within two business days.",
+      button: CTA_BUTTON,
+    },
+  },
+  {
+    slug: "health-and-wellness",
+    name: "Health and wellness",
+    audienceName: "health and wellness brands",
+    audienceType: "Health and wellness businesses",
+    serviceName: "AI and data consulting for health and wellness businesses",
+    metaTitle: "AI and Data Consulting for Health and Wellness",
+    metaDescription:
+      "For clinics and supplement brands: we connect your store, shipping and accounting systems, then build customer segments and reports. Free AI strategy call.",
+    h1: "AI and data consulting for health and wellness: every order, shipment and customer in one place you own.",
+    definition:
+      "DataSpoke is a data and AI consulting firm that works with health and wellness businesses across the United States, from clinics to supplement brands. We connect the e-commerce, shipping and accounting systems you already run, bring the data into one place, and build reports, customer segments and tools on top. Customer data stays in accounts your business owns, and you own every line of code.",
+    lastUpdated: "2026-11-10",
+    card: {
+      body: "Clinics and supplement brands: orders, shipping and customer records in one place you own, with customer segments and reports on top.",
+    },
+    problems: {
+      title: "Where the picture breaks",
+      intro:
+        "Health and wellness businesses collect plenty of data, from orders and shipments to appointments, and it rarely sits in one place.",
+      items: [
+        { text: "Orders, shipments and payments live in separate systems.", icon: "split" },
+        { text: "Shipping costs and delivery problems surface weeks late.", icon: "truck" },
+        { text: "Every customer gets the same email, whatever they buy.", icon: "users" },
+        { text: "Nobody can say which customers come back and which buy once.", icon: "repeat" },
+        { text: "Month-end means exporting and lining up reports by hand.", icon: "file-spreadsheet" },
+      ],
+    },
+    build: {
+      title: "What we build for health and wellness businesses",
+      intro:
+        "We build on the systems you already pay for, and most businesses start by bringing their order and customer data into one place.",
+      cards: [
+        {
+          title: "Orders and shipping in one place",
+          body: "Order, shipping and payment data flow into one place on their own, so nobody exports and pastes them together.",
+          serviceSlug: "capture",
+        },
+        {
+          title: "Customer segments you can act on",
+          body: "Customers grouped by what they buy, how often and how recently, ready for marketing and follow-up.",
+          serviceSlug: "analytics-data-science",
+        },
+        {
+          title: "A weekly view of the business",
+          body: "Sales, repeat customers, shipping costs and delivery times in one view that updates itself, by product or location.",
+          serviceSlug: "metrics-dashboards",
+        },
+        {
+          title: "Customer data in accounts you own",
+          body: "Customer records organized in accounts your business owns and controls, with a written map of who can see what.",
+          serviceSlug: "organize",
+        },
+      ],
+    },
+    systems: {
+      title: "Systems we connect",
+      intro:
+        "We connect the e-commerce, shipping and accounting systems you already run. Clinics add scheduling and billing systems, and we check those the same way.",
+      primary: [],
+      common: [],
+      close:
+        "Tell us what you run on the free AI strategy call, and we check how each system lets data in and out before we promise anything.",
+    },
+    stats: {
+      title: "By the numbers",
+      intro:
+        "Supplements are part of most American households, and a growing share of what people buy arrives by mail.",
+      tiles: [
+        {
+          figure: "75%",
+          label: "of US adults use dietary supplements",
+          // Primary source: https://crnusa.org/node/7743
+          source: "46% use them regularly. Council for Responsible Nutrition, 2026 Consumer Survey on Dietary Supplements.",
+        },
+        {
+          figure: "17.1%",
+          label: "of US retail sales were e-commerce in the second quarter of 2026",
+          // Primary source: https://www.census.gov/retail/ecommerce.html
+          source: "U.S. Census Bureau, Quarterly Retail E-Commerce Sales, 2026.",
+        },
+      ],
+      close:
+        "When more sales happen online, more of a business's data lives in order, shipping and payment systems. We bring those together first, so reports, customer segments and AI all read from the same records.",
+    },
+    outcomes: {
+      heading: "From our work with a supplement brand:",
+      items: ["Shipping data brought together and customers segmented."],
+    },
+    steps: {
+      title: "How it works",
+      intro: stepsIntro,
+      items: [
+        {
+          title: "Free AI strategy call",
+          description: "30 minutes on your systems, your customers and where the picture breaks, and whether we can help.",
+        },
+        sharedSteps.estimate,
+        sharedSteps.build,
+        {
+          title: "Hand over",
+          description:
+            "Every account and line of code in your business's name, with plain-English documentation.",
+        },
+      ],
+      close: "Businesses that want the full map first can start with the two-week Data & AI Assessment.",
+      closeLinks: [assessment],
+      approachLink,
+    },
+    faqTitle: "Questions health and wellness businesses ask",
+    faqs: [
+      {
+        question: "What does an AI and data consultant do for a health and wellness business?",
+        answer:
+          "An AI and data consultant connects the systems a business already runs, organizes the information in them and puts it to work. For a supplement brand, that often means bringing order, shipping and payment data together and grouping customers by how they buy. For a clinic, it can mean joining scheduling, billing and follow-up records. Then we build reports and tools on top, and set up AI where it saves your team time.",
+      },
+      {
+        question: "Can you connect our online store, shipping and accounting systems?",
+        answer:
+          "We check on the free AI strategy call before we promise anything. We look at how each system lets data in and out, and we tell you plainly what is possible. For a supplement brand, we brought shipping data together in one place, and the same approach carries over to orders, payments and accounting. If a connection cannot be built, you hear it before the project starts.",
+      },
+      {
+        question: "How do you segment customers?",
+        answer:
+          "We group customers by what their records show, such as what they buy, how often and how recently. Each segment has a plain definition your team can check, and it updates itself as new orders come in. Marketing and customer service can then reach each group with a message that fits, instead of sending everyone the same email.",
+      },
+      {
+        question: "Where does our customer data live, and who controls it?",
+        answer:
+          "Customer data stays in accounts your business owns, under logins you control. We set up reports and AI tools to read only what you give them access to. We write down where each kind of data lives and who can see it, so you can check it against your own obligations. Because every account is in your name, you can remove our access at any time.",
+      },
+      {
+        question: "Do we have to replace our software?",
+        answer:
+          "No. We build on the store, shipping, scheduling and accounting systems you already pay for. The goal is for those systems to share information, not for your team to learn a new one.",
+      },
+      {
+        question: "How do we start?",
+        answer:
+          "Book a free AI strategy call. It is a 30-minute call about the tools you run and where your data stops lining up. Within two business days you get a written estimate with a recommended plan and a price range, with no obligation to go ahead. Businesses that want the full map first can start with the two-week Data & AI Assessment.",
+      },
+    ],
+    cta: {
+      title: "See your customers and orders in one place.",
+      text: "A free 30-minute call about your tools and your customers, then a written estimate within two business days.",
+      button: CTA_BUTTON,
+    },
+  },
+  {
+    slug: "manufacturing",
+    name: "Manufacturing",
+    audienceName: "manufacturers",
+    audienceType: "Manufacturers",
+    serviceName: "AI and data consulting for manufacturers",
+    metaTitle: "AI and Data Consulting for Manufacturers",
+    metaDescription:
+      "We copy plant data out of validated systems into one place you own, then build scheduling tools, customer portals and dashboards. Free AI strategy call.",
+    h1: "AI and data consulting for manufacturers: put plant data to work without touching validated systems.",
+    definition:
+      "DataSpoke is a data and AI consulting firm that works with manufacturers across the United States, including contract and regulated manufacturers. We copy data out of the systems your plant runs into a separate place you own, so validated systems are read from and never written to. Then we build the planning tools, customer portals, dashboards and AI your team runs on. You own every account and every line of code.",
+    lastUpdated: "2026-11-10",
+    card: {
+      body: "Contract and regulated manufacturers: plant data copied into one place you own, with scheduling tools, a customer portal and dashboards on top.",
+    },
+    problems: {
+      title: "Where the plant loses time",
+      intro:
+        "Plants run on several systems that were never meant to share data, and in a regulated plant nobody wants to risk touching the validated ones.",
+      items: [
+        { text: "The production schedule lives in a spreadsheet one person maintains.", icon: "calendar-clock" },
+        { text: "Customers email for certificates, and someone digs each one out by hand.", icon: "file-check" },
+        { text: "Reporting means exporting from validated systems, one file at a time.", icon: "database" },
+        { text: "Production, quality and shipping numbers disagree from report to report.", icon: "git-compare-arrows" },
+        { text: "Changing a validated system for a report would mean revalidating it.", icon: "shield-check" },
+      ],
+    },
+    build: {
+      title: "What we build for manufacturers",
+      intro:
+        "We build beside the systems your plant already runs, and most manufacturers start by getting a copy of their data somewhere it can be used safely.",
+      cards: [
+        {
+          title: "A data lake beside your validated systems",
+          body: "Data is copied out of validated systems into a separate data lake you own, so reports and tools never touch the systems themselves.",
+          serviceSlug: "organize",
+        },
+        {
+          title: "A scheduling planner for the floor",
+          body: "Planners build the production schedule in one tool, and it writes to the floor calendar so every shift works from the same plan.",
+          serviceSlug: "custom-software",
+        },
+        {
+          title: "A certificate portal for customers",
+          body: "Customers find the certificates for their orders in a portal on their own, instead of emailing your team and waiting.",
+          serviceSlug: "custom-software",
+        },
+        {
+          title: "Production and quality numbers in one view",
+          body: "Output, schedule changes, quality results and shipments in one view that updates itself from the data lake.",
+          serviceSlug: "metrics-dashboards",
+        },
+      ],
+    },
+    systems: {
+      title: "Systems we connect",
+      intro:
+        "Plants run a mix of planning, quality, inventory and accounting systems, and some of them are validated. We read from them and copy the data out, and we never change them.",
+      primary: [],
+      common: [],
+      close:
+        "Tell us what your plant runs on the free AI strategy call, and we check how each system lets data out before we promise anything.",
+    },
+    stats: {
+      title: "By the numbers",
+      intro:
+        "Manufacturers expect smart manufacturing to decide who stays competitive, and few have put AI to work across the plant.",
+      tiles: [
+        {
+          figure: "92%",
+          label: "of manufacturers surveyed say smart manufacturing will be the main driver of competitiveness over the next three years",
+          // Primary source: https://www.deloitte.com/us/en/about/press-room/deloitte-2025-smart-manufacturing-survey.html
+          source: "Deloitte, 2025 Smart Manufacturing Survey.",
+        },
+        {
+          figure: "29%",
+          label: "use AI or machine learning at the facility or network level",
+          // Primary source: https://www.deloitte.com/us/en/about/press-room/deloitte-2025-smart-manufacturing-survey.html
+          source: "Deloitte, 2025 Smart Manufacturing Survey.",
+        },
+        {
+          figure: "400,000",
+          label: "private manufacturing establishments, employing about 12.6 million people",
+          // Primary source: https://data.bls.gov/cew/data/api/2025/a/industry/31_33.csv
+          source:
+            "About 400,000. U.S. Bureau of Labor Statistics, Quarterly Census of Employment and Wages, 2025 annual averages.",
+        },
+      ],
+      close:
+        "AI is only as useful as the records it reads, and in a regulated plant those records sit in systems nobody wants to touch. A separate copy of the data gives AI, dashboards and planning tools something to read with no risk to the validated systems.",
+    },
+    outcomes: {
+      heading: "From our work with a contract processor in a regulated industry:",
+      items: [
+        "A production scheduling planner that writes to the floor calendar.",
+        "A certificate portal for the processor's customers.",
+        "Data copied out of validated systems into a separate data lake, so the validated systems are never touched.",
+      ],
+    },
+    steps: {
+      title: "How it works",
+      intro: stepsIntro,
+      items: [
+        {
+          title: "Free AI strategy call",
+          description: "30 minutes on your systems, your schedule and where time goes, and whether we can help.",
+        },
+        sharedSteps.estimate,
+        sharedSteps.build,
+        {
+          title: "Hand over",
+          description:
+            "Every account and line of code in your company's name, with plain-English documentation.",
+        },
+      ],
+      close: "Manufacturers that want the full map first can start with the two-week Data & AI Assessment.",
+      closeLinks: [assessment],
+      approachLink,
+    },
+    faqTitle: "Questions manufacturers ask",
+    faqs: [
+      {
+        question: "What does an AI and data consultant do for a manufacturer?",
+        answer:
+          "An AI and data consultant connects the systems a business already runs, organizes the information in them and puts it to work. For a manufacturer, that usually means copying data out of production, quality and shipping systems into one place the company owns. Then we build tools on top, such as a scheduling planner, a customer certificate portal or a dashboard for output and quality. Most manufacturers start with the data copy, because every tool after it reads from there.",
+      },
+      {
+        question: "Can you work with the systems our plant already runs?",
+        answer:
+          "We check on the free AI strategy call before we promise anything. We look at how each system lets data out, whether through an export, a database or an interface the vendor provides, and we tell you plainly what is possible. If a connection cannot be built, you hear it before the project starts.",
+      },
+      {
+        question: "How do we get production and quality numbers we can trust?",
+        answer:
+          "We bring production, schedule, quality and shipping data into one place and define each number once, such as output per line or on-time shipments. A dashboard reads from that one place and updates itself, so the plant manager and the front office see the same figures. When two numbers disagree, you can trace each one back to its source.",
+      },
+      {
+        question: "How do you handle validated systems and the audit trail?",
+        answer:
+          "Validated systems are read from, never written to. We copy data out of them into a separate data lake, so the validated systems and their audit trails stay as they are, with nothing to revalidate. We write down which data is copied, from where and how often, so your quality team can review it. Tools we build, such as a scheduling planner, write only to systems outside the validated set, like the floor calendar.",
+      },
+      {
+        question: "Do we have to replace our software?",
+        answer:
+          "No. We build beside the systems you already run. Your planning, quality and accounting systems stay in place, and the tools we add read from a copy of their data.",
+      },
+      {
+        question: "How do we start?",
+        answer:
+          "Book a free AI strategy call. It is a 30-minute call about the systems you run and where time goes on the floor. Within two business days you get a written estimate with a recommended plan and a price range, with no obligation to go ahead. Manufacturers that want the full map first can start with the two-week Data & AI Assessment.",
+      },
+    ],
+    cta: {
+      title: "Put your plant's data to work.",
+      text: "A free 30-minute call about your systems and where time goes, then a written estimate within two business days.",
+      button: CTA_BUTTON,
+    },
+  },
 ];
 
 export const INDUSTRIES_HUB = {
   path: "/industries",
   name: "Industries",
-  metaTitle: "Industries We Serve",
+  metaTitle: "Industries We've Worked In",
   metaDescription:
-    "DataSpoke is a data and AI consulting firm for law firms and home service companies across the United States. See what we build for each industry.",
-  h1: "Industries we serve",
+    "DataSpoke is a data and AI consulting firm. We connect the systems a business runs and build dashboards, tools and AI on top, in many industries.",
+  h1: "Industries we've worked in",
   definition:
-    "DataSpoke is a data and AI consulting firm for established businesses across the United States. We connect the software you already run, organize the information in it and put it to work in dashboards, custom tools and AI. We work in many industries, and we go deepest in two: law firms and home service companies.",
+    "DataSpoke is a data and AI consulting firm for established businesses across the United States. We connect the systems a business already runs, organize the data in them and build dashboards, custom tools and AI on top, and that work carries from one industry to the next.",
   cardLink: "See the page",
+  /** Industries we have worked in with no page of their own. Shown after the linked cards, without a link. */
+  unlinked: [{ name: "Government", body: "Human resources and intelligence data work for government teams." }],
   notListed: {
     title: "Not on the list?",
     text: "The work is the same in every industry: connect what you run, organize it, then build on top. If your industry is not listed, tell us on a free AI strategy call and we will say honestly whether we are a fit.",
@@ -459,10 +942,21 @@ export function buildCardService(card: IndustryBuildCard): { title: string; href
   return { title: line.title, href: `/services/${line.slug}` };
 }
 
-/** The sentence on each service page that links its industries: "We build this for law firms and home service companies." */
-export const SERVICE_INDUSTRIES_SENTENCE = { lead: "We build this for", join: "and" };
+/** The sentence on each service page that links its industries: "We've built this for law firms, home service companies and gyms." */
+export const SERVICE_INDUSTRIES_SENTENCE = { lead: "We've built this for", join: "and" };
 
-/** Industries whose build cards use this service, in INDUSTRIES order. Drives the service page link sentence. */
+/** Industries named on each service page. Kept to two or three so the sentence stays short. */
+const SERVICE_INDUSTRIES: Record<ServiceLineSlug, IndustrySlug[]> = {
+  capture: ["law-firms", "home-services", "health-and-wellness"],
+  organize: ["law-firms", "manufacturing"],
+  "metrics-dashboards": ["home-services", "gyms-and-fitness"],
+  "custom-software": ["home-services", "gyms-and-fitness", "manufacturing"],
+  "ai-implementation": ["law-firms"],
+  "analytics-data-science": ["home-services", "health-and-wellness"],
+};
+
+/** Industries linked from a service page, in INDUSTRIES order. Drives the service page link sentence. */
 export function industriesForService(slug: ServiceLineSlug): Industry[] {
-  return INDUSTRIES.filter((i) => i.build.cards.some((c) => c.serviceSlug === slug));
+  const slugs = SERVICE_INDUSTRIES[slug] ?? [];
+  return INDUSTRIES.filter((i) => slugs.includes(i.slug));
 }

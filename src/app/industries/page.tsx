@@ -49,6 +49,15 @@ export default function IndustriesPage() {
               </p>
             </Link>
           ))}
+          {INDUSTRIES_HUB.unlinked.map((card) => (
+            <div
+              key={card.name}
+              className="grid content-start gap-2.5 rounded-xl border border-tint-strong bg-background p-6"
+            >
+              <h2 className="text-xl font-bold">{card.name}</h2>
+              <p className="text-[0.97rem] text-muted-foreground">{card.body}</p>
+            </div>
+          ))}
         </div>
         <div className="mt-12 grid max-w-2xl gap-3">
           <h2 className="text-2xl font-bold">{INDUSTRIES_HUB.notListed.title}</h2>
