@@ -161,7 +161,7 @@ Hash anchors such as `/services/capture#lead-flow` keep working, because the bro
 4. The `lines: ["capture"]` and `lines: ["organize"]` references in `src/content/case-studies.ts`.
 5. `src/components/home-a/services.tsx` and `src/components/home-a/pipeline-list.tsx`.
 6. `src/lib/constants.ts` lines 45–46, which hold the contact form values `capture` and `organize`. The page builds `/contact?service=${line.slug}`, so either change these values or map the old values to the new ones.
-7. `public/sitemap.xml`. `next-sitemap` regenerates it on `postbuild` from the routes, so the new slugs and the tracking page appear on the next build. Don't edit it by hand.
+7. `src/app/sitemap.ts`. Service slugs come from `SERVICE_LINES`, so they appear on the next build. Top-level pages are listed by hand there: add the tracking page's path to the list.
 8. `src/app/llms.txt`, if it lists service URLs.
 
 ---
