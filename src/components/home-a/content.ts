@@ -28,10 +28,10 @@ export const USE_CASES_HEAD = {
   title: "What it looks like in practice.",
 };
 
-export const INDUSTRIES_A_HEAD = {
-  eyebrow: "Who we work with",
-  title: "We go deepest in two industries.",
-  allLink: { label: "All industries", href: "/industries" },
+/** One plain line low on the page; B2B and B2C are business models, not industries. */
+export const WORKED_WITH_A = {
+  text: "We've worked with law firms, home service companies, gyms, health and wellness brands, manufacturers and government teams, in both B2B and B2C.",
+  link: { label: "See the industries", href: "/industries" },
 };
 
 export const SERVICES_A_HEAD = {

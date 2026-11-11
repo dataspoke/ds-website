@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { HeroA } from "@/components/home-a/hero";
 import { UseCases } from "@/components/home-a/use-cases";
-import { IndustriesA } from "@/components/home-a/industries";
 import { ServicesA } from "@/components/home-a/services";
 import { HowItWorksA } from "@/components/home-a/how-it-works";
+import { WorkedWithA } from "@/components/home-a/worked-with";
 import { FaqA } from "@/components/home-a/faq";
 import { CtaA } from "@/components/home-a/cta";
 import { FAQS_A } from "@/components/home-a/content";
@@ -25,9 +25,9 @@ export default function HomePage() {
       <FaqPageJsonLd path="/" faqs={FAQS_A} />
       <HeroA />
       <UseCases />
-      <IndustriesA />
       <ServicesA />
       <HowItWorksA />
+      <WorkedWithA />
       <FaqA />
       <CtaA />
     </>
