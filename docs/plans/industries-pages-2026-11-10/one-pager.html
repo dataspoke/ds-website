@@ -256,6 +256,102 @@
   .btn { display: inline-block; margin-top: 6px; padding: 6px 14px; border-radius: 6px; background: var(--accent); color: #fff; font-weight: 600; font-size: 14px; }
   .src { font-size: 13px; color: var(--muted); }
   .src li { overflow-wrap: anywhere; }
+
+  /* Restyled copy fields: icon rows, stat tiles, chips, build notes */
+  .ann { font-size: 12px; font-weight: 400; color: var(--grey); background: var(--grey-bg); border: 1px dashed var(--grey-line); border-radius: 4px; padding: 0 6px; white-space: nowrap; }
+  .ccard .svc .ann { margin-left: 4px; }
+  ul.probs { list-style: none; padding-left: 0; }
+  ul.probs li { padding-left: 18px; position: relative; }
+  ul.probs li::before { content: ""; position: absolute; left: 0; top: .55em; width: 9px; height: 9px; border-radius: 3px; background: var(--accent-line); }
+  .fv ol { margin: 4px 0 8px; padding-left: 22px; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin: 6px 0 10px; }
+  .tile { border: 1px solid var(--accent-line); background: var(--accent-bg); border-radius: 8px; padding: 10px 12px; }
+  .tile .fig { font-size: 26px; font-weight: 800; line-height: 1.1; color: var(--accent); }
+  .tile .lab { font-size: 14px; font-weight: 600; margin: 4px 0 6px; }
+  .tile .fine { font-size: 12px; color: var(--muted); }
+  .chip.pri { background: var(--accent-bg); border-color: var(--accent-line); color: var(--accent); font-weight: 600; }
+  .fv .chips { margin: 4px 0 8px; }
+  .chip-label { font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); margin: 6px 0 0 !important; }
+
+  /* Visual mock of the law firms page: site tokens from src/app/globals.css */
+  h3.mock-title { font-size: 16px; margin: 8px 0 4px; }
+  .mock-wrap { width: min(1000px, calc(100vw - 32px)); position: relative; left: 50%; transform: translateX(-50%); margin: 0 0 32px; }
+  .mock { --s-primary: #1f63b5; --s-brand: #4a90e2; --s-tint: #eef5fc; --s-tint-strong: #d6e6f8; --s-ink: #0f1e33;
+          --s-muted: #475569; --s-border: #e5e9f0; --s-input: #94a3b8;
+          container-type: inline-size; border: 2px solid var(--line); border-radius: 12px; overflow: hidden; background: #fff;
+          color: var(--s-ink); font: 15px/1.6 "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+          box-shadow: 0 2px 10px rgba(15,30,51,.08); }
+  .mock svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .mock p { margin: 0; }
+  .m-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 60px; padding: 0 28px; border-bottom: 1px solid var(--s-border); background: rgba(255,255,255,.95); }
+  .m-logo { display: inline-flex; align-items: center; gap: 8px; color: var(--s-brand); font: 600 20px/1 "Plus Jakarta Sans", "Inter", -apple-system, sans-serif; letter-spacing: -.02em; }
+  .m-mark { width: 26px; height: 26px; color: var(--s-brand); }
+  .m-links { display: flex; gap: 22px; font-size: 14.5px; font-weight: 500; }
+  .m-links .on { color: var(--s-primary); }
+  .m-btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; background: var(--s-primary); color: #fff; font-weight: 600; white-space: nowrap; }
+  .m-btn-nav { height: 36px; padding: 0 14px; font-size: 14px; }
+  .m-btn-lg { height: 44px; padding: 0 22px; font-size: 15.5px; margin-top: 16px; }
+  .m-sec { padding: 36px 28px; }
+  .m-pt0 { padding-top: 0; }
+  .m-tint { background: var(--s-tint); }
+  .m-bc { font-size: 13px; color: var(--s-muted); margin-bottom: 14px; }
+  .m-bc span { margin: 0 4px; color: var(--s-input); }
+  .m-bc b { color: var(--s-ink); font-weight: 600; }
+  .m-eyebrow { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--s-primary); margin-bottom: 8px !important; }
+  .m-h1, .m-h2, .m-h3 { font-family: "Plus Jakarta Sans", "Inter", -apple-system, sans-serif; font-weight: 700; letter-spacing: -.02em; color: var(--s-ink); }
+  .m-h1 { font-size: 34px; line-height: 1.15; max-width: 760px; }
+  .m-h2 { font-size: 26px; line-height: 1.2; margin-bottom: 8px; }
+  .m-h3 { font-size: 17px; line-height: 1.3; }
+  .m-lede { font-size: 17px; line-height: 1.55; color: var(--s-muted); max-width: 760px; margin-top: 14px !important; }
+  .m-upd { font-size: 13px; color: var(--s-muted); margin-top: 12px !important; }
+  .m-intro { color: var(--s-muted); max-width: 680px; margin-bottom: 18px !important; }
+  .m-note { color: var(--s-muted); font-size: 14px; margin-top: 14px !important; }
+  .m-probs { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; max-width: 720px; }
+  .m-probs li { display: flex; align-items: center; gap: 14px; margin: 0; padding: 10px 14px; background: #fff; border: 1px solid var(--s-tint-strong); border-radius: 10px; font-weight: 600; }
+  .m-ico { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: var(--s-tint); color: var(--s-primary); }
+  .m-ico svg { width: 20px; height: 20px; }
+  .m-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .m-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .m-card { display: grid; align-content: start; gap: 8px; border: 1px solid var(--s-tint-strong); border-radius: 12px; padding: 20px; background: #fff; }
+  .m-card p { color: var(--s-muted); font-size: 14.5px; }
+  .m-link { display: inline-block; color: var(--s-primary); font-weight: 600; font-size: 14.5px; margin-top: 4px; }
+  .m-sec > .m-link { margin-top: 18px; }
+  .m-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .m-chips span { padding: 5px 14px; border-radius: 999px; border: 1px solid var(--s-border); background: #fff; font-size: 14px; font-weight: 500; }
+  .m-chips .pri { border-color: var(--s-brand); background: var(--s-tint); color: var(--s-primary); font-weight: 600; }
+  .m-tile { background: #fff; border: 1px solid var(--s-tint-strong); border-radius: 12px; padding: 20px; }
+  .m-fig { font: 800 40px/1 "Plus Jakarta Sans", "Inter", -apple-system, sans-serif; letter-spacing: -.03em; color: var(--s-primary); }
+  .m-lab { font-weight: 600; margin: 10px 0 10px; line-height: 1.4; }
+  .m-src { font-size: 12px; line-height: 1.45; color: var(--s-muted); border-top: 1px solid var(--s-border); padding-top: 8px; }
+  .m-bridge { margin-top: 18px !important; max-width: 720px; color: var(--s-ink); }
+  .m-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .m-steps li { position: relative; display: grid; align-content: start; gap: 6px; padding-top: 26px; margin: 0; }
+  .m-steps li p { color: var(--s-muted); font-size: 14.5px; }
+  .m-dot { position: absolute; left: 0; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--s-brand); }
+  .m-steps li:not(:last-child)::after { content: ""; position: absolute; left: 14px; top: 10px; height: 2px; width: calc(100% + 10px); background: var(--s-tint-strong); }
+  .m-step { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--s-primary); }
+  .m-faq { border-top: 1px solid var(--s-border); max-width: 780px; }
+  .m-q { border-bottom: 1px solid var(--s-border); }
+  .m-qrow { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 0; font-weight: 700; font-size: 16px; }
+  .m-chev { flex: none; width: 20px; height: 20px; color: var(--s-primary); }
+  .m-a { color: var(--s-muted); padding: 0 36px 16px 0; }
+  .m-cta .m-h2 { font-size: 30px; }
+  @container (max-width: 720px) {
+    .m-links { display: none; }
+    .m-nav, .m-sec { padding-left: 16px; padding-right: 16px; }
+    .m-sec.m-pt0 { padding-top: 0; }
+    .m-h1 { font-size: 26px; }
+    .m-h2, .m-cta .m-h2 { font-size: 22px; }
+    .m-grid2, .m-grid3 { grid-template-columns: 1fr; }
+    .m-steps { grid-template-columns: 1fr 1fr; }
+    .m-steps li:not(:last-child)::after { display: none; }
+  }
+  @container (max-width: 420px) {
+    .m-steps { grid-template-columns: 1fr; }
+    .m-btn-nav { font-size: 12.5px; padding: 0 10px; }
+    .m-logo { font-size: 17px; }
+  }
+  @media print { .mock-wrap { width: auto; left: 0; transform: none; } .mock { box-shadow: none; } }
 </style>
 </head>
 <body>
@@ -403,7 +499,7 @@
       <div class="where">New top-level page: Industries</div>
       <ul>
         <li>Short intro with the definition sentence.</li>
-        <li>Two cards: Law firms, Home services.</li>
+        <li>Two cards: Law firms, Home services, each under 30 words.</li>
         <li>A line for businesses outside both, then the call-to-action button.</li>
       </ul>
       <div class="chips"><span class="chip">Phone width</span><span class="chip">Desktop width</span></div>
@@ -413,8 +509,11 @@
       <div class="where">Industries › Law firms</div>
       <ul>
         <li>Breadcrumb, H1, definition, "Last updated".</li>
-        <li>Problems, four service cards, systems list, statistics, how it works.</li>
-        <li>Six-question FAQ and the call-to-action button.</li>
+        <li>Five problem rows, each a one-line statement with an icon.</li>
+        <li>Four service cards in a 2x2 grid, each linking to its service page.</li>
+        <li>Systems as name chips; three stat tiles with the source in fine print; four numbered steps.</li>
+        <li>Six-question FAQ as an accordion, closed on load; answers stay in the page HTML for the FAQ schema.</li>
+        <li>Call-to-action band with the button.</li>
       </ul>
       <div class="chips"><span class="chip">Phone width</span><span class="chip">Desktop width</span><span class="chip">FAQ open / closed</span></div>
     </div>
@@ -423,7 +522,8 @@
       <div class="where">Industries › Home services</div>
       <ul>
         <li>Same layout as the law firms page.</li>
-        <li>Adds three roofing-contractor outcomes under the statistics.</li>
+        <li>Systems chips in two groups: Salesforce, then "Commonly connected".</li>
+        <li>Adds three roofing-contractor outcomes under the stat tiles.</li>
       </ul>
       <div class="chips"><span class="chip">Phone width</span><span class="chip">Desktop width</span><span class="chip">FAQ open / closed</span></div>
     </div>
@@ -787,12 +887,129 @@
   <ul class="ap-note">
     <li>Full page copy for approval. Prose is allowed here because it is the page copy.</li>
     <li>Character counts are for the title text before " | DataSpoke", and for the whole meta description.</li>
-    <li>Word counts cover visible copy only: breadcrumb through the call to action.</li>
+    <li>Word counts cover page copy from the breadcrumb through the call to action. "Visible" is what shows on load: it counts the FAQ heading and questions but not the answers, which sit in the closed accordion. "Total" adds the answers.</li>
+    <li>Grey notes (icon names, link targets) are build notes, not page copy.</li>
   </ul>
+
+  <!-- ===================== MOCK ===================== -->
+  <h3 class="mock-title">Mock: Law firms page (desktop)</h3>
+  <p class="ap-note">Real draft copy in the site's colors, type and card style. The first FAQ row is shown open to show an answer; on load all six are closed.</p>
+  <div class="mock-wrap">
+  <div class="mock">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-inbox" viewBox="0 0 24 24"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></symbol>
+        <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"/></symbol>
+        <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol>
+        <symbol id="i-compare" viewBox="0 0 24 24"><circle cx="5" cy="6" r="3"/><circle cx="19" cy="18" r="3"/><path d="M12 6h5a2 2 0 0 1 2 2v7"/><path d="m15 9-3-3 3-3"/><path d="M12 18H7a2 2 0 0 1-2-2V9"/><path d="m9 15 3 3-3 3"/></symbol>
+        <symbol id="i-videooff" viewBox="0 0 24 24"><path d="M10.66 6H14a2 2 0 0 1 2 2v2.5l5.25-3.06a.5.5 0 0 1 .75.43v8.2"/><path d="M16 16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2"/><path d="m2 2 20 20"/></symbol>
+        <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+        <symbol id="i-up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol>
+        <symbol id="i-wheel" viewBox="0 0 48 48"><circle cx="24" cy="24" r="19.5" fill="none" stroke="currentColor" stroke-width="3.5"/><circle cx="24" cy="24" r="4.6" fill="currentColor" stroke="none"/><g stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="24" y1="15.2" x2="24" y2="9.2"/><line x1="24" y1="15.2" x2="24" y2="9.2" transform="rotate(60 24 24)"/><line x1="24" y1="15.2" x2="24" y2="9.2" transform="rotate(120 24 24)"/><line x1="24" y1="15.2" x2="24" y2="9.2" transform="rotate(180 24 24)"/><line x1="24" y1="15.2" x2="24" y2="9.2" transform="rotate(240 24 24)"/><line x1="24" y1="15.2" x2="24" y2="9.2" transform="rotate(300 24 24)"/></g></symbol>
+      </defs>
+    </svg>
+
+    <!-- Nav bar -->
+    <div class="m-nav">
+      <span class="m-logo"><svg class="m-mark"><use href="#i-wheel"/></svg>DataSpoke</span>
+      <span class="m-links"><span>Services</span><span class="on">Industries</span><span>Approach</span><span>About</span><span>Contact</span></span>
+      <span class="m-btn m-btn-nav">Free AI strategy call</span>
+    </div>
+
+    <!-- Hero -->
+    <div class="m-sec">
+      <div class="m-bc">Home <span>›</span> Industries <span>›</span> <b>Law firms</b></div>
+      <p class="m-eyebrow">Industries</p>
+      <div class="m-h1">AI and data consulting for law firms: every lead, call and matter in one place you own.</div>
+      <p class="m-lede">DataSpoke is a data and AI consulting firm for law firms across the United States. We connect your intake CRM, practice management, phones and accounting so every lead, call and matter sits in one record. Then we build dashboards for intake and revenue by case type, and set up AI that drafts from your firm's own files, with a lawyer approving every word. You own every account and every line of code.</p>
+      <p class="m-upd">Last updated November 10, 2026</p>
+    </div>
+
+    <!-- Problems -->
+    <div class="m-sec m-tint">
+      <div class="m-h2">Where firms lose cases and hours</div>
+      <p class="m-intro">Most firms lose prospective clients and billable hours in the gaps between their tools, and these five gaps show up in almost every firm we talk to.</p>
+      <ul class="m-probs">
+        <li><span class="m-ico"><svg><use href="#i-inbox"/></svg></span>A web lead sits in a shared inbox overnight, with no owner.</li>
+        <li><span class="m-ico"><svg><use href="#i-keyboard"/></svg></span>Intake details get retyped into the case system, then into billing.</li>
+        <li><span class="m-ico"><svg><use href="#i-megaphone"/></svg></span>Nobody can say which ad source actually signs cases.</li>
+        <li><span class="m-ico"><svg><use href="#i-compare"/></svg></span>Partners argue over whose report is right before using the numbers.</li>
+        <li><span class="m-ico"><svg><use href="#i-videooff"/></svg></span>Decisions made on client calls get lost within weeks.</li>
+      </ul>
+    </div>
+
+    <!-- What we build -->
+    <div class="m-sec">
+      <div class="m-h2">What we build for law firms</div>
+      <p class="m-intro">We build on the software your firm already pays for, and most firms start with intake because every report depends on it.</p>
+      <div class="m-grid2">
+        <div class="m-card"><div class="m-h3">Intake connected to the matter</div><p>Every web form, email and call lands in your intake CRM with its source attached, then becomes the matter in practice management without retyping.</p><span class="m-link">See the service →</span></div>
+        <div class="m-card"><div class="m-h3">One record per client and matter</div><p>Intake, matter, billing and call history sit in one organized record your firm owns, so every report and AI tool agrees.</p><span class="m-link">See the service →</span></div>
+        <div class="m-card"><div class="m-h3">A weekly intake and revenue scorecard</div><p>Leads, consultations, signed cases and collected revenue by source and case type, ready before the Monday meeting with nothing built by hand.</p><span class="m-link">See the service →</span></div>
+        <div class="m-card"><div class="m-h3">AI on your own files, lawyer-approved</div><p>An assistant drafts intake summaries, follow-up emails and first-pass letters from your firm's own files, and a lawyer approves every draft.</p><span class="m-link">See the service →</span></div>
+      </div>
+    </div>
+
+    <!-- Systems -->
+    <div class="m-sec m-pt0">
+      <div class="m-h2">Systems we connect for firms</div>
+      <p class="m-intro">We work with the software your firm already runs, and we have built on Lawmatics and Clio for law firms.</p>
+      <div class="m-chips"><span class="pri">Lawmatics</span><span class="pri">Clio</span><span>RingCentral</span><span>Zoom</span><span>Fathom</span><span>QuickBooks</span><span>Google Workspace</span><span>Google Ads</span><span>Meta Ads</span></div>
+      <p class="m-note">Running something else? Tell us on the free AI strategy call, and we will say plainly whether we have connected it before.</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="m-sec m-tint">
+      <div class="m-h2">By the numbers</div>
+      <p class="m-intro">Clio, the practice management company, surveys firms across the profession every year, and its numbers show the same gaps.</p>
+      <div class="m-grid3">
+        <div class="m-tile"><div class="m-fig">33%</div><div class="m-lab">of 500 firms replied to a prospective client's email</div><div class="m-src">Down from 40% in 2019. Clio, Legal Trends Report, 2024.</div></div>
+        <div class="m-tile"><div class="m-fig">48%</div><div class="m-lab">of firms were essentially unreachable by phone</div><div class="m-src">Only 40% answered calls, down from 56% in 2019. Clio, Legal Trends Report, 2024.</div></div>
+        <div class="m-tile"><div class="m-fig">38%</div><div class="m-lab">average utilization: about 3 of every 8 working hours billed</div><div class="m-src">Firms collect on roughly 2.4 hours of work per day. Clio, Legal Trends Report, 2025.</div></div>
+      </div>
+      <p class="m-bridge">We do not take your calls for you. We make sure every call, form and email becomes a lead in your intake CRM with an owner and a next step, and we take the retyping and report-building off the people whose hours you bill.</p>
+    </div>
+
+    <!-- How it works -->
+    <div class="m-sec">
+      <div class="m-h2">How it works</div>
+      <p class="m-intro">Every engagement follows the same steps: you see a plan and a price range before anything is built, and you own everything at the end.</p>
+      <ol class="m-steps">
+        <li><span class="m-dot"></span><span class="m-step">Step 1</span><div class="m-h3">Free AI strategy call</div><p>30 minutes on where leads and hours slip away, and whether we can help.</p></li>
+        <li><span class="m-dot"></span><span class="m-step">Step 2</span><div class="m-h3">Written estimate in two business days</div><p>A recommended plan and price range, with no obligation to go ahead.</p></li>
+        <li><span class="m-dot"></span><span class="m-step">Step 3</span><div class="m-h3">Fixed-scope build</div><p>Projects taken straight from the plan, each with a finish line you can check.</p></li>
+        <li><span class="m-dot"></span><span class="m-step">Step 4</span><div class="m-h3">Hand over</div><p>Every account and line of code in the firm's name, with plain-English documentation.</p></li>
+      </ol>
+      <p class="m-note">Firms that want the full map first can start with the two-week Data &amp; AI Assessment.</p>
+      <span class="m-link">See how an engagement works →</span>
+    </div>
+
+    <!-- FAQ -->
+    <div class="m-sec m-pt0">
+      <div class="m-h2">Questions law firms ask</div>
+      <div class="m-faq">
+        <div class="m-q open"><div class="m-qrow"><span>What does an AI and data consultant do for a law firm?</span><svg class="m-chev"><use href="#i-up"/></svg></div>
+          <p class="m-a">An AI and data consultant connects the systems a firm already runs, organizes the information in them and puts it to work. For a law firm, that usually means linking intake, practice management, phones and accounting. Then we build a scorecard for intake and revenue, and set up AI that drafts from the firm's own files. We do not give legal advice, and we do not replace your case management software. Most firms start with intake, because every report and AI tool depends on clean intake records.</p></div>
+        <div class="m-q"><div class="m-qrow"><span>Can you connect Clio or Lawmatics to our intake forms, phones and accounting?</span><svg class="m-chev"><use href="#i-down"/></svg></div></div>
+        <div class="m-q"><div class="m-qrow"><span>How do we see which marketing source signs cases?</span><svg class="m-chev"><use href="#i-down"/></svg></div></div>
+        <div class="m-q"><div class="m-qrow"><span>How do you keep client data confidential when we use AI?</span><svg class="m-chev"><use href="#i-down"/></svg></div></div>
+        <div class="m-q"><div class="m-qrow"><span>Do we have to replace our case management software?</span><svg class="m-chev"><use href="#i-down"/></svg></div></div>
+        <div class="m-q"><div class="m-qrow"><span>How do we start?</span><svg class="m-chev"><use href="#i-down"/></svg></div></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="m-sec m-tint m-cta">
+      <div class="m-h2">See where your firm's leads and hours go.</div>
+      <p class="m-lede">A free 30-minute call about your tools and where leads slip away, then a written estimate within two business days.</p>
+      <span class="m-btn m-btn-lg">Book your free AI strategy call</span>
+    </div>
+  </div>
+  </div>
 
   <!-- ===================== HUB ===================== -->
   <div class="copy-page" id="copy-hub">
-    <header><span class="pname">Industries hub</span><span class="pmeta"><span class="badge b-info">226 words</span><span class="badge b-grey">/industries</span></span></header>
+    <header><span class="pname">Industries hub</span><span class="pmeta"><span class="badge b-info" data-wc="hub">186 words (no FAQ)</span><span class="badge b-grey">/industries</span></span></header>
     <div class="copy-body">
       <div class="f"><div class="fl">Title tag <span class="cc">19 chars</span></div><div class="fv mono">Industries We Serve | DataSpoke</div></div>
       <div class="f"><div class="fl">Meta description <span class="cc">146 chars</span></div><div class="fv">DataSpoke is a data and AI consulting firm for law firms and home service companies across the United States. See what we build for each industry.</div></div>
@@ -801,14 +1018,13 @@
       <div class="f"><div class="fl">H1</div><div class="fv h1">Industries we serve</div></div>
       <div class="f"><div class="fl">Definition</div><div class="fv">
         <p>DataSpoke is a data and AI consulting firm for established businesses across the United States. We connect the software you already run, organize the information in it and put it to work in dashboards, custom tools and AI. We work in many industries, and we go deepest in two: law firms and home service companies.</p>
-        <p>Each page below covers the problems we see most in that industry, the systems we connect and what we build.</p>
       </div></div>
       <div class="f"><div class="fl">Cards</div><div class="fv"><div class="cardgrid">
-        <div class="ccard"><div class="ct">Law firms</div><p>Intake, phones, practice management and billing in one record you own. A weekly scorecard for intake and revenue by case type, and AI that drafts from your own files with a lawyer approving every word.</p><div class="svc">Link: AI and data consulting for law firms</div></div>
-        <div class="ccard"><div class="ct">Home services</div><p>Roofing, HVAC, plumbing and other trades. Every lead counted, every ad dollar traced to a booked and paid job, and a weekly scorecard your managers run the business from.</p><div class="svc">Link: AI and data consulting for home services</div></div>
+        <div class="ccard"><div class="ct">Law firms</div><p>Intake, phones, practice management and billing in one record you own, with a weekly intake scorecard and AI drafts a lawyer approves.</p><div class="svc">See the page → <span class="ann">AI and data consulting for law firms</span></div></div>
+        <div class="ccard"><div class="ct">Home services</div><p>Roofing, HVAC, plumbing and other trades: every lead counted, every ad dollar traced to a paid job, and a weekly scorecard for your managers.</p><div class="svc">See the page → <span class="ann">AI and data consulting for home services</span></div></div>
       </div></div></div>
       <div class="f"><div class="fl">Section: Not on the list?</div><div class="fv">
-        <p>The work is the same in every industry: connect what you run, organize it, then build the dashboards, tools and AI on top. If your industry is not listed, tell us about it on a free AI strategy call. We will say honestly whether we are a fit.</p>
+        <p>The work is the same in every industry: connect what you run, organize it, then build on top. If your industry is not listed, tell us on a free AI strategy call and we will say honestly whether we are a fit.</p>
       </div></div>
       <div class="f"><div class="fl">Call to action</div><div class="fv">
         <p class="h2c">Start with a 30-minute call.</p>
@@ -821,7 +1037,7 @@
 
   <!-- ===================== LAW FIRMS ===================== -->
   <div class="copy-page" id="copy-law">
-    <header><span class="pname">Law firms</span><span class="pmeta"><span class="badge b-info">1,377 words</span><span class="badge b-grey">/industries/law-firms</span></span></header>
+    <header><span class="pname">Law firms</span><span class="pmeta"><span class="badge b-info" data-wc="law">744 visible · 1,170 total incl. FAQ</span><span class="badge b-grey">/industries/law-firms</span></span></header>
     <div class="copy-body">
       <div class="f"><div class="fl">Title tag <span class="cc">36 chars</span></div><div class="fv mono">AI and Data Consulting for Law Firms | DataSpoke</div></div>
       <div class="f"><div class="fl">Meta description <span class="cc">149 chars</span></div><div class="fv">We connect Lawmatics, Clio, your phones and billing, then build intake dashboards and AI drafts a lawyer approves. Nationwide. Free AI strategy call.</div></div>
@@ -833,80 +1049,73 @@
         <p class="upd">Last updated November 10, 2026</p>
       </div></div>
 
-      <div class="f"><div class="fl">Section 1</div><div class="fv">
+      <div class="f"><div class="fl">Section 1 · Problems (icon rows)</div><div class="fv">
         <p class="h2c">Where firms lose cases and hours</p>
-        <p>Most firms do not lose a prospective client on the law. They lose them in the gaps between tools. The first firm to respond clearly usually gets the call back, and the hours spent retyping and reconciling come straight out of billable time. These five gaps show up in almost every firm we talk to.</p>
-        <ul>
-          <li><b>A lead sits in an inbox overnight.</b> The web form emails a shared address, and nobody owns that address on a Friday evening.</li>
-          <li><b>Intake data is retyped into the case system.</b> The same name, contact details and matter facts get keyed into intake, then practice management, then billing, with a fresh chance of a typo each time.</li>
-          <li><b>Nobody can say which ad source signs cases.</b> Ad platforms report clicks, intake reports consultations, and nothing ties a signed engagement back to the campaign that produced it.</li>
-          <li><b>Partners argue over whose report is right.</b> Each report pulls from a different system, so the Monday meeting starts with reconciling numbers instead of using them.</li>
-          <li><b>Decisions made on calls are lost.</b> A client agrees to a strategy on a video call, and three weeks later nobody can find what was said or who said it.</li>
+        <p>Most firms lose prospective clients and billable hours in the gaps between their tools, and these five gaps show up in almost every firm we talk to.</p>
+        <ul class="probs">
+          <li><b>A web lead sits in a shared inbox overnight, with no owner.</b> <span class="ann">icon: inbox</span></li>
+          <li><b>Intake details get retyped into the case system, then into billing.</b> <span class="ann">icon: keyboard</span></li>
+          <li><b>Nobody can say which ad source actually signs cases.</b> <span class="ann">icon: megaphone</span></li>
+          <li><b>Partners argue over whose report is right before using the numbers.</b> <span class="ann">icon: git-compare-arrows</span></li>
+          <li><b>Decisions made on client calls get lost within weeks.</b> <span class="ann">icon: video-off</span></li>
         </ul>
       </div></div>
 
-      <div class="f"><div class="fl">Section 2 · What we build (4 cards)</div><div class="fv">
+      <div class="f"><div class="fl">Section 2 · What we build (4 cards, 2x2)</div><div class="fv">
         <p class="h2c">What we build for law firms</p>
-        <p>We do not sell you new software. We connect and build on what your firm already pays for, in four pieces. Most firms start with intake, because every report and every AI tool is only as good as the records under it.</p>
+        <p>We build on the software your firm already pays for, and most firms start with intake because every report depends on it.</p>
         <div class="cardgrid">
-          <div class="ccard"><div class="ct">Intake connected to the matter</div><p>Every web form, email and call from a prospective client lands in your intake CRM on its own, with its source attached. When the client signs, the intake record becomes the matter in practice management without anyone retyping it. Missed calls and unreturned emails appear on the intake team's list with an owner and a next step, instead of disappearing.</p><div class="svc">Links to: Data Capture &amp; Integration</div></div>
-          <div class="ccard"><div class="ct">One record per client and matter</div><p>Intake, matter, billing and call history in one organized record your firm owns. Each fact is marked by how far you can trust it: decided, documented, discussed or hearsay. Reports and AI read from the same place, so they agree with each other.</p><div class="svc">Links to: Data Organization &amp; Warehousing</div></div>
-          <div class="ccard"><div class="ct">A weekly intake and revenue scorecard</div><p>Leads, consultations, signed cases and collected revenue, by source and by case type, updated from your own systems. Each number has an owner and a target. It is ready before the Monday meeting, and nobody builds it by hand.</p><div class="svc">Links to: Metrics &amp; Dashboards</div></div>
-          <div class="ccard"><div class="ct">AI on your own files, lawyer-approved</div><p>An assistant that reads your firm's documents, matters and call notes under logins the firm controls. It drafts the intake summary, the follow-up email or the first pass at a letter, and waits for a lawyer to approve it. We train your team to use it on their real work.</p><div class="svc">Links to: AI Implementation</div></div>
+          <div class="ccard"><div class="ct">Intake connected to the matter</div><p>Every web form, email and call lands in your intake CRM with its source attached, then becomes the matter in practice management without retyping.</p><div class="svc">See the service → <span class="ann">Data Capture &amp; Integration</span></div></div>
+          <div class="ccard"><div class="ct">One record per client and matter</div><p>Intake, matter, billing and call history sit in one organized record your firm owns, so every report and AI tool agrees.</p><div class="svc">See the service → <span class="ann">Data Organization &amp; Warehousing</span></div></div>
+          <div class="ccard"><div class="ct">A weekly intake and revenue scorecard</div><p>Leads, consultations, signed cases and collected revenue by source and case type, ready before the Monday meeting with nothing built by hand.</p><div class="svc">See the service → <span class="ann">Metrics &amp; Dashboards</span></div></div>
+          <div class="ccard"><div class="ct">AI on your own files, lawyer-approved</div><p>An assistant drafts intake summaries, follow-up emails and first-pass letters from your firm's own files, and a lawyer approves every draft.</p><div class="svc">See the service → <span class="ann">AI Implementation</span></div></div>
         </div>
       </div></div>
 
-      <div class="f"><div class="fl">Section 3</div><div class="fv">
+      <div class="f"><div class="fl">Section 3 · Systems (name chips)</div><div class="fv">
         <p class="h2c">Systems we connect for firms</p>
-        <p>We work with the software your firm already runs, so nothing has to migrate. We have built on Lawmatics and Clio for law firms.</p>
-        <ul>
-          <li><b>Lawmatics</b> for intake and client relationships.</li>
-          <li><b>Clio</b> for matters, time and billing.</li>
-          <li><b>RingCentral</b> for calls and call logs.</li>
-          <li><b>Zoom</b> and <b>Fathom</b> for meetings and meeting notes.</li>
-          <li><b>QuickBooks</b> for accounting.</li>
-          <li><b>Google Workspace</b> for email, calendars and documents.</li>
-          <li><b>Google Ads</b> and <b>Meta Ads</b> for paid marketing.</li>
-        </ul>
-        <p>Running something else? Tell us on the free AI strategy call. We will say plainly whether we have connected it before, and what it would take if we have not.</p>
+        <p>We work with the software your firm already runs, and we have built on Lawmatics and Clio for law firms.</p>
+        <div class="chips"><span class="chip pri">Lawmatics</span><span class="chip pri">Clio</span><span class="chip">RingCentral</span><span class="chip">Zoom</span><span class="chip">Fathom</span><span class="chip">QuickBooks</span><span class="chip">Google Workspace</span><span class="chip">Google Ads</span><span class="chip">Meta Ads</span></div>
+        <p>Running something else? Tell us on the free AI strategy call, and we will say plainly whether we have connected it before.</p>
       </div></div>
 
-      <div class="f"><div class="fl">Section 4 · By the numbers (statistics only, no DataSpoke outcome)</div><div class="fv">
+      <div class="f"><div class="fl">Section 4 · By the numbers (stat tiles; statistics only, no DataSpoke outcome)</div><div class="fv">
         <p class="h2c">By the numbers</p>
-        <p>The gaps are not a hunch. Clio, the practice management company, measures them across the profession every year.</p>
-        <ul>
-          <li><b>33%.</b> Only 33% of 500 law firms responded to a prospective client's email, down from 40% in 2019. <span class="cite">(Clio, 2024 Legal Trends Report)</span></li>
-          <li><b>48%.</b> 48% of firms were essentially unreachable by phone. Only 40% answered calls, down from 56% in 2019. <span class="cite">(Clio, 2024 Legal Trends Report)</span></li>
-          <li><b>38%.</b> Average utilization was 38%, about 3 of every 8 working hours billed. Firms collect on roughly 2.4 hours of work per day. <span class="cite">(Clio, 2025 Legal Trends Report)</span></li>
-        </ul>
-        <p>We do not take your calls for you. We make sure every call, form and email becomes a lead in your intake CRM with an owner and a next step, so a follow-up never depends on someone remembering. And we take the retyping and report-building off the people whose hours you bill.</p>
+        <p>Clio, the practice management company, surveys firms across the profession every year, and its numbers show the same gaps.</p>
+        <div class="tiles">
+          <div class="tile"><div class="fig">33%</div><div class="lab">of 500 firms replied to a prospective client's email</div><div class="fine">Down from 40% in 2019. Clio, Legal Trends Report, 2024.</div></div>
+          <div class="tile"><div class="fig">48%</div><div class="lab">of firms were essentially unreachable by phone</div><div class="fine">Only 40% answered calls, down from 56% in 2019. Clio, Legal Trends Report, 2024.</div></div>
+          <div class="tile"><div class="fig">38%</div><div class="lab">average utilization: about 3 of every 8 working hours billed</div><div class="fine">Firms collect on roughly 2.4 hours of work per day. Clio, Legal Trends Report, 2025.</div></div>
+        </div>
+        <p>We do not take your calls for you. We make sure every call, form and email becomes a lead in your intake CRM with an owner and a next step, and we take the retyping and report-building off the people whose hours you bill.</p>
       </div></div>
 
-      <div class="f"><div class="fl">Section 5</div><div class="fv">
+      <div class="f"><div class="fl">Section 5 · How it works (4 numbered steps)</div><div class="fv">
         <p class="h2c">How it works</p>
-        <p>Every engagement follows the same steps. You see a plan and a price before anything is built, and you own everything at the end.</p>
-        <ul>
-          <li><b>Free AI strategy call.</b> A free 30-minute call. You tell us where leads and hours slip away. We tell you honestly whether we can fix it.</li>
-          <li><b>Written estimate within two business days.</b> A recommended plan and a price range, in writing, with no obligation to go ahead. Firms that want the full map first can start with the two-week Data &amp; AI Assessment.</li>
-          <li><b>Fixed-scope build.</b> Projects taken straight from the plan, each with a finish line and a result you can check.</li>
-          <li><b>Hand over.</b> Every account and every line of code is in the firm's name, with plain-English documentation and a walkthrough for the people who use it.</li>
-        </ul>
-        <p>Link: See how an engagement works (Approach page)</p>
+        <p>Every engagement follows the same steps: you see a plan and a price range before anything is built, and you own everything at the end.</p>
+        <ol>
+          <li><b>Free AI strategy call.</b> 30 minutes on where leads and hours slip away, and whether we can help.</li>
+          <li><b>Written estimate in two business days.</b> A recommended plan and price range, with no obligation to go ahead.</li>
+          <li><b>Fixed-scope build.</b> Projects taken straight from the plan, each with a finish line you can check.</li>
+          <li><b>Hand over.</b> Every account and line of code in the firm's name, with plain-English documentation.</li>
+        </ol>
+        <p>Firms that want the full map first can start with the two-week Data &amp; AI Assessment.</p>
+        <p>See how an engagement works → <span class="ann">Approach page</span></p>
       </div></div>
 
-      <div class="f"><div class="fl">FAQ (6, matches FAQ schema)</div><div class="fv">
+      <div class="f faq"><div class="fl">FAQ · accordion, closed by default (6, matches FAQ schema)</div><div class="fv">
         <p class="h2c">Questions law firms ask</p>
-        <div class="qa"><div class="q2">Q. What does an AI and data consultant do for a law firm?</div><p>A. An AI and data consultant connects the systems a firm already runs, organizes the information in them and puts it to work. For a law firm, that usually means linking intake, practice management, phones and accounting. Then we build a scorecard for intake and revenue, and set up AI that drafts from the firm's own files. We do not give legal advice, and we do not replace your case management software.</p></div>
-        <div class="qa"><div class="q2">Q. Can you connect Clio or Lawmatics to our intake forms, phones and accounting?</div><p>A. Yes. We have built on both Lawmatics and Clio for law firms. Common connections send web forms and email into Lawmatics, put RingCentral call logs on the right lead or matter, open a matter in Clio when an intake signs, and carry billing into QuickBooks. We confirm what your setup allows on the free AI strategy call before we promise anything.</p></div>
-        <div class="qa"><div class="q2">Q. How do we see which marketing source signs cases?</div><p>A. We carry the source of each lead from first contact to signed matter and collected fee. Ad spend from Google Ads and Meta Ads, intake records from your CRM and revenue from billing go into one dashboard that updates itself. You see cost per signed case by source and by case type, without anyone exporting a report.</p></div>
-        <div class="qa"><div class="q2">Q. How do you keep client data confidential when we use AI?</div><p>A. Your data stays in accounts the firm owns, under logins the firm controls. We set up AI tools to read only what you give them access to, and nothing goes to a client or a court until a lawyer approves it. We write down where each kind of data lives and who can see it, so your firm can check it against its own confidentiality duties.</p></div>
-        <div class="qa"><div class="q2">Q. Do we have to replace our case management software?</div><p>A. No. We build on the systems you already pay for, such as Clio and Lawmatics. The goal is for those systems to share information, not for your team to learn a new one.</p></div>
-        <div class="qa"><div class="q2">Q. How do we start?</div><p>A. Book a free AI strategy call. It is a 30-minute call about the tools you run and where leads and hours slip away. Within two business days you get a written estimate with a recommended plan and a price range. There is no obligation.</p></div>
+        <div class="qa"><div class="q2">Q. What does an AI and data consultant do for a law firm?</div><p>A. An AI and data consultant connects the systems a firm already runs, organizes the information in them and puts it to work. For a law firm, that usually means linking intake, practice management, phones and accounting. Then we build a scorecard for intake and revenue, and set up AI that drafts from the firm's own files. We do not give legal advice, and we do not replace your case management software. Most firms start with intake, because every report and AI tool depends on clean intake records.</p></div>
+        <div class="qa"><div class="q2">Q. Can you connect Clio or Lawmatics to our intake forms, phones and accounting?</div><p>A. Yes. We have built on both Lawmatics and Clio for law firms. Common connections send web forms and email into Lawmatics, put RingCentral call logs on the right lead or matter, open a matter in Clio when an intake signs, and carry billing into QuickBooks. We confirm what your setup allows on the free AI strategy call before we promise anything, and if you run different software, we tell you what it would take.</p></div>
+        <div class="qa"><div class="q2">Q. How do we see which marketing source signs cases?</div><p>A. We carry the source of each lead from first contact to signed matter and collected fee. Ad spend from Google Ads and Meta Ads, intake records from your CRM and revenue from billing go into one dashboard that updates itself. You see cost per signed case by source and by case type, without anyone exporting a report, so you know which campaigns to grow and which to cut.</p></div>
+        <div class="qa"><div class="q2">Q. How do you keep client data confidential when we use AI?</div><p>A. Your data stays in accounts the firm owns, under logins the firm controls. We set up AI tools to read only what you give them access to, and nothing goes to a client or a court until a lawyer approves it. We write down where each kind of data lives and who can see it, so your firm can check it against its own confidentiality duties. Because every account is in the firm's name, the firm can remove our access at any time.</p></div>
+        <div class="qa"><div class="q2">Q. Do we have to replace our case management software?</div><p>A. No. We build on the systems you already pay for, such as Clio and Lawmatics. The goal is for those systems to share information, not for your team to learn a new one. Your intake team keeps working in Lawmatics, and your lawyers keep working in Clio.</p></div>
+        <div class="qa"><div class="q2">Q. How do we start?</div><p>A. Book a free AI strategy call. It is a 30-minute call about the tools you run and where leads and hours slip away. Within two business days you get a written estimate with a recommended plan and a price range, with no obligation to go ahead. Firms that want the full map first can start with the two-week Data &amp; AI Assessment.</p></div>
       </div></div>
 
       <div class="f"><div class="fl">Call to action</div><div class="fv">
         <p class="h2c">See where your firm's leads and hours go.</p>
-        <p>A free 30-minute call, then a written estimate within two business days.</p>
+        <p>A free 30-minute call about your tools and where leads slip away, then a written estimate within two business days.</p>
         <span class="btn">Book your free AI strategy call</span>
       </div></div>
       </div>
@@ -920,7 +1129,7 @@
 
   <!-- ===================== HOME SERVICES ===================== -->
   <div class="copy-page" id="copy-home">
-    <header><span class="pname">Home services</span><span class="pmeta"><span class="badge b-info">1,373 words</span><span class="badge b-grey">/industries/home-services</span></span></header>
+    <header><span class="pname">Home services</span><span class="pmeta"><span class="badge b-info" data-wc="home">788 visible · 1,185 total incl. FAQ</span><span class="badge b-grey">/industries/home-services</span></span></header>
     <div class="copy-body">
       <div class="f"><div class="fl">Title tag <span class="cc">40 chars</span></div><div class="fv mono">AI and Data Consulting for Home Services | DataSpoke</div></div>
       <div class="f"><div class="fl">Meta description <span class="cc">154 chars</span></div><div class="fv">Trace every ad dollar to a booked, paid job. We connect Salesforce, your ad accounts and accounting, then build a weekly scorecard. Free AI strategy call.</div></div>
@@ -932,52 +1141,47 @@
         <p class="upd">Last updated November 10, 2026</p>
       </div></div>
 
-      <div class="f"><div class="fl">Section 1</div><div class="fv">
+      <div class="f"><div class="fl">Section 1 · Problems (icon rows)</div><div class="fv">
         <p class="h2c">Where the money leaks</p>
-        <p>A home service company can spend heavily on ads, lead vendors and canvassing and still not know what a paying customer costs. The money rarely leaks in one big place. It leaks in five ordinary ones.</p>
-        <ul>
-          <li><b>A lead sits until Monday.</b> It came from an ad, the web form or a lead vendor on Saturday, and nobody saw it until the office opened.</li>
-          <li><b>Office staff retype leads into the CRM.</b> Vendor leads arrive by email, someone copies them in by hand, and some never make it at all, so nobody calls them and nobody counts them.</li>
-          <li><b>Ad reports count conversions sales can't find.</b> The ad platform reports one lead count. The CRM shows fewer, and nobody can say which number is true.</li>
-          <li><b>Close rate by source and by rep is a guess.</b> The lead source field is filled in by hand, everyone fills it in differently, and half the options mean the same thing.</li>
-          <li><b>Month-end means exporting four reports.</b> Ad spend, payroll, sales and accounting live in separate systems, so someone spends a day lining them up and hoping they match.</li>
+        <p>A home service company can spend heavily on ads, lead vendors and canvassing and still not know what a paying customer costs.</p>
+        <ul class="probs">
+          <li><b>A weekend lead sits unseen until the office opens Monday.</b> <span class="ann">icon: calendar-clock</span></li>
+          <li><b>Office staff retype vendor leads into the CRM by hand.</b> <span class="ann">icon: keyboard</span></li>
+          <li><b>Ad reports count conversions the sales team can't find.</b> <span class="ann">icon: target</span></li>
+          <li><b>Close rate by lead source and by rep is a guess.</b> <span class="ann">icon: user-search</span></li>
+          <li><b>Month-end means a day spent exporting and lining up four reports.</b> <span class="ann">icon: file-spreadsheet</span></li>
         </ul>
       </div></div>
 
-      <div class="f"><div class="fl">Section 2 · What we build (4 cards)</div><div class="fv">
+      <div class="f"><div class="fl">Section 2 · What we build (4 cards, 2x2)</div><div class="fv">
         <p class="h2c">What we build for home service companies</p>
-        <p>We build on the systems you already pay for, in four pieces. Most companies start with leads, because cost per job and every report after it depend on every lead being counted.</p>
+        <p>We build on the systems you already pay for, and most companies start with leads because every cost figure depends on counting them.</p>
         <div class="cardgrid">
-          <div class="ccard"><div class="ct">One front door for every lead</div><p>Every web form, ad platform and lead vendor sends to one place. Each lead is checked, duplicates are caught and the lead is created in your CRM with its source attached. If the CRM rejects one, it retries and tells someone if it still fails. Adding a new lead vendor no longer means a new manual process.</p><div class="svc">Links to: Data Capture &amp; Integration</div></div>
-          <div class="ccard"><div class="ct">Ad dollar to paid job</div><p>We match every booked and paid job to the channel that produced it, then join ad spend, field labor and revenue. You see cost per paying job for each channel, and you can test a change in spend and know whether it paid off before you double it.</p><div class="svc">Links to: Analytics &amp; Data Science</div></div>
-          <div class="ccard"><div class="ct">A weekly scorecard from the goal down</div><p>We start from the goal you set for the year and work down to the five to ten weekly numbers that move it: leads, appointments, close rate, jobs completed. Each number has an owner and a target, and the scorecard updates itself from your systems.</p><div class="svc">Links to: Metrics &amp; Dashboards</div></div>
-          <div class="ccard"><div class="ct">Internal tools and a customer portal</div><p>A screen for your office and crews that shows each person the work that is theirs, and a private page where customers see job status, documents and invoices without calling the office. Both are built on the systems you already pay for, and you own the code.</p><div class="svc">Links to: Custom Software</div></div>
+          <div class="ccard"><div class="ct">One front door for every lead</div><p>Forms, ad platforms and lead vendors feed one place that checks each lead, catches duplicates and creates it in your CRM with its source.</p><div class="svc">See the service → <span class="ann">Data Capture &amp; Integration</span></div></div>
+          <div class="ccard"><div class="ct">Ad dollar to paid job</div><p>We match every booked and paid job to the channel that produced it, and join ad spend, labor and revenue into cost per paying job.</p><div class="svc">See the service → <span class="ann">Analytics &amp; Data Science</span></div></div>
+          <div class="ccard"><div class="ct">A weekly scorecard from the goal down</div><p>Five to ten weekly numbers that move your yearly goal, such as leads, appointments and close rate, each with an owner and a target.</p><div class="svc">See the service → <span class="ann">Metrics &amp; Dashboards</span></div></div>
+          <div class="ccard"><div class="ct">Internal tools and a customer portal</div><p>A screen that shows each person in the office and on crews their own work, and a page where customers see job status and invoices.</p><div class="svc">See the service → <span class="ann">Custom Software</span></div></div>
         </div>
       </div></div>
 
-      <div class="f"><div class="fl">Section 3 · Systems (decision 4: confirm the commonly connected list)</div><div class="fv">
+      <div class="f"><div class="fl">Section 3 · Systems (name chips; decision 4: confirm the commonly connected list)</div><div class="fv">
         <p class="h2c">Systems we connect</p>
-        <p>We have built on Salesforce for home service companies. Your CRM stays the center: we connect the rest to it, so nothing has to migrate.</p>
-        <ul>
-          <li><b>Salesforce</b> as the CRM, from first lead to signed job.</li>
-        </ul>
-        <p>Commonly connected alongside it:</p>
-        <ul>
-          <li><b>Google Ads</b> and <b>Meta Ads</b> for ad spend and leads.</li>
-          <li><b>QuickBooks</b> for invoices, payments and job revenue.</li>
-        </ul>
-        <p>Running different software? Tell us on the free AI strategy call. We check how your systems let data in and out before we promise anything.</p>
+        <p>We have built on Salesforce for home service companies and connect the rest to it, so nothing has to migrate.</p>
+        <div class="chips"><span class="chip pri">Salesforce</span></div>
+        <p class="chip-label">Commonly connected</p>
+        <div class="chips"><span class="chip">Google Ads</span><span class="chip">Meta Ads</span><span class="chip">QuickBooks</span></div>
+        <p>Running different software? Tell us on the free AI strategy call, and we check how it lets data in and out before we promise anything.</p>
       </div></div>
 
-      <div class="f"><div class="fl">Section 4 · By the numbers + roofing outcomes (industry only)</div><div class="fv">
+      <div class="f"><div class="fl">Section 4 · By the numbers (stat tiles) + roofing outcomes (industry only)</div><div class="fv">
         <p class="h2c">By the numbers</p>
-        <p>Most contractors know the data could work harder. Few have it set up to.</p>
-        <ul>
-          <li><b>74% vs 25%.</b> 74% of residential contractors see AI as a way to run more efficiently, but only about 25% use it. <span class="cite">(ServiceTitan, 2026 Residential State of the Trades Report)</span></li>
-          <li><b>4%.</b> Only 4% of roofing and exteriors contractors use AI built into their CRM. <span class="cite">(ServiceTitan, 2026 Roofing &amp; Exteriors Market Report)</span></li>
-          <li><b>598,000.</b> About 598,000 specialty trade contractor establishments employ about 5.3 million people. <span class="cite">(U.S. Bureau of Labor Statistics, Industries at a Glance, NAICS 238, 2026, preliminary)</span></li>
-        </ul>
-        <p>The AI numbers are low for a reason. AI is only as useful as the records it reads, and in most trades businesses those records are scattered across the CRM, the ad accounts, payroll and the books. Connecting them comes first. Then AI can draft the follow-up, summarize the job file or flag the lead nobody called back.</p>
+        <p>Most contractors know their data could work harder, and few have it set up to.</p>
+        <div class="tiles">
+          <div class="tile"><div class="fig">74%</div><div class="lab">of residential contractors see AI as a way to run more efficiently</div><div class="fine">Only about 25% use it. ServiceTitan, Residential State of the Trades Report, 2026.</div></div>
+          <div class="tile"><div class="fig">4%</div><div class="lab">of roofing and exteriors contractors use AI built into their CRM</div><div class="fine">ServiceTitan, Roofing &amp; Exteriors Market Report, 2026.</div></div>
+          <div class="tile"><div class="fig">598,000</div><div class="lab">specialty trade contractor establishments, employing about 5.3 million people</div><div class="fine">About 598,000. U.S. Bureau of Labor Statistics, Industries at a Glance, NAICS 238, 2026, preliminary.</div></div>
+        </div>
+        <p>AI is only as useful as the records it reads, so we connect the CRM, ad accounts, payroll and books first. Then AI can draft the follow-up, summarize the job file or flag the lead nobody called back.</p>
         <p><b>From our work with a roofing contractor:</b></p>
         <ul>
           <li>Web and agency leads reach the CRM in under a minute. Nobody retypes them.</li>
@@ -986,31 +1190,32 @@
         </ul>
       </div></div>
 
-      <div class="f"><div class="fl">Section 5</div><div class="fv">
+      <div class="f"><div class="fl">Section 5 · How it works (4 numbered steps)</div><div class="fv">
         <p class="h2c">How it works</p>
-        <p>Every engagement follows the same steps. You see a plan and a price before anything is built, and you own everything at the end.</p>
-        <ul>
-          <li><b>Free AI strategy call.</b> A free 30-minute call. You tell us where leads and hours slip away. We tell you honestly whether we can fix it.</li>
-          <li><b>Written estimate within two business days.</b> A recommended plan and a price range, in writing, with no obligation to go ahead. Companies that want the full map first can start with the two-week Data &amp; AI Assessment.</li>
-          <li><b>Fixed-scope build.</b> Projects taken straight from the plan, each with a finish line and a result you can check.</li>
-          <li><b>Hand over.</b> Every account and every line of code is in your company's name, with plain-English documentation and a walkthrough for the people who use it.</li>
-        </ul>
-        <p>Link: See how an engagement works (Approach page)</p>
+        <p>Every engagement follows the same steps: you see a plan and a price range before anything is built, and you own everything at the end.</p>
+        <ol>
+          <li><b>Free AI strategy call.</b> 30 minutes on where leads and money slip away, and whether we can help.</li>
+          <li><b>Written estimate in two business days.</b> A recommended plan and price range, with no obligation to go ahead.</li>
+          <li><b>Fixed-scope build.</b> Projects taken straight from the plan, each with a finish line you can check.</li>
+          <li><b>Hand over.</b> Every account and line of code in your company's name, with plain-English documentation.</li>
+        </ol>
+        <p>Companies that want the full map first can start with the two-week Data &amp; AI Assessment.</p>
+        <p>See how an engagement works → <span class="ann">Approach page</span></p>
       </div></div>
 
-      <div class="f"><div class="fl">FAQ (6, matches FAQ schema)</div><div class="fv">
+      <div class="f faq"><div class="fl">FAQ · accordion, closed by default (6, matches FAQ schema)</div><div class="fv">
         <p class="h2c">Questions home service owners ask</p>
-        <div class="qa"><div class="q2">Q. What does an AI and data consultant do for a home service company?</div><p>A. An AI and data consultant connects the systems a company already runs, organizes the information in them and puts it to work. For a home service company, that usually means getting every lead into the CRM with its source, tying ad spend to booked and paid jobs, and building a weekly scorecard. Then we put AI to work on the office tasks your staff retype today, with a person approving what it writes.</p></div>
-        <div class="qa"><div class="q2">Q. How do we tell which ads produce booked and paid jobs?</div><p>A. We carry the source of each lead from the first click or call to the paid invoice. Ad spend from Google Ads and Meta Ads, leads and jobs from your CRM and payments from accounting go into one dashboard. You see cost per paying job by channel, and the dashboard updates itself.</p></div>
-        <div class="qa"><div class="q2">Q. Can you work with the field-service software and CRM we already use?</div><p>A. We check on the free AI strategy call before we promise anything. We have built on Salesforce for home service companies. For other field-service software, we look at how it lets data in and out, and we tell you plainly what is possible and what is not.</p></div>
-        <div class="qa"><div class="q2">Q. What belongs on a weekly scorecard for a trades business?</div><p>A. Five to ten numbers that move your yearly goal, each with an owner and a target. Common ones are leads by source, appointments set, close rate by rep, jobs completed, average job value and cost per paying job by channel. We pick them with you, starting from the goal, not from whatever data is easy to pull.</p></div>
-        <div class="qa"><div class="q2">Q. Do our office staff need to be technical?</div><p>A. No. We build the connections and the scorecard, and we train your team on the parts they use. They keep working in the tools they know, with less retyping. Every account and every line of code is yours, with plain-English documentation.</p></div>
-        <div class="qa"><div class="q2">Q. How do we start?</div><p>A. Book a free AI strategy call. It is a 30-minute call about the tools you run and where leads and money slip away. Within two business days you get a written estimate with a recommended plan and a price range. There is no obligation.</p></div>
+        <div class="qa"><div class="q2">Q. What does an AI and data consultant do for a home service company?</div><p>A. An AI and data consultant connects the systems a company already runs, organizes the information in them and puts it to work. For a home service company, that usually means getting every lead into the CRM with its source, tying ad spend to booked and paid jobs, and building a weekly scorecard. Then we put AI to work on the office tasks your staff retype today, with a person approving what it writes. Most companies start with leads, because cost per job and every report after it depend on every lead being counted.</p></div>
+        <div class="qa"><div class="q2">Q. How do we tell which ads produce booked and paid jobs?</div><p>A. We carry the source of each lead from the first click or call to the paid invoice. Ad spend from Google Ads and Meta Ads, leads and jobs from your CRM and payments from accounting go into one dashboard. You see cost per paying job by channel, and the dashboard updates itself, so you know which channels to grow and which to cut.</p></div>
+        <div class="qa"><div class="q2">Q. Can you work with the field-service software and CRM we already use?</div><p>A. We check on the free AI strategy call before we promise anything. We have built on Salesforce for home service companies. For other field-service software, we look at how it lets data in and out, and we tell you plainly what is possible and what is not. If a connection cannot be built, you hear it before the project starts.</p></div>
+        <div class="qa"><div class="q2">Q. What belongs on a weekly scorecard for a trades business?</div><p>A. Five to ten numbers that move your yearly goal, each with an owner and a target. Common ones are leads by source, appointments set, close rate by rep, jobs completed, average job value and cost per paying job by channel. We pick them with you, starting from the goal rather than from whatever data is easy to pull. The scorecard then updates itself from your systems, so nobody builds it by hand.</p></div>
+        <div class="qa"><div class="q2">Q. Do our office staff need to be technical?</div><p>A. No. We build the connections and the scorecard, and we train your team on the parts they use. They keep working in the tools they know, with less retyping, and every account and every line of code is yours, with plain-English documentation.</p></div>
+        <div class="qa"><div class="q2">Q. How do we start?</div><p>A. Book a free AI strategy call. It is a 30-minute call about the tools you run and where leads and money slip away. Within two business days you get a written estimate with a recommended plan and a price range, with no obligation to go ahead. Companies that want the full map first can start with the two-week Data &amp; AI Assessment.</p></div>
       </div></div>
 
       <div class="f"><div class="fl">Call to action</div><div class="fv">
         <p class="h2c">Find out what a paying job really costs you.</p>
-        <p>A free 30-minute call, then a written estimate within two business days.</p>
+        <p>A free 30-minute call about your tools and where leads slip away, then a written estimate within two business days.</p>
         <span class="btn">Book your free AI strategy call</span>
       </div></div>
       </div>
