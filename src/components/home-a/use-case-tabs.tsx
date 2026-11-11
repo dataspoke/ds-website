@@ -74,6 +74,24 @@ export function UseCaseTabs({ tabs }: { tabs: UseCaseTab[] }) {
       strip.scrollTo({ left: right + pad - strip.clientWidth, behavior: "smooth" });
   }, [selected]);
 
+  // Below sm the track is as tall as its tallest panel, which leaves a gap under
+  // short ones. Size it to the selected panel instead, and follow that panel's
+  // height as it changes (fonts loading, bars animating in).
+  useEffect(() => {
+    const track = trackRef.current;
+    const panel = track?.children[selected] as HTMLElement | undefined;
+    if (!track || !panel) return;
+    const fit = () => {
+      const swipe = track.scrollWidth > track.clientWidth + 1;
+      track.style.height = swipe ? `${panel.offsetHeight}px` : "";
+    };
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(panel);
+    ro.observe(track);
+    return () => ro.disconnect();
+  }, [selected]);
+
   return (
     <div className="mt-8 grid min-w-0 gap-4">
       <div ref={stripRef} className="sm:overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -113,7 +131,7 @@ export function UseCaseTabs({ tabs }: { tabs: UseCaseTab[] }) {
       <div
         ref={trackRef}
         onScroll={onScroll}
-        className="-mx-4 flex snap-x snap-mandatory overflow-x-auto scroll-smooth sm:mx-0 sm:block sm:snap-none sm:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="-mx-4 flex items-start snap-x snap-mandatory overflow-x-auto scroll-smooth transition-[height] duration-300 ease-out motion-reduce:transition-none sm:mx-0 sm:block sm:snap-none sm:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {tabs.map((t, i) => (
           <figure
@@ -123,7 +141,7 @@ export function UseCaseTabs({ tabs }: { tabs: UseCaseTab[] }) {
             aria-labelledby={`${ID}-tab-${i}`}
             tabIndex={0}
             className={cn(
-              "w-full shrink-0 snap-start px-4 sm:px-0",
+              "w-full shrink-0 snap-start px-4 pb-6 sm:px-0 sm:pb-0",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:rounded-3xl",
               i !== selected && "sm:hidden"
             )}
