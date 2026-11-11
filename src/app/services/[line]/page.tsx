@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -13,6 +14,7 @@ import { BulletList, ListLabel, ProductDetail } from "@/components/services/prod
 import { LadderGraphic } from "@/components/services/ladder";
 import { RelatedCaseStudies } from "@/components/services/related-case-studies";
 import { SERVICE_PAGE_EXTRAS } from "@/content/service-pages";
+import { SERVICE_INDUSTRIES_SENTENCE, industriesForService, industryPath } from "@/content/industries";
 import { LINE_LADDERS, LINE_PAGE, SERVICE_LINES, getServiceLine, serviceLinkText } from "@/content/services";
 
 // Only the six lines exist; anything else is a 404.
@@ -41,6 +43,7 @@ export default async function ServiceLinePage({ params }: PageProps<"/services/[
   const ladder = LINE_LADDERS[line.slug];
   const extra = SERVICE_PAGE_EXTRAS[line.slug];
   const others = SERVICE_LINES.filter((l) => l.slug !== line.slug);
+  const industries = industriesForService(line.slug);
 
   return (
     <>
@@ -67,6 +70,20 @@ export default async function ServiceLinePage({ params }: PageProps<"/services/[
             </div>
           </div>
         </div>
+        {industries.length > 0 && (
+          <p className="mt-10 text-muted-foreground">
+            {SERVICE_INDUSTRIES_SENTENCE.lead}{" "}
+            {industries.map((industry, i) => (
+              <Fragment key={industry.slug}>
+                {i > 0 && ` ${SERVICE_INDUSTRIES_SENTENCE.join} `}
+                <Link href={industryPath(industry.slug)} className="font-semibold text-primary hover:text-primary/80">
+                  {industry.audienceName}
+                </Link>
+              </Fragment>
+            ))}
+            .
+          </p>
+        )}
       </Section>
 
       {ladder && (

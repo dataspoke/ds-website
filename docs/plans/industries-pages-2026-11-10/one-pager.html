@@ -1,0 +1,1233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Industry pages plan</title>
+<style>
+  :root {
+    color-scheme: light;
+    --ink: #1f2328; --muted: #59636e; --line: #d0d7de; --panel: #f6f8fa;
+    --accent: #0b5cad; --accent-bg: #eaf2fb; --accent-line: #b6d0ee;
+    --green: #1a7f37; --green-bg: #e6f6ea; --green-line: #a6dcb3;
+    --amber: #8a5a00; --amber-bg: #fff4d6; --amber-line: #e8c76a;
+    --red: #b42318; --red-bg: #fdecea; --red-line: #f1aaa3;
+    --grey: #59616a; --grey-bg: #f3f4f6; --grey-line: #c9ced4;
+  }
+  * { box-sizing: border-box; }
+  html { background: #fff; }
+  body { margin: 0 auto; max-width: 900px; padding: 32px 24px 56px; background: #fff; color: var(--ink);
+         font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: max(.86em, 12px); }
+  code { background: var(--panel); border-radius: 4px; padding: 1px 4px; overflow-wrap: anywhere; }
+  ul, ol { margin: 0 0 10px; padding-left: 22px; }
+  li { margin-bottom: 4px; }
+
+  /* Top: client line + title only */
+  header.top { margin-bottom: 24px; }
+  .client { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+  h1 { font-size: 26px; line-height: 1.25; margin: 2px 0 0; }
+
+  /* Badges */
+  .badge { display: inline-block; font-size: 12px; font-weight: 600; line-height: 1.5; padding: 3px 10px;
+           border: 1px solid; border-radius: 999px; white-space: nowrap; vertical-align: 1px; }
+  .b-new   { color: var(--green); background: var(--green-bg); border-color: var(--green-line); }
+  .b-edit  { color: var(--amber); background: var(--amber-bg); border-color: var(--amber-line); }
+  .b-del   { color: var(--red);   background: var(--red-bg);   border-color: var(--red-line); }
+  .b-info  { color: var(--accent); background: var(--accent-bg); border-color: var(--accent-line); }
+  .b-grey  { color: var(--grey);  background: var(--grey-bg);  border-color: var(--grey-line); }
+  .b-yes   { color: var(--red); background: var(--red-bg); border-color: var(--red-line); font-size: 12.5px; padding: 4px 12px; }
+
+  /* Sections */
+  section { margin: 0 0 32px; }
+  h2 { font-size: 18px; margin: 0 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--line);
+       break-after: avoid; page-break-after: avoid; }
+  h3 { font-size: 15px; margin: 18px 0 8px; break-after: avoid; page-break-after: avoid; }
+  .muted { color: var(--muted); }
+
+  /* 1. Problem + end state */
+  .label { font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--accent); margin: 0 0 4px; }
+  li.quote { font-style: italic; color: var(--muted); }
+  .callout { border: 2px solid var(--accent-line); background: var(--accent-bg);
+             border-radius: 8px; padding: 14px 18px; break-inside: avoid; }
+  .callout .label { margin-top: 14px; }
+  .callout .label:first-child { margin-top: 0; }
+  .callout ul { margin-bottom: 0; }
+  ul.end { font-weight: 600; }
+  .ends-at { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-top: 14px; padding: 10px 14px;
+             background: #fff; border: 1px solid var(--accent-line); border-radius: 6px; font-weight: 600; }
+  .ends-at .label { margin: 0; }
+  ol.pipeline { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 0; padding: 0; counter-reset: stage; }
+  ol.pipeline li { display: flex; margin: 0; }
+  .stage { flex: 1; display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; border: 1px solid var(--grey-line);
+           border-radius: 8px; background: #fff; line-height: 1.3; }
+  .stage .gs { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .stage .gn { font-size: 14px; font-weight: 600; }
+  .stage .gn::before { counter-increment: stage; content: counter(stage) ". "; }
+  .stage { position: relative; }
+  .stage .yes { position: absolute; top: 10px; right: 10px; width: 10px; height: 10px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 2px #fff; }
+  .pipe-key { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--muted); margin-top: 8px; }
+  .pipe-key span::before { content: ""; display: inline-block; vertical-align: -1px; margin-right: 6px; }
+  .pipe-key .k-yes::before { width: 10px; height: 10px; border-radius: 50%; background: var(--red); }
+  .pipe-key .k-out::before { width: 14px; height: 10px; border-radius: 3px; border: 1.5px dashed var(--grey); background: var(--grey-bg); }
+  .pipe-key .k-later::before { width: 14px; height: 10px; border-radius: 3px; border: 1px solid var(--grey-line); background: #fff; }
+  .g-done .stage { border-color: var(--green-line); background: var(--green-bg); }
+  .g-done .gs { color: var(--green); }
+  .g-here .stage { border-color: var(--accent); background: var(--accent); color: #fff; box-shadow: 0 0 0 3px var(--accent-line); }
+  .g-here .gs { color: #fff; }
+  .g-next .stage { border-color: var(--accent); }
+  .g-next .gs { color: var(--accent); }
+  .g-out .stage { border-style: dashed; background: var(--grey-bg); color: var(--muted); }
+  .g-out .gn { text-decoration: line-through; font-weight: 400; }
+
+  /* Diagram */
+  figure.diagram { margin: 0 0 12px; border: 1px solid var(--line); border-radius: 8px; padding: 12px; break-inside: avoid; }
+  figure.diagram svg { display: block; width: 100%; height: auto; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--muted); margin-top: 8px; }
+  .legend span::before { content: ""; display: inline-block; width: 14px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; border: 1.5px solid; }
+  .legend .l-new::before  { background: var(--green-bg); border-color: var(--green); }
+  .legend .l-edit::before { background: var(--amber-bg); border-color: var(--amber); }
+  .legend .l-same::before { background: #fff; border-color: var(--grey); }
+  svg .n-new  { fill: #e6f6ea; stroke: #1a7f37; stroke-width: 1.5; }
+  svg .n-edit { fill: #fff4d6; stroke: #8a5a00; stroke-width: 1.5; }
+  svg .n-same { fill: #ffffff; stroke: #6e7781; stroke-width: 1.2; }
+  svg .t1 { font: 600 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #1f2328; }
+  svg .t2 { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #59636e; }
+  svg .edge { stroke: #57606a; stroke-width: 1.5; fill: none; }
+  svg .elabel { font: italic 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #59636e; }
+
+  /* Tables */
+  .tbl { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin: 8px 0 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; vertical-align: top; padding: 7px 10px; border-bottom: 1px solid var(--line); }
+  tr:last-child td { border-bottom: 0; }
+  th { font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); background: var(--panel); }
+  tr { break-inside: avoid; page-break-inside: avoid; }
+  td.tag, th.tag { width: 1%; white-space: nowrap; }
+  td.arrow { width: 1%; color: var(--muted); padding-left: 0; padding-right: 0; text-align: center; }
+  td ul, td ol { margin: 0; padding-left: 18px; }
+  td li { margin-bottom: 2px; }
+  td li:last-child { margin-bottom: 0; }
+  ul.cols { columns: 2; column-gap: 24px; margin-top: 2px; }
+  ul.cols li { break-inside: avoid; }
+
+  /* Schema cards */
+  .schemas { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 14px; }
+  .schema { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; break-inside: avoid; box-shadow: 0 1px 2px rgba(31,35,40,.06); }
+  .schema header { display: flex; justify-content: space-between; align-items: center; gap: 8px;
+                   padding: 8px 12px; background: var(--panel); border-bottom: 1px solid var(--line); }
+  .schema header code { background: none; padding: 0; font-weight: 700; font-size: 14px; }
+  .schema table { font-size: 13px; }
+  .schema td:first-child { white-space: nowrap; }
+  .schema .foot { margin: 0; padding: 8px 12px 8px 30px; font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--line); }
+  .schema .foot li { margin-bottom: 2px; }
+  .db-notes { margin-top: 12px; }
+  .mig { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 0 0 12px; }
+
+  /* Cards (UI screens) */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+  .card { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; break-inside: avoid; box-shadow: 0 1px 2px rgba(31,35,40,.06); }
+  .card h3 { margin: 0 0 2px; font-size: 14.5px; }
+  .card .where { font-size: 12.5px; color: var(--muted); margin-bottom: 8px; overflow-wrap: anywhere; }
+  .card ul { font-size: 13.5px; padding-left: 18px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+  .chip { font-size: 12px; padding: 3px 10px; border-radius: 4px; background: var(--grey-bg); border: 1px solid var(--grey-line); color: var(--ink); }
+  ul.after { margin-top: 10px; }
+
+  /* Logic rules */
+  table.rules td:first-child { font-weight: 600; width: 32%; }
+  table.rules td:first-child::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 8px; background: var(--grey-line); }
+  table.rules tr.ok   td:first-child::before { background: var(--green); }
+  table.rules tr.warn td:first-child::before { background: #d4a72c; }
+  table.rules tr.stop td:first-child::before { background: var(--red); }
+  table.rules tr.ok   td:last-child { background: #f4fbf6; }
+  table.rules tr.warn td:last-child { background: #fffaeb; }
+  table.rules tr.stop td:last-child { background: #fef5f4; }
+  .key { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--muted); }
+  .key span::before { content: ""; display: inline-block; width: 4px; height: 12px; margin-right: 6px; vertical-align: -1px; }
+  .key .k-ok::before { background: var(--green); }
+  .key .k-warn::before { background: #d4a72c; }
+  .key .k-stop::before { background: var(--red); }
+  .key .k-same::before { background: var(--grey-line); }
+
+  /* Out of scope + decisions; Testing scenarios share the card look */
+  ul.compact { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 4px 0 16px; }
+  ul.compact li { margin: 0; font-size: 13.5px; padding: 4px 12px; border: 1px solid var(--grey-line); border-radius: 999px; background: var(--grey-bg); }
+  .decisions, .scenarios { display: grid; gap: 12px; }
+  .decision, .scenario { display: grid; grid-template-columns: 32px 1fr; gap: 12px; border: 1px solid var(--line); border-radius: 8px;
+              padding: 12px 14px; break-inside: avoid; box-shadow: 0 1px 2px rgba(31,35,40,.06); }
+  .decision .num, .scenario .num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700;
+                   display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .decision .q, .scenario .q { font-weight: 700; margin: 3px 0 8px; }
+  .rec { background: var(--green-bg); border: 1px solid var(--green); border-radius: 6px; padding: 8px 12px; margin: 0 0 6px; }
+  .rec b:first-child { color: var(--green); }
+  .why { margin: 0; padding-left: 20px; font-size: 13.5px; color: var(--muted); }
+  .why li { margin-bottom: 2px; }
+
+  /* Testing */
+  .scenarios { margin: 0 0 16px; }
+  .sc-body { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 24px; }
+  .sc-body ul { margin: 0; padding-left: 18px; font-size: 14px; }
+  .sublabel { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 2px; }
+  .sublabel.exp { color: var(--green); }
+
+  /* Monitoring */
+  .note { border: 1px solid var(--amber-line); background: var(--amber-bg); border-radius: 6px; padding: 8px 12px 8px 30px; font-size: 13.5px; margin: 0 0 10px; }
+  .note li { margin-bottom: 2px; }
+  .crm-label { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 14px 0 4px; }
+  pre#crm-monitoring { margin: 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel);
+                       white-space: pre-wrap; overflow-wrap: anywhere; font-size: 13px; break-inside: avoid; }
+
+  /* Details (bottom of page) */
+  section.details { margin: 40px 0 0; padding: 12px 16px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); break-inside: avoid; }
+  section.details h2 { font-size: 13px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); border-bottom: 0; padding-bottom: 0; margin-bottom: 8px; }
+  .meta { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px 18px; margin: 0; font-size: 13.5px; }
+  .meta div { min-width: 0; }
+  .meta .wide { grid-column: 1 / -1; }
+  .meta .two { grid-column: span 2; }
+  .meta dt { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .meta dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+
+
+  @media (max-width: 640px) {
+    body { padding: 20px 16px 40px; }
+    .schemas { grid-template-columns: 1fr; }
+    .meta .two { grid-column: 1 / -1; }
+    ul.cols { columns: 1; }
+    ol.pipeline { grid-template-columns: repeat(2, 1fr); }
+    .sc-body { grid-template-columns: 1fr; }
+    .callout { padding: 12px 14px; }
+  }
+  @media print {
+    @page { margin: 14mm 12mm; }
+    body { max-width: none; padding: 0; font-size: 10pt; }
+    .cards { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    .tbl { border-radius: 0; overflow: visible; }
+    .schema, .card, .decision, .scenario { box-shadow: none; }
+    .callout, section.details { background: none; }
+    th, .schema header { background: none; }
+    code { background: none; padding: 0; }
+    li.quote { color: var(--ink); }
+    table.rules td:last-child { background: none !important; }
+    pre#crm-monitoring { background: none; }
+    ul.compact li { background: none; }
+    .badge, .rec, .decision .num, .pipe-key, .stage .yes, figure.diagram, .key, .legend, table.rules td:first-child, ol.pipeline, .stage, .scenario .num {
+      -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    section { break-inside: auto; }
+    h2, h3 { break-after: avoid; page-break-after: avoid; }
+    .callout, .schema, .card, .decision, .scenario, figure.diagram, pre, .note, .tbl.keep, .crm, section.details { break-inside: avoid; page-break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+  /* Draft copy appendix (Nick's exception: prose allowed here, because it is the page copy) */
+  section.appendix { margin: 48px 0 0; }
+  section.appendix > h2 { font-size: 20px; }
+  .ap-note { margin: 0 0 16px; font-size: 13.5px; color: var(--muted); }
+  .copy-page { border: 2px solid var(--accent-line); border-radius: 10px; margin: 0 0 28px; overflow: hidden; background: #fff; }
+  .copy-page > header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 12px;
+                        padding: 10px 16px; background: var(--accent-bg); border-bottom: 1px solid var(--accent-line); }
+  .copy-page > header .pname { font-size: 16px; font-weight: 700; }
+  .copy-page > header .pmeta { display: flex; flex-wrap: wrap; gap: 6px; }
+  .copy-page > header .b-grey { color: var(--muted); }
+  .copy-body { padding: 4px 16px 14px; }
+  .f { border-bottom: 1px solid var(--line); padding: 10px 0; }
+  .f:last-child { border-bottom: 0; }
+  .fl { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: 11.5px; font-weight: 700; letter-spacing: .07em;
+        text-transform: uppercase; color: var(--accent); margin: 0 0 4px; }
+  .cc { font-size: 11.5px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--green); background: var(--green-bg);
+        border: 1px solid var(--green-line); border-radius: 999px; padding: 3px 10px; }
+  .fv { font-size: 14.5px; }
+  .fv p { margin: 0 0 8px; }
+  .fv p:last-child { margin-bottom: 0; }
+  .fv ul { margin: 4px 0 8px; }
+  .fv .h1 { font-size: 19px; font-weight: 700; line-height: 1.3; }
+  .fv .h2c { font-size: 16px; font-weight: 700; margin: 0 0 6px; }
+  .fv .upd { font-size: 13px; color: var(--muted); }
+  .fv .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
+  .bc { font-size: 13px; color: var(--muted); }
+  .cardgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; margin-top: 6px; }
+  .ccard { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: var(--panel); }
+  .ccard .ct { font-weight: 700; margin: 0 0 4px; }
+  .ccard .svc { font-size: 12.5px; color: var(--accent); margin: 6px 0 0; }
+  .qa { margin: 0 0 10px; }
+  .qa .q2 { font-weight: 700; margin: 0 0 2px; }
+  .cite { color: var(--muted); }
+  .btn { display: inline-block; margin-top: 6px; padding: 6px 14px; border-radius: 6px; background: var(--accent); color: #fff; font-weight: 600; font-size: 14px; }
+  .src { font-size: 13px; color: var(--muted); }
+  .src li { overflow-wrap: anywhere; }
+
+  /* Restyled copy fields: icon rows, stat tiles, chips, build notes */
+  .ann { font-size: 12px; font-weight: 400; color: var(--grey); background: var(--grey-bg); border: 1px dashed var(--grey-line); border-radius: 4px; padding: 0 6px; white-space: nowrap; }
+  .ccard .svc .ann { margin-left: 4px; }
+  ul.probs { list-style: none; padding-left: 0; }
+  ul.probs li { padding-left: 18px; position: relative; }
+  ul.probs li::before { content: ""; position: absolute; left: 0; top: .55em; width: 9px; height: 9px; border-radius: 3px; background: var(--accent-line); }
+  .fv ol { margin: 4px 0 8px; padding-left: 22px; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin: 6px 0 10px; }
+  .tile { border: 1px solid var(--accent-line); background: var(--accent-bg); border-radius: 8px; padding: 10px 12px; }
+  .tile .fig { font-size: 26px; font-weight: 800; line-height: 1.1; color: var(--accent); }
+  .tile .lab { font-size: 14px; font-weight: 600; margin: 4px 0 6px; }
+  .tile .fine { font-size: 12px; color: var(--muted); }
+  .chip.pri { background: var(--accent-bg); border-color: var(--accent-line); color: var(--accent); font-weight: 600; }
+  .fv .chips { margin: 4px 0 8px; }
+  .chip-label { font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); margin: 6px 0 0 !important; }
+
+  /* Visual mock of the law firms page: site tokens from src/app/globals.css */
+  h3.mock-title { font-size: 16px; margin: 8px 0 4px; }
+  .mock-wrap { width: min(1000px, calc(100vw - 32px)); position: relative; left: 50%; transform: translateX(-50%); margin: 0 0 32px; }
+  .mock { --s-primary: #1f63b5; --s-brand: #4a90e2; --s-tint: #eef5fc; --s-tint-strong: #d6e6f8; --s-ink: #0f1e33;
+          --s-muted: #475569; --s-border: #e5e9f0; --s-input: #94a3b8;
+          container-type: inline-size; border: 2px solid var(--line); border-radius: 12px; overflow: hidden; background: #fff;
+          color: var(--s-ink); font: 15px/1.6 "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+          box-shadow: 0 2px 10px rgba(15,30,51,.08); }
+  .mock svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .mock p { margin: 0; }
+  .m-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 60px; padding: 0 28px; border-bottom: 1px solid var(--s-border); background: rgba(255,255,255,.95); }
+  .m-logo { display: inline-flex; align-items: center; gap: 8px; color: var(--s-primary); font: 600 20px/1 "Plus Jakarta Sans", "Inter", -apple-system, sans-serif; letter-spacing: -.02em; }
+  .m-mark { width: 26px; height: 26px; color: var(--s-brand); }
+  .m-links { display: flex; gap: 22px; font-size: 14.5px; font-weight: 500; }
+  .m-links .on { color: var(--s-primary); }
+  .m-btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; background: var(--s-primary); color: #fff; font-weight: 600; white-space: nowrap; }
+  .m-btn-nav { height: 36px; padding: 0 14px; font-size: 14px; }
+  .m-btn-lg { height: 44px; padding: 0 22px; font-size: 15.5px; margin-top: 16px; }
+  .m-sec { padding: 36px 28px; }
+  .m-pt0 { padding-top: 0; }
+  .m-tint { background: var(--s-tint); }
+  .m-bc { font-size: 13px; color: var(--s-muted); margin-bottom: 14px; }
+  .m-bc span { margin: 0 4px; color: var(--s-input); }
+  .m-bc b { color: var(--s-ink); font-weight: 600; }
+  .m-eyebrow { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--s-primary); margin-bottom: 8px !important; }
+  .m-h1, .m-h2, .m-h3 { font-family: "Plus Jakarta Sans", "Inter", -apple-system, sans-serif; font-weight: 700; letter-spacing: -.02em; color: var(--s-ink); }
+  .m-h1 { font-size: 34px; line-height: 1.15; max-width: 760px; }
+  .m-h2 { font-size: 26px; line-height: 1.2; margin-bottom: 8px; }
+  .m-h3 { font-size: 17px; line-height: 1.3; }
+  .m-lede { font-size: 17px; line-height: 1.55; color: var(--s-muted); max-width: 760px; margin-top: 14px !important; }
+  .m-upd { font-size: 13px; color: var(--s-muted); margin-top: 12px !important; }
+  .m-intro { color: var(--s-muted); max-width: 680px; margin-bottom: 18px !important; }
+  .m-note { color: var(--s-muted); font-size: 14px; margin-top: 14px !important; }
+  .m-probs { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; max-width: 720px; }
+  .m-probs li { display: flex; align-items: center; gap: 14px; margin: 0; padding: 10px 14px; background: #fff; border: 1px solid var(--s-tint-strong); border-radius: 10px; font-weight: 600; }
+  .m-ico { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: var(--s-tint); color: var(--s-primary); }
+  .m-ico svg { width: 20px; height: 20px; }
+  .m-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .m-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .m-card { display: grid; align-content: start; gap: 8px; border: 1px solid var(--s-tint-strong); border-radius: 12px; padding: 20px; background: #fff; }
+  .m-card p { color: var(--s-muted); font-size: 14.5px; }
+  .m-link { display: inline-block; color: var(--s-primary); font-weight: 600; font-size: 14.5px; margin-top: 4px; }
+  .m-sec > .m-link { margin-top: 18px; }
+  .m-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .m-chips span { padding: 5px 14px; border-radius: 999px; border: 1px solid var(--s-border); background: #fff; font-size: 14px; font-weight: 500; }
+  .m-chips .pri { border-color: var(--s-brand); background: var(--s-tint); color: var(--s-primary); font-weight: 600; }
+  .m-tile { background: #fff; border: 1px solid var(--s-tint-strong); border-radius: 12px; padding: 20px; }
+  .m-fig { font: 800 40px/1 "Plus Jakarta Sans", "Inter", -apple-system, sans-serif; letter-spacing: -.03em; color: var(--s-primary); }
+  .m-lab { font-weight: 600; margin: 10px 0 10px; line-height: 1.4; }
+  .m-src { font-size: 12px; line-height: 1.45; color: var(--s-muted); border-top: 1px solid var(--s-border); padding-top: 8px; }
+  .m-bridge { margin-top: 18px !important; max-width: 720px; color: var(--s-ink); }
+  .m-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .m-steps li { position: relative; display: grid; align-content: start; gap: 6px; padding-top: 26px; margin: 0; }
+  .m-steps li p { color: var(--s-muted); font-size: 14.5px; }
+  .m-dot { position: absolute; left: 0; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--s-brand); }
+  .m-steps li:not(:last-child)::after { content: ""; position: absolute; left: 14px; top: 10px; height: 2px; width: calc(100% + 10px); background: var(--s-tint-strong); }
+  .m-step { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--s-primary); }
+  .m-faq { border-top: 1px solid var(--s-border); max-width: 780px; }
+  .m-q { border-bottom: 1px solid var(--s-border); }
+  .m-qrow { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 0; font-weight: 700; font-size: 16px; }
+  .m-chev { flex: none; width: 20px; height: 20px; color: var(--s-primary); }
+  .m-a { color: var(--s-muted); padding: 0 36px 16px 0; }
+  .m-cta .m-h2 { font-size: 30px; }
+  @container (max-width: 720px) {
+    .m-links { display: none; }
+    .m-nav, .m-sec { padding-left: 16px; padding-right: 16px; }
+    .m-sec.m-pt0 { padding-top: 0; }
+    .m-h1 { font-size: 26px; }
+    .m-h2, .m-cta .m-h2 { font-size: 22px; }
+    .m-grid2, .m-grid3 { grid-template-columns: 1fr; }
+    .m-steps { grid-template-columns: 1fr 1fr; }
+    .m-steps li:not(:last-child)::after { display: none; }
+  }
+  @container (max-width: 420px) {
+    .m-steps { grid-template-columns: 1fr; }
+    .m-btn-nav { font-size: 12.5px; padding: 0 10px; }
+    .m-logo { font-size: 17px; }
+  }
+  @media print { .mock-wrap { width: auto; left: 0; transform: none; } .mock { box-shadow: none; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="client">DS · DataSpoke</div>
+  <h1>Industry pages: law firms, home services and an Industries hub</h1>
+</header>
+
+<section id="s1">
+  <h2>1. Problem + end state</h2>
+  <div class="label">Problem</div>
+  <ul>
+    <li>No page on the site targets law firms or home service companies.</li>
+    <li>"Law firm", "home service", "HVAC", "plumbing" and "contractor" appear 0 times on the home page, the Services page and the Capture page.</li>
+    <li>Google and AI answers cannot match DataSpoke to "AI consultant for law firms" or "AI consultant for home service businesses".</li>
+    <li>Competitors that win those searches all have one page per industry, about 1,300 to 2,000 words each.</li>
+    <li class="quote">"No page targets the two verticals … Google and AI answers cannot match DataSpoke to 'AI consultant for law firms'." — site audit, 2026-11-10, priority 1</li>
+  </ul>
+  <div class="callout">
+    <div class="label">End state</div>
+    <ul class="end">
+      <li>An Industries hub page and two industry pages exist: Law firms and Home services.</li>
+      <li>Each industry page carries the approved copy from the Draft copy appendix below.</li>
+      <li>Each industry page has a visible breadcrumb and a "Last updated" line.</li>
+      <li>Each page carries structured data that parses: breadcrumbs, service with audience, and FAQ matching the visible FAQ.</li>
+      <li>The pages are linked from the nav, the footer, the home page and all six service pages.</li>
+      <li>The AI-readable site summary and the sitemap list the three pages.</li>
+      <li>A PR is open for Nick. Nothing is merged or deployed.</li>
+    </ul>
+    <div class="label">Pipeline</div>
+    <ol class="pipeline">
+      <li class="g-done"><span class="stage"><span class="gs">Done</span><span class="gn">Problem definition</span></span></li>
+      <li class="g-done"><span class="stage"><span class="gs">Done</span><span class="gn">Plan</span><span class="yes" role="img" aria-label="needs your yes"></span></span></li>
+      <li class="g-here"><span class="stage"><span class="gs">We are here</span><span class="gn">Implementation</span></span></li>
+      <li class="g-next"><span class="stage"><span class="gs">Next</span><span class="gn">Testing</span></span></li>
+      <li class="g-later"><span class="stage"><span class="gn">Merge</span><span class="yes" role="img" aria-label="needs your yes"></span></span></li>
+      <li class="g-out"><span class="stage"><span class="gn">Migrations</span><span class="yes" role="img" aria-label="needs your yes"></span></span></li>
+      <li class="g-out"><span class="stage"><span class="gn">Deployment</span><span class="yes" role="img" aria-label="needs your yes"></span></span></li>
+      <li class="g-out"><span class="stage"><span class="gn">Monitoring</span></span></li>
+    </ol>
+    <div class="pipe-key"><span class="k-yes">Needs your yes</span><span class="k-out">Dashed = not in this work</span><span class="k-later">Plain = later</span></div>
+    <div class="ends-at"><span class="label">Ends at</span><span>Merge — PR open for Nick, not merged; nothing deployed</span></div>
+    <div class="label">Proof</div>
+    <ul>
+      <li>A production build runs clean on a local machine.</li>
+      <li>The end-to-end scenarios in section 8 pass and are saved with the other scenarios.</li>
+      <li>Screenshots at phone and desktop width go on the Evidence line.</li>
+      <li>The copy-rule check on the rendered pages finds nothing.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="s2">
+  <h2>2. Architecture</h2>
+  <figure class="diagram">
+    <svg viewBox="0 0 860 330" role="img" aria-label="Industry pages architecture">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#57606a"/>
+        </marker>
+      </defs>
+      <!-- Row 1: content and schema -->
+      <rect class="n-new"  x="10"  y="20" width="180" height="60" rx="8"/>
+      <text class="t1" x="100" y="45" text-anchor="middle">Industries content</text>
+      <text class="t2" x="100" y="63" text-anchor="middle">copy, FAQ, systems</text>
+
+      <rect class="n-new"  x="340" y="20" width="180" height="60" rx="8"/>
+      <text class="t1" x="430" y="45" text-anchor="middle">Industry page</text>
+      <text class="t2" x="430" y="63" text-anchor="middle">one route, two pages</text>
+
+      <rect class="n-new"  x="340" y="130" width="180" height="60" rx="8"/>
+      <text class="t1" x="430" y="155" text-anchor="middle">Industries hub</text>
+      <text class="t2" x="430" y="173" text-anchor="middle">two cards</text>
+
+      <rect class="n-edit" x="670" y="20" width="180" height="60" rx="8"/>
+      <text class="t1" x="760" y="45" text-anchor="middle">Structured data</text>
+      <text class="t2" x="760" y="63" text-anchor="middle">+ breadcrumbs, audience</text>
+
+      <rect class="n-same" x="670" y="130" width="180" height="60" rx="8"/>
+      <text class="t1" x="760" y="155" text-anchor="middle">Services content</text>
+      <text class="t2" x="760" y="173" text-anchor="middle">names and links, read only</text>
+
+      <!-- Row 3: link sources -->
+      <rect class="n-edit" x="10"  y="250" width="150" height="60" rx="8"/>
+      <text class="t1" x="85" y="275" text-anchor="middle">Nav + footer</text>
+      <text class="t2" x="85" y="293" text-anchor="middle">Industries links</text>
+
+      <rect class="n-edit" x="180" y="250" width="150" height="60" rx="8"/>
+      <text class="t1" x="255" y="275" text-anchor="middle">Home page</text>
+      <text class="t2" x="255" y="293" text-anchor="middle">Who we work with</text>
+
+      <rect class="n-edit" x="350" y="250" width="150" height="60" rx="8"/>
+      <text class="t1" x="425" y="275" text-anchor="middle">Six service pages</text>
+      <text class="t2" x="425" y="293" text-anchor="middle">one linking sentence</text>
+
+      <rect class="n-edit" x="520" y="250" width="150" height="60" rx="8"/>
+      <text class="t1" x="595" y="275" text-anchor="middle">AI site summary</text>
+      <text class="t2" x="595" y="293" text-anchor="middle">Industries section</text>
+
+      <rect class="n-edit" x="690" y="250" width="160" height="60" rx="8"/>
+      <text class="t1" x="770" y="275" text-anchor="middle">Sitemap config</text>
+      <text class="t2" x="770" y="293" text-anchor="middle">+ three pages</text>
+
+      <!-- Edges -->
+      <line class="edge" x1="190" y1="50"  x2="338" y2="50"  marker-end="url(#arr)"/>
+      <line class="edge" x1="190" y1="65"  x2="338" y2="155" marker-end="url(#arr)"/>
+      <text class="elabel" x="200" y="40">copy per industry</text>
+      <line class="edge" x1="668" y1="50"  x2="522" y2="50"  marker-end="url(#arr)"/>
+      <line class="edge" x1="668" y1="65"  x2="522" y2="150" marker-end="url(#arr)"/>
+      <line class="edge" x1="668" y1="160" x2="522" y2="70"  marker-end="url(#arr)"/>
+      <text class="elabel" x="600" y="122" text-anchor="middle">card links</text>
+      <line class="edge" x1="85"  y1="250" x2="360" y2="192" marker-end="url(#arr)"/>
+      <line class="edge" x1="255" y1="250" x2="400" y2="192" marker-end="url(#arr)"/>
+      <line class="edge" x1="425" y1="250" x2="430" y2="192" marker-end="url(#arr)"/>
+      <line class="edge" x1="595" y1="250" x2="470" y2="192" marker-end="url(#arr)"/>
+      <line class="edge" x1="770" y1="250" x2="510" y2="192" marker-end="url(#arr)"/>
+      <text class="elabel" x="560" y="225">all link to the hub and both pages</text>
+    </svg>
+    <div class="legend"><span class="l-new">New</span><span class="l-edit">Changed</span><span class="l-same">Unchanged</span></div>
+  </figure>
+  <ul>
+    <li>All page copy lives in one new industries content module, like the existing services content.</li>
+    <li>One page template serves both industry pages; only the two known industries build.</li>
+    <li>The hub reads the same content module, so a third industry later is one new entry.</li>
+    <li>Structured data gains a breadcrumb helper.</li>
+    <li>The existing service schema gains optional audience and service-type fields.</li>
+    <li>Service pages keep their current schema unless they opt in.</li>
+    <li>"What we build" cards read service names and links from the services content, so they never drift.</li>
+  </ul>
+</section>
+
+<section id="s3">
+  <h2>3. Database</h2>
+  <ul>
+    <li>None. Static pages only.</li>
+  </ul>
+</section>
+
+<section id="s4">
+  <h2>4. UI</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Industries hub <span class="badge b-new">New</span></h3>
+      <div class="where">New top-level page: Industries</div>
+      <ul>
+        <li>Short intro with the definition sentence.</li>
+        <li>Two cards: Law firms, Home services, each under 30 words.</li>
+        <li>A line for businesses outside both, then the call-to-action button.</li>
+      </ul>
+      <div class="chips"><span class="chip">Phone width</span><span class="chip">Desktop width</span></div>
+    </div>
+    <div class="card">
+      <h3>Law firms page <span class="badge b-new">New</span></h3>
+      <div class="where">Industries › Law firms</div>
+      <ul>
+        <li>Breadcrumb, H1, definition, "Last updated".</li>
+        <li>Five problem rows, each a one-line statement with an icon.</li>
+        <li>Four service cards in a 2x2 grid, each linking to its service page.</li>
+        <li>Systems as name chips; three stat tiles with the source in fine print; four numbered steps.</li>
+        <li>Six-question FAQ as an accordion, closed on load; answers stay in the page HTML for the FAQ schema.</li>
+        <li>Call-to-action band with the button.</li>
+      </ul>
+      <div class="chips"><span class="chip">Phone width</span><span class="chip">Desktop width</span><span class="chip">FAQ open / closed</span></div>
+    </div>
+    <div class="card">
+      <h3>Home services page <span class="badge b-new">New</span></h3>
+      <div class="where">Industries › Home services</div>
+      <ul>
+        <li>Same layout as the law firms page.</li>
+        <li>Systems chips in two groups: Salesforce, then "Commonly connected".</li>
+        <li>Adds three roofing-contractor outcomes under the stat tiles.</li>
+      </ul>
+      <div class="chips"><span class="chip">Phone width</span><span class="chip">Desktop width</span><span class="chip">FAQ open / closed</span></div>
+    </div>
+    <div class="card">
+      <h3>Nav <span class="badge b-edit">Changed</span></h3>
+      <div class="where">Top of every page</div>
+      <ul>
+        <li>"Industries" sits between Services and Approach.</li>
+        <li>Six items in total, so the mobile menu is checked at phone width.</li>
+      </ul>
+      <div class="chips"><span class="chip">Desktop bar</span><span class="chip">Mobile menu open</span></div>
+    </div>
+    <div class="card">
+      <h3>Footer <span class="badge b-edit">Changed</span></h3>
+      <div class="where">Bottom of every page</div>
+      <ul>
+        <li>Today: one flat list of links.</li>
+        <li>New Industries group: the hub and both pages.</li>
+      </ul>
+      <div class="chips"><span class="chip">Phone width</span><span class="chip">Desktop width</span></div>
+    </div>
+    <div class="card">
+      <h3>Home page <span class="badge b-edit">Changed</span></h3>
+      <div class="where">Home, after use cases, before services</div>
+      <ul>
+        <li>New "Who we work with" section.</li>
+        <li>Two cards, one per industry page.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Service pages <span class="badge b-edit">Changed</span></h3>
+      <div class="where">Services › each of the six pages</div>
+      <ul>
+        <li>One sentence that links the relevant industry page or pages.</li>
+        <li>No other change to layout or copy.</li>
+      </ul>
+    </div>
+  </div>
+  <ul class="after muted">
+    <li>Prototype: none. The pages reuse the service page components.</li>
+  </ul>
+</section>
+
+<section id="s5">
+  <h2>5. Logic</h2>
+  <div class="key"><span class="k-ok">Builds or shows</span><span class="k-warn">Shows with a caveat</span><span class="k-stop">Blocks or guards</span><span class="k-same">Unchanged</span></div>
+  <div class="tbl">
+    <table class="rules">
+      <tr><th>Condition</th><th></th><th>Outcome</th></tr>
+      <tr class="ok"><td>Known industry (law firms, home services)</td><td class="arrow">→</td><td>Page built at build time.</td></tr>
+      <tr class="stop"><td>Any other industry address</td><td class="arrow">→</td><td><ul>
+        <li>404.</li>
+        <li>No pages are made on request.</li></ul></td></tr>
+      <tr class="ok"><td>Visible FAQ</td><td class="arrow">→</td><td>FAQ schema built from the same entries, so the two always match.</td></tr>
+      <tr class="ok"><td>Visible breadcrumb</td><td class="arrow">→</td><td>Breadcrumb schema built from the same list.</td></tr>
+      <tr class="ok"><td>Industry page service schema</td><td class="arrow">→</td><td><ul>
+        <li>Audience is the industry.</li>
+        <li>Area served is the United States.</li>
+        <li>Provider is the existing organization.</li></ul></td></tr>
+      <tr><td>Service page schema</td><td class="arrow">→</td><td>Unchanged unless a page opts in to the new fields.</td></tr>
+      <tr class="ok"><td>Hub schema</td><td class="arrow">→</td><td>Item list of the two pages, plus breadcrumbs.</td></tr>
+      <tr class="warn"><td>Roofing outcomes</td><td class="arrow">→</td><td><ul>
+        <li>Home services page only.</li>
+        <li>Named by industry only.</li>
+        <li>No link to the unpublished case studies.</li></ul></td></tr>
+      <tr class="stop"><td>Law firm proof</td><td class="arrow">→</td><td><ul>
+        <li>Statistics only.</li>
+        <li>No DataSpoke outcome, because no law firm case study exists.</li></ul></td></tr>
+      <tr class="stop"><td>Copy rules</td><td class="arrow">→</td><td><ul>
+        <li>Phone numbers, state or city names, the banned size word, dollar figures: any hit blocks the PR.</li>
+        <li>Any offer to take or return calls for the client: blocks the PR.</li></ul></td></tr>
+      <tr class="stop"><td>Systems lists</td><td class="arrow">→</td><td><ul>
+        <li>Only systems Nick has built on, or ones he confirms.</li>
+        <li>Field-service platforms DataSpoke has not built on are never named.</li></ul></td></tr>
+      <tr class="warn"><td>The open sitemap PR merges first</td><td class="arrow">→</td><td>This branch adds the three pages to the code-built sitemap instead.</td></tr>
+      <tr class="warn"><td>This PR merges first</td><td class="arrow">→</td><td>The sitemap PR must add the three pages before it merges.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="s6">
+  <h2>6. Changes</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Industry content <span class="badge b-new">New</span></h3>
+      <ul>
+        <li>One content module with the copy for the hub and both pages.</li>
+        <li>Holds the FAQ, the systems lists, the statistics with sources and the "Last updated" date.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Pages <span class="badge b-new">New</span></h3>
+      <ul>
+        <li>The Industries hub.</li>
+        <li>One industry page template that builds Law firms and Home services.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Structured data <span class="badge b-edit">Changed</span></h3>
+      <ul>
+        <li>New breadcrumb helper.</li>
+        <li>Service schema gains optional audience and service type.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Nav and footer <span class="badge b-edit">Changed</span></h3>
+      <ul>
+        <li>"Industries" in the nav, between Services and Approach.</li>
+        <li>An Industries group in the footer.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Home and service pages <span class="badge b-edit">Changed</span></h3>
+      <ul>
+        <li>"Who we work with" section on the home page.</li>
+        <li>One linking sentence on each of the six service pages.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>AI site summary and sitemap <span class="badge b-edit">Changed</span></h3>
+      <ul>
+        <li>An Industries section in the AI-readable site summary.</li>
+        <li>The three pages added to the current sitemap config.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Tests <span class="badge b-new">New</span></h3>
+      <ul>
+        <li>One saved end-to-end scenario file for the industry pages.</li>
+      </ul>
+    </div>
+  </div>
+  <h3>Not touched</h3>
+  <ul class="compact">
+    <li>Service page layout</li>
+    <li>Case studies and the Work page</li>
+    <li>Free AI strategy call page and booking</li>
+    <li>Contact form</li>
+    <li>Robots file</li>
+    <li>Deployment config</li>
+    <li>The sitemap rebuild in the open PR</li>
+  </ul>
+</section>
+
+<section id="s7">
+  <h2>7. Out of scope + open decisions</h2>
+  <h3>Out of scope</h3>
+  <ul class="compact">
+    <li>Deploying</li>
+    <li>Footer Services column and Privacy link</li>
+    <li>A gyms page</li>
+    <li>A roofing sub-page</li>
+    <li>Home hero sub-line</li>
+    <li>Contact page schema</li>
+    <li>Moving to a code-built sitemap</li>
+    <li>Search Console and IndexNow requests</li>
+  </ul>
+  <h3>Open decisions</h3>
+  <div class="decisions">
+    <div class="decision">
+      <div class="num">1</div>
+      <div>
+        <div class="q">Approve the page copy in the Draft copy appendix as written?</div>
+        <div class="rec"><b>Recommendation:</b> yes.</div>
+        <ul class="why">
+          <li>It follows the SEO spec's titles, outlines, FAQ topics and schema.</li>
+          <li>Every statistic is one of the verified figures, cited with publisher, report and year.</li>
+          <li>Every promise is one the site already makes: the 30-minute call, the written estimate in two business days, ownership, a person approving AI drafts.</li>
+          <li>The three roofing outcomes come from case studies still held for the client's OK; Nick cleared industry-only use on 2026-11-10.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="decision">
+      <div class="num">2</div>
+      <div>
+        <div class="q">Hub: two cards only, or add a "Gyms with several locations" card with no page behind it?</div>
+        <div class="rec"><b>Recommendation:</b> two cards only; add a gyms page later.</div>
+        <ul class="why">
+          <li>A card with no page is a dead end for readers and search engines.</li>
+          <li>The gym case studies are unpublished too, so a gyms page has no proof to show yet.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="decision">
+      <div class="num">3</div>
+      <div>
+        <div class="q">Cite the ServiceTitan reports as statistic sources on the home services page?</div>
+        <div class="rec"><b>Recommendation:</b> yes.</div>
+        <ul class="why">
+          <li>Citing a publisher is not claiming an integration.</li>
+          <li>The systems list never names it.</li>
+          <li>Alternative: government labor statistics only, which drops the two AI-adoption figures.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="decision">
+      <div class="num">4</div>
+      <div>
+        <div class="q">Home services systems beyond Salesforce: which of Google Ads, Meta Ads, RingCentral and QuickBooks were in home services work?</div>
+        <div class="rec"><b>Recommendation:</b> list only what Nick confirms; the draft lists Salesforce, Google Ads, Meta Ads and QuickBooks.</div>
+        <ul class="why">
+          <li>The SEO spec allows only systems DataSpoke actually connected for home service clients.</li>
+          <li>The draft leaves RingCentral off until Nick confirms it.</li>
+          <li>Confirm these were in home services work.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="decision">
+      <div class="num">5</div>
+      <div>
+        <div class="q">Law firm proof: no DataSpoke outcome on the page?</div>
+        <div class="rec"><b>Recommendation:</b> yes, statistics only.</div>
+        <ul class="why">
+          <li>No law firm case study exists.</li>
+          <li>Reusing the roofing line on a law firm page would mislead.</li>
+          <li>Add an outcome when a law firm client approves one.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="s8">
+  <h2>8. Testing</h2>
+  <h3>End-to-end scenarios</h3>
+  <ul class="muted">
+    <li>Run against a local production build, saved as one scenario file with the other end-to-end scenarios.</li>
+    <li>Proof: screenshots at phone and desktop width and the check outputs, on the Evidence line.</li>
+  </ul>
+  <div class="scenarios">
+    <div class="scenario">
+      <div class="num">1</div>
+      <div>
+        <div class="q">Three pages render at phone and desktop width</div>
+        <div class="sc-body">
+          <div><div class="sublabel">Steps</div><ul>
+            <li>Open the hub, Law firms and Home services at 375px wide.</li>
+            <li>Repeat at 1280px wide.</li>
+          </ul></div>
+          <div><div class="sublabel exp">Expected</div><ul>
+            <li>No horizontal scroll on any page.</li>
+            <li>Breadcrumb, H1, "Last updated" and FAQ are visible.</li>
+            <li>Exactly one H1 per page.</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+    <div class="scenario">
+      <div class="num">2</div>
+      <div>
+        <div class="q">Structured data parses with the expected types</div>
+        <div class="sc-body">
+          <div><div class="sublabel">Steps</div><ul>
+            <li>Read every structured-data block on the three pages.</li>
+          </ul></div>
+          <div><div class="sublabel exp">Expected</div><ul>
+            <li>Every block parses.</li>
+            <li>Hub: item list and breadcrumbs.</li>
+            <li>Industry pages: breadcrumbs, service with audience, and FAQ.</li>
+            <li>FAQ questions match the visible questions word for word.</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+    <div class="scenario">
+      <div class="num">3</div>
+      <div>
+        <div class="q">Links in work</div>
+        <div class="sc-body">
+          <div><div class="sublabel">Steps</div><ul>
+            <li>Click Industries in the desktop nav and in the mobile menu.</li>
+            <li>Click each footer Industries link.</li>
+            <li>Click both "Who we work with" cards on the home page.</li>
+            <li>Click the industry link on each of the six service pages.</li>
+          </ul></div>
+          <div><div class="sublabel exp">Expected</div><ul>
+            <li>Each link opens the right page.</li>
+            <li>The mobile menu fits six items with no horizontal scroll.</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+    <div class="scenario">
+      <div class="num">4</div>
+      <div>
+        <div class="q">Copy rules hold on the rendered pages</div>
+        <div class="sc-body">
+          <div><div class="sublabel">Steps</div><ul>
+            <li>Search the rendered HTML of all three pages for the banned size word, phone-number patterns, state names and the dollar sign.</li>
+          </ul></div>
+          <div><div class="sublabel exp">Expected</div><ul>
+            <li>No hits.</li>
+            <li>No link to the Work page or case studies.</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+    <div class="scenario">
+      <div class="num">5</div>
+      <div>
+        <div class="q">Sitemap and unknown industry</div>
+        <div class="sc-body">
+          <div><div class="sublabel">Steps</div><ul>
+            <li>Build, then read the sitemap.</li>
+            <li>Open an industry address that does not exist.</li>
+          </ul></div>
+          <div><div class="sublabel exp">Expected</div><ul>
+            <li>The sitemap lists all three pages.</li>
+            <li>The unknown address returns 404.</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3>Other checks</h3>
+  <ul>
+    <li>The production build and the repo's lint and type checks pass.</li>
+    <li>Migration: none.</li>
+    <li>An independent reviewer checks the branch before the PR.</li>
+    <li>The PR notes the overlap with the open sitemap PR.</li>
+  </ul>
+</section>
+
+<section id="s9">
+  <h2>9. Monitoring</h2>
+  <ul class="note">
+    <li><code>dev:deploy-and-monitor</code> refuses to deploy until this section (or a Fast one-line plan) is on the CRM task as a <code>Monitoring:</code> line.</li>
+    <li>This work deploys nothing.</li>
+  </ul>
+  <div class="tbl keep">
+    <table>
+      <tr><th style="width:22%">Field</th><th>Plan</th></tr>
+      <tr><td><b>Signal</b></td><td>None: no deploy in this work</td></tr>
+      <tr><td><b>How</b></td><td>None</td></tr>
+      <tr><td><b>Threshold</b></td><td>None</td></tr>
+      <tr><td><b>When checked</b></td><td>None</td></tr>
+      <tr><td><b>Rollback trigger</b></td><td>None</td></tr>
+    </table>
+  </div>
+  <div class="crm">
+    <div class="crm-label">CRM line</div>
+    <pre id="crm-monitoring">Monitoring: none (no deploy in this work)</pre>
+  </div>
+</section>
+
+<section class="details" id="details">
+  <h2>Details</h2>
+  <dl class="meta">
+    <div><dt>Client</dt><dd>DS · DataSpoke</dd></div>
+    <div><dt>Rigor</dt><dd>Standard</dd></div>
+    <div><dt>Date</dt><dd>2026-11-10</dd></div>
+    <div><dt>Status</dt><dd><span class="badge b-info">Implementation</span></dd></div>
+    <div class="wide"><dt>CRM task</dt><dd><code>6cb79edb-3c33-48a0-90ea-f7fa6e7703d8</code></dd></div>
+    <div class="wide"><dt>Project</dt><dd>—</dd></div>
+    <div class="wide"><dt>File</dt><dd><code>docs/plans/industries-pages-2026-11-10/one-pager.html</code> on branch <code>t3/industries-hub-pages</code></dd></div>
+  </dl>
+</section>
+
+<section class="appendix" id="draft-copy">
+  <h2>Draft copy</h2>
+  <ul class="ap-note">
+    <li>Full page copy for approval. Prose is allowed here because it is the page copy.</li>
+    <li>Character counts are for the title text before " | DataSpoke", and for the whole meta description.</li>
+    <li>Word counts cover page copy from the breadcrumb through the call to action. "Visible" is what shows on load: it counts the FAQ heading and questions but not the answers, which sit in the closed accordion. "Total" adds the answers.</li>
+    <li>Grey notes (icon names, link targets) are build notes, not page copy.</li>
+  </ul>
+
+  <!-- ===================== MOCK ===================== -->
+  <h3 class="mock-title">Mock: Law firms page (desktop)</h3>
+  <p class="ap-note">Real draft copy in the site's colors, type and card style. The first FAQ row is shown open to show an answer; on load all six are closed.</p>
+  <div class="mock-wrap">
+  <div class="mock">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-inbox" viewBox="0 0 24 24"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></symbol>
+        <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"/></symbol>
+        <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol>
+        <symbol id="i-compare" viewBox="0 0 24 24"><circle cx="5" cy="6" r="3"/><circle cx="19" cy="18" r="3"/><path d="M12 6h5a2 2 0 0 1 2 2v7"/><path d="m15 9-3-3 3-3"/><path d="M12 18H7a2 2 0 0 1-2-2V9"/><path d="m9 15 3 3-3 3"/></symbol>
+        <symbol id="i-videooff" viewBox="0 0 24 24"><path d="M10.66 6H14a2 2 0 0 1 2 2v2.5l5.25-3.06a.5.5 0 0 1 .75.43v8.2"/><path d="M16 16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2"/><path d="m2 2 20 20"/></symbol>
+        <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+        <symbol id="i-up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol>
+        <symbol id="i-wheel" viewBox="0 0 48 48"><circle cx="24" cy="24" r="19.5" fill="none" stroke="currentColor" stroke-width="3.5"/><circle cx="24" cy="24" r="4.6" fill="currentColor" stroke="none"/><g stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="24" y1="15.2" x2="24" y2="9.2"/><line x1="24" y1="15.2" x2="24" y2="9.2" transform="rotate(60 24 24)"/><line x1="24" y1="15.2" x2="24" y2="9.2" transform="rotate(120 24 24)"/><line x1="24" y1="15.2" x2="24" y2="9.2" transform="rotate(180 24 24)"/><line x1="24" y1="15.2" x2="24" y2="9.2" transform="rotate(240 24 24)"/><line x1="24" y1="15.2" x2="24" y2="9.2" transform="rotate(300 24 24)"/></g></symbol>
+      </defs>
+    </svg>
+
+    <!-- Nav bar -->
+    <div class="m-nav">
+      <span class="m-logo"><svg class="m-mark"><use href="#i-wheel"/></svg>DataSpoke</span>
+      <span class="m-links"><span>Services</span><span class="on">Industries</span><span>Approach</span><span>About</span><span>Contact</span></span>
+      <span class="m-btn m-btn-nav">Free AI strategy call</span>
+    </div>
+
+    <!-- Hero -->
+    <div class="m-sec">
+      <div class="m-bc">Home <span>›</span> Industries <span>›</span> <b>Law firms</b></div>
+      <p class="m-eyebrow">Industries</p>
+      <div class="m-h1">AI and data consulting for law firms: every lead, call and matter in one place you own.</div>
+      <p class="m-lede">DataSpoke is a data and AI consulting firm for law firms across the United States. We connect your intake CRM, practice management, phones and accounting so every lead, call and matter sits in one record. Then we build dashboards for intake and revenue by case type, and set up AI that drafts from your firm's own files, with a lawyer approving every word. You own every account and every line of code.</p>
+      <p class="m-upd">Last updated November 10, 2026</p>
+    </div>
+
+    <!-- Problems -->
+    <div class="m-sec m-tint">
+      <div class="m-h2">Where firms lose cases and hours</div>
+      <p class="m-intro">Most firms lose prospective clients and billable hours in the gaps between their tools, and these five gaps show up in almost every firm we talk to.</p>
+      <ul class="m-probs">
+        <li><span class="m-ico"><svg><use href="#i-inbox"/></svg></span>A web lead sits in a shared inbox overnight, with no owner.</li>
+        <li><span class="m-ico"><svg><use href="#i-keyboard"/></svg></span>Intake details get retyped into the case system, then into billing.</li>
+        <li><span class="m-ico"><svg><use href="#i-megaphone"/></svg></span>Nobody can say which ad source actually signs cases.</li>
+        <li><span class="m-ico"><svg><use href="#i-compare"/></svg></span>Partners argue over whose report is right before using the numbers.</li>
+        <li><span class="m-ico"><svg><use href="#i-videooff"/></svg></span>Decisions made on client calls get lost within weeks.</li>
+      </ul>
+    </div>
+
+    <!-- What we build -->
+    <div class="m-sec">
+      <div class="m-h2">What we build for law firms</div>
+      <p class="m-intro">We build on the software your firm already pays for, and most firms start with intake because every report depends on it.</p>
+      <div class="m-grid2">
+        <div class="m-card"><div class="m-h3">Intake connected to the matter</div><p>Every web form, email and call lands in your intake CRM with its source attached, then becomes the matter in practice management without retyping.</p><span class="m-link">See the service →</span></div>
+        <div class="m-card"><div class="m-h3">One record per client and matter</div><p>Intake, matter, billing and call history sit in one organized record your firm owns, so every report and AI tool agrees.</p><span class="m-link">See the service →</span></div>
+        <div class="m-card"><div class="m-h3">A weekly intake and revenue scorecard</div><p>Leads, consultations, signed cases and collected revenue by source and case type, ready before the Monday meeting with nothing built by hand.</p><span class="m-link">See the service →</span></div>
+        <div class="m-card"><div class="m-h3">AI on your own files, lawyer-approved</div><p>An assistant drafts intake summaries, follow-up emails and first-pass letters from your firm's own files, and a lawyer approves every draft.</p><span class="m-link">See the service →</span></div>
+      </div>
+    </div>
+
+    <!-- Systems -->
+    <div class="m-sec m-pt0">
+      <div class="m-h2">Systems we connect for firms</div>
+      <p class="m-intro">We work with the software your firm already runs, and we have built on Lawmatics and Clio for law firms.</p>
+      <div class="m-chips"><span class="pri">Lawmatics</span><span class="pri">Clio</span><span>RingCentral</span><span>Zoom</span><span>Fathom</span><span>QuickBooks</span><span>Google Workspace</span><span>Google Ads</span><span>Meta Ads</span></div>
+      <p class="m-note">Running something else? Tell us on the free AI strategy call, and we will say plainly whether we have connected it before.</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="m-sec m-tint">
+      <div class="m-h2">By the numbers</div>
+      <p class="m-intro">Clio, the practice management company, surveys firms across the profession every year, and its numbers show the same gaps.</p>
+      <div class="m-grid3">
+        <div class="m-tile"><div class="m-fig">33%</div><div class="m-lab">of 500 firms replied to a prospective client's email</div><div class="m-src">Down from 40% in 2019. Clio, Legal Trends Report, 2024.</div></div>
+        <div class="m-tile"><div class="m-fig">48%</div><div class="m-lab">of firms were essentially unreachable by phone</div><div class="m-src">Only 40% answered calls, down from 56% in 2019. Clio, Legal Trends Report, 2024.</div></div>
+        <div class="m-tile"><div class="m-fig">38%</div><div class="m-lab">average utilization: about 3 of every 8 working hours billed</div><div class="m-src">Firms collect on roughly 2.4 hours of work per day. Clio, Legal Trends Report, 2025.</div></div>
+      </div>
+      <p class="m-bridge">We do not take your calls for you. We make sure every call, form and email becomes a lead in your intake CRM with an owner and a next step, and we take the retyping and report-building off the people whose hours you bill.</p>
+    </div>
+
+    <!-- How it works -->
+    <div class="m-sec">
+      <div class="m-h2">How it works</div>
+      <p class="m-intro">Every engagement follows the same steps: you see a plan and a price range before anything is built, and you own everything at the end.</p>
+      <ol class="m-steps">
+        <li><span class="m-dot"></span><span class="m-step">Step 1</span><div class="m-h3">Free AI strategy call</div><p>30 minutes on where leads and hours slip away, and whether we can help.</p></li>
+        <li><span class="m-dot"></span><span class="m-step">Step 2</span><div class="m-h3">Written estimate in two business days</div><p>A recommended plan and price range, with no obligation to go ahead.</p></li>
+        <li><span class="m-dot"></span><span class="m-step">Step 3</span><div class="m-h3">Fixed-scope build</div><p>Projects taken straight from the plan, each with a finish line you can check.</p></li>
+        <li><span class="m-dot"></span><span class="m-step">Step 4</span><div class="m-h3">Hand over</div><p>Every account and line of code in the firm's name, with plain-English documentation.</p></li>
+      </ol>
+      <p class="m-note">Firms that want the full map first can start with the two-week Data &amp; AI Assessment.</p>
+      <span class="m-link">See how an engagement works →</span>
+    </div>
+
+    <!-- FAQ -->
+    <div class="m-sec m-pt0">
+      <div class="m-h2">Questions law firms ask</div>
+      <div class="m-faq">
+        <div class="m-q open"><div class="m-qrow"><span>What does an AI and data consultant do for a law firm?</span><svg class="m-chev"><use href="#i-up"/></svg></div>
+          <p class="m-a">An AI and data consultant connects the systems a firm already runs, organizes the information in them and puts it to work. For a law firm, that usually means linking intake, practice management, phones and accounting. Then we build a scorecard for intake and revenue, and set up AI that drafts from the firm's own files. We do not give legal advice, and we do not replace your case management software. Most firms start with intake, because every report and AI tool depends on clean intake records.</p></div>
+        <div class="m-q"><div class="m-qrow"><span>Can you connect Clio or Lawmatics to our intake forms, phones and accounting?</span><svg class="m-chev"><use href="#i-down"/></svg></div></div>
+        <div class="m-q"><div class="m-qrow"><span>How do we see which marketing source signs cases?</span><svg class="m-chev"><use href="#i-down"/></svg></div></div>
+        <div class="m-q"><div class="m-qrow"><span>How do you keep client data confidential when we use AI?</span><svg class="m-chev"><use href="#i-down"/></svg></div></div>
+        <div class="m-q"><div class="m-qrow"><span>Do we have to replace our case management software?</span><svg class="m-chev"><use href="#i-down"/></svg></div></div>
+        <div class="m-q"><div class="m-qrow"><span>How do we start?</span><svg class="m-chev"><use href="#i-down"/></svg></div></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="m-sec m-tint m-cta">
+      <div class="m-h2">See where your firm's leads and hours go.</div>
+      <p class="m-lede">A free 30-minute call about your tools and where leads slip away, then a written estimate within two business days.</p>
+      <span class="m-btn m-btn-lg">Book your free AI strategy call</span>
+    </div>
+  </div>
+  </div>
+
+  <!-- ===================== HUB ===================== -->
+  <div class="copy-page" id="copy-hub">
+    <header><span class="pname">Industries hub</span><span class="pmeta"><span class="badge b-info" data-wc="hub">186 words (no FAQ)</span><span class="badge b-grey">/industries</span></span></header>
+    <div class="copy-body">
+      <div class="f"><div class="fl">Title tag <span class="cc">19 chars</span></div><div class="fv mono">Industries We Serve | DataSpoke</div></div>
+      <div class="f"><div class="fl">Meta description <span class="cc">146 chars</span></div><div class="fv">DataSpoke is a data and AI consulting firm for law firms and home service companies across the United States. See what we build for each industry.</div></div>
+      <div class="wc" data-page="hub">
+      <div class="f"><div class="fl">Breadcrumb</div><div class="fv bc">Home › Industries</div></div>
+      <div class="f"><div class="fl">H1</div><div class="fv h1">Industries we serve</div></div>
+      <div class="f"><div class="fl">Definition</div><div class="fv">
+        <p>DataSpoke is a data and AI consulting firm for established businesses across the United States. We connect the software you already run, organize the information in it and put it to work in dashboards, custom tools and AI. We work in many industries, and we go deepest in two: law firms and home service companies.</p>
+      </div></div>
+      <div class="f"><div class="fl">Cards</div><div class="fv"><div class="cardgrid">
+        <div class="ccard"><div class="ct">Law firms</div><p>Intake, phones, practice management and billing in one record you own, with a weekly intake scorecard and AI drafts a lawyer approves.</p><div class="svc">See the page → <span class="ann">AI and data consulting for law firms</span></div></div>
+        <div class="ccard"><div class="ct">Home services</div><p>Roofing, HVAC, plumbing and other trades: every lead counted, every ad dollar traced to a paid job, and a weekly scorecard for your managers.</p><div class="svc">See the page → <span class="ann">AI and data consulting for home services</span></div></div>
+      </div></div></div>
+      <div class="f"><div class="fl">Section: Not on the list?</div><div class="fv">
+        <p>The work is the same in every industry: connect what you run, organize it, then build on top. If your industry is not listed, tell us on a free AI strategy call and we will say honestly whether we are a fit.</p>
+      </div></div>
+      <div class="f"><div class="fl">Call to action</div><div class="fv">
+        <p class="h2c">Start with a 30-minute call.</p>
+        <p>A free AI strategy call, then a written estimate with a recommended plan within two business days.</p>
+        <span class="btn">Book your free AI strategy call</span>
+      </div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== LAW FIRMS ===================== -->
+  <div class="copy-page" id="copy-law">
+    <header><span class="pname">Law firms</span><span class="pmeta"><span class="badge b-info" data-wc="law">744 visible · 1,170 total incl. FAQ</span><span class="badge b-grey">/industries/law-firms</span></span></header>
+    <div class="copy-body">
+      <div class="f"><div class="fl">Title tag <span class="cc">36 chars</span></div><div class="fv mono">AI and Data Consulting for Law Firms | DataSpoke</div></div>
+      <div class="f"><div class="fl">Meta description <span class="cc">149 chars</span></div><div class="fv">We connect Lawmatics, Clio, your phones and billing, then build intake dashboards and AI drafts a lawyer approves. Nationwide. Free AI strategy call.</div></div>
+      <div class="wc" data-page="law">
+      <div class="f"><div class="fl">Breadcrumb</div><div class="fv bc">Home › Industries › Law firms</div></div>
+      <div class="f"><div class="fl">H1</div><div class="fv h1">AI and data consulting for law firms: every lead, call and matter in one place you own.</div></div>
+      <div class="f"><div class="fl">Definition</div><div class="fv">
+        <p>DataSpoke is a data and AI consulting firm for law firms across the United States. We connect your intake CRM, practice management, phones and accounting so every lead, call and matter sits in one record. Then we build dashboards for intake and revenue by case type, and set up AI that drafts from your firm's own files, with a lawyer approving every word. You own every account and every line of code.</p>
+        <p class="upd">Last updated November 10, 2026</p>
+      </div></div>
+
+      <div class="f"><div class="fl">Section 1 · Problems (icon rows)</div><div class="fv">
+        <p class="h2c">Where firms lose cases and hours</p>
+        <p>Most firms lose prospective clients and billable hours in the gaps between their tools, and these five gaps show up in almost every firm we talk to.</p>
+        <ul class="probs">
+          <li><b>A web lead sits in a shared inbox overnight, with no owner.</b> <span class="ann">icon: inbox</span></li>
+          <li><b>Intake details get retyped into the case system, then into billing.</b> <span class="ann">icon: keyboard</span></li>
+          <li><b>Nobody can say which ad source actually signs cases.</b> <span class="ann">icon: megaphone</span></li>
+          <li><b>Partners argue over whose report is right before using the numbers.</b> <span class="ann">icon: git-compare-arrows</span></li>
+          <li><b>Decisions made on client calls get lost within weeks.</b> <span class="ann">icon: video-off</span></li>
+        </ul>
+      </div></div>
+
+      <div class="f"><div class="fl">Section 2 · What we build (4 cards, 2x2)</div><div class="fv">
+        <p class="h2c">What we build for law firms</p>
+        <p>We build on the software your firm already pays for, and most firms start with intake because every report depends on it.</p>
+        <div class="cardgrid">
+          <div class="ccard"><div class="ct">Intake connected to the matter</div><p>Every web form, email and call lands in your intake CRM with its source attached, then becomes the matter in practice management without retyping.</p><div class="svc">See the service → <span class="ann">Data Capture &amp; Integration</span></div></div>
+          <div class="ccard"><div class="ct">One record per client and matter</div><p>Intake, matter, billing and call history sit in one organized record your firm owns, so every report and AI tool agrees.</p><div class="svc">See the service → <span class="ann">Data Organization &amp; Warehousing</span></div></div>
+          <div class="ccard"><div class="ct">A weekly intake and revenue scorecard</div><p>Leads, consultations, signed cases and collected revenue by source and case type, ready before the Monday meeting with nothing built by hand.</p><div class="svc">See the service → <span class="ann">Metrics &amp; Dashboards</span></div></div>
+          <div class="ccard"><div class="ct">AI on your own files, lawyer-approved</div><p>An assistant drafts intake summaries, follow-up emails and first-pass letters from your firm's own files, and a lawyer approves every draft.</p><div class="svc">See the service → <span class="ann">AI Implementation</span></div></div>
+        </div>
+      </div></div>
+
+      <div class="f"><div class="fl">Section 3 · Systems (name chips)</div><div class="fv">
+        <p class="h2c">Systems we connect for firms</p>
+        <p>We work with the software your firm already runs, and we have built on Lawmatics and Clio for law firms.</p>
+        <div class="chips"><span class="chip pri">Lawmatics</span><span class="chip pri">Clio</span><span class="chip">RingCentral</span><span class="chip">Zoom</span><span class="chip">Fathom</span><span class="chip">QuickBooks</span><span class="chip">Google Workspace</span><span class="chip">Google Ads</span><span class="chip">Meta Ads</span></div>
+        <p>Running something else? Tell us on the free AI strategy call, and we will say plainly whether we have connected it before.</p>
+      </div></div>
+
+      <div class="f"><div class="fl">Section 4 · By the numbers (stat tiles, statistics only)</div><div class="fv">
+        <p class="h2c">By the numbers</p>
+        <p>Clio, the practice management company, surveys firms across the profession every year, and its numbers show the same gaps.</p>
+        <div class="tiles">
+          <div class="tile"><div class="fig">33%</div><div class="lab">of 500 firms replied to a prospective client's email</div><div class="fine">Down from 40% in 2019. Clio, Legal Trends Report, 2024.</div></div>
+          <div class="tile"><div class="fig">48%</div><div class="lab">of firms were essentially unreachable by phone</div><div class="fine">Only 40% answered calls, down from 56% in 2019. Clio, Legal Trends Report, 2024.</div></div>
+          <div class="tile"><div class="fig">38%</div><div class="lab">average utilization: about 3 of every 8 working hours billed</div><div class="fine">Firms collect on roughly 2.4 hours of work per day. Clio, Legal Trends Report, 2025.</div></div>
+        </div>
+        <p>We do not take your calls for you. We make sure every call, form and email becomes a lead in your intake CRM with an owner and a next step, and we take the retyping and report-building off the people whose hours you bill.</p>
+      </div></div>
+
+      <div class="f"><div class="fl">Section 5 · How it works (4 numbered steps)</div><div class="fv">
+        <p class="h2c">How it works</p>
+        <p>Every engagement follows the same steps: you see a plan and a price range before anything is built, and you own everything at the end.</p>
+        <ol>
+          <li><b>Free AI strategy call.</b> 30 minutes on where leads and hours slip away, and whether we can help.</li>
+          <li><b>Written estimate in two business days.</b> A recommended plan and price range, with no obligation to go ahead.</li>
+          <li><b>Fixed-scope build.</b> Projects taken straight from the plan, each with a finish line you can check.</li>
+          <li><b>Hand over.</b> Every account and line of code in the firm's name, with plain-English documentation.</li>
+        </ol>
+        <p>Firms that want the full map first can start with the two-week Data &amp; AI Assessment.</p>
+        <p>See how an engagement works → <span class="ann">Approach page</span></p>
+      </div></div>
+
+      <div class="f faq"><div class="fl">FAQ · accordion, closed by default (6, matches FAQ schema)</div><div class="fv">
+        <p class="h2c">Questions law firms ask</p>
+        <div class="qa"><div class="q2">Q. What does an AI and data consultant do for a law firm?</div><p>A. An AI and data consultant connects the systems a firm already runs, organizes the information in them and puts it to work. For a law firm, that usually means linking intake, practice management, phones and accounting. Then we build a scorecard for intake and revenue, and set up AI that drafts from the firm's own files. We do not give legal advice, and we do not replace your case management software. Most firms start with intake, because every report and AI tool depends on clean intake records.</p></div>
+        <div class="qa"><div class="q2">Q. Can you connect Clio or Lawmatics to our intake forms, phones and accounting?</div><p>A. Yes. We have built on both Lawmatics and Clio for law firms. Common connections send web forms and email into Lawmatics, put RingCentral call logs on the right lead or matter, open a matter in Clio when an intake signs, and carry billing into QuickBooks. We confirm what your setup allows on the free AI strategy call before we promise anything, and if you run different software, we tell you what it would take.</p></div>
+        <div class="qa"><div class="q2">Q. How do we see which marketing source signs cases?</div><p>A. We carry the source of each lead from first contact to signed matter and collected fee. Ad spend from Google Ads and Meta Ads, intake records from your CRM and revenue from billing go into one dashboard that updates itself. You see cost per signed case by source and by case type, without anyone exporting a report, so you know which campaigns to grow and which to cut.</p></div>
+        <div class="qa"><div class="q2">Q. How do you keep client data confidential when we use AI?</div><p>A. Your data stays in accounts the firm owns, under logins the firm controls. We set up AI tools to read only what you give them access to, and nothing goes to a client or a court until a lawyer approves it. We write down where each kind of data lives and who can see it, so your firm can check it against its own confidentiality duties. Because every account is in the firm's name, the firm can remove our access at any time.</p></div>
+        <div class="qa"><div class="q2">Q. Do we have to replace our case management software?</div><p>A. No. We build on the systems you already pay for, such as Clio and Lawmatics. The goal is for those systems to share information, not for your team to learn a new one. Your intake team keeps working in Lawmatics, and your lawyers keep working in Clio.</p></div>
+        <div class="qa"><div class="q2">Q. How do we start?</div><p>A. Book a free AI strategy call. It is a 30-minute call about the tools you run and where leads and hours slip away. Within two business days you get a written estimate with a recommended plan and a price range, with no obligation to go ahead. Firms that want the full map first can start with the two-week Data &amp; AI Assessment.</p></div>
+      </div></div>
+
+      <div class="f"><div class="fl">Call to action</div><div class="fv">
+        <p class="h2c">See where your firm's leads and hours go.</p>
+        <p>A free 30-minute call about your tools and where leads slip away, then a written estimate within two business days.</p>
+        <span class="btn">Book your free AI strategy call</span>
+      </div></div>
+      </div>
+
+      <div class="f"><div class="fl">Statistic sources (plain text, not links)</div><div class="fv"><ul class="src">
+        <li>clio.com/about/press/clio-latest-legal-trends-report/</li>
+        <li>clio.com/resources/legal-trends/</li>
+      </ul></div></div>
+    </div>
+  </div>
+
+  <!-- ===================== HOME SERVICES ===================== -->
+  <div class="copy-page" id="copy-home">
+    <header><span class="pname">Home services</span><span class="pmeta"><span class="badge b-info" data-wc="home">788 visible · 1,185 total incl. FAQ</span><span class="badge b-grey">/industries/home-services</span></span></header>
+    <div class="copy-body">
+      <div class="f"><div class="fl">Title tag <span class="cc">40 chars</span></div><div class="fv mono">AI and Data Consulting for Home Services | DataSpoke</div></div>
+      <div class="f"><div class="fl">Meta description <span class="cc">154 chars</span></div><div class="fv">Trace every ad dollar to a booked, paid job. We connect Salesforce, your ad accounts and accounting, then build a weekly scorecard. Free AI strategy call.</div></div>
+      <div class="wc" data-page="home">
+      <div class="f"><div class="fl">Breadcrumb</div><div class="fv bc">Home › Industries › Home services</div></div>
+      <div class="f"><div class="fl">H1</div><div class="fv h1">AI and data consulting for home service companies: trace every ad dollar to a paid job.</div></div>
+      <div class="f"><div class="fl">Definition</div><div class="fv">
+        <p>DataSpoke is a data and AI consulting firm for home service companies across the United States, including roofing, HVAC, plumbing and other trades. We connect your CRM, ad accounts and accounting so every lead is counted, build a weekly scorecard your managers run on, and put AI to work on the office busywork. You own every account and every line of code.</p>
+        <p class="upd">Last updated November 10, 2026</p>
+      </div></div>
+
+      <div class="f"><div class="fl">Section 1 · Problems (icon rows)</div><div class="fv">
+        <p class="h2c">Where the money leaks</p>
+        <p>A home service company can spend heavily on ads, lead vendors and canvassing and still not know what a paying customer costs.</p>
+        <ul class="probs">
+          <li><b>A weekend lead sits unseen until the office opens Monday.</b> <span class="ann">icon: calendar-clock</span></li>
+          <li><b>Office staff retype vendor leads into the CRM by hand.</b> <span class="ann">icon: keyboard</span></li>
+          <li><b>Ad reports count conversions the sales team can't find.</b> <span class="ann">icon: target</span></li>
+          <li><b>Close rate by lead source and by rep is a guess.</b> <span class="ann">icon: user-search</span></li>
+          <li><b>Month-end means a day spent exporting and lining up four reports.</b> <span class="ann">icon: file-spreadsheet</span></li>
+        </ul>
+      </div></div>
+
+      <div class="f"><div class="fl">Section 2 · What we build (4 cards, 2x2)</div><div class="fv">
+        <p class="h2c">What we build for home service companies</p>
+        <p>We build on the systems you already pay for, and most companies start with leads because every cost figure depends on counting them.</p>
+        <div class="cardgrid">
+          <div class="ccard"><div class="ct">One front door for every lead</div><p>Forms, ad platforms and lead vendors feed one place that checks each lead, catches duplicates and creates it in your CRM with its source.</p><div class="svc">See the service → <span class="ann">Data Capture &amp; Integration</span></div></div>
+          <div class="ccard"><div class="ct">Ad dollar to paid job</div><p>We match every booked and paid job to the channel that produced it, and join ad spend, labor and revenue into cost per paying job.</p><div class="svc">See the service → <span class="ann">Analytics &amp; Data Science</span></div></div>
+          <div class="ccard"><div class="ct">A weekly scorecard from the goal down</div><p>Five to ten weekly numbers that move your yearly goal, such as leads, appointments and close rate, each with an owner and a target.</p><div class="svc">See the service → <span class="ann">Metrics &amp; Dashboards</span></div></div>
+          <div class="ccard"><div class="ct">Internal tools and a customer portal</div><p>A screen that shows each person in the office and on crews their own work, and a page where customers see job status and invoices.</p><div class="svc">See the service → <span class="ann">Custom Software</span></div></div>
+        </div>
+      </div></div>
+
+      <div class="f"><div class="fl">Section 3 · Systems (chips; see decision 4)</div><div class="fv">
+        <p class="h2c">Systems we connect</p>
+        <p>We have built on Salesforce for home service companies and connect the rest to it, so nothing has to migrate.</p>
+        <div class="chips"><span class="chip pri">Salesforce</span></div>
+        <p class="chip-label">Commonly connected</p>
+        <div class="chips"><span class="chip">Google Ads</span><span class="chip">Meta Ads</span><span class="chip">QuickBooks</span></div>
+        <p>Running different software? Tell us on the free AI strategy call, and we check how it lets data in and out before we promise anything.</p>
+      </div></div>
+
+      <div class="f"><div class="fl">Section 4 · By the numbers (stat tiles) + roofing outcomes (industry only)</div><div class="fv">
+        <p class="h2c">By the numbers</p>
+        <p>Most contractors know their data could work harder, and few have it set up to.</p>
+        <div class="tiles">
+          <div class="tile"><div class="fig">74%</div><div class="lab">of residential contractors see AI as a way to run more efficiently</div><div class="fine">Only about 25% use it. ServiceTitan, Residential State of the Trades Report, 2026.</div></div>
+          <div class="tile"><div class="fig">4%</div><div class="lab">of roofing and exteriors contractors use AI built into their CRM</div><div class="fine">ServiceTitan, Roofing &amp; Exteriors Market Report, 2026.</div></div>
+          <div class="tile"><div class="fig">598,000</div><div class="lab">specialty trade contractor establishments, employing about 5.3 million people</div><div class="fine">About 598,000. U.S. Bureau of Labor Statistics, Industries at a Glance, NAICS 238, 2026, preliminary.</div></div>
+        </div>
+        <p>AI is only as useful as the records it reads, so we connect the CRM, ad accounts, payroll and books first. Then AI can draft the follow-up, summarize the job file or flag the lead nobody called back.</p>
+        <p><b>From our work with a roofing contractor:</b></p>
+        <ul>
+          <li>Web and agency leads reach the CRM in under a minute. Nobody retypes them.</li>
+          <li>Every sale traces back to a channel. Reports agree because they read the same data.</li>
+          <li>One trusted cost per paying job across five channels. Building it showed that nearly half the field marketing team was missing from labor cost.</li>
+        </ul>
+      </div></div>
+
+      <div class="f"><div class="fl">Section 5 · How it works (4 numbered steps)</div><div class="fv">
+        <p class="h2c">How it works</p>
+        <p>Every engagement follows the same steps: you see a plan and a price range before anything is built, and you own everything at the end.</p>
+        <ol>
+          <li><b>Free AI strategy call.</b> 30 minutes on where leads and money slip away, and whether we can help.</li>
+          <li><b>Written estimate in two business days.</b> A recommended plan and price range, with no obligation to go ahead.</li>
+          <li><b>Fixed-scope build.</b> Projects taken straight from the plan, each with a finish line you can check.</li>
+          <li><b>Hand over.</b> Every account and line of code in your company's name, with plain-English documentation.</li>
+        </ol>
+        <p>Companies that want the full map first can start with the two-week Data &amp; AI Assessment.</p>
+        <p>See how an engagement works → <span class="ann">Approach page</span></p>
+      </div></div>
+
+      <div class="f faq"><div class="fl">FAQ · accordion, closed by default (6, matches FAQ schema)</div><div class="fv">
+        <p class="h2c">Questions home service owners ask</p>
+        <div class="qa"><div class="q2">Q. What does an AI and data consultant do for a home service company?</div><p>A. An AI and data consultant connects the systems a company already runs, organizes the information in them and puts it to work. For a home service company, that usually means getting every lead into the CRM with its source, tying ad spend to booked and paid jobs, and building a weekly scorecard. Then we put AI to work on the office tasks your staff retype today, with a person approving what it writes. Most companies start with leads, because cost per job and every report after it depend on every lead being counted.</p></div>
+        <div class="qa"><div class="q2">Q. How do we tell which ads produce booked and paid jobs?</div><p>A. We carry the source of each lead from the first click or call to the paid invoice. Ad spend from Google Ads and Meta Ads, leads and jobs from your CRM and payments from accounting go into one dashboard. You see cost per paying job by channel, and the dashboard updates itself, so you know which channels to grow and which to cut.</p></div>
+        <div class="qa"><div class="q2">Q. Can you work with the field-service software and CRM we already use?</div><p>A. We check on the free AI strategy call before we promise anything. We have built on Salesforce for home service companies. For other field-service software, we look at how it lets data in and out, and we tell you plainly what is possible and what is not. If a connection cannot be built, you hear it before the project starts.</p></div>
+        <div class="qa"><div class="q2">Q. What belongs on a weekly scorecard for a trades business?</div><p>A. Five to ten numbers that move your yearly goal, each with an owner and a target. Common ones are leads by source, appointments set, close rate by rep, jobs completed, average job value and cost per paying job by channel. We pick them with you, starting from the goal rather than from whatever data is easy to pull. The scorecard then updates itself from your systems, so nobody builds it by hand.</p></div>
+        <div class="qa"><div class="q2">Q. Do our office staff need to be technical?</div><p>A. No. We build the connections and the scorecard, and we train your team on the parts they use. They keep working in the tools they know, with less retyping, and every account and every line of code is yours, with plain-English documentation.</p></div>
+        <div class="qa"><div class="q2">Q. How do we start?</div><p>A. Book a free AI strategy call. It is a 30-minute call about the tools you run and where leads and money slip away. Within two business days you get a written estimate with a recommended plan and a price range, with no obligation to go ahead. Companies that want the full map first can start with the two-week Data &amp; AI Assessment.</p></div>
+      </div></div>
+
+      <div class="f"><div class="fl">Call to action</div><div class="fv">
+        <p class="h2c">Find out what a paying job really costs you.</p>
+        <p>A free 30-minute call about your tools and where leads slip away, then a written estimate within two business days.</p>
+        <span class="btn">Book your free AI strategy call</span>
+      </div></div>
+      </div>
+
+      <div class="f"><div class="fl">Statistic sources (plain text, not links)</div><div class="fv"><ul class="src">
+        <li>servicetitan.com/press/servicetitan-report-finds-74-of-residential-contractors-see-ai-as-key</li>
+        <li>servicetitan.com/blog/roofing-exteriors-market-report-2026</li>
+        <li>bls.gov/iag/tgs/iag238.htm</li>
+      </ul></div></div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

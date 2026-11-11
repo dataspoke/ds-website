@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { HeroA } from "@/components/home-a/hero";
 import { UseCases } from "@/components/home-a/use-cases";
+import { IndustriesA } from "@/components/home-a/industries";
 import { ServicesA } from "@/components/home-a/services";
 import { HowItWorksA } from "@/components/home-a/how-it-works";
 import { FaqA } from "@/components/home-a/faq";
@@ -24,6 +25,7 @@ export default function HomePage() {
       <FaqPageJsonLd path="/" faqs={FAQS_A} />
       <HeroA />
       <UseCases />
+      <IndustriesA />
       <ServicesA />
       <HowItWorksA />
       <FaqA />

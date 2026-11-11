@@ -12,6 +12,7 @@ import {
 import { CREDENTIALS, HERO, TOOLS } from "@/content/home";
 import { FAQS_A } from "@/components/home-a/content";
 import { FREE_ESTIMATE } from "@/content/free-estimate";
+import { INDUSTRIES, INDUSTRIES_HUB, industryPath } from "@/content/industries";
 import { SERVICE_PAGE_EXTRAS } from "@/content/service-pages";
 import { HUB_LINES, SPOKE_LINES } from "@/content/services";
 import type { CaseStudy, ServiceLine } from "@/types";
@@ -70,6 +71,11 @@ function body() {
         "",
       ];
     }),
+    "## Industries",
+    "",
+    `- [${INDUSTRIES_HUB.h1}](${SITE_URL}${INDUSTRIES_HUB.path}): ${INDUSTRIES_HUB.definition}`,
+    ...INDUSTRIES.map((i) => `- [${i.name}](${SITE_URL}${industryPath(i.slug)}): ${i.definition}`),
+    "",
     `## The [${ASSESSMENT.name}](${SITE_URL}/approach#assessment)`,
     "",
     ASSESSMENT.lede,
@@ -91,6 +97,7 @@ function body() {
     "",
     `- [Home](${SITE_URL}): what ${SITE_NAME} does for business owners and who it's for`,
     `- [Services](${SITE_URL}/services): the six services, each described by what changes for the owner`,
+    `- [Industries](${SITE_URL}${INDUSTRIES_HUB.path}): ${INDUSTRIES.map((i) => i.audienceName).join(" and ")}, the two industries ${SITE_NAME} goes deepest in`,
     ...(WORK_PUBLISHED ? [`- [Work](${SITE_URL}/work): case studies, filterable by service`] : []),
     `- [Approach](${SITE_URL}/approach): the ${ASSESSMENT.name}, then build, hand-over and retainer, plus how the numbers that run a business get picked`,
     `- [About](${SITE_URL}/about): Nick Paul's background and how he works`,

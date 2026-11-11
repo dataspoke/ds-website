@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import type { MetadataRoute } from "next";
 import { CASE_STUDIES } from "@/content/case-studies";
+import { INDUSTRIES } from "@/content/industries";
 import { SERVICE_LINES } from "@/content/services";
 import { SITE_URL, WORK_PUBLISHED } from "@/lib/constants";
 import { getInsightPosts } from "@/lib/insights";
@@ -38,6 +39,9 @@ function pageSources(pagePath: string): string[] {
   if (pagePath.startsWith("/services/")) {
     return ["src/app/services/[line]", "src/content/services.ts", "src/content/service-pages.ts", "src/components/services"];
   }
+  if (pagePath.startsWith("/industries/")) {
+    return ["src/app/industries/[slug]", "src/content/industries.ts", "src/components/industries"];
+  }
   if (pagePath.startsWith("/work/")) return ["src/app/work/[slug]", "src/components/work"];
   const sources: Record<string, string[]> = {
     "/": ["src/app/page.tsx", "src/content/home.ts", "src/components/home"],
@@ -45,6 +49,7 @@ function pageSources(pagePath: string): string[] {
     "/approach": ["src/app/approach", "src/content/approach.ts", "src/components/home"],
     "/contact": ["src/app/contact", "src/components/contact"],
     "/free-estimate": ["src/app/free-estimate", "src/content/free-estimate.ts", "src/components/estimate"],
+    "/industries": ["src/app/industries/page.tsx", "src/content/industries.ts", "src/components/industries"],
     "/insights": ["src/app/insights/page.tsx"],
     "/privacy": ["src/app/privacy", "src/content/privacy.ts"],
     "/services": ["src/app/services/page.tsx", "src/content/services.ts", "src/content/approach.ts", "src/components/services"],
@@ -93,6 +98,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/privacy",
     "/services",
     ...SERVICE_LINES.map((l) => `/services/${l.slug}`),
+    "/industries",
+    ...INDUSTRIES.map((i) => `/industries/${i.slug}`),
     // /insights is noindex until a post is published (see src/app/insights/page.tsx).
     ...(posts.length > 0 ? ["/insights", ...posts.map((p) => `/insights/${p.slug}`)] : []),
     ...(WORK_PUBLISHED ? ["/work", ...CASE_STUDIES.map((c) => `/work/${c.slug}`)] : []),
