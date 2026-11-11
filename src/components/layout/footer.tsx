@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/shared/logo";
+import { INDUSTRIES, INDUSTRIES_HUB, industryPath } from "@/content/industries";
 import {
   CONTACT_EMAIL,
   SERVICE_AREA,
@@ -22,14 +23,36 @@ export function Footer({ navItems }: { navItems: NavItem[] }) {
             </p>
             <p className="text-sm font-semibold text-ink select-all">{CONTACT_EMAIL}</p>
           </div>
+          <nav aria-label={INDUSTRIES_HUB.name} className="grid text-sm">
+            <Link
+              href={INDUSTRIES_HUB.path}
+              className="inline-block py-2.5 font-semibold text-ink hover:text-primary"
+            >
+              {INDUSTRIES_HUB.name}
+            </Link>
+            <ul>
+              {INDUSTRIES.map((industry) => (
+                <li key={industry.slug}>
+                  <Link
+                    href={industryPath(industry.slug)}
+                    className="inline-block py-2.5 text-muted-foreground hover:text-primary"
+                  >
+                    {industry.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
           <ul className="flex flex-wrap gap-x-6 gap-y-0 text-sm">
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className="inline-block py-2.5 text-muted-foreground hover:text-primary">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {navItems
+              .filter((item) => item.href !== INDUSTRIES_HUB.path)
+              .map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="inline-block py-2.5 text-muted-foreground hover:text-primary">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             <li>
               <a
                 href={SOCIAL_LINKS.linkedinCompany}

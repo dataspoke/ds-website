@@ -15,7 +15,7 @@ export function Header({ navItems }: { navItems: NavItem[] }) {
 
   const isActive = (href: string) => {
     const path = pathname?.split("#")[0] ?? "";
-    if (href === "/insights") return path === "/insights" || path.startsWith("/insights/");
+    if (href === "/insights" || href === "/industries") return path === href || path.startsWith(`${href}/`);
     return path === href;
   };
 
