@@ -472,7 +472,7 @@ export const INDUSTRIES: Industry[] = [
         },
         {
           title: "Members at risk, flagged in time",
-          body: "A weekly list of members whose visits are falling off, so managers can reach them while there is still time.",
+          body: "A list of members whose visits are falling off, so managers can reach them while there is still time.",
           serviceSlug: "analytics-data-science",
         },
         {
@@ -563,7 +563,7 @@ export const INDUSTRIES: Industry[] = [
       {
         question: "How do we spot members who are about to cancel?",
         answer:
-          "We look at each member's booking history for the pattern that comes before a cancellation, such as visits falling off over several weeks. Managers get a weekly list of those members for their own locations, while there is still time to reach them. The same data shows which trainers keep their clients and which members might want more, such as personal training.",
+          "We look at each member's booking history for the pattern that comes before a cancellation, such as visits falling off over several weeks. Managers get a list of those members for their own locations, while there is still time to reach them. The same data shows which trainers keep their clients and which members might want more, such as personal training.",
       },
       {
         question: "Who owns our member data and the app?",
@@ -875,7 +875,7 @@ export const INDUSTRIES: Industry[] = [
       {
         question: "How do you handle validated systems and the audit trail?",
         answer:
-          "Validated systems are read from, never written to. We copy data out of them into a separate data lake, so the validated systems and their audit trails stay as they are, with nothing to revalidate. We write down which data is copied, from where and how often, so your quality team can review it. Tools we build, such as a scheduling planner, write only to systems outside the validated set, like the floor calendar.",
+          "Validated systems are read from, never written to. We copy data out of them into a separate data lake, so the validated systems and their audit trails stay as they are. We write down which data is copied, from where and how often, so your quality team can review it. Tools we build, such as a scheduling planner, write only to systems outside the validated set, like the floor calendar.",
       },
       {
         question: "Do we have to replace our software?",
