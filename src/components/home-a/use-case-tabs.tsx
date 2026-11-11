@@ -76,8 +76,8 @@ export function UseCaseTabs({ tabs }: { tabs: UseCaseTab[] }) {
 
   return (
     <div className="mt-8 grid min-w-0 gap-4">
-      <div ref={stripRef} className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        <div role="tablist" aria-label="Use cases" className="flex w-max gap-2 border-b border-tint-strong pb-px sm:w-auto">
+      <div ref={stripRef} className="sm:overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div role="tablist" aria-label="Use cases" className="flex flex-wrap gap-2 sm:w-auto sm:flex-nowrap sm:border-b sm:border-tint-strong sm:pb-px">
           {tabs.map((t, i) => {
             const on = i === selected;
             return (
@@ -95,9 +95,12 @@ export function UseCaseTabs({ tabs }: { tabs: UseCaseTab[] }) {
                 onClick={() => select(i)}
                 onKeyDown={(e) => onKeyDown(e, i)}
                 className={cn(
-                  "-mb-px whitespace-nowrap rounded-t-lg border-b-2 px-3 py-2.5 text-sm font-semibold transition-colors sm:px-4 sm:text-[0.95rem]",
+                  "whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors",
+                  "sm:-mb-px sm:rounded-none sm:rounded-t-lg sm:border-0 sm:border-b-2 sm:px-4 sm:py-2.5 sm:text-[0.95rem]",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white",
-                  on ? "border-brand text-primary" : "border-transparent text-muted-foreground hover:text-foreground"
+                  on
+                    ? "border-primary bg-primary text-white sm:border-brand sm:bg-transparent sm:text-primary"
+                    : "border-tint-strong text-muted-foreground hover:text-foreground sm:border-transparent"
                 )}
               >
                 {t.label}
