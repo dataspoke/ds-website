@@ -44,7 +44,7 @@ Pushes to `main` tell IndexNow about every URL in the sitemap after the Vercel p
 - `dataspoke.io` currently returns 308 to `www.dataspoke.io`. IndexNow verifies the key only on an HTTP 200 and does not follow that redirect, so the script submits host `www.dataspoke.io` when the apex does not serve the key. Sitemap URLs are already on `www.dataspoke.io`.
 - `.github/workflows/indexnow.yml` runs on push to `main`. It waits until the GitHub Deployment for that commit in the `Production` environment succeeds, then runs the script. The key file has to be public before IndexNow will accept the list, so this is not a `postbuild` step.
 
-Preview the payload without submitting:
+Preview the payload without submitting (reads the live sitemap; the sitemap is built from `src/app/sitemap.ts`):
 
 ```bash
 npm run indexnow -- --dry-run
@@ -53,7 +53,7 @@ npm run indexnow -- --dry-run
 Submit a local sitemap by hand (this does POST once the key is reachable):
 
 ```bash
-npm run indexnow -- --sitemap public/sitemap.xml
+npm run indexnow -- --sitemap http://localhost:3000/sitemap.xml
 ```
 
 ## AI referrals in GA4

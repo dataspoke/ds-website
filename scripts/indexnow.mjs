@@ -17,7 +17,8 @@ const REQUESTED_HOST = "dataspoke.io";
 const SITE_HOSTS = new Set(["dataspoke.io", "www.dataspoke.io"]);
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const PUBLIC_DIR = resolve(ROOT, "public");
-const LOCAL_SITEMAP = resolve(PUBLIC_DIR, "sitemap.xml");
+// Next builds the sitemap from src/app/sitemap.ts; there is no sitemap file in the repo.
+const LIVE_SITEMAP = "https://www.dataspoke.io/sitemap.xml";
 const KEY_FILENAME = /^[a-zA-Z0-9-]{8,128}\.txt$/;
 const URL_LIMIT = 10_000;
 
@@ -163,15 +164,7 @@ async function resolveHost(key) {
 }
 
 async function loadLocs(host, sitemapPath) {
-  if (sitemapPath) return collectLocs(sitemapPath);
-  const live = `https://${host}/sitemap.xml`;
-  try {
-    return await collectLocs(live);
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    console.log(`Could not read ${live} (${message}). Using public/sitemap.xml.`);
-    return collectLocs(LOCAL_SITEMAP);
-  }
+  return collectLocs(sitemapPath ?? `https://${host}/sitemap.xml`);
 }
 
 async function submit(payload) {
@@ -202,7 +195,7 @@ async function main() {
   const host = dryRun ? REQUESTED_HOST : (await resolveHost(key)).host;
   const keyLocation = `https://${host}/${key}.txt`;
   const locs = dryRun
-    ? await collectLocs(sitemapPath ?? LOCAL_SITEMAP)
+    ? await collectLocs(sitemapPath ?? LIVE_SITEMAP)
     : await loadLocs(host, sitemapPath);
   const urlList = urlsForHost(locs, host);
   if (urlList.length === 0) {
