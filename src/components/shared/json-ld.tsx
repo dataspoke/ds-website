@@ -126,8 +126,24 @@ export function PersonJsonLd() {
   return <LdScript data={data} />;
 }
 
-/** One service line. Rendered only on that line's page, which carries the matching copy. */
-export function ServiceJsonLd({ line }: { line: ServiceLine }) {
+/** Who a service is for, as a schema.org BusinessAudience. */
+function businessAudience(audienceType: string) {
+  return { "@type": "BusinessAudience", audienceType };
+}
+
+/**
+ * One service line. Rendered only on that line's page, which carries the matching copy.
+ * `audience` and `serviceType` are optional; the service pages leave them out.
+ */
+export function ServiceJsonLd({
+  line,
+  audience,
+  serviceType,
+}: {
+  line: ServiceLine;
+  audience?: string;
+  serviceType?: string;
+}) {
   const data = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -135,8 +151,105 @@ export function ServiceJsonLd({ line }: { line: ServiceLine }) {
     name: line.title,
     description: `${line.oneLiner} ${line.problem}`,
     url: `${SITE_URL}/services/${line.slug}`,
+    ...(serviceType ? { serviceType } : {}),
     provider,
     areaServed,
+    ...(audience ? { audience: businessAudience(audience) } : {}),
+  };
+  return <LdScript data={data} />;
+}
+
+/**
+ * The service offered to one industry. Rendered only on that industry's page.
+ * `offers` lists the service lines the page's cards link to, by name, with no prices.
+ */
+export function IndustryServiceJsonLd({
+  name,
+  description,
+  path,
+  serviceType,
+  audience,
+  offers,
+}: {
+  name: string;
+  description: string;
+  path: string;
+  serviceType: string;
+  audience: string;
+  offers?: { name: string; path: string }[];
+}) {
+  const pageUrl = `${SITE_URL}${path}`;
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${pageUrl}#service`,
+    name,
+    description,
+    url: pageUrl,
+    serviceType,
+    provider,
+    areaServed,
+    audience: businessAudience(audience),
+    ...(offers?.length
+      ? {
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name,
+            itemListElement: offers.map((o) => ({
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                "@id": `${SITE_URL}${o.path}#service`,
+                name: o.name,
+                url: `${SITE_URL}${o.path}`,
+              },
+            })),
+          },
+        }
+      : {}),
+  };
+  return <LdScript data={data} />;
+}
+
+/** Breadcrumb trail matching the visible one. The first item is usually Home ("/"). */
+export function BreadcrumbJsonLd({ items }: { items: { name: string; path: string }[] }) {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: item.path === "/" ? SITE_URL : `${SITE_URL}${item.path}`,
+    })),
+  };
+  return <LdScript data={data} />;
+}
+
+/** Ordered list of pages, such as the cards on a hub page. */
+export function ItemListJsonLd({
+  path,
+  name,
+  items,
+}: {
+  path: string;
+  name: string;
+  items: { name: string; path: string }[];
+}) {
+  const pageUrl = `${SITE_URL}${path}`;
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${pageUrl}#list`,
+    name,
+    url: pageUrl,
+    numberOfItems: items.length,
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      url: `${SITE_URL}${item.path}`,
+    })),
   };
   return <LdScript data={data} />;
 }
