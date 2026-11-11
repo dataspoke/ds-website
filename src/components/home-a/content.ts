@@ -30,7 +30,7 @@ export const USE_CASES_HEAD = {
 
 export const INDUSTRIES_A_HEAD = {
   eyebrow: "Who we work with",
-  title: "We go deepest in two industries.",
+  title: "Law firms and home service companies.",
   allLink: { label: "All industries", href: "/industries" },
 };
 
