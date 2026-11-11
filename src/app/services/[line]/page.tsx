@@ -75,7 +75,7 @@ export default async function ServiceLinePage({ params }: PageProps<"/services/[
             {SERVICE_INDUSTRIES_SENTENCE.lead}{" "}
             {industries.map((industry, i) => (
               <Fragment key={industry.slug}>
-                {i > 0 && ` ${SERVICE_INDUSTRIES_SENTENCE.join} `}
+                {i > 0 && (i === industries.length - 1 ? ` ${SERVICE_INDUSTRIES_SENTENCE.join} ` : ", ")}
                 <Link href={industryPath(industry.slug)} className="font-semibold text-primary hover:text-primary/80">
                   {industry.audienceName}
                 </Link>
