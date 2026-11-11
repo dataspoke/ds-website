@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode, type UIEvent } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode, type UIEvent } from "react";
 import { cn } from "@/lib/utils";
 
 export interface UseCaseTab {
@@ -77,7 +77,7 @@ export function UseCaseTabs({ tabs }: { tabs: UseCaseTab[] }) {
   // Below sm the track is as tall as its tallest panel, which leaves a gap under
   // short ones. Size it to the selected panel instead, and follow that panel's
   // height as it changes (fonts loading, bars animating in).
-  useEffect(() => {
+  useLayoutEffect(() => {
     const track = trackRef.current;
     const panel = track?.children[selected] as HTMLElement | undefined;
     if (!track || !panel) return;
@@ -86,10 +86,15 @@ export function UseCaseTabs({ tabs }: { tabs: UseCaseTab[] }) {
       track.style.height = swipe ? `${panel.offsetHeight}px` : "";
     };
     fit();
+    // Watch the panel only; observing the track would re-fire on our own height write.
     const ro = new ResizeObserver(fit);
     ro.observe(panel);
-    ro.observe(track);
-    return () => ro.disconnect();
+    const mq = window.matchMedia("(min-width: 640px)");
+    mq.addEventListener("change", fit);
+    return () => {
+      ro.disconnect();
+      mq.removeEventListener("change", fit);
+    };
   }, [selected]);
 
   return (
@@ -131,7 +136,7 @@ export function UseCaseTabs({ tabs }: { tabs: UseCaseTab[] }) {
       <div
         ref={trackRef}
         onScroll={onScroll}
-        className="-mx-4 flex items-start snap-x snap-mandatory overflow-x-auto scroll-smooth transition-[height] duration-300 ease-out motion-reduce:transition-none sm:mx-0 sm:block sm:snap-none sm:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="-mx-4 flex items-start snap-x snap-mandatory overflow-x-auto overflow-y-hidden scroll-smooth transition-[height] duration-300 ease-out motion-reduce:transition-none sm:mx-0 sm:block sm:snap-none sm:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {tabs.map((t, i) => (
           <figure
