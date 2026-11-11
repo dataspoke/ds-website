@@ -30,7 +30,7 @@ export const SERVICE_AREA = "Serving clients across the United States.";
 
 /**
  * /work is taken down (redirected to /about) until clients approve their case studies.
- * Set to true to bring it back. next-sitemap.config.js repeats this value; keep both in sync.
+ * Set to true to bring it back. src/app/sitemap.ts reads it to list or drop /work.
  */
 export const WORK_PUBLISHED = false;
 

@@ -12,7 +12,7 @@ export function generateMetadata(): Metadata {
     description:
       "Plain-English articles for business owners on connecting your software, knowing your numbers and putting AI to work.",
     path: "/insights",
-    // An empty index is thin. It indexes (and joins the sitemap, see next-sitemap.config.js)
+    // An empty index is thin. It indexes (and joins the sitemap, see src/app/sitemap.ts)
     // once content/insights has a published post.
     noIndex: posts.length === 0,
   });

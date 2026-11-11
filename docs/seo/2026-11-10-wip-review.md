@@ -86,7 +86,7 @@ If /work will **not** come back within about three months, switch both to perman
 3. **Nav and footer.** Filter `{ label: "Work", href: "/work" }` (`src/lib/constants.ts:35`) out of `NAV_ITEMS` when the flag is off. The header and footer both render `navItems`, so this one change covers both.
 4. **Service page links.** Hide the `LINE_PAGE.workLink` link at `src/app/services/[line]/page.tsx:125-129` and `src/app/services/page.tsx:75-79` when the flag is off.
 5. **Related work block.** Return `null` from `RelatedCaseStudies` (`src/components/services/related-case-studies.tsx`) when the flag is off. This removes the founder-only card from /services/ai-implementation.
-6. **Sitemap.** In `next-sitemap.config.js`, drop `additionalPaths` (line 130) and add `"/work"` and `"/work/*"` to `exclude` (line 110) when the flag is off. `public/sitemap.xml` is regenerated on `postbuild`, so don't edit it by hand.
+6. **Sitemap.** Done: `src/app/sitemap.ts` reads `WORK_PUBLISHED` and lists `/work` and `/work/*` only when it is true.
 7. **llms.txt.** In `src/app/llms.txt/route.ts`, skip the "## Case studies" block (lines 86-88) and the `[Work]` page line (line 93) when the flag is off.
 8. **Dead links.** Delete or ignore `WORK_HEAD.allLink` (`src/content/home.ts:113`). Only unused old home components render it (finding 19).
 9. **Leave in place:** `src/app/work/*`, `src/components/work/*` and `src/content/case-studies.ts`. The redirect runs before the route, so these stay unreachable but ready.
