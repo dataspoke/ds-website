@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ClipboardList, Flag, Sparkles, UserCheck } from "lucide-react";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { cn } from "@/lib/utils";
-import { ClaudeMdCartoon, CodeCartoon, SkillCartoon } from "@/components/services/claude-cartoons";
+import { ClaudeMdCartoon, LearningLoopCartoon, SkillsLibraryCartoon } from "@/components/services/claude-cartoons";
 import { CLAUDE_VISUALS as V, type JourneyStep, type Shot } from "@/content/claude-services";
 
 /**
@@ -68,7 +68,7 @@ function Screenshot({ shot }: { shot: Shot }) {
   );
 }
 
-const CARTOONS: Record<number, typeof SkillCartoon> = { 3: SkillCartoon, 4: CodeCartoon, 5: ClaudeMdCartoon };
+const CARTOONS: Record<number, typeof ClaudeMdCartoon> = { 3: SkillsLibraryCartoon, 4: LearningLoopCartoon, 5: ClaudeMdCartoon };
 
 /** A cartoon in the same 4:3 frame as the screenshots, with a sentence caption. */
 function Cartoon({ step }: { step: number }) {

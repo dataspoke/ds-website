@@ -84,6 +84,7 @@ export const CLAUDE_PAGE = {
         "Hands-on sessions on your team's real work, not a slide deck",
         "Your staff practice the everyday jobs: running a skill, approving a draft, reading the audit trail",
         "Plain notes on how each piece works and how to change it",
+        "I set up a change process with you: when the work changes, your team updates the skill, a person approves it, and everyone learns the new way",
         "Coaching continues until your team can add the next skill on their own",
       ],
     },
@@ -201,16 +202,16 @@ export const CLAUDE_VISUALS = {
   /** Cartoons for steps 3 to 5, keyed by step number. */
   cartoons: {
     3: {
-      alt: "Cartoon: a month-end-close skill card. Three steps are ticked and the fourth waits for your OK, while a person says Approved",
-      caption: "A skill is a checklist Claude runs the same way every time. Illustration.",
+      alt: "Cartoon: a skills library with five saved skills, such as month-end, weekly-report and client-intake, and an empty slot for a new skill",
+      caption: "A skills library: each repeating job saved once, for the whole team to reuse. Illustration.",
     },
     4: {
-      alt: "Cartoon: Claude Code on a laptop listing what it may read and write, what it never changes, and what waits for a person, with two teammates",
-      caption: "Your team asks Claude Code what it may touch, and it answers in plain English. Illustration.",
+      alt: "Cartoon: a learning loop around your team. Run the skill, spot a change, update and approve, teach the team, then run it again",
+      caption: "The learning loop: when the work changes, your team updates the skill, a person approves it, and everyone learns the new way. Illustration.",
     },
     5: {
-      alt: "Cartoon: a CLAUDE.md page listing what Claude may read, may write, must never do, and must ask a person about, next to a lock badge",
-      caption: "The guardrails, written down in the project's CLAUDE.md. Illustration.",
+      alt: "Cartoon: a CLAUDE.md page with a short note about the business, then guardrails for what Claude may read, may write, must never do, and must ask a person about",
+      caption: "The project's CLAUDE.md: what Claude knows about your business, and the guardrails it follows. Illustration.",
     },
   } as Record<number, { alt: string; caption: string }>,
   /** Guardrails: the approval flow. */

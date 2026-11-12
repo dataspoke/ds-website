@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 
 /**
- * Cartoon pictures for the later journey steps: a skill card, Claude Code
- * explaining its rules to the team, and the CLAUDE.md that holds the guardrails.
+ * Cartoon pictures for the later journey steps: the skills library, the team's
+ * learning loop, and the CLAUDE.md that holds business context and guardrails.
  * Flat shapes, ink outlines and an offset shadow, in the brand colours.
  * All drawn on a 480 x 360 canvas so they fill the same 4:3 frame as the screenshots.
  */
@@ -113,98 +113,123 @@ function Bubble({ x, y, w, text, tail = "left" }: { x: number; y: number; w: num
   );
 }
 
-/** Step 3: a skill as a card of steps, with a person giving the OK at the stop. */
-export function SkillCartoon({ label }: { label: string }) {
-  const rows: { icon: "check" | "hand"; text: string }[] = [
-    { icon: "check", text: "Pull the job export" },
-    { icon: "check", text: "Match the payments" },
-    { icon: "check", text: "Flag anything unusual" },
-    { icon: "hand", text: "Wait for your OK" },
+/** Step 3: a skills library, one saved skill per repeating job, with room for the next one. */
+export function SkillsLibraryCartoon({ label }: { label: string }) {
+  const skills: { name: string; note: string; on?: boolean }[] = [
+    { name: "month-end", note: "Close the books", on: true },
+    { name: "weekly-report", note: "Monday numbers" },
+    { name: "client-intake", note: "New client setup" },
+    { name: "invoice-chase", note: "Late invoices" },
+    { name: "morning-brief", note: "Today at a glance" },
   ];
+  const at = (i: number) => ({ x: 40 + (i % 2) * 160, y: 104 + Math.floor(i / 2) * 66 });
   return (
     <Canvas label={label}>
-      <Card x={36} y={44} w={290} h={262} />
-      <path d="M36 92 V60 a16 16 0 0 1 16 -16 H310 a16 16 0 0 1 16 16 V92 Z" fill={PRIMARY} stroke={INK} strokeWidth="3" />
-      <Sparkle x={62} y={68} s={0.95} />
-      <text x={82} y={74} fontSize="16" fontWeight="700" fill="#fff" fontFamily={MONO}>
-        month-end-close
-      </text>
-      {rows.map((r, i) => {
-        const y = 116 + i * 38;
-        const last = r.icon === "hand";
-        return (
-          <g key={r.text}>
-            {last && <rect x={50} y={y - 17} width={262} height={34} rx="17" fill={TINT} stroke={BRAND} strokeWidth="2" />}
-            {last ? <Hand x={70} y={y} /> : <Check x={70} y={y} />}
-            <text x={92} y={y + 5.5} fontSize="15.5" fontWeight={last ? 700 : 500} fill={INK} fontFamily={SANS}>
-              {r.text}
-            </text>
-          </g>
-        );
-      })}
-      <g>
-        <rect x={56} y={262} width={96} height={30} rx="15" fill={BRAND} stroke={INK} strokeWidth="2.5" />
-        <path d="M76 269 L76 285 L89 277 Z" fill="#fff" />
-        <text x={98} y={282.5} fontSize="14" fontWeight="700" fill="#fff" fontFamily={DISPLAY}>
-          Run
-        </text>
+      <Card x={24} y={40} w={336} h={282} />
+      <path d="M24 86 V56 a16 16 0 0 1 16 -16 H344 a16 16 0 0 1 16 16 V86 Z" fill={PRIMARY} stroke={INK} strokeWidth="3" />
+      {/* a closed book: the library */}
+      <g transform="translate(50 63)">
+        <rect x="-11" y="-11" width="22" height="22" rx="3" fill="#fff" />
+        <rect x="-11" y="-11" width="6" height="22" rx="2" fill={BRAND} />
       </g>
-      <Person x={398} y={252} />
-      <Bubble x={340} y={150} w={124} text="Approved!" tail="left" />
-    </Canvas>
-  );
-}
-
-/** Step 4: Claude Code on a laptop, explaining its rules, with two teammates. */
-export function CodeCartoon({ label }: { label: string }) {
-  const lines: { icon: "check" | "cross" | "hand"; text: string }[] = [
-    { icon: "check", text: "I may read QuickBooks" },
-    { icon: "check", text: "I may write the report" },
-    { icon: "cross", text: "I never change invoices" },
-    { icon: "hand", text: "Refunds wait for a person" },
-  ];
-  return (
-    <Canvas label={label}>
-      {/* laptop */}
-      <rect x={98} y={36} width={284} height={206} rx="14" fill={INK} stroke={INK} strokeWidth="3" />
-      <rect x={110} y={48} width={260} height={182} rx="6" fill="#fff" />
-      <path d="M70 242 H410 L422 262 a6 6 0 0 1 -5 8 H63 a6 6 0 0 1 -5 -8 Z" fill="#c9d6e6" stroke={INK} strokeWidth="3" strokeLinejoin="round" />
-      <rect x={210} y={248} width={60} height={6} rx="3" fill={INK} opacity="0.35" />
-      {/* screen: the question, then Claude's answer */}
-      <rect x={208} y={58} width={152} height={26} rx="13" fill={TINT} stroke={BRAND} strokeWidth="1.5" />
-      <text x={284} y={75.5} textAnchor="middle" fontSize="12.5" fontWeight="600" fill={INK} fontFamily={SANS}>
-        What may you touch?
+      <text x={72} y={69} fontSize="17" fontWeight="800" fill="#fff" fontFamily={DISPLAY}>
+        Skills library
       </text>
-      <circle cx={130} cy={104} r="12" fill={BRAND} stroke={INK} strokeWidth="2" />
-      <Sparkle x={130} y={104} s={0.7} />
-      {lines.map((l, i) => {
-        const y = 104 + i * 32;
+      {skills.map((k, i) => {
+        const { x, y } = at(i);
         return (
-          <g key={l.text}>
-            {l.icon === "check" && <Check x={160} y={y} r={9} />}
-            {l.icon === "cross" && <Cross x={160} y={y} r={9} />}
-            {l.icon === "hand" && <Hand x={160} y={y} r={9} />}
-            <text x={176} y={y + 4.5} fontSize="13" fontWeight={l.icon === "hand" ? 700 : 500} fill={INK} fontFamily={SANS}>
-              {l.text}
+          <g key={k.name}>
+            <rect x={x} y={y} width={144} height={54} rx="10" fill={k.on ? BRAND : "#fff"} stroke={INK} strokeWidth="2.5" />
+            <circle cx={x + 18} cy={y + 18} r="9" fill={k.on ? "#fff" : TINT} stroke={INK} strokeWidth="2" />
+            <Sparkle x={x + 18} y={y + 18} s={0.55} fill={k.on ? BRAND : PRIMARY} />
+            <text x={x + 34} y={y + 22.5} fontSize="12.5" fontWeight="700" fill={k.on ? "#fff" : INK} fontFamily={MONO}>
+              {k.name}
+            </text>
+            <text x={x + 12} y={y + 43} fontSize="12" fontWeight="500" fill={k.on ? "#fff" : INK} opacity={k.on ? 1 : 0.7} fontFamily={SANS}>
+              {k.note}
             </text>
           </g>
         );
       })}
-      {/* the team, watching and learning */}
-      <Person x={44} y={292} shirt={BRAND} />
-      <Person x={436} y={292} shirt={PRIMARY} flip />
-      <Bubble x={386} y={190} w={86} text="Got it!" tail="right" />
+      {/* the empty slot: the next skill your team adds */}
+      <rect x={200} y={236} width={144} height={54} rx="10" fill="none" stroke={PRIMARY} strokeWidth="2.5" strokeDasharray="7 6" />
+      <text x={272} y={268} textAnchor="middle" fontSize="14" fontWeight="700" fill={PRIMARY} fontFamily={DISPLAY}>
+        + New skill
+      </text>
+      <Person x={418} y={262} />
+      <Bubble x={366} y={150} w={104} text="Reuse it!" tail="left" />
     </Canvas>
   );
 }
 
-/** Step 5: the CLAUDE.md page, with sections for what Claude may and may not do. */
+/** Step 4: the learning loop. The team runs the work, spots a change, updates the skill with a person's OK, and teaches it on. */
+export function LearningLoopCartoon({ label }: { label: string }) {
+  const cx = 240;
+  const cy = 184;
+  const rx = 150;
+  const ry = 112;
+  const nodes = [
+    { n: 1, text: "Run the skill", x: cx, y: cy - ry },
+    { n: 2, text: "Spot a change", x: cx + rx, y: cy },
+    { n: 3, text: "Update and approve", x: cx, y: cy + ry },
+    { n: 4, text: "Teach the team", x: cx - rx, y: cy },
+  ];
+  // arrowheads halfway between nodes, pointing clockwise along the loop
+  const arrows = [-45, 45, 135, 225].map((deg) => {
+    const t = (deg * Math.PI) / 180;
+    const x = cx + rx * Math.cos(t);
+    const y = cy + ry * Math.sin(t);
+    const angle = (Math.atan2(ry * Math.cos(t), -rx * Math.sin(t)) * 180) / Math.PI;
+    return { x, y, angle };
+  });
+  return (
+    <Canvas label={label}>
+      <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill="none" stroke={BRAND} strokeWidth="5" strokeDasharray="2 12" strokeLinecap="round" />
+      {arrows.map((a) => (
+        <path
+          key={a.angle}
+          transform={`translate(${a.x} ${a.y}) rotate(${a.angle})`}
+          d="M-9 -11 L11 0 L-9 11 L-3 0 Z"
+          fill={PRIMARY}
+          stroke={INK}
+          strokeWidth="2.5"
+          strokeLinejoin="round"
+        />
+      ))}
+      {/* the team in the middle of the loop */}
+      <Person x={208} y={176} shirt={BRAND} />
+      <Person x={272} y={176} shirt={PRIMARY} flip />
+      <text x={cx} y={258} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily={DISPLAY}>
+        Your team
+      </text>
+      {nodes.map((d) => {
+        const w = 44 + d.text.length * 7.6;
+        const x = d.x - w / 2;
+        return (
+          <g key={d.n}>
+            <rect x={x + 5} y={d.y - 18 + 5} width={w} height={36} rx="18" fill={BRAND} stroke={INK} strokeWidth="2.5" />
+            <rect x={x} y={d.y - 18} width={w} height={36} rx="18" fill="#fff" stroke={INK} strokeWidth="2.5" />
+            <circle cx={x + 18} cy={d.y} r="11" fill={PRIMARY} stroke={INK} strokeWidth="2" />
+            <text x={x + 18} y={d.y + 4.5} textAnchor="middle" fontSize="12.5" fontWeight="800" fill="#fff" fontFamily={DISPLAY}>
+              {d.n}
+            </text>
+            <text x={x + 35} y={d.y + 5} fontSize="14" fontWeight="700" fill={INK} fontFamily={SANS}>
+              {d.text}
+            </text>
+          </g>
+        );
+      })}
+    </Canvas>
+  );
+}
+
+/** Step 5: the CLAUDE.md page: what Claude knows about the business, then what it may and may not do. */
 export function ClaudeMdCartoon({ label }: { label: string }) {
-  const sections: { head: string; icon: "check" | "cross" | "hand"; text: string }[] = [
-    { head: "May read", icon: "check", text: "QuickBooks, the job export" },
-    { head: "May write", icon: "check", text: "reports/ only" },
-    { head: "Never", icon: "cross", text: "change invoices or payments" },
-    { head: "Ask a person", icon: "hand", text: "refunds and credits" },
+  const rules: { icon: "check" | "cross" | "hand"; text: string }[] = [
+    { icon: "check", text: "Read QuickBooks, the job export" },
+    { icon: "check", text: "Write to reports/ only" },
+    { icon: "cross", text: "Never change invoices" },
+    { icon: "hand", text: "Refunds go to a person" },
   ];
   return (
     <Canvas label={label}>
@@ -217,18 +242,29 @@ export function ClaudeMdCartoon({ label }: { label: string }) {
           CLAUDE.md
         </text>
         <rect x={102} y={84} width={96} height={5} rx="2.5" fill={BRAND} />
-        {sections.map((s, i) => {
-          const y = 118 + i * 50;
+        {/* business context: what Claude needs to know about you */}
+        <text x={102} y={114} fontSize="12.5" fontWeight="800" fill={PRIMARY} fontFamily={DISPLAY} letterSpacing="0.06em">
+          ABOUT THE BUSINESS
+        </text>
+        <rect x={98} y={122} width={236} height={58} rx="8" fill={TINT} stroke={BRAND} strokeWidth="2" />
+        <text x={110} y={146} fontSize="13.5" fontWeight="600" fill={INK} fontFamily={SANS}>
+          Field-service company, 3 crews
+        </text>
+        <text x={110} y={168} fontSize="13.5" fontWeight="600" fill={INK} fontFamily={SANS}>
+          Books close by the 5th
+        </text>
+        <text x={102} y={206} fontSize="12.5" fontWeight="800" fill={PRIMARY} fontFamily={DISPLAY} letterSpacing="0.06em">
+          GUARDRAILS
+        </text>
+        {rules.map((r, i) => {
+          const y = 226 + i * 24;
           return (
-            <g key={s.head}>
-              <text x={102} y={y} fontSize="13" fontWeight="800" fill={PRIMARY} fontFamily={DISPLAY} letterSpacing="0.06em">
-                {s.head.toUpperCase()}
-              </text>
-              {s.icon === "check" && <Check x={112} y={y + 20} r={9} />}
-              {s.icon === "cross" && <Cross x={112} y={y + 20} r={9} />}
-              {s.icon === "hand" && <Hand x={112} y={y + 20} r={9} />}
-              <text x={128} y={y + 24.5} fontSize="14" fontWeight="500" fill={INK} fontFamily={SANS}>
-                {s.text}
+            <g key={r.text}>
+              {r.icon === "check" && <Check x={110} y={y} r={8} />}
+              {r.icon === "cross" && <Cross x={110} y={y} r={8} />}
+              {r.icon === "hand" && <Hand x={110} y={y} r={8} />}
+              <text x={126} y={y + 4.5} fontSize="13" fontWeight="500" fill={INK} fontFamily={SANS}>
+                {r.text}
               </text>
             </g>
           );
@@ -242,12 +278,14 @@ export function ClaudeMdCartoon({ label }: { label: string }) {
         <path d="M-10 -6 V-16 a10 10 0 0 1 20 0 V-6" fill="none" stroke={INK} strokeWidth="3" />
         <circle cx="0" cy="8" r="3.5" fill={INK} />
       </g>
-      <g transform="translate(392 262)">
-        <rect x="-58" y="-17" width="116" height="34" rx="17" fill="#fff" stroke={INK} strokeWidth="3" />
-        <text x="0" y="5.5" textAnchor="middle" fontSize="14" fontWeight="700" fill={INK} fontFamily={DISPLAY}>
-          Your rules
-        </text>
-      </g>
+      {["Your business", "Your rules"].map((t, i) => (
+        <g key={t} transform={`translate(400 ${250 + i * 44})`}>
+          <rect x="-62" y="-17" width="124" height="34" rx="17" fill="#fff" stroke={INK} strokeWidth="3" />
+          <text x="0" y="5.5" textAnchor="middle" fontSize="14" fontWeight="700" fill={INK} fontFamily={DISPLAY}>
+            {t}
+          </text>
+        </g>
+      ))}
     </Canvas>
   );
 }
