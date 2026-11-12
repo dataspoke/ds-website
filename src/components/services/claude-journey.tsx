@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Check, ClipboardList, Flag, Sparkles, UserCheck } from "lucide-react";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { cn } from "@/lib/utils";
-import { CLAUDE_VISUALS as V, type JourneyStep } from "@/content/claude-services";
+import { CLAUDE_VISUALS as V, type JourneyStep, type Shot } from "@/content/claude-services";
 
 /**
  * The five steps as a numbered path. A row joined by a line on wide screens,
@@ -54,10 +54,8 @@ function Frame({ title, className, children }: { title: string; className?: stri
   );
 }
 
-/** A real Claude screenshot in a dark window frame, with its source caption. */
-function Screenshot({ step }: { step: number }) {
-  const shot = V.shots[step];
-  if (!shot) return null;
+/** A real screenshot in a dark window frame, with its source caption. */
+function Screenshot({ shot }: { shot: Shot }) {
   return (
     <figure
       className="mx-auto grid w-full max-w-[22rem] gap-1.5 sm:max-w-[var(--shot-max)] lg:col-span-2"
@@ -85,39 +83,6 @@ function Screenshot({ step }: { step: number }) {
         {shot.caption}
       </figcaption>
     </figure>
-  );
-}
-
-function CodePicture() {
-  return (
-    <Frame title={V.code.label} className="border-ink">
-      <pre className="-m-3 overflow-x-auto bg-ink p-3 font-mono text-xs leading-relaxed text-white/85">
-        {V.code.lines.map((l, i) => (
-          <span key={l} className={cn("block", i === 0 && "font-semibold text-[#9cc4f0]")}>
-            {l}
-          </span>
-        ))}
-      </pre>
-    </Frame>
-  );
-}
-
-function SkillPicture() {
-  return (
-    <Frame title={V.skill.label}>
-      <p className="flex items-center gap-2 font-mono text-[0.8rem] font-semibold text-primary">
-        <Sparkles className="h-4 w-4" aria-hidden="true" />
-        {V.skill.name}
-      </p>
-      <ol className="mt-2 grid gap-1.5">
-        {V.skill.steps.map((s, i) => (
-          <li key={s} className="grid grid-cols-[1.25rem_1fr] items-baseline text-xs text-foreground/80">
-            <span className="font-semibold tabular-nums text-primary">{i + 1}</span>
-            {s}
-          </li>
-        ))}
-      </ol>
-    </Frame>
   );
 }
 
@@ -166,8 +131,8 @@ function RolloutPicture() {
   );
 }
 
-/** Mock picture per step, shown in the heading column and tagged "Illustrative". Steps 1-3 also get a real screenshot. */
-const MOCKS: ((() => React.ReactElement) | null)[] = [null, CodePicture, SkillPicture, TrainingPicture, RolloutPicture];
+/** Mock picture per step, shown in the heading column and tagged "Illustrative". Steps 1-3 and 5 use real screenshots instead or as well. */
+const MOCKS: ((() => React.ReactElement) | null)[] = [null, null, null, TrainingPicture, RolloutPicture];
 
 /**
  * The full journey as a numbered timeline. A rail runs down the left on every
@@ -218,7 +183,9 @@ export function JourneyTimeline({ steps }: { steps: JourneyStep[] }) {
                   </SpokeBullet>
                 ))}
               </ul>
-              <Screenshot step={i + 1} />
+              {(V.shots[i + 1] ?? []).map((shot) => (
+                <Screenshot key={shot.src} shot={shot} />
+              ))}
             </article>
           </li>
         );

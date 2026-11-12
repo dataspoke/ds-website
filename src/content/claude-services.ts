@@ -13,6 +13,18 @@ export interface JourneyStep {
   bullets: string[];
 }
 
+/** A real screenshot, with a narrower crop for phones. */
+export interface Shot {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  caption: string;
+  /** Cap the desktop width for tall shots. */
+  maxWidth?: number;
+  phone: { src: string; width: number; height: number };
+}
+
 export interface Guardrail {
   title: string;
   description: string;
@@ -189,48 +201,71 @@ export const CLAUDE_VISUALS = {
   hubAriaLabel:
     "Illustration: Claude at the center, with spokes to QuickBooks, Xero, HubSpot, your ERP, your CRM, calendar, email and documents",
   /**
-   * Real screenshots of the Claude desktop app, cropped to leave out account
-   * details. Keyed by step number. Shown full width under the step; phones
+   * Real screenshots (the Claude desktop app, and Claude Code and VS Code run on
+   * a demo project with sample data), cropped to leave out account details. Keyed by step number. Shown full width under the step; phones
    * get the narrower `phone` crop so the text stays readable.
    */
   shots: {
-    1: {
-      src: "/images/claude/connectors.png",
-      width: 1430,
-      height: 470,
-      alt: "Claude's connector directory, listing Google Drive, Gmail, Google Calendar and Microsoft 365",
-      caption: "Claude's connector directory",
-      phone: { src: "/images/claude/connectors-phone.png", width: 725, height: 470 },
-    },
-    2: {
-      src: "/images/claude/projects.png",
-      width: 1250,
-      height: 700,
-      alt: "A Claude project, pinned in the sidebar with its morning brief skill",
-      caption: "A Claude project with its skill",
-      maxWidth: 640,
-      phone: { src: "/images/claude/projects-phone.png", width: 495, height: 700 },
-    },
-    3: {
-      src: "/images/claude/skills.png",
-      width: 1425,
-      height: 515,
-      alt: "The Skills tab in Claude's Customize screen",
-      caption: "Where Claude Skills live",
-      phone: { src: "/images/claude/skills-phone.png", width: 760, height: 515 },
-    },
-  } as Record<number, { src: string; width: number; height: number; alt: string; caption: string; maxWidth?: number; phone: { src: string; width: number; height: number } }>,
-  /** Step 2: a Claude Code window (the Cowork side is a real screenshot). */
-  code: {
-    label: "Claude Code",
-    lines: ["CLAUDE.md", "  How this project works", "  What Claude may touch", "  Who approves what"],
-  },
-  /** Step 3: a skill card. */
-  skill: {
-    label: "Claude Skill",
-    name: "month-end-close",
-    steps: ["Pull the trial balance", "Match payments to invoices", "Flag anything unusual for a person"],
-  },
+    1: [
+      {
+        src: "/images/claude/connectors.png",
+        width: 1430,
+        height: 470,
+        alt: "Claude's connector directory, listing Google Drive, Gmail, Google Calendar and Microsoft 365",
+        caption: "Claude's connector directory",
+        phone: { src: "/images/claude/connectors-phone.png", width: 725, height: 470 },
+      },
+    ],
+    2: [
+      {
+        src: "/images/claude/claude-md.png",
+        width: 1864,
+        height: 1205,
+        alt: "A CLAUDE.md file open in VS Code, listing data sources, what Claude may and may not do, and approvals",
+        caption: "A project's CLAUDE.md: the rules Claude works by",
+        maxWidth: 760,
+        phone: { src: "/images/claude/claude-md-phone.png", width: 1060, height: 820 },
+      },
+      {
+        src: "/images/claude/projects.png",
+        width: 1250,
+        height: 700,
+        alt: "A Claude Cowork project, pinned in the sidebar with its morning brief skill",
+        caption: "A Claude Cowork project with its skill",
+        maxWidth: 640,
+        phone: { src: "/images/claude/projects-phone.png", width: 495, height: 700 },
+      },
+    ],
+    3: [
+      {
+        src: "/images/claude/skill-run.png",
+        width: 2200,
+        height: 960,
+        alt: "Claude Code running a month-end-close skill on sample data and stopping for the controller's approval",
+        caption: "A skill run that stops for approval (sample data)",
+        phone: { src: "/images/claude/skill-run-phone.png", width: 1250, height: 960 },
+      },
+      {
+        src: "/images/claude/skill-md.png",
+        width: 1864,
+        height: 1080,
+        alt: "The month-end-close skill file open in VS Code, with its numbered steps and approval step",
+        caption: "The skill file behind it",
+        maxWidth: 760,
+        phone: { src: "/images/claude/skill-md-phone.png", width: 1060, height: 940 },
+      },
+    ],
+    5: [
+      {
+        src: "/images/claude/code-session.png",
+        width: 2200,
+        height: 1100,
+        alt: "Claude Code reading a project's CLAUDE.md back: what it may read and write, what waits for a person, and a conflict it would ask about",
+        caption: "Claude Code checking the rules before it acts",
+        phone: { src: "/images/claude/code-session-phone.png", width: 1250, height: 1100 },
+      },
+    ],
+  } as Record<number, Shot[]>,
   /** Step 4: a training checklist. */
   training: {
     label: "Training session",
