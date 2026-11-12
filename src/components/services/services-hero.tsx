@@ -1,9 +1,9 @@
 import { Check } from "lucide-react";
 import { EstimateCta } from "@/components/shared/estimate-cta";
 import { LINE_PAGE, SERVICES_PAGE } from "@/content/services";
-import { ServicesMap } from "./services-map";
+import { ServicesWheel } from "./services-wheel";
 
-/** /services hero in the home page's style: short copy on the left, the hub-and-spoke map on the right. */
+/** /services hero in the home page's style: short copy on the left, the services wheel on the right. */
 export function ServicesHero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-tint via-white to-white pt-12 pb-8 sm:pt-20 sm:pb-12">
@@ -36,7 +36,7 @@ export function ServicesHero() {
             </a>
           </div>
         </div>
-        <ServicesMap className="mx-auto w-full max-w-xl" />
+        <ServicesWheel className="mx-auto w-full max-w-[560px]" />
       </div>
     </section>
   );
