@@ -1,4 +1,5 @@
-import { Check, ClipboardList, FileText, Flag, Folder, Sparkles, UserCheck } from "lucide-react";
+import Image from "next/image";
+import { Check, ClipboardList, Flag, Sparkles, UserCheck } from "lucide-react";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { cn } from "@/lib/utils";
 import { CLAUDE_VISUALS as V, type JourneyStep } from "@/content/claude-services";
@@ -53,54 +54,51 @@ function Frame({ title, className, children }: { title: string; className?: stri
   );
 }
 
-function ConnectorsPicture() {
+/** A real Claude screenshot in a dark window frame, with its source caption. */
+function Screenshot({ step }: { step: number }) {
+  const shot = V.shots[step];
+  if (!shot) return null;
   return (
-    <Frame title="MCP connectors">
-      <ul className="grid gap-2">
-        {V.connectors.map((c) => (
-          <li key={c.name} className="flex items-center justify-between gap-3 rounded-md border border-border px-3 py-2">
-            <span className="grid">
-              <span className="font-semibold">{c.name}</span>
-              <span className="text-xs text-muted-foreground">{c.access}</span>
-            </span>
-            <span className="flex shrink-0 items-center gap-1.5 text-xs font-semibold text-primary">
-              <span className="h-2 w-2 rounded-full bg-brand" aria-hidden="true" />
-              {V.connected}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </Frame>
+    <figure
+      className="mx-auto grid w-full max-w-[22rem] gap-1.5 sm:max-w-[var(--shot-max)] lg:col-span-2"
+      style={{ "--shot-max": shot.maxWidth ? `${shot.maxWidth}px` : "100%" } as React.CSSProperties}
+    >
+      <div className="overflow-hidden rounded-xl border border-ink/80 bg-[#1f1f1e] shadow-[0_12px_32px_-16px_rgba(15,30,51,0.45)]">
+        <Image
+          src={shot.phone.src}
+          width={shot.phone.width}
+          height={shot.phone.height}
+          alt={shot.alt}
+          sizes="100vw"
+          className="block h-auto w-full sm:hidden"
+        />
+        <Image
+          src={shot.src}
+          width={shot.width}
+          height={shot.height}
+          alt={shot.alt}
+          sizes={shot.maxWidth ? `(min-width: 1024px) ${shot.maxWidth}px, 100vw` : "(min-width: 1024px) 900px, 100vw"}
+          className="hidden h-auto w-full sm:block"
+        />
+      </div>
+      <figcaption className="text-right text-[0.65rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+        {shot.caption}
+      </figcaption>
+    </figure>
   );
 }
 
-function SetupPicture() {
+function CodePicture() {
   return (
-    <div className="grid gap-3 sm:grid-cols-2">
-      <Frame title={V.cowork.label}>
-        <p className="flex items-center gap-2 font-semibold">
-          <Folder className="h-4 w-4 text-primary" aria-hidden="true" />
-          {V.cowork.name}
-        </p>
-        <ul className="mt-2 grid gap-1.5">
-          {V.cowork.files.map((f) => (
-            <li key={f} className="flex items-center gap-2 text-xs text-muted-foreground">
-              <FileText className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-              {f}
-            </li>
-          ))}
-        </ul>
-      </Frame>
-      <Frame title={V.code.label} className="border-ink">
-        <pre className="-m-3 overflow-x-auto bg-ink p-3 font-mono text-xs leading-relaxed text-white/85">
-          {V.code.lines.map((l, i) => (
-            <span key={l} className={cn("block", i === 0 && "font-semibold text-[#9cc4f0]")}>
-              {l}
-            </span>
-          ))}
-        </pre>
-      </Frame>
-    </div>
+    <Frame title={V.code.label} className="border-ink">
+      <pre className="-m-3 overflow-x-auto bg-ink p-3 font-mono text-xs leading-relaxed text-white/85">
+        {V.code.lines.map((l, i) => (
+          <span key={l} className={cn("block", i === 0 && "font-semibold text-[#9cc4f0]")}>
+            {l}
+          </span>
+        ))}
+      </pre>
+    </Frame>
   );
 }
 
@@ -168,7 +166,8 @@ function RolloutPicture() {
   );
 }
 
-const PICTURES = [ConnectorsPicture, SetupPicture, SkillPicture, TrainingPicture, RolloutPicture];
+/** Mock picture per step, shown in the heading column and tagged "Illustrative". Steps 1-3 also get a real screenshot. */
+const MOCKS: ((() => React.ReactElement) | null)[] = [null, CodePicture, SkillPicture, TrainingPicture, RolloutPicture];
 
 /**
  * The full journey as a numbered timeline. A rail runs down the left on every
@@ -183,7 +182,7 @@ export function JourneyTimeline({ steps }: { steps: JourneyStep[] }) {
         aria-hidden="true"
       />
       {steps.map((step, i) => {
-        const Picture = PICTURES[i];
+        const Mock = MOCKS[i];
         return (
           <li
             key={step.title}
@@ -203,9 +202,9 @@ export function JourneyTimeline({ steps }: { steps: JourneyStep[] }) {
                 </p>
                 <h3 className="text-2xl font-bold leading-tight">{step.title}</h3>
                 <p className="text-muted-foreground">{step.lede}</p>
-                {Picture && (
+                {Mock && (
                   <figure className="mt-2 grid gap-1.5" aria-hidden="true">
-                    <Picture />
+                    <Mock />
                     <figcaption className="text-right text-[0.65rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
                       {V.illustrative}
                     </figcaption>
@@ -219,6 +218,7 @@ export function JourneyTimeline({ steps }: { steps: JourneyStep[] }) {
                   </SpokeBullet>
                 ))}
               </ul>
+              <Screenshot step={i + 1} />
             </article>
           </li>
         );

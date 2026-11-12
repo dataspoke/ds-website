@@ -188,19 +188,39 @@ export const CLAUDE_VISUALS = {
   ] satisfies HeroSpoke[],
   hubAriaLabel:
     "Illustration: Claude at the center, with spokes to QuickBooks, Xero, HubSpot, your ERP, your CRM, calendar, email and documents",
-  /** Step 1: connector list. */
-  connectors: [
-    { name: "QuickBooks", access: "Read invoices and customers" },
-    { name: "Xero", access: "Read bills and payments" },
-    { name: "HubSpot", access: "Read deals, draft follow-ups" },
-  ],
-  connected: "Connected",
-  /** Step 2: a Cowork project beside a Claude Code window. */
-  cowork: {
-    label: "Claude Cowork project",
-    name: "Weekly operations report",
-    files: ["Instructions", "Report template", "Last month's report"],
-  },
+  /**
+   * Real screenshots of the Claude desktop app, cropped to leave out account
+   * details. Keyed by step number. Shown full width under the step; phones
+   * get the narrower `phone` crop so the text stays readable.
+   */
+  shots: {
+    1: {
+      src: "/images/claude/connectors.png",
+      width: 1430,
+      height: 470,
+      alt: "Claude's connector directory, listing Google Drive, Gmail, Google Calendar and Microsoft 365",
+      caption: "Claude's connector directory",
+      phone: { src: "/images/claude/connectors-phone.png", width: 725, height: 470 },
+    },
+    2: {
+      src: "/images/claude/projects.png",
+      width: 1250,
+      height: 700,
+      alt: "A Claude project, pinned in the sidebar with its morning brief skill",
+      caption: "A Claude project with its skill",
+      maxWidth: 640,
+      phone: { src: "/images/claude/projects-phone.png", width: 495, height: 700 },
+    },
+    3: {
+      src: "/images/claude/skills.png",
+      width: 1425,
+      height: 515,
+      alt: "The Skills tab in Claude's Customize screen",
+      caption: "Where Claude Skills live",
+      phone: { src: "/images/claude/skills-phone.png", width: 760, height: 515 },
+    },
+  } as Record<number, { src: string; width: number; height: number; alt: string; caption: string; maxWidth?: number; phone: { src: string; width: number; height: number } }>,
+  /** Step 2: a Claude Code window (the Cowork side is a real screenshot). */
   code: {
     label: "Claude Code",
     lines: ["CLAUDE.md", "  How this project works", "  What Claude may touch", "  Who approves what"],
