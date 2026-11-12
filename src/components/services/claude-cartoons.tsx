@@ -74,17 +74,6 @@ function Hand({ x, y, r = 11 }: { x: number; y: number; r?: number }) {
   );
 }
 
-/** Claude's sparkle mark, drawn simply. */
-function Sparkle({ x, y, s = 1, fill = "#fff" }: { x: number; y: number; s?: number; fill?: string }) {
-  return (
-    <path
-      transform={`translate(${x} ${y}) scale(${s})`}
-      d="M0 -10 C1.5 -3 3 -1.5 10 0 C3 1.5 1.5 3 0 10 C-1.5 3 -3 1.5 -10 0 C-3 -1.5 -1.5 -3 0 -10 Z"
-      fill={fill}
-    />
-  );
-}
-
 /** A friendly round person: head, shoulders, two dot eyes and a smile. */
 function Person({ x, y, shirt = PRIMARY, flip = false }: { x: number; y: number; shirt?: string; flip?: boolean }) {
   return (
@@ -99,65 +88,71 @@ function Person({ x, y, shirt = PRIMARY, flip = false }: { x: number; y: number;
   );
 }
 
-function Bubble({ x, y, w, text, tail = "left" }: { x: number; y: number; w: number; text: string; tail?: "left" | "right" }) {
-  const tx = tail === "left" ? x + 22 : x + w - 22;
-  return (
-    <g>
-      <rect x={x} y={y} width={w} height="38" rx="19" fill="#fff" stroke={INK} strokeWidth="3" />
-      <path d={`M${tx - 8} ${y + 36} L${tx + (tail === "left" ? -10 : 10)} ${y + 52} L${tx + 8} ${y + 36}`} fill="#fff" stroke={INK} strokeWidth="3" strokeLinejoin="round" />
-      <rect x={tx - 9} y={y + 30} width="18" height="7" fill="#fff" />
-      <text x={x + w / 2} y={y + 24.5} textAnchor="middle" fontSize="15" fontWeight="700" fill={INK} fontFamily={DISPLAY}>
-        {text}
-      </text>
-    </g>
-  );
+/** A small folder icon for the file tree. */
+function Folder({ x, y, fill }: { x: number; y: number; fill: string }) {
+  return <path d={`M${x} ${y - 9} h6 l2 2 h8 v11 h-16 Z`} fill={fill} stroke={INK} strokeWidth="1.5" strokeLinejoin="round" />;
 }
 
-/** Step 3: a skills library, one saved skill per repeating job, with room for the next one. */
+/** Step 3: the skills library as a folder, one folder per job, with the open skill's steps beside it. */
 export function SkillsLibraryCartoon({ label }: { label: string }) {
-  const skills: { name: string; note: string; on?: boolean }[] = [
-    { name: "month-end", note: "Close the books", on: true },
-    { name: "weekly-report", note: "Monday numbers" },
-    { name: "client-intake", note: "New client setup" },
-    { name: "invoice-chase", note: "Late invoices" },
-    { name: "morning-brief", note: "Today at a glance" },
+  const others = ["weekly-report/", "client-intake/", "invoice-chase/", "morning-brief/"];
+  const file: { text: string; color: string; bold?: boolean }[] = [
+    { text: "---", color: "#55657a" },
+    { text: "name: month-end", color: INK },
+    { text: "about: close the books", color: INK },
+    { text: "---", color: "#55657a" },
+    { text: "1. Pull the job export", color: INK },
+    { text: "2. Match the payments", color: INK },
+    { text: "3. Flag anything odd", color: INK },
+    { text: "4. Wait for your OK", color: PRIMARY, bold: true },
   ];
-  const at = (i: number) => ({ x: 40 + (i % 2) * 160, y: 104 + Math.floor(i / 2) * 66 });
   return (
     <Canvas label={label}>
-      <Card x={24} y={40} w={336} h={282} />
-      <path d="M24 86 V56 a16 16 0 0 1 16 -16 H344 a16 16 0 0 1 16 16 V86 Z" fill={PRIMARY} stroke={INK} strokeWidth="3" />
-      {/* a closed book: the library */}
-      <g transform="translate(50 63)">
-        <rect x="-11" y="-11" width="22" height="22" rx="3" fill="#fff" />
-        <rect x="-11" y="-11" width="6" height="22" rx="2" fill={BRAND} />
-      </g>
-      <text x={72} y={69} fontSize="17" fontWeight="800" fill="#fff" fontFamily={DISPLAY}>
+      <Card x={36} y={32} w={408} h={292} r={12} />
+      {/* window title bar */}
+      <path d="M36 66 V44 a12 12 0 0 1 12 -12 H432 a12 12 0 0 1 12 12 V66 Z" fill={INK} />
+      {[BRAND, "#d6e6f8", "#fff"].map((c, i) => (
+        <circle key={c} cx={56 + i * 16} cy={49} r="5" fill={c} />
+      ))}
+      <text x={240} y={54} textAnchor="middle" fontSize="12" fontWeight="600" fill="#fff" fontFamily={MONO}>
         Skills library
       </text>
-      {skills.map((k, i) => {
-        const { x, y } = at(i);
-        return (
-          <g key={k.name}>
-            <rect x={x} y={y} width={144} height={54} rx="10" fill={k.on ? BRAND : "#fff"} stroke={INK} strokeWidth="2.5" />
-            <circle cx={x + 18} cy={y + 18} r="9" fill={k.on ? "#fff" : TINT} stroke={INK} strokeWidth="2" />
-            <Sparkle x={x + 18} y={y + 18} s={0.55} fill={k.on ? BRAND : PRIMARY} />
-            <text x={x + 34} y={y + 22.5} fontSize="12.5" fontWeight="700" fill={k.on ? "#fff" : INK} fontFamily={MONO}>
-              {k.name}
-            </text>
-            <text x={x + 12} y={y + 43} fontSize="12" fontWeight="500" fill={k.on ? "#fff" : INK} opacity={k.on ? 1 : 0.7} fontFamily={SANS}>
-              {k.note}
-            </text>
-          </g>
-        );
-      })}
-      {/* the empty slot: the next skill your team adds */}
-      <rect x={200} y={236} width={144} height={54} rx="10" fill="none" stroke={PRIMARY} strokeWidth="2.5" strokeDasharray="7 6" />
-      <text x={272} y={268} textAnchor="middle" fontSize="14" fontWeight="700" fill={PRIMARY} fontFamily={DISPLAY}>
-        + New skill
+      {/* sidebar: the skills folder */}
+      <rect x={38} y={66} width={182} height={256} fill={TINT} />
+      <line x1={220} y1={66} x2={220} y2={322} stroke={INK} strokeWidth="2" />
+      <Folder x={52} y={98} fill={BRAND} />
+      <text x={74} y={98} fontSize="12.5" fontWeight="700" fill={INK} fontFamily={MONO}>
+        skills/
       </text>
-      <Person x={418} y={262} />
-      <Bubble x={366} y={150} w={104} text="Reuse it!" tail="left" />
+      <rect x={46} y={110} width={168} height={24} rx="6" fill={BRAND} />
+      <Folder x={64} y={126} fill="#fff" />
+      <text x={86} y={126} fontSize="12" fontWeight="700" fill="#fff" fontFamily={MONO}>
+        month-end/
+      </text>
+      <path d="M84 140 h9 l4 4 v10 h-13 Z" fill="#fff" stroke={INK} strokeWidth="1.5" />
+      <text x={104} y={152} fontSize="12" fontWeight="600" fill={PRIMARY} fontFamily={MONO}>
+        SKILL.md
+      </text>
+      {others.map((n, i) => (
+        <g key={n}>
+          <Folder x={64} y={178 + i * 26} fill="#d6e6f8" />
+          <text x={86} y={178 + i * 26} fontSize="12" fontWeight="600" fill={INK} fontFamily={MONO}>
+            {n}
+          </text>
+        </g>
+      ))}
+      <text x={64} y={302} fontSize="12" fontWeight="700" fill={PRIMARY} fontFamily={MONO}>
+        + new skill
+      </text>
+      {/* the open skill file */}
+      <text x={236} y={96} fontSize="14" fontWeight="800" fill={INK} fontFamily={MONO}>
+        SKILL.md
+      </text>
+      {file.map((l, i) => (
+        <text key={`${i}-${l.text}`} x={236} y={124 + i * 24} fontSize="12" fontWeight={l.bold ? 800 : 500} fill={l.color} fontFamily={MONO}>
+          {l.text}
+        </text>
+      ))}
     </Canvas>
   );
 }

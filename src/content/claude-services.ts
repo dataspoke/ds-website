@@ -202,8 +202,8 @@ export const CLAUDE_VISUALS = {
   /** Cartoons for steps 3 to 5, keyed by step number. */
   cartoons: {
     3: {
-      alt: "Cartoon: a skills library with five saved skills, such as month-end, weekly-report and client-intake, and an empty slot for a new skill",
-      caption: "A skills library: each repeating job saved once, for the whole team to reuse. Illustration.",
+      alt: "Illustration: a skills library window. A skills folder holds month-end, weekly-report, client-intake, invoice-chase and morning-brief, and the open month-end skill file lists its four steps, ending with wait for your OK",
+      caption: "A skills library: one folder per repeating job, with the steps written down. Illustration.",
     },
     4: {
       alt: "Cartoon: a learning loop around your team. Run the skill, spot a change, update and approve, teach the team, then run it again",
