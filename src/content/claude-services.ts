@@ -1,3 +1,4 @@
+import type { HeroSpoke } from "@/components/home-a/illustrations";
 import type { TextLink } from "@/types";
 
 // Copy for /services/claude. First person ("I"): Nick does this work himself.
@@ -26,11 +27,8 @@ export const CLAUDE_PAGE = {
   title: "I set Claude up on your business, then teach you to run it.",
   lede:
     "Claude connected to the systems you already use, a reviewed Claude Cowork or Claude Code setup, Claude Skills for the work that repeats, and a first agent done properly. Limited access, human approvals, and an audit trail. I build with you and teach you, so you're not stuck when I leave.",
-  intro: [
-    "I set Claude up on the systems you already pay for.",
-    "I stay until you and your team can run it.",
-    "I do the work myself. No hand-offs.",
-  ],
+  /** Short promises shown as chips in the hero. */
+  intro: ["On systems you already pay for", "I stay until your team can run it", "I do the work myself. No hand-offs"],
   pathLabel: "The path, in order",
 
   journeyEyebrow: "How it works",
@@ -177,9 +175,19 @@ export const CLAUDE_PAGE = {
 export const CLAUDE_VISUALS = {
   illustrative: "Illustrative",
   hub: "Claude",
-  hubSpokes: ["QuickBooks", "Xero", "HubSpot", "Your CRM", "Your ERP", "Documents"],
+  /** Hero spokes, clockwise from the top, each with a glyph from the home hero set. */
+  hubSpokes: [
+    { name: "QuickBooks", glyph: "dollar" },
+    { name: "Xero", glyph: "chart" },
+    { name: "HubSpot", glyph: "users" },
+    { name: "Your ERP", glyph: "truck" },
+    { name: "Your CRM", glyph: "chat" },
+    { name: "Calendar", glyph: "calendar" },
+    { name: "Email", glyph: "mail" },
+    { name: "Documents", glyph: "doc" },
+  ] satisfies HeroSpoke[],
   hubAriaLabel:
-    "Diagram: Claude at the center, connected to QuickBooks, Xero, HubSpot, your CRM, your ERP and your documents",
+    "Illustration: Claude at the center, with spokes to QuickBooks, Xero, HubSpot, your ERP, your CRM, calendar, email and documents",
   /** Step 1: connector list. */
   connectors: [
     { name: "QuickBooks", access: "Read invoices and customers" },

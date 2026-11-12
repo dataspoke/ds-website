@@ -111,7 +111,12 @@ function HubMark({ cx, cy, r }: { cx: number; cy: number; r: number }) {
   return <WheelMark x={cx - r} y={cy - r} width={r * 2} height={r * 2} color="#fff" />;
 }
 
-const HERO_SPOKES: { name: string; glyph: keyof typeof GLYPHS }[] = [
+export interface HeroSpoke {
+  name: string;
+  glyph: keyof typeof GLYPHS;
+}
+
+const HERO_SPOKES: HeroSpoke[] = [
   { name: "Sales", glyph: "users" },
   { name: "Marketing", glyph: "mail" },
   { name: "Phones", glyph: "phone" },
@@ -125,16 +130,31 @@ const HERO_SPOKES: { name: string; glyph: keyof typeof GLYPHS }[] = [
 /**
  * Hero: the business as a hub with eight tool spokes, on a soft blue gradient.
  * Pure SVG so it scales from 390px to desktop with no asset files.
+ * Other pages pass their own spokes and hub; the defaults draw the home page hero.
  */
-export function HeroIllustration({ className }: { className?: string }) {
+export function HeroIllustration({
+  className,
+  spokes = HERO_SPOKES,
+  hubLabel = "Your business",
+  hubGlyph,
+  ariaLabel = "Illustration: your business at the center, with spokes to sales, marketing, phones, calendar, operations, finance, customers and documents",
+}: {
+  className?: string;
+  /** Eight spokes keep the 45-degree layout; other counts spread evenly. */
+  spokes?: HeroSpoke[];
+  hubLabel?: string;
+  /** A glyph drawn in white in the hub instead of the DataSpoke wheel. */
+  hubGlyph?: keyof typeof GLYPHS;
+  ariaLabel?: string;
+}) {
   const W = 720;
   const H = 560;
   const CX = 360;
   const CY = 280;
   const R = 205;
   const nodeR = 36;
-  const nodes = HERO_SPOKES.map((s, i) => {
-    const ang = ((-90 + i * 45) * Math.PI) / 180;
+  const nodes = spokes.map((s, i) => {
+    const ang = ((-90 + i * (360 / spokes.length)) * Math.PI) / 180;
     const x = CX + R * Math.cos(ang);
     const y = CY + R * Math.sin(ang);
     const sin = Math.sin(ang);
@@ -152,7 +172,7 @@ export function HeroIllustration({ className }: { className?: string }) {
     <svg
       viewBox={`0 0 ${W} ${H}`}
       role="img"
-      aria-label="Illustration: your business at the center, with spokes to sales, marketing, phones, calendar, operations, finance, customers and documents"
+      aria-label={ariaLabel}
       className={cn("block h-auto w-full", className)}
     >
       <defs>
@@ -214,7 +234,11 @@ export function HeroIllustration({ className }: { className?: string }) {
       ))}
       <circle cx={CX} cy={CY} r={78} fill="url(#hero-hub)" filter="url(#hero-shadow)" />
       <circle cx={CX} cy={CY} r={92} fill="none" stroke="var(--brand)" strokeWidth={2} opacity={0.35} />
-      <HubMark cx={CX} cy={CY - 10} r={34} />
+      {hubGlyph ? (
+        <Glyph name={hubGlyph} x={CX} y={CY - 12} size={44} stroke="#fff" />
+      ) : (
+        <HubMark cx={CX} cy={CY - 10} r={34} />
+      )}
       <text
         x={CX}
         y={CY + 46}
@@ -224,7 +248,7 @@ export function HeroIllustration({ className }: { className?: string }) {
         fill="#fff"
         fontFamily="var(--font-jakarta), var(--font-inter), sans-serif"
       >
-        Your business
+        {hubLabel}
       </text>
     </svg>
   );

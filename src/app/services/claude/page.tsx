@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ClipboardList, Fuel, HardHat, Hotel, Landmark, Lock, UserCheck } from "lucide-react";
+import { Check, ClipboardList, Fuel, HardHat, Hotel, Landmark, Lock, UserCheck } from "lucide-react";
 import { generateMetadata } from "@/lib/metadata";
 import { LinkedText } from "@/components/shared/faq-list";
 import { Section, SectionHead } from "@/components/shared/section";
 import { EstimateCta } from "@/components/shared/estimate-cta";
-import { SpokeBullet } from "@/components/shared/spoke-bullet";
-import { SpokeDiagram } from "@/components/shared/spoke-diagram";
+import { HeroIllustration } from "@/components/home-a/illustrations";
 import { ApprovalFlow, JourneyPath, JourneyTimeline } from "@/components/services/claude-journey";
 import { CLAUDE_PAGE as P, CLAUDE_VISUALS as V } from "@/content/claude-services";
 import { LINE_PAGE } from "@/content/services";
@@ -32,35 +31,51 @@ function Cta({ location }: { location: string }) {
 export default function ClaudeServicePage() {
   return (
     <>
-      <Section tight>
-        <Link href="/services" className="inline-block py-2 text-sm font-semibold text-primary hover:text-primary/80">
-          &larr; {LINE_PAGE.backLabel}
-        </Link>
-        <div className="mt-4 grid items-center gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-14">
-          <div className="grid gap-6">
-            <SectionHead as="h1" eyebrow={P.eyebrow} title={P.title} lede={P.lede} />
-            <div className="grid gap-2.5">
-              <div>
-                <Cta location="service-claude-hero" />
-              </div>
-              <p className="max-w-xl text-sm text-muted-foreground">{P.ctaSupport}</p>
-            </div>
-          </div>
-          <SpokeDiagram medium hub={V.hub} spokes={V.hubSpokes} ariaLabel={V.hubAriaLabel} className="mx-auto max-w-md" />
-        </div>
-        <JourneyPath
-          steps={P.journey}
-          label={P.pathLabel}
-          className="mt-12 rounded-2xl border border-tint-strong bg-background p-6 shadow-[0_1px_2px_rgba(15,30,51,0.04)] sm:p-8"
+      <section className="relative overflow-hidden bg-gradient-to-b from-tint via-white to-white pb-12 pt-10 sm:pb-16 sm:pt-14">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-32 -top-32 h-[28rem] w-[28rem] rounded-full bg-brand/10 blur-3xl"
         />
-        <ul className="mt-10 grid gap-3 sm:grid-cols-3 sm:gap-6">
-          {P.intro.map((line) => (
-            <SpokeBullet key={line} as="li" size="list" className="font-semibold text-foreground/85">
-              {line}
-            </SpokeBullet>
-          ))}
-        </ul>
-      </Section>
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+          <Link href="/services" className="inline-block py-2 text-sm font-semibold text-primary hover:text-primary/80">
+            &larr; {LINE_PAGE.backLabel}
+          </Link>
+          <div className="mt-4 grid items-center gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
+            <div className="grid gap-5">
+              <p className="eyebrow">{P.eyebrow}</p>
+              <h1 className="text-[2.3rem] font-extrabold leading-[1.08] tracking-[-0.025em] sm:text-5xl lg:text-[3.25rem]">
+                {P.title}
+              </h1>
+              <p className="lede max-w-xl">{P.lede}</p>
+              <ul className="flex flex-wrap gap-2">
+                {P.intro.map((line) => (
+                  <li
+                    key={line}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-sm font-semibold text-foreground ring-1 ring-tint-strong"
+                  >
+                    <Check className="size-4 shrink-0 text-brand" aria-hidden="true" />
+                    {line}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-1 grid gap-2.5">
+                <div>
+                  <Cta location="service-claude-hero" />
+                </div>
+                <p className="max-w-xl text-sm text-muted-foreground">{P.ctaSupport}</p>
+              </div>
+            </div>
+            <figure className="mx-auto w-full max-w-[640px]">
+              <HeroIllustration spokes={V.hubSpokes} hubLabel={V.hub} hubGlyph="sparkle" ariaLabel={V.hubAriaLabel} />
+            </figure>
+          </div>
+          <JourneyPath
+            steps={P.journey}
+            label={P.pathLabel}
+            className="mt-10 rounded-2xl border border-tint-strong bg-background p-6 shadow-[0_1px_2px_rgba(15,30,51,0.04)] sm:p-8"
+          />
+        </div>
+      </section>
 
       <Section tint id="journey">
         <SectionHead eyebrow={P.journeyEyebrow} title={P.journeyTitle} lede={P.journeyLede} />
