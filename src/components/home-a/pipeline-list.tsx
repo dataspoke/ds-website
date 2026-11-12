@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BarChart3, Database, LayoutGrid, Plug, Sparkles, TrendingUp, type LucideIcon } from "lucide-react";
+import { LINE_ICONS as ICONS } from "@/components/services/line-icons";
 import type { ServiceLineSlug } from "@/types";
 import { cn } from "@/lib/utils";
 import { useInView } from "./dash";
@@ -13,15 +13,6 @@ export interface PipelineStep {
   blurb: string;
 }
 
-// Icons stay on the client: components can't cross the server-to-client boundary as props.
-const ICONS: Record<ServiceLineSlug, LucideIcon> = {
-  capture: Plug,
-  organize: Database,
-  "metrics-dashboards": BarChart3,
-  "analytics-data-science": TrendingUp,
-  "ai-implementation": Sparkles,
-  "custom-software": LayoutGrid,
-};
 const FOUNDATION = 2; // the first two steps are the foundation; the rest build on it
 const STEP_MS = 220; // the line reaches each node in turn
 
