@@ -1,9 +1,8 @@
-import Image from "next/image";
 import { ClipboardList, Flag, Sparkles, UserCheck } from "lucide-react";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { cn } from "@/lib/utils";
-import { ClaudeMdCartoon, ConnectorsCartoon, LearningLoopCartoon, SkillsLibraryCartoon } from "@/components/services/claude-cartoons";
-import { CLAUDE_VISUALS as V, type JourneyStep, type Shot } from "@/content/claude-services";
+import { ClaudeMdCartoon, ConnectorsCartoon, LearningLoopCartoon, ProjectCartoon, SkillsLibraryCartoon } from "@/components/services/claude-cartoons";
+import { CLAUDE_VISUALS as V, type JourneyStep } from "@/content/claude-services";
 
 /**
  * The five steps as a numbered path. A row joined by a line on wide screens,
@@ -38,39 +37,9 @@ export function JourneyPath({ steps, label, className }: { steps: JourneyStep[];
   );
 }
 
-/**
- * One real screenshot per step, in a fixed 4:3 window so every step card is the
- * same shape. The image is pinned top-left; the crop already holds the part
- * that matters. It links to the full image for a closer look.
- */
-function Screenshot({ shot }: { shot: Shot }) {
-  return (
-    <figure className="grid content-start gap-2">
-      <a
-        href={shot.src}
-        target="_blank"
-        rel="noopener"
-        className="block overflow-hidden rounded-lg border border-ink/80 bg-[#1f1f1e] shadow-[0_8px_24px_-14px_rgba(15,30,51,0.5)] transition-transform hover:-translate-y-0.5"
-      >
-        <Image
-          src={shot.src}
-          width={shot.width}
-          height={shot.height}
-          alt={shot.alt}
-          // Served as-is: the PNGs are already cropped and light, and this keeps them
-          // off the image optimizer so they load the same on every host.
-          unoptimized
-          className="aspect-[4/3] h-auto w-full object-cover object-left-top"
-        />
-      </a>
-      <figcaption className="text-sm text-muted-foreground">{shot.caption}</figcaption>
-    </figure>
-  );
-}
+const CARTOONS: Record<number, typeof ClaudeMdCartoon> = { 1: ConnectorsCartoon, 2: ProjectCartoon, 3: SkillsLibraryCartoon, 4: LearningLoopCartoon, 5: ClaudeMdCartoon };
 
-const CARTOONS: Record<number, typeof ClaudeMdCartoon> = { 1: ConnectorsCartoon, 3: SkillsLibraryCartoon, 4: LearningLoopCartoon, 5: ClaudeMdCartoon };
-
-/** A cartoon in the same 4:3 frame as the screenshots, with a sentence caption. */
+/** A drawn picture in a 4:3 frame, with a sentence caption. */
 function Cartoon({ step }: { step: number }) {
   const Picture = CARTOONS[step];
   const text = V.cartoons[step];
@@ -87,7 +56,7 @@ function Cartoon({ step }: { step: number }) {
 
 /**
  * The full journey as a numbered timeline. A rail runs down the left on every
- * screen size; on wide screens each step card puts its text beside its screenshot.
+ * screen size; on wide screens each step card puts its text beside its picture.
  */
 export function JourneyTimeline({ steps }: { steps: JourneyStep[] }) {
   return (
@@ -97,7 +66,6 @@ export function JourneyTimeline({ steps }: { steps: JourneyStep[] }) {
         aria-hidden="true"
       />
       {steps.map((step, i) => {
-        const shot = V.shots[i + 1];
         return (
           <li
             key={step.title}
@@ -125,7 +93,7 @@ export function JourneyTimeline({ steps }: { steps: JourneyStep[] }) {
                   ))}
                 </ul>
               </div>
-              {shot ? <Screenshot shot={shot} /> : <Cartoon step={i + 1} />}
+              <Cartoon step={i + 1} />
             </article>
           </li>
         );

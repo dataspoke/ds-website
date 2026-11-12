@@ -1,8 +1,9 @@
 import type { ReactNode } from "react";
 
 /**
- * Cartoon pictures for the later journey steps: the skills library, the team's
- * learning loop, and the CLAUDE.md that holds business context and guardrails.
+ * Drawn pictures for the five journey steps, all in one style: an app window with
+ * a dark title bar, ink outlines and an offset brand shadow. Letter badges stand in
+ * for product logos. No people.
  * Flat shapes, ink outlines and an offset shadow, in the brand colours.
  * All drawn on a 480 x 360 canvas so they fill the same 4:3 frame as the screenshots.
  */
@@ -11,7 +12,6 @@ const INK = "var(--ink)";
 const BRAND = "var(--brand)";
 const PRIMARY = "#1f63b5";
 const TINT = "var(--tint)";
-const LINE = "#e5e9f0";
 const SANS = "var(--font-inter), system-ui, sans-serif";
 const DISPLAY = "var(--font-jakarta), var(--font-inter), sans-serif";
 const MONO = "ui-monospace, SFMono-Regular, Menlo, monospace";
@@ -70,20 +70,6 @@ function Hand({ x, y, r = 11 }: { x: number; y: number; r?: number }) {
       {/* a pause sign: work stops here for a person */}
       <rect x="-4.5" y="-5" width="3" height="10" rx="1.2" fill="#fff" />
       <rect x="1.5" y="-5" width="3" height="10" rx="1.2" fill="#fff" />
-    </g>
-  );
-}
-
-/** A friendly round person: head, shoulders, two dot eyes and a smile. */
-function Person({ x, y, shirt = PRIMARY, flip = false }: { x: number; y: number; shirt?: string; flip?: boolean }) {
-  return (
-    <g transform={`translate(${x} ${y}) scale(${flip ? -1 : 1} 1)`}>
-      <path d="M-34 56 C-34 26 -18 16 0 16 C18 16 34 26 34 56 Z" fill={shirt} stroke={INK} strokeWidth="3" strokeLinejoin="round" />
-      <circle cx="0" cy="-8" r="22" fill="#fff" stroke={INK} strokeWidth="3" />
-      <path d="M-22 -14 C-18 -32 14 -34 22 -14 C12 -22 -8 -24 -22 -14 Z" fill={INK} />
-      <circle cx="-7" cy="-6" r="2.6" fill={INK} />
-      <circle cx="8" cy="-6" r="2.6" fill={INK} />
-      <path d="M-7 4 Q1 10 9 4" fill="none" stroke={INK} strokeWidth="2.5" strokeLinecap="round" />
     </g>
   );
 }
@@ -228,60 +214,146 @@ export function SkillsLibraryCartoon({ label }: { label: string }) {
   );
 }
 
-/** Step 4: the learning loop. The team runs the work, spots a change, updates the skill with a person's OK, and teaches it on. */
-export function LearningLoopCartoon({ label }: { label: string }) {
-  const cx = 240;
-  const cy = 184;
-  const rx = 150;
-  const ry = 112;
-  const nodes = [
-    { n: 1, text: "Run the skill", x: cx, y: cy - ry },
-    { n: 2, text: "Spot a change", x: cx + rx, y: cy },
-    { n: 3, text: "Update and approve", x: cx, y: cy + ry },
-    { n: 4, text: "Teach the team", x: cx - rx, y: cy },
-  ];
-  // arrowheads halfway between nodes, pointing clockwise along the loop
-  const arrows = [-45, 45, 135, 225].map((deg) => {
-    const t = (deg * Math.PI) / 180;
-    const x = cx + rx * Math.cos(t);
-    const y = cy + ry * Math.sin(t);
-    const angle = (Math.atan2(ry * Math.cos(t), -rx * Math.sin(t)) * 180) / Math.PI;
-    return { x, y, angle };
-  });
+/** Step 2: a Cowork project window: its instructions, files and skill. */
+export function ProjectCartoon({ label }: { label: string }) {
+  const projects = ["Month-end close", "Client intake", "Weekly report"];
+  const files = [
+    ["close-checklist.md", 176, 230],
+    ["accounts.pdf", 324, 230],
+    ["vendor-list.xlsx", 176, 258],
+  ] as const;
   return (
     <Canvas label={label}>
-      <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill="none" stroke={BRAND} strokeWidth="5" strokeDasharray="2 12" strokeLinecap="round" />
-      {arrows.map((a) => (
-        <path
-          key={a.angle}
-          transform={`translate(${a.x} ${a.y}) rotate(${a.angle})`}
-          d="M-9 -11 L11 0 L-9 11 L-3 0 Z"
-          fill={PRIMARY}
-          stroke={INK}
-          strokeWidth="2.5"
-          strokeLinejoin="round"
-        />
-      ))}
-      {/* the team in the middle of the loop */}
-      <Person x={208} y={176} shirt={BRAND} />
-      <Person x={272} y={176} shirt={PRIMARY} flip />
-      <text x={cx} y={258} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily={DISPLAY}>
-        Your team
+      <Window title="Month-end close" />
+      <rect x={38} y={66} width={116} height={256} fill={TINT} />
+      <line x1={154} y1={66} x2={154} y2={322} stroke={INK} strokeWidth="2" />
+      <text x={50} y={92} fontSize="12" fontWeight="800" fill={INK} fontFamily={MONO}>
+        Projects
       </text>
-      {nodes.map((d) => {
-        const w = 44 + d.text.length * 7.6;
-        const x = d.x - w / 2;
+      {projects.map((n, i) => {
+        const y = 120 + i * 28;
         return (
-          <g key={d.n}>
-            <rect x={x + 5} y={d.y - 18 + 5} width={w} height={36} rx="18" fill={BRAND} stroke={INK} strokeWidth="2.5" />
-            <rect x={x} y={d.y - 18} width={w} height={36} rx="18" fill="#fff" stroke={INK} strokeWidth="2.5" />
-            <circle cx={x + 18} cy={d.y} r="11" fill={PRIMARY} stroke={INK} strokeWidth="2" />
-            <text x={x + 18} y={d.y + 4.5} textAnchor="middle" fontSize="12.5" fontWeight="800" fill="#fff" fontFamily={DISPLAY}>
-              {d.n}
+          <g key={n}>
+            {i === 0 && <rect x={44} y={y - 17} width={104} height={24} rx="6" fill={BRAND} />}
+            <text x={50} y={y} fontSize="11" fontWeight="700" fill={i === 0 ? "#fff" : INK} fontFamily={SANS}>
+              {n}
             </text>
-            <text x={x + 35} y={d.y + 5} fontSize="14" fontWeight="700" fill={INK} fontFamily={SANS}>
-              {d.text}
+          </g>
+        );
+      })}
+      <text x={50} y={212} fontSize="11" fontWeight="700" fill={PRIMARY} fontFamily={SANS}>
+        + New project
+      </text>
+      {/* Cowork or Code */}
+      <rect x={176} y={78} width={74} height={24} rx="12" fill={BRAND} stroke={INK} strokeWidth="2" />
+      <text x={213} y={94.5} textAnchor="middle" fontSize="12" fontWeight="700" fill="#fff" fontFamily={SANS}>
+        Cowork
+      </text>
+      <rect x={258} y={78} width={60} height={24} rx="12" fill="#fff" stroke={INK} strokeWidth="2" />
+      <text x={288} y={94.5} textAnchor="middle" fontSize="12" fontWeight="700" fill={INK} fontFamily={SANS}>
+        Code
+      </text>
+      <Heading x={176} y={128} text="INSTRUCTIONS" />
+      <rect x={172} y={136} width={254} height={60} rx="8" fill={TINT} stroke={BRAND} strokeWidth="2" />
+      <text x={184} y={160} fontSize="12" fontWeight="600" fill={INK} fontFamily={SANS}>
+        Help close the books each month.
+      </text>
+      <text x={184} y={182} fontSize="12" fontWeight="600" fill={INK} fontFamily={SANS}>
+        Ask a person before changing data.
+      </text>
+      <Heading x={176} y={222} text="FILES" />
+      {files.map(([n, x, y]) => (
+        <g key={n}>
+          <rect x={x} y={y} width={n.length * 6.2 + 26} height={22} rx="6" fill="#fff" stroke={INK} strokeWidth="1.5" />
+          <path d={`M${x + 8} ${y + 5} h6 l3 3 v9 h-9 Z`} fill={TINT} stroke={INK} strokeWidth="1.2" />
+          <text x={x + 21} y={y + 15} fontSize="10" fontWeight="600" fill={INK} fontFamily={MONO}>
+            {n}
+          </text>
+        </g>
+      ))}
+      <Heading x={176} y={306} text="SKILL" />
+      <rect x={222} y={292} width={92} height={22} rx="11" fill={PRIMARY} stroke={INK} strokeWidth="1.5" />
+      <text x={268} y={307} textAnchor="middle" fontSize="11" fontWeight="700" fill="#fff" fontFamily={MONO}>
+        month-end
+      </text>
+    </Canvas>
+  );
+}
+
+/** A small uppercase section heading inside a window. */
+function Heading({ x, y, text }: { x: number; y: number; text: string }) {
+  return (
+    <text x={x} y={y} fontSize="11" fontWeight="800" fill={PRIMARY} fontFamily={DISPLAY} letterSpacing="0.06em">
+      {text}
+    </text>
+  );
+}
+
+/**
+ * Step 4: the learning loop as a skill's change log. The loop runs along the top;
+ * below, each change shows whether a person approved it and the team was trained.
+ */
+export function LearningLoopCartoon({ label }: { label: string }) {
+  const loop = ["Run it", "Spot a change", "Update", "Teach"];
+  const widths = [64, 108, 70, 62];
+  const gap = 22;
+  let lx = 52;
+  const chips = loop.map((t, i) => {
+    const chip = { t, x: lx, w: widths[i] };
+    lx += widths[i] + gap;
+    return chip;
+  });
+  const log: { v: string; title: string; pending?: boolean }[] = [
+    { v: "v4", title: "Use the new job export", pending: true },
+    { v: "v3", title: "Add a vendor check" },
+    { v: "v2", title: "Flag anything over the limit" },
+  ];
+  return (
+    <Canvas label={label}>
+      <Window title="month-end · change log" />
+      {chips.map((c, i) => (
+        <g key={c.t}>
+          <rect x={c.x} y={80} width={c.w} height={26} rx="13" fill={i === 1 ? BRAND : "#fff"} stroke={INK} strokeWidth="2" />
+          <text x={c.x + c.w / 2} y={97.5} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={i === 1 ? "#fff" : INK} fontFamily={SANS}>
+            {c.t}
+          </text>
+          {i < chips.length - 1 && <path d={`M${c.x + c.w + 5} 93 h12 m-5 -5 l5 5 l-5 5`} fill="none" stroke={PRIMARY} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />}
+        </g>
+      ))}
+      {/* the loop closes: back to the start */}
+      <path d={`M${lx - gap - widths[3] / 2} 108 v10 H${52 + widths[0] / 2} v-6`} fill="none" stroke={PRIMARY} strokeWidth="2" strokeDasharray="4 4" />
+      <path d={`M${52 + widths[0] / 2 - 5} 115 l5 -6 l5 6`} fill="none" stroke={PRIMARY} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      {log.map((e, i) => {
+        const y = 134 + i * 62;
+        return (
+          <g key={e.v}>
+            <rect x={52} y={y} width={376} height={54} rx="8" fill={e.pending ? TINT : "#fff"} stroke={e.pending ? BRAND : INK} strokeWidth="2" />
+            <circle cx={76} cy={y + 27} r="14" fill={e.pending ? BRAND : PRIMARY} stroke={INK} strokeWidth="2" />
+            <text x={76} y={y + 31} textAnchor="middle" fontSize="11" fontWeight="800" fill="#fff" fontFamily={DISPLAY}>
+              {e.v}
             </text>
+            <text x={100} y={y + 22} fontSize="12.5" fontWeight="700" fill={INK} fontFamily={SANS}>
+              {e.title}
+            </text>
+            {e.pending ? (
+              <>
+                <Hand x={108} y={y + 38} r={7} />
+                <text x={121} y={y + 42} fontSize="11" fontWeight="700" fill={PRIMARY} fontFamily={SANS}>
+                  Waiting for a person to approve
+                </text>
+              </>
+            ) : (
+              <>
+                <Check x={108} y={y + 38} r={7} />
+                <text x={121} y={y + 42} fontSize="11" fontWeight="600" fill={INK} fontFamily={SANS}>
+                  Approved by a person
+                </text>
+                <Check x={252} y={y + 38} r={7} />
+                <text x={265} y={y + 42} fontSize="11" fontWeight="600" fill={INK} fontFamily={SANS}>
+                  Team trained
+                </text>
+              </>
+            )}
           </g>
         );
       })}
@@ -289,69 +361,54 @@ export function LearningLoopCartoon({ label }: { label: string }) {
   );
 }
 
-/** Step 5: the CLAUDE.md page: what Claude knows about the business, then what it may and may not do. */
+/** Step 5: CLAUDE.md open in an editor: business context first, then the guardrails. */
 export function ClaudeMdCartoon({ label }: { label: string }) {
-  const rules: { icon: "check" | "cross" | "hand"; text: string }[] = [
-    { icon: "check", text: "Read QuickBooks, the job export" },
-    { icon: "check", text: "Write to reports/ only" },
-    { icon: "cross", text: "Never change invoices" },
-    { icon: "hand", text: "Refunds go to a person" },
+  const lines: { text?: string; kind?: "h1" | "h2" | "ctx"; icon?: "check" | "cross" | "hand" }[] = [
+    { text: "# CLAUDE.md", kind: "h1" },
+    {},
+    { text: "## About the business", kind: "h2" },
+    { text: "Field-service company, 3 crews.", kind: "ctx" },
+    { text: "Books close by the 5th.", kind: "ctx" },
+    {},
+    { text: "## Guardrails", kind: "h2" },
+    { text: "Read QuickBooks and the job export", icon: "check" },
+    { text: "Write to reports/ only", icon: "check" },
+    { text: "Never change invoices", icon: "cross" },
+    { text: "Refunds go to a person", icon: "hand" },
   ];
   return (
     <Canvas label={label}>
-      <g transform="rotate(-2.5 220 190)">
-        {/* page with a folded corner */}
-        <path d="M80 34 H318 L352 68 V322 H80 Z" fill={BRAND} stroke={INK} strokeWidth="3" strokeLinejoin="round" transform="translate(8 8)" />
-        <path d="M80 34 H318 L352 68 V322 H80 Z" fill="#fff" stroke={INK} strokeWidth="3" strokeLinejoin="round" />
-        <path d="M318 34 V68 H352" fill={LINE} stroke={INK} strokeWidth="3" strokeLinejoin="round" />
-        <text x={102} y={72} fontSize="22" fontWeight="800" fill={INK} fontFamily={MONO}>
-          CLAUDE.md
-        </text>
-        <rect x={102} y={84} width={96} height={5} rx="2.5" fill={BRAND} />
-        {/* business context: what Claude needs to know about you */}
-        <text x={102} y={114} fontSize="12.5" fontWeight="800" fill={PRIMARY} fontFamily={DISPLAY} letterSpacing="0.06em">
-          ABOUT THE BUSINESS
-        </text>
-        <rect x={98} y={122} width={236} height={58} rx="8" fill={TINT} stroke={BRAND} strokeWidth="2" />
-        <text x={110} y={146} fontSize="13.5" fontWeight="600" fill={INK} fontFamily={SANS}>
-          Field-service company, 3 crews
-        </text>
-        <text x={110} y={168} fontSize="13.5" fontWeight="600" fill={INK} fontFamily={SANS}>
-          Books close by the 5th
-        </text>
-        <text x={102} y={206} fontSize="12.5" fontWeight="800" fill={PRIMARY} fontFamily={DISPLAY} letterSpacing="0.06em">
-          GUARDRAILS
-        </text>
-        {rules.map((r, i) => {
-          const y = 226 + i * 24;
-          return (
-            <g key={r.text}>
-              {r.icon === "check" && <Check x={110} y={y} r={8} />}
-              {r.icon === "cross" && <Cross x={110} y={y} r={8} />}
-              {r.icon === "hand" && <Hand x={110} y={y} r={8} />}
-              <text x={126} y={y + 4.5} fontSize="13" fontWeight="500" fill={INK} fontFamily={SANS}>
-                {r.text}
+      <Window title="CLAUDE.md" />
+      <rect x={38} y={66} width={36} height={256} fill={TINT} />
+      {/* the business context, highlighted */}
+      <rect x={76} y={121} width={366} height={68} fill={TINT} />
+      <rect x={76} y={121} width={4} height={68} fill={BRAND} />
+      {lines.map((l, i) => {
+        const y = 92 + i * 22;
+        const x = l.icon ? 110 : 90;
+        return (
+          <g key={i}>
+            <text x={62} y={y} textAnchor="end" fontSize="11" fontWeight="500" fill="#8a97a8" fontFamily={MONO}>
+              {i + 1}
+            </text>
+            {l.icon === "check" && <Check x={96} y={y - 4} r={7} />}
+            {l.icon === "cross" && <Cross x={96} y={y - 4} r={7} />}
+            {l.icon === "hand" && <Hand x={96} y={y - 4} r={7} />}
+            {l.text && (
+              <text
+                x={x}
+                y={y}
+                fontSize={l.kind === "h1" ? 13.5 : 12}
+                fontWeight={l.kind === "h1" || l.kind === "h2" ? 800 : 500}
+                fill={l.kind === "h2" ? PRIMARY : INK}
+                fontFamily={MONO}
+              >
+                {l.text}
               </text>
-            </g>
-          );
-        })}
-      </g>
-      {/* shield badge: the rules are enforced, not just written down */}
-      <g transform="translate(392 150)">
-        <path d="M0 -62 L50 -44 V0 C50 34 26 56 0 68 C-26 56 -50 34 -50 0 V-44 Z" fill={PRIMARY} stroke={INK} strokeWidth="3" strokeLinejoin="round" transform="translate(6 6)" opacity="0.35" />
-        <path d="M0 -62 L50 -44 V0 C50 34 26 56 0 68 C-26 56 -50 34 -50 0 V-44 Z" fill={BRAND} stroke={INK} strokeWidth="3" strokeLinejoin="round" />
-        <rect x="-17" y="-6" width="34" height="28" rx="5" fill="#fff" stroke={INK} strokeWidth="3" />
-        <path d="M-10 -6 V-16 a10 10 0 0 1 20 0 V-6" fill="none" stroke={INK} strokeWidth="3" />
-        <circle cx="0" cy="8" r="3.5" fill={INK} />
-      </g>
-      {["Your business", "Your rules"].map((t, i) => (
-        <g key={t} transform={`translate(400 ${250 + i * 44})`}>
-          <rect x="-62" y="-17" width="124" height="34" rx="17" fill="#fff" stroke={INK} strokeWidth="3" />
-          <text x="0" y="5.5" textAnchor="middle" fontSize="14" fontWeight="700" fill={INK} fontFamily={DISPLAY}>
-            {t}
-          </text>
-        </g>
-      ))}
+            )}
+          </g>
+        );
+      })}
     </Canvas>
   );
 }

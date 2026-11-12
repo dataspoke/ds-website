@@ -13,16 +13,6 @@ export interface JourneyStep {
   bullets: string[];
 }
 
-/** A real screenshot, cropped to the part that matters. */
-export interface Shot {
-  src: string;
-  width: number;
-  height: number;
-  alt: string;
-  caption: string;
-}
-
-
 export const CLAUDE_PAGE = {
   path: "/services/claude",
   metaTitle: "Claude Cowork, Claude Code, Skills and MCP setup",
@@ -179,35 +169,26 @@ export const CLAUDE_VISUALS = {
   ] satisfies HeroSpoke[],
   hubAriaLabel:
     "Illustration: Claude at the center, with spokes to QuickBooks, Xero, HubSpot, your ERP, your CRM, calendar, email and documents",
-  /**
-   * A real screenshot of the Claude desktop app for step 2 (a Cowork project),
-   * cropped to leave out account details. Keyed by step number.
-   */
-  shots: {
-    2: {
-      src: "/images/claude/projects.png",
-      width: 1250,
-      height: 700,
-      alt: "The Claude desktop app with a Cowork project pinned in the sidebar, along with its morning brief skill",
-      caption: "A Cowork project, pinned with its skill.",
-    },
-  } as Record<number, Shot>,
-  /** Drawn pictures for the other steps, keyed by step number. */
+  /** Drawn pictures for the five steps, keyed by step number. */
   cartoons: {
     1: {
       alt: "Illustration: a connector directory window. Gmail, Notion, Fathom and Google Drive are connected, and Xero and Salesforce are ready to connect",
       caption: "Your systems, connected one at a time. Illustration.",
+    },
+    2: {
+      alt: "Illustration: a Cowork project window for month-end close, with its instructions, three files and the month-end skill, and a switch between Cowork and Code",
+      caption: "A Cowork project: instructions, files and a skill in one place. Illustration.",
     },
     3: {
       alt: "Illustration: a skills library window. A skills folder holds month-end, weekly-report, client-intake, invoice-chase and morning-brief, and the open month-end skill file lists its four steps, ending with wait for your OK",
       caption: "A skills library: one folder per repeating job, with the steps written down. Illustration.",
     },
     4: {
-      alt: "Cartoon: a learning loop around your team. Run the skill, spot a change, update and approve, teach the team, then run it again",
-      caption: "The learning loop: when the work changes, your team updates the skill, a person approves it, and everyone learns the new way. Illustration.",
+      alt: "Illustration: a change log for the month-end skill. The loop runs run it, spot a change, update, teach. Two changes are approved by a person with the team trained, and the newest waits for approval",
+      caption: "The learning loop: every change to a skill is approved by a person, and the team learns it. Illustration.",
     },
     5: {
-      alt: "Cartoon: a CLAUDE.md page with a short note about the business, then guardrails for what Claude may read, may write, must never do, and must ask a person about",
+      alt: "Illustration: CLAUDE.md open in an editor, with a section about the business, then guardrails for what Claude may read and write, must never do, and must ask a person about",
       caption: "The project's CLAUDE.md: what Claude knows about your business, and the guardrails it follows. Illustration.",
     },
   } as Record<number, { alt: string; caption: string }>,
