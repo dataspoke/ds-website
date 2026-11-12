@@ -9,6 +9,7 @@ import { LegacyAnchorRedirect } from "@/components/services/legacy-anchor-redire
 import { LineCard } from "@/components/services/line-card";
 import { ServicesMap } from "@/components/services/services-map";
 import { ASSESSMENT, RETAINER_NOTE } from "@/content/approach";
+import { CLAUDE_PAGE } from "@/content/claude-services";
 import { HUB_LINES, LINE_PAGE, SERVICES_PAGE, SPOKE_LINES } from "@/content/services";
 
 export const metadata: Metadata = generateMetadata({
@@ -80,6 +81,19 @@ export default function ServicesPage() {
             {LINE_PAGE.workLink.label} &rarr;
           </Link>
         )}
+        <Link
+          href={CLAUDE_PAGE.path}
+          className="mt-10 grid gap-2.5 rounded-xl border border-tint-strong bg-tint p-6 transition-colors hover:border-brand md:grid-cols-[1fr_auto] md:items-end md:gap-8"
+        >
+          <div className="grid gap-2.5">
+            <p className="eyebrow">{CLAUDE_PAGE.card.eyebrow}</p>
+            <h3 className="text-xl font-bold">{CLAUDE_PAGE.card.title}</h3>
+            <p className="font-semibold text-foreground/80">{CLAUDE_PAGE.card.oneLiner}</p>
+            <p className="text-[0.97rem] text-muted-foreground">{CLAUDE_PAGE.card.summary}</p>
+            <p className="mt-1 border-t border-tint-strong pt-2.5 text-sm text-muted-foreground">{CLAUDE_PAGE.card.steps}</p>
+          </div>
+          <p className="font-semibold text-primary">{CLAUDE_PAGE.card.link} &rarr;</p>
+        </Link>
       </Section>
 
       <Section tint tight>

@@ -36,6 +36,9 @@ function shallowBoundary(): Set<string> {
 
 /** The source files each page is built from. Shared chrome (layout, header, footer) is left out. */
 function pageSources(pagePath: string): string[] {
+  if (pagePath === "/services/claude") {
+    return ["src/app/services/claude", "src/content/claude-services.ts", "src/components/services/claude-journey.tsx"];
+  }
   if (pagePath.startsWith("/services/")) {
     return ["src/app/services/[line]", "src/content/services.ts", "src/content/service-pages.ts", "src/components/services"];
   }
@@ -98,6 +101,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/privacy",
     "/services",
     ...SERVICE_LINES.map((l) => `/services/${l.slug}`),
+    "/services/claude",
     "/industries",
     ...INDUSTRIES.map((i) => `/industries/${i.slug}`),
     // /insights is noindex until a post is published (see src/app/insights/page.tsx).

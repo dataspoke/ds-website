@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { generateMetadata as pageMetadata } from "@/lib/metadata";
 import { FaqPageJsonLd, ServiceJsonLd } from "@/components/shared/json-ld";
-import { FaqList } from "@/components/shared/faq-list";
+import { FaqList, LinkedText } from "@/components/shared/faq-list";
 import { Section, SectionHead } from "@/components/shared/section";
 import { EstimateCta } from "@/components/shared/estimate-cta";
 import { WORK_PUBLISHED } from "@/lib/constants";
@@ -82,6 +82,11 @@ export default async function ServiceLinePage({ params }: PageProps<"/services/[
               </Fragment>
             ))}
             .
+          </p>
+        )}
+        {extra.crossLink && (
+          <p className="mt-6 rounded-xl border border-tint-strong bg-tint px-5 py-4 text-foreground/85">
+            <LinkedText text={extra.crossLink.text} links={extra.crossLink.links} />
           </p>
         )}
       </Section>
