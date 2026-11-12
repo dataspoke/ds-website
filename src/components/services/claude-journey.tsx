@@ -1,7 +1,7 @@
 import { ClipboardList, Flag, Sparkles, UserCheck } from "lucide-react";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { cn } from "@/lib/utils";
-import { ClaudeMdCartoon, ConnectorsCartoon, LearningLoopCartoon, ProjectCartoon, SkillsLibraryCartoon } from "@/components/services/claude-cartoons";
+import { ConnectorsCartoon, FirstAgentCartoon, LearningLoopCartoon, ProjectCartoon, SkillsLibraryCartoon } from "@/components/services/claude-cartoons";
 import { CLAUDE_VISUALS as V, type JourneyStep } from "@/content/claude-services";
 
 /**
@@ -37,7 +37,7 @@ export function JourneyPath({ steps, label, className }: { steps: JourneyStep[];
   );
 }
 
-const CARTOONS: Record<number, typeof ClaudeMdCartoon> = { 1: ConnectorsCartoon, 2: ProjectCartoon, 3: SkillsLibraryCartoon, 4: LearningLoopCartoon, 5: ClaudeMdCartoon };
+const CARTOONS: Record<number, typeof FirstAgentCartoon> = { 1: ConnectorsCartoon, 2: ProjectCartoon, 3: SkillsLibraryCartoon, 4: LearningLoopCartoon, 5: FirstAgentCartoon };
 
 /** A drawn picture in a 4:3 frame, with a sentence caption. */
 function Cartoon({ step }: { step: number }) {

@@ -54,15 +54,6 @@ function Check({ x, y, r = 11 }: { x: number; y: number; r?: number }) {
   );
 }
 
-function Cross({ x, y, r = 11 }: { x: number; y: number; r?: number }) {
-  return (
-    <g transform={`translate(${x} ${y})`}>
-      <circle r={r} fill="#fff" stroke={INK} strokeWidth="2.5" />
-      <path d="M-4.5 -4.5 L4.5 4.5 M4.5 -4.5 L-4.5 4.5" stroke={INK} strokeWidth="3" strokeLinecap="round" />
-    </g>
-  );
-}
-
 function Hand({ x, y, r = 11 }: { x: number; y: number; r?: number }) {
   return (
     <g transform={`translate(${x} ${y})`}>
@@ -361,54 +352,156 @@ export function LearningLoopCartoon({ label }: { label: string }) {
   );
 }
 
-/** Step 5: CLAUDE.md open in an editor: business context first, then the guardrails. */
-export function ClaudeMdCartoon({ label }: { label: string }) {
-  const lines: { text?: string; kind?: "h1" | "h2" | "ctx"; icon?: "check" | "cross" | "hand" }[] = [
-    { text: "# CLAUDE.md", kind: "h1" },
-    {},
-    { text: "## About the business", kind: "h2" },
-    { text: "Field-service company, 3 crews.", kind: "ctx" },
-    { text: "Books close by the 5th.", kind: "ctx" },
-    {},
-    { text: "## Guardrails", kind: "h2" },
-    { text: "Read QuickBooks and the job export", icon: "check" },
-    { text: "Write to reports/ only", icon: "check" },
-    { text: "Never change invoices", icon: "cross" },
-    { text: "Refunds go to a person", icon: "hand" },
-  ];
+/** Claude's sparkle mark, drawn simply. */
+function Sparkle({ x, y, s = 1, fill = "#fff" }: { x: number; y: number; s?: number; fill?: string }) {
+  return (
+    <path
+      transform={`translate(${x} ${y}) scale(${s})`}
+      d="M0 -10 C1.5 -3 3 -1.5 10 0 C3 1.5 1.5 3 0 10 C-1.5 3 -3 1.5 -10 0 C-3 -1.5 -1.5 -3 0 -10 Z"
+      fill={fill}
+    />
+  );
+}
+
+/** A line with an arrowhead at its end; the head points along `rot` degrees. */
+function Arrow({ d, tip, rot }: { d: string; tip: [number, number]; rot: number }) {
+  return (
+    <>
+      <path d={d} fill="none" stroke={PRIMARY} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        transform={`translate(${tip[0]} ${tip[1]}) rotate(${rot})`}
+        d="M-6 -4.5 L0 0 L-6 4.5"
+        fill="none"
+        stroke={PRIMARY}
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </>
+  );
+}
+
+/** A tool step: exact work, shown with letter badges for the systems it touches. */
+function ToolStep({ cy, h = 40, badges = [], title, sub }: { cy: number; h?: number; badges?: [string, string][]; title: string; sub?: string }) {
+  const x = 28;
+  const tx = x + 14 + badges.length * 26;
+  return (
+    <g>
+      <Card x={x} y={cy - h / 2} w={196} h={h} r={9} />
+      {badges.map(([b, f], i) => (
+        <g key={b}>
+          <rect x={x + 10 + i * 26} y={cy - 9} width={22} height={18} rx="4" fill={f} stroke={INK} strokeWidth="1.5" />
+          <text x={x + 21 + i * 26} y={cy + 3.5} textAnchor="middle" fontSize="9" fontWeight="800" fill={f === "#fff" || f === "#d6e6f8" ? INK : "#fff"} fontFamily={DISPLAY}>
+            {b}
+          </text>
+        </g>
+      ))}
+      <text x={tx} y={sub ? cy - 2 : cy + 4} fontSize="11.5" fontWeight="800" fill={INK} fontFamily={SANS}>
+        {title}
+      </text>
+      {sub && (
+        <text x={tx} y={cy + 12} fontSize="9.5" fontWeight="500" fill="#55657a" fontFamily={SANS}>
+          {sub}
+        </text>
+      )}
+    </g>
+  );
+}
+
+/** A Claude step: a judgment call, marked with the sparkle. `judge` draws it white. */
+function ClaudeStep({ cy, title, sub, judge = false }: { cy: number; title: string; sub: string; judge?: boolean }) {
+  const x = 256;
+  const tc = judge ? INK : "#fff";
+  return (
+    <g>
+      <rect x={x + 4} y={cy - 16} width={186} height={40} rx="9" fill={judge ? PRIMARY : BRAND} stroke={INK} strokeWidth="2.5" />
+      <rect x={x} y={cy - 20} width={186} height={40} rx="9" fill={judge ? "#fff" : PRIMARY} stroke={INK} strokeWidth="2.5" />
+      <Sparkle x={x + 16} y={cy} s={0.75} fill={judge ? PRIMARY : "#fff"} />
+      <text x={x + 30} y={cy - 2} fontSize="11.5" fontWeight="800" fill={tc} fontFamily={SANS}>
+        {title}
+      </text>
+      <text x={x + 30} y={cy + 12} fontSize="9.5" fontWeight="500" fill={tc} opacity="0.85" fontFamily={SANS}>
+        {sub}
+      </text>
+    </g>
+  );
+}
+
+/**
+ * Step 5: a client follow-through agent in two lanes. Tools on the left do exact,
+ * logged work (the transcript, the data warehouse, the drafts); Claude on the right
+ * makes the calls (what was promised, where each item goes, whether the work passes).
+ */
+export function FirstAgentCartoon({ label }: { label: string }) {
   return (
     <Canvas label={label}>
-      <Window title="CLAUDE.md" />
-      <rect x={38} y={66} width={36} height={256} fill={TINT} />
-      {/* the business context, highlighted */}
-      <rect x={76} y={121} width={366} height={68} fill={TINT} />
-      <rect x={76} y={121} width={4} height={68} fill={BRAND} />
-      {lines.map((l, i) => {
-        const y = 92 + i * 22;
-        const x = l.icon ? 110 : 90;
-        return (
-          <g key={i}>
-            <text x={62} y={y} textAnchor="end" fontSize="11" fontWeight="500" fill="#8a97a8" fontFamily={MONO}>
-              {i + 1}
-            </text>
-            {l.icon === "check" && <Check x={96} y={y - 4} r={7} />}
-            {l.icon === "cross" && <Cross x={96} y={y - 4} r={7} />}
-            {l.icon === "hand" && <Hand x={96} y={y - 4} r={7} />}
-            {l.text && (
-              <text
-                x={x}
-                y={y}
-                fontSize={l.kind === "h1" ? 13.5 : 12}
-                fontWeight={l.kind === "h1" || l.kind === "h2" ? 800 : 500}
-                fill={l.kind === "h2" ? PRIMARY : INK}
-                fontFamily={MONO}
-              >
-                {l.text}
-              </text>
-            )}
-          </g>
-        );
-      })}
+      <rect x={16} y={14} width={216} height={304} rx="12" fill="#fff" opacity="0.7" />
+      <rect x={248} y={14} width={216} height={304} rx="12" fill="#d6e6f8" opacity="0.55" />
+      <rect x={26} y={22} width={18} height={16} rx="4" fill="#fff" stroke={INK} strokeWidth="1.5" />
+      <text x={52} y={35} fontSize="10" fontWeight="800" fill={INK} fontFamily={DISPLAY}>
+        TOOLS · exact, logged
+      </text>
+      <Sparkle x={266} y={30} s={0.8} fill={PRIMARY} />
+      <text x={280} y={35} fontSize="10" fontWeight="800" fill={PRIMARY} fontFamily={DISPLAY}>
+        CLAUDE · makes the calls
+      </text>
+
+      <rect x={28} y={46} width={196} height={24} rx="12" fill={INK} />
+      <text x={126} y={62} textAnchor="middle" fontSize="10.5" fontWeight="700" fill="#fff" fontFamily={SANS}>
+        Trigger: a Fathom call ends
+      </text>
+      <Arrow d="M126 70 V80" tip={[126, 80]} rot={90} />
+      <ToolStep cy={98} h={34} badges={[["F", "#d6e6f8"]]} title="Pull the transcript" />
+      <Arrow d="M126 115 V128" tip={[126, 128]} rot={90} />
+      <ToolStep cy={148} badges={[["DW", PRIMARY]]} title="Data warehouse" sub="client history, open jobs" />
+      <Arrow d="M224 148 H254" tip={[254, 148]} rot={0} />
+      <ClaudeStep cy={148} title="Find promises, risks" sub="who, what, by when" />
+      <Arrow d="M349 168 V180" tip={[349, 180]} rot={90} />
+      <ClaudeStep cy={200} title="Route each item" sub="update, email, task or flag" />
+      <Arrow d="M256 200 H226" tip={[226, 200]} rot={180} />
+      <ToolStep
+        cy={200}
+        badges={[
+          ["SF", BRAND],
+          ["M", PRIMARY],
+          ["N", "#fff"],
+        ]}
+        title="Write drafts"
+      />
+      <Arrow d="M126 220 V250 H254" tip={[254, 250]} rot={0} />
+      <ClaudeStep cy={250} title="AI judge checks" sub="vs transcript + warehouse" judge />
+
+      {/* pass: the tools finish the job */}
+      <Arrow d="M256 266 L226 290" tip={[226, 290]} rot={141} />
+      <text x={236} y={266} textAnchor="end" fontSize="9.5" fontWeight="700" fill={PRIMARY} fontFamily={SANS}>
+        pass
+      </text>
+      <ToolStep cy={300} h={32} title="" />
+      <Check x={46} y={300} r={7} />
+      <text x={60} y={304} fontSize="11.5" fontWeight="800" fill={INK} fontFamily={SANS}>
+        Send and save
+      </text>
+
+      {/* unsure: a person decides, and that call feeds back */}
+      <Arrow d="M372 275 V286" tip={[372, 286]} rot={90} />
+      <text x={380} y={285} fontSize="9.5" fontWeight="700" fill={PRIMARY} fontFamily={SANS}>
+        unsure
+      </text>
+      <Card x={298} y={288} w={144} h={28} r={9} />
+      <Hand x={314} y={302} r={7} />
+      <text x={328} y={306} fontSize="11.5" fontWeight="800" fill={INK} fontFamily={SANS}>
+        A person decides
+      </text>
+      <path d="M442 302 H462 V148 H448" fill="none" stroke={PRIMARY} strokeWidth="2" strokeDasharray="4 4" />
+      <path transform="translate(448 148) rotate(180)" d="M-6 -4.5 L0 0 L-6 4.5" fill="none" stroke={PRIMARY} strokeWidth="2.2" strokeLinecap="round" />
+      <text x={469} y={226} textAnchor="middle" fontSize="9.5" fontWeight="700" fill={PRIMARY} fontFamily={SANS} transform="rotate(90 469 226)">
+        feedback
+      </text>
+
+      <rect x={16} y={326} width={448} height={26} rx="8" fill={INK} />
+      <text x={240} y={343} textAnchor="middle" fontSize="10.5" fontWeight="600" fill="#fff" fontFamily={SANS}>
+        Every step logged · each tool sees only what it needs
+      </text>
     </Canvas>
   );
 }

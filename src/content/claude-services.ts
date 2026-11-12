@@ -188,8 +188,8 @@ export const CLAUDE_VISUALS = {
       caption: "The learning loop: every change to a skill is approved by a person, and the team learns it. Illustration.",
     },
     5: {
-      alt: "Illustration: CLAUDE.md open in an editor, with a section about the business, then guardrails for what Claude may read and write, must never do, and must ask a person about",
-      caption: "The project's CLAUDE.md: what Claude knows about your business, and the guardrails it follows. Illustration.",
+      alt: "Illustration: a client follow-through agent in two lanes. Tools pull the call transcript from Fathom and client history from the data warehouse, and write drafts in Salesforce, Gmail and Notion. Claude finds the promises and risks, routes each item, and an AI judge checks the work. Passing work is sent and saved; anything unsure goes to a person, and their call feeds back. Every step is logged",
+      caption: "A first agent: tools do the exact work, Claude makes the calls, and a person decides anything unsure. Illustration.",
     },
   } as Record<number, { alt: string; caption: string }>,
   /** Guardrails: the approval flow. */
