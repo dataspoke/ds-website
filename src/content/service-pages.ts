@@ -396,7 +396,7 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
   },
   "ai-implementation": {
     crossLink: {
-      text: "Already working in Claude? See Claude setup and training: Claude Code setup, Claude Skills, and MCP connectors into QuickBooks, Xero or your CRM.",
+      text: "Already working in Claude? See Claude setup and training: Claude connected to QuickBooks, Xero or your CRM, Claude Cowork and Claude Code setup, and Claude Skills.",
       links: [{ label: "Claude setup and training", href: "/services/claude" }],
     },
     faqEyebrow: "Questions",

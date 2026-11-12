@@ -19,13 +19,13 @@ export interface Guardrail {
 
 export const CLAUDE_PAGE = {
   path: "/services/claude",
-  metaTitle: "Claude Code, Skills and MCP, set up and taught",
+  metaTitle: "Claude Cowork, Claude Code, Skills and MCP setup",
   metaDescription:
-    "I review your Claude Code setup, build a first guarded agent and Skills, and connect Claude to QuickBooks, Xero or your CRM. Free AI strategy call.",
+    "I connect Claude to QuickBooks, Xero or your CRM, set up Claude Cowork and Claude Code, and build Skills and a first agent. Free AI strategy call.",
   eyebrow: "Claude setup and training",
   title: "I set Claude up on your business, then teach you to run it.",
   lede:
-    "A reviewed Claude Code setup, a first agent done properly, Claude Skills for the work that repeats, and a connection into the systems you already use. Limited access, human approvals, and an audit trail. I build with you and teach you, so you're not stuck when I leave.",
+    "Claude connected to the systems you already use, a reviewed Claude Cowork or Claude Code setup, Claude Skills for the work that repeats, and a first agent done properly. Limited access, human approvals, and an audit trail. I build with you and teach you, so you're not stuck when I leave.",
   intro: [
     "I set Claude up on the systems you already pay for.",
     "I stay until you and your team can run it.",
@@ -34,18 +34,30 @@ export const CLAUDE_PAGE = {
   pathLabel: "The path, in order",
 
   journeyEyebrow: "How it works",
-  journeyTitle: "Five steps, from your first Claude Code setup to an agent your team runs.",
+  journeyTitle: "Five steps, from connecting your data to an agent your team runs.",
   journeyLede:
     "Each step builds on the one before. You can start at step one, or tell me where you are and we pick up from there.",
   journey: [
     {
-      short: "Claude Code setup",
-      title: "Review or build your Claude Code setup",
+      short: "Connect your data",
+      title: "Connect Claude to your data",
       lede:
-        "I sit with you, review the setup you have, and tighten it. If you're just getting started, I build it with you and teach you as we go.",
+        "Claude starts with your data. An MCP connector (a secure way for Claude to use a system you already have) links it to the tools you already pay for.",
       bullets: [
-        "A screen-share review of your current Claude Code setup and workflow",
-        "A tighter setup: project instructions, skills, and guardrails you keep",
+        "Connect Claude to QuickBooks, Xero, your ERP, your CRM, or HubSpot",
+        "Claude can read the records it needs and, where you approve it, draft the next step",
+        "Access stays limited, in accounts you own",
+        "You don't have to start running your own servers to get this working",
+      ],
+    },
+    {
+      short: "Cowork or Code setup",
+      title: "Set up Claude Cowork projects or Claude Code",
+      lede:
+        "Claude Cowork projects for your team's everyday work, or a Claude Code setup for the people who build. I review the setup you have and tighten it, or build it with you and teach you as we go.",
+      bullets: [
+        "A screen-share review of your current Claude Cowork or Claude Code setup and workflow",
+        "Cowork projects with the instructions and files each job needs, or a Claude Code setup with project instructions and guardrails you keep",
         "Coaching while you do the work, so the knowledge stays in your company",
         "Help with Claude Skills, Claude Cowork, and Claude Code, until you can run them yourself",
       ],
@@ -61,20 +73,8 @@ export const CLAUDE_PAGE = {
       ],
     },
     {
-      short: "MCP connectors",
-      title: "Connect Claude to the systems you already use",
-      lede:
-        "An MCP connector (a secure way for Claude to use a system you already have) into the tools you already pay for.",
-      bullets: [
-        "Connect Claude to QuickBooks, Xero, your ERP, your CRM, or HubSpot",
-        "Claude can read the records it needs and, where you approve it, draft the next step",
-        "Access stays limited, in accounts you own",
-        "You don't have to start running your own servers to get this working",
-      ],
-    },
-    {
       short: "Staff training",
-      title: "Build with me and teach me",
+      title: "Your team learns to run it",
       lede:
         "I build alongside the people who will run it, so your team owns the setup, not me.",
       bullets: [
@@ -145,7 +145,7 @@ export const CLAUDE_PAGE = {
   startTitle: "Book a free AI strategy call.",
   startPoints: [
     "A free 30-minute call.",
-    "Tell me what you want to do first: review your setup, stand up a first agent, turn a repeating job into a skill, or connect Claude to a system you already run.",
+    "Tell me what you want to do first: connect Claude to a system you already run, set up Claude Cowork or Claude Code, turn a repeating job into a skill, or stand up a first agent.",
     "Within two business days I send a written estimate with a recommended plan and a price range.",
     "No obligation. You keep the estimate either way.",
   ],
@@ -163,8 +163,8 @@ export const CLAUDE_PAGE = {
     title: "Claude setup and training",
     oneLiner: "I set Claude up on your business, then teach you to run it.",
     summary:
-      "A reviewed Claude Code setup, Claude Skills for the work that repeats, MCP connectors into QuickBooks, Xero or your CRM, and a first guarded agent your team can run.",
-    steps: "Claude Code setup · Claude Skills · MCP connectors · Staff training · First agent",
+      "Claude connected to QuickBooks, Xero or your CRM, a Claude Cowork or Claude Code setup, Claude Skills for the work that repeats, and a first guarded agent your team can run.",
+    steps: "Connect your data · Cowork or Code setup · Claude Skills · Staff training · First agent",
     link: "See Claude setup and training",
   },
 };
