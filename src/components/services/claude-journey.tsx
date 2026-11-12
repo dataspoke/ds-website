@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Check, ClipboardList, Flag, Sparkles, UserCheck } from "lucide-react";
+import { ClipboardList, Flag, Sparkles, UserCheck } from "lucide-react";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { cn } from "@/lib/utils";
 import { CLAUDE_VISUALS as V, type JourneyStep, type Shot } from "@/content/claude-services";
@@ -37,107 +37,37 @@ export function JourneyPath({ steps, label, className }: { steps: JourneyStep[];
   );
 }
 
-/** Frame for a step picture: a mock window. The timeline adds the "Illustrative" tag under it. */
-function Frame({ title, className, children }: { title: string; className?: string; children: React.ReactNode }) {
-  return (
-    <div className={cn("overflow-hidden rounded-lg border border-tint-strong bg-background", className)}>
-      <div className="flex items-center justify-between gap-3 border-b border-tint-strong bg-tint px-3 py-2">
-        <span className="flex shrink-0 items-center gap-1.5" aria-hidden="true">
-          <span className="h-2 w-2 rounded-full bg-tint-strong" />
-          <span className="h-2 w-2 rounded-full bg-tint-strong" />
-          <span className="h-2 w-2 rounded-full bg-tint-strong" />
-        </span>
-        <span className="truncate text-xs font-semibold text-foreground/70">{title}</span>
-      </div>
-      <div className="p-3 text-sm">{children}</div>
-    </div>
-  );
-}
-
-/** A real screenshot in a dark window frame, with its source caption. */
+/**
+ * One real screenshot per step, in a fixed 4:3 window so every step card is the
+ * same shape. The image is pinned top-left; the crop already holds the part
+ * that matters. It links to the full image for a closer look.
+ */
 function Screenshot({ shot }: { shot: Shot }) {
   return (
-    <figure
-      className="mx-auto grid w-full max-w-[22rem] gap-1.5 sm:max-w-[var(--shot-max)] lg:col-span-2"
-      style={{ "--shot-max": shot.maxWidth ? `${shot.maxWidth}px` : "100%" } as React.CSSProperties}
-    >
-      <div className="overflow-hidden rounded-xl border border-ink/80 bg-[#1f1f1e] shadow-[0_12px_32px_-16px_rgba(15,30,51,0.45)]">
-        <Image
-          src={shot.phone.src}
-          width={shot.phone.width}
-          height={shot.phone.height}
-          alt={shot.alt}
-          sizes="100vw"
-          className="block h-auto w-full sm:hidden"
-        />
+    <figure className="grid content-start gap-2">
+      <a
+        href={shot.src}
+        target="_blank"
+        rel="noopener"
+        className="block overflow-hidden rounded-lg border border-ink/80 bg-[#1f1f1e] shadow-[0_8px_24px_-14px_rgba(15,30,51,0.5)] transition-transform hover:-translate-y-0.5"
+      >
         <Image
           src={shot.src}
           width={shot.width}
           height={shot.height}
           alt={shot.alt}
-          sizes={shot.maxWidth ? `(min-width: 1024px) ${shot.maxWidth}px, 100vw` : "(min-width: 1024px) 900px, 100vw"}
-          className="hidden h-auto w-full sm:block"
+          sizes="(min-width: 1024px) 460px, 100vw"
+          className="aspect-[4/3] h-auto w-full object-cover object-left-top"
         />
-      </div>
-      <figcaption className="text-right text-[0.65rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
-        {shot.caption}
-      </figcaption>
+      </a>
+      <figcaption className="text-sm text-muted-foreground">{shot.caption}</figcaption>
     </figure>
   );
 }
 
-function TrainingPicture() {
-  return (
-    <Frame title={V.training.label}>
-      <ul className="grid gap-1.5">
-        {V.training.items.map((item) => (
-          <li key={item.text} className="flex items-center gap-2.5">
-            <span
-              className={cn(
-                "grid h-5 w-5 shrink-0 place-items-center rounded-full border",
-                item.done ? "border-primary bg-primary text-primary-foreground" : "border-tint-strong bg-background"
-              )}
-              aria-hidden="true"
-            >
-              {item.done && <Check className="h-3 w-3" strokeWidth={3} />}
-            </span>
-            <span className={cn("text-xs", item.done ? "font-semibold text-foreground/85" : "text-muted-foreground")}>
-              {item.text}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </Frame>
-  );
-}
-
-function RolloutPicture() {
-  return (
-    <Frame title="Rollout">
-      <ol className="grid grid-cols-3 gap-1.5">
-        {V.rollout.map((stage, i) => (
-          <li key={stage.label} className="grid content-start gap-1.5">
-            <span
-              className="h-2 rounded-full"
-              style={{ background: `color-mix(in srgb, var(--brand) ${100 - i * 30}%, var(--tint-strong))` }}
-              aria-hidden="true"
-            />
-            <span className="text-xs font-semibold">{stage.label}</span>
-            <span className="text-[0.7rem] leading-snug text-muted-foreground">{stage.note}</span>
-          </li>
-        ))}
-      </ol>
-    </Frame>
-  );
-}
-
-/** Mock picture per step, shown in the heading column and tagged "Illustrative". Steps 1-3 and 5 use real screenshots instead or as well. */
-const MOCKS: ((() => React.ReactElement) | null)[] = [null, null, null, TrainingPicture, RolloutPicture];
-
 /**
  * The full journey as a numbered timeline. A rail runs down the left on every
- * screen size; on wide screens each step splits into a heading column (with a
- * picture of the step) and a bullet column.
+ * screen size; on wide screens each step card puts its text beside its screenshot.
  */
 export function JourneyTimeline({ steps }: { steps: JourneyStep[] }) {
   return (
@@ -147,7 +77,7 @@ export function JourneyTimeline({ steps }: { steps: JourneyStep[] }) {
         aria-hidden="true"
       />
       {steps.map((step, i) => {
-        const Mock = MOCKS[i];
+        const shot = V.shots[i + 1];
         return (
           <li
             key={step.title}
@@ -160,32 +90,22 @@ export function JourneyTimeline({ steps }: { steps: JourneyStep[] }) {
             >
               {i + 1}
             </span>
-            <article className="grid min-w-0 gap-5 rounded-xl border border-tint-strong bg-background p-5 shadow-[0_1px_2px_rgba(15,30,51,0.04)] sm:p-7 lg:grid-cols-[1.1fr_1fr] lg:gap-10">
+            <article className="grid min-w-0 items-start gap-6 rounded-xl border border-tint-strong bg-background p-5 shadow-[0_1px_2px_rgba(15,30,51,0.04)] sm:p-7 lg:grid-cols-[1fr_460px] lg:gap-10">
               <div className="grid min-w-0 content-start gap-2.5">
                 <p className="text-xs font-semibold uppercase tracking-[0.08em] text-primary">
                   Step {i + 1} · {step.short}
                 </p>
                 <h3 className="text-2xl font-bold leading-tight">{step.title}</h3>
                 <p className="text-muted-foreground">{step.lede}</p>
-                {Mock && (
-                  <figure className="mt-2 grid gap-1.5" aria-hidden="true">
-                    <Mock />
-                    <figcaption className="text-right text-[0.65rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
-                      {V.illustrative}
-                    </figcaption>
-                  </figure>
-                )}
+                <ul className="mt-2 grid gap-2">
+                  {step.bullets.map((b) => (
+                    <SpokeBullet key={b} as="li" size="list" className="text-[0.95rem] text-foreground/85">
+                      {b}
+                    </SpokeBullet>
+                  ))}
+                </ul>
               </div>
-              <ul className="grid content-start gap-2.5 border-t border-border pt-5 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
-                {step.bullets.map((b) => (
-                  <SpokeBullet key={b} as="li" size="list" className="text-[0.97rem] text-foreground/85">
-                    {b}
-                  </SpokeBullet>
-                ))}
-              </ul>
-              {(V.shots[i + 1] ?? []).map((shot) => (
-                <Screenshot key={shot.src} shot={shot} />
-              ))}
+              {shot && <Screenshot shot={shot} />}
             </article>
           </li>
         );

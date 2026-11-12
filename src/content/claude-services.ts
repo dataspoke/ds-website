@@ -13,22 +13,15 @@ export interface JourneyStep {
   bullets: string[];
 }
 
-/** A real screenshot, with a narrower crop for phones. */
+/** A real screenshot, cropped to the part that matters. */
 export interface Shot {
   src: string;
   width: number;
   height: number;
   alt: string;
   caption: string;
-  /** Cap the desktop width for tall shots. */
-  maxWidth?: number;
-  phone: { src: string; width: number; height: number };
 }
 
-export interface Guardrail {
-  title: string;
-  description: string;
-}
 
 export const CLAUDE_PAGE = {
   path: "/services/claude",
@@ -111,20 +104,6 @@ export const CLAUDE_PAGE = {
 
   guardrailsEyebrow: "Guardrails",
   guardrailsTitle: "How each setup stays under your control.",
-  guardrails: [
-    {
-      title: "Limited access",
-      description: "Claude only sees the systems and records you approve.",
-    },
-    {
-      title: "Human approvals",
-      description: "Drafts and exceptions wait for a person.",
-    },
-    {
-      title: "An audit trail",
-      description: "You can see what ran, what it touched, and what was approved.",
-    },
-  ] satisfies Guardrail[],
 
   proofEyebrow: "What this has looked like",
   proofTitle: "Guarded agent setups for operations businesses.",
@@ -185,7 +164,6 @@ export const CLAUDE_PAGE = {
  * "Illustrative" tag.
  */
 export const CLAUDE_VISUALS = {
-  illustrative: "Illustrative",
   hub: "Claude",
   /** Hero spokes, clockwise from the top, each with a glyph from the home hero set. */
   hubSpokes: [
@@ -205,89 +183,54 @@ export const CLAUDE_VISUALS = {
    * a demo project with sample data), cropped to leave out account details. Keyed by step number. Shown full width under the step; phones
    * get the narrower `phone` crop so the text stays readable.
    */
+  /**
+   * One real screenshot per step: the Claude desktop app (connectors, a Cowork
+   * project), and Claude Code and VS Code run on a demo project with sample
+   * data. Cropped to leave out account details.
+   */
   shots: {
-    1: [
-      {
-        src: "/images/claude/connectors.png",
-        width: 1430,
-        height: 470,
-        alt: "Claude's connector directory, listing Google Drive, Gmail, Google Calendar and Microsoft 365",
-        caption: "Claude's connector directory",
-        phone: { src: "/images/claude/connectors-phone.png", width: 725, height: 470 },
-      },
-    ],
-    2: [
-      {
-        src: "/images/claude/claude-md.png",
-        width: 1864,
-        height: 1205,
-        alt: "A CLAUDE.md file open in VS Code, listing data sources, what Claude may and may not do, and approvals",
-        caption: "A project's CLAUDE.md: the rules Claude works by",
-        maxWidth: 760,
-        phone: { src: "/images/claude/claude-md-phone.png", width: 1060, height: 820 },
-      },
-      {
-        src: "/images/claude/projects.png",
-        width: 1250,
-        height: 700,
-        alt: "A Claude Cowork project, pinned in the sidebar with its morning brief skill",
-        caption: "A Claude Cowork project with its skill",
-        maxWidth: 640,
-        phone: { src: "/images/claude/projects-phone.png", width: 495, height: 700 },
-      },
-    ],
-    3: [
-      {
-        src: "/images/claude/skill-run.png",
-        width: 2200,
-        height: 960,
-        alt: "Claude Code running a month-end-close skill on sample data and stopping for the controller's approval",
-        caption: "A skill run that stops for approval (sample data)",
-        phone: { src: "/images/claude/skill-run-phone.png", width: 1250, height: 960 },
-      },
-      {
-        src: "/images/claude/skill-md.png",
-        width: 1864,
-        height: 1080,
-        alt: "The month-end-close skill file open in VS Code, with its numbered steps and approval step",
-        caption: "The skill file behind it",
-        maxWidth: 760,
-        phone: { src: "/images/claude/skill-md-phone.png", width: 1060, height: 940 },
-      },
-    ],
-    5: [
-      {
-        src: "/images/claude/code-session.png",
-        width: 2200,
-        height: 1100,
-        alt: "Claude Code reading a project's CLAUDE.md back: what it may read and write, what waits for a person, and a conflict it would ask about",
-        caption: "Claude Code checking the rules before it acts",
-        phone: { src: "/images/claude/code-session-phone.png", width: 1250, height: 1100 },
-      },
-    ],
-  } as Record<number, Shot[]>,
-  /** Step 4: a training checklist. */
-  training: {
-    label: "Training session",
-    items: [
-      { text: "Run a skill", done: true },
-      { text: "Approve a draft", done: true },
-      { text: "Read the audit trail", done: false },
-      { text: "Write the next skill", done: false },
-    ],
-  },
-  /** Step 5: the rollout stages. */
-  rollout: [
-    { label: "Prototype", note: "One workflow" },
-    { label: "Harden", note: "Access and audit trail" },
-    { label: "Roll out", note: "The whole team" },
-  ],
+    1: {
+      src: "/images/claude/connectors.png",
+      width: 725,
+      height: 470,
+      alt: "Claude's connector directory, showing the Google Drive and Google Calendar connectors",
+      caption: "Claude's connector directory.",
+    },
+    2: {
+      src: "/images/claude/projects.png",
+      width: 1250,
+      height: 700,
+      alt: "The Claude desktop app with a Cowork project pinned in the sidebar, along with its morning brief skill",
+      caption: "A Cowork project, pinned with its skill.",
+    },
+    3: {
+      src: "/images/claude/skill-run.png",
+      width: 1250,
+      height: 960,
+      alt: "Claude Code running a month-end-close skill on sample data and stopping for the controller's approval",
+      caption: "A month-end skill run that stops for approval. Sample data.",
+    },
+    4: {
+      src: "/images/claude/code-session.png",
+      width: 1250,
+      height: 1100,
+      alt: "Claude Code explaining a project's rules in plain English: what it may read and write, and what waits for a person",
+      caption: "Claude Code explaining the project's rules in plain English.",
+    },
+    5: {
+      src: "/images/claude/claude-md.png",
+      width: 1060,
+      height: 820,
+      alt: "A CLAUDE.md file open in VS Code, listing data sources and what Claude may and may not do",
+      caption: "The guardrails, written down in the project's CLAUDE.md.",
+    },
+  } as Record<number, Shot>,
   /** Guardrails: the approval flow. */
   flowLabel: "What happens on every run",
   flow: [
-    { title: "Claude drafts", note: "Using only the systems you approved" },
+    { title: "Claude drafts", note: "Limited access: only the systems and records you approve" },
     { title: "Exceptions are flagged", note: "Anything unusual waits" },
-    { title: "A person approves", note: "Nothing goes out on its own" },
-    { title: "Every step is logged", note: "What ran, what it touched, who approved" },
+    { title: "A person approves", note: "Human approvals: drafts and exceptions wait for a person" },
+    { title: "Every step is logged", note: "An audit trail: what ran, what it touched, what was approved" },
   ],
 };

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Check, ClipboardList, Fuel, HardHat, Hotel, Landmark, Lock, UserCheck } from "lucide-react";
+import { Check, Fuel, HardHat, Hotel, Landmark } from "lucide-react";
 import { generateMetadata } from "@/lib/metadata";
 import { LinkedText } from "@/components/shared/faq-list";
 import { Section, SectionHead } from "@/components/shared/section";
@@ -16,7 +16,6 @@ export const metadata: Metadata = generateMetadata({
   path: P.path,
 });
 
-const GUARDRAIL_ICONS = [Lock, UserCheck, ClipboardList];
 /** One icon per proof item, in the order of P.proof. */
 const PROOF_ICONS = [HardHat, Fuel, Hotel, Landmark];
 
@@ -87,22 +86,6 @@ export default function ClaudeServicePage() {
         <div className="mt-10">
           <ApprovalFlow />
         </div>
-        <ul className="mt-8 grid gap-6 md:grid-cols-3">
-          {P.guardrails.map((g, i) => {
-            const Icon = GUARDRAIL_ICONS[i];
-            return (
-              <li key={g.title} className="grid grid-cols-[2.75rem_1fr] gap-4">
-                <span className="grid h-11 w-11 place-items-center rounded-lg bg-tint text-primary" aria-hidden="true">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <span className="grid content-start gap-1">
-                  <h3 className="text-lg font-bold">{g.title}</h3>
-                  <p className="text-muted-foreground">{g.description}</p>
-                </span>
-              </li>
-            );
-          })}
-        </ul>
       </Section>
 
       <Section tint id="proof">
