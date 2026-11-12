@@ -428,11 +428,17 @@ function ClaudeStep({ cy, title, sub, judge = false }: { cy: number; title: stri
 }
 
 /**
- * Step 5: a client follow-through agent in two lanes. Tools on the left do exact,
- * logged work (the transcript, the data warehouse, the drafts); Claude on the right
- * makes the calls (what was promised, where each item goes, whether the work passes).
+ * Step 5: a work triage agent in two lanes. Tools on the left do exact, logged work
+ * (one queue, context from the data warehouse and other systems, replies and tasks);
+ * Claude on the right makes the calls (urgency, simple or not, the plan, the check).
+ * Simple requests are answered straight from triage; the rest become a plan you decide.
  */
 export function FirstAgentCartoon({ label }: { label: string }) {
+  const urgency: [string, number, boolean][] = [
+    ["Now", 40, true],
+    ["This week", 66, false],
+    ["Later", 46, false],
+  ];
   return (
     <Canvas label={label}>
       <rect x={16} y={14} width={216} height={304} rx="12" fill="#fff" opacity="0.7" />
@@ -446,61 +452,115 @@ export function FirstAgentCartoon({ label }: { label: string }) {
         CLAUDE · makes the calls
       </text>
 
-      <rect x={28} y={46} width={196} height={24} rx="12" fill={INK} />
-      <text x={126} y={62} textAnchor="middle" fontSize="10.5" fontWeight="700" fill="#fff" fontFamily={SANS}>
-        Trigger: a Fathom call ends
+      {/* new work from four places */}
+      <rect x={28} y={44} width={196} height={26} rx="13" fill={INK} />
+      {(
+        [
+          ["M", PRIMARY],
+          ["S", BRAND],
+          ["F", "#d6e6f8"],
+          ["N", "#fff"],
+        ] as [string, string][]
+      ).map(([b, f], i) => (
+        <g key={b}>
+          <rect x={36 + i * 22} y={49} width={18} height={16} rx="4" fill={f} stroke={INK} strokeWidth="1.2" />
+          <text x={45 + i * 22} y={60.5} textAnchor="middle" fontSize="8.5" fontWeight="800" fill={f === "#fff" || f === "#d6e6f8" ? INK : "#fff"} fontFamily={DISPLAY}>
+            {b}
+          </text>
+        </g>
+      ))}
+      <text x={128} y={61} fontSize="10.5" fontWeight="700" fill="#fff" fontFamily={SANS}>
+        New work arrives
       </text>
       <Arrow d="M126 70 V80" tip={[126, 80]} rot={90} />
-      <ToolStep cy={98} h={34} badges={[["F", "#d6e6f8"]]} title="Pull the transcript" />
-      <Arrow d="M126 115 V128" tip={[126, 128]} rot={90} />
-      <ToolStep cy={148} badges={[["DW", PRIMARY]]} title="Data warehouse" sub="client history, open jobs" />
-      <Arrow d="M224 148 H254" tip={[254, 148]} rot={0} />
-      <ClaudeStep cy={148} title="Find promises, risks" sub="who, what, by when" />
-      <Arrow d="M349 168 V180" tip={[349, 180]} rot={90} />
-      <ClaudeStep cy={200} title="Route each item" sub="update, email, task or flag" />
-      <Arrow d="M256 200 H226" tip={[226, 200]} rot={180} />
+      <ToolStep cy={100} badges={[]} title="One ticket queue" sub="email, Slack, meetings, tasks" />
+      <Arrow d="M224 100 H254" tip={[254, 100]} rot={0} />
+
+      {/* triage: urgency and whether it is simple */}
+      <rect x={260} y={78} width={186} height={52} rx="9" fill={BRAND} stroke={INK} strokeWidth="2.5" />
+      <rect x={256} y={74} width={186} height={52} rx="9" fill={PRIMARY} stroke={INK} strokeWidth="2.5" />
+      <Sparkle x={272} y={90} s={0.75} />
+      <text x={286} y={94} fontSize="11.5" fontWeight="800" fill="#fff" fontFamily={SANS}>
+        Triage and classify
+      </text>
+      {urgency.reduce<{ x: number; out: ReactNode[] }>(
+        (acc, [t, w, on]) => {
+          acc.out.push(
+            <g key={t}>
+              <rect x={acc.x} y={104} width={w} height={16} rx="8" fill={on ? "#fff" : "none"} stroke="#fff" strokeWidth="1.5" />
+              <text x={acc.x + w / 2} y={115.5} textAnchor="middle" fontSize="9.5" fontWeight="700" fill={on ? PRIMARY : "#fff"} fontFamily={SANS}>
+                {t}
+              </text>
+            </g>,
+          );
+          acc.x += w + 6;
+          return acc;
+        },
+        { x: 272, out: [] },
+      ).out}
+
+      {/* simple: answered straight from triage */}
+      <Arrow d="M258 124 L227 146" tip={[227, 146]} rot={145} />
+      <text x={236} y={135} textAnchor="end" fontSize="9.5" fontWeight="700" fill={PRIMARY} fontFamily={SANS}>
+        simple
+      </text>
       <ToolStep
-        cy={200}
+        cy={164}
         badges={[
-          ["SF", BRAND],
+          ["S", BRAND],
           ["M", PRIMARY],
-          ["N", "#fff"],
         ]}
-        title="Write drafts"
+        title="Reply sent"
+        sub="answered at triage"
       />
-      <Arrow d="M126 220 V250 H254" tip={[254, 250]} rot={0} />
-      <ClaudeStep cy={250} title="AI judge checks" sub="vs transcript + warehouse" judge />
 
-      {/* pass: the tools finish the job */}
-      <Arrow d="M256 266 L226 290" tip={[226, 290]} rot={141} />
-      <text x={236} y={266} textAnchor="end" fontSize="9.5" fontWeight="700" fill={PRIMARY} fontFamily={SANS}>
-        pass
+      {/* needs work: Claude decides what to look up, the tools fetch it */}
+      <Arrow d="M349 126 V140" tip={[349, 140]} rot={90} />
+      <text x={356} y={139.5} fontSize="9" fontWeight="700" fill={PRIMARY} fontFamily={SANS}>
+        needs work
       </text>
-      <ToolStep cy={300} h={32} title="" />
-      <Check x={46} y={300} r={7} />
-      <text x={60} y={304} fontSize="11.5" fontWeight="800" fill={INK} fontFamily={SANS}>
-        Send and save
+      <ClaudeStep cy={162} title="Gather context" sub="decides what to look up" />
+      <Arrow d="M258 180 L227 200" tip={[227, 200]} rot={147} />
+      <ToolStep
+        cy={216}
+        badges={[
+          ["DW", PRIMARY],
+          ["SF", BRAND],
+          ["D", "#d6e6f8"],
+        ]}
+        title="Look it up"
+        sub="warehouse and CRM"
+      />
+      <Arrow d="M224 216 H254" tip={[254, 216]} rot={0} />
+      <ClaudeStep cy={214} title="Assemble a plan" sub="options, risks, effort" />
+      <Arrow d="M349 234 V242" tip={[349, 242]} rot={90} />
+      <ClaudeStep cy={262} title="AI judge checks it" sub="sources, gaps, conflicts" judge />
+      <Arrow d="M349 282 V292" tip={[349, 292]} rot={90} />
+      <Card x={256} y={293} w={186} h={26} r={9} />
+      <Hand x={272} y={306} r={7} />
+      <text x={286} y={310} fontSize="11.5" fontWeight="800" fill={INK} fontFamily={SANS}>
+        You decide the plan
       </text>
-
-      {/* unsure: a person decides, and that call feeds back */}
-      <Arrow d="M372 275 V286" tip={[372, 286]} rot={90} />
-      <text x={380} y={285} fontSize="9.5" fontWeight="700" fill={PRIMARY} fontFamily={SANS}>
-        unsure
-      </text>
-      <Card x={298} y={288} w={144} h={28} r={9} />
-      <Hand x={314} y={302} r={7} />
-      <text x={328} y={306} fontSize="11.5" fontWeight="800" fill={INK} fontFamily={SANS}>
-        A person decides
-      </text>
-      <path d="M442 302 H462 V148 H448" fill="none" stroke={PRIMARY} strokeWidth="2" strokeDasharray="4 4" />
-      <path transform="translate(448 148) rotate(180)" d="M-6 -4.5 L0 0 L-6 4.5" fill="none" stroke={PRIMARY} strokeWidth="2.2" strokeLinecap="round" />
-      <text x={469} y={226} textAnchor="middle" fontSize="9.5" fontWeight="700" fill={PRIMARY} fontFamily={SANS} transform="rotate(90 469 226)">
-        feedback
+      <Arrow d="M256 306 H226" tip={[226, 306]} rot={180} />
+      <ToolStep
+        cy={306}
+        h={26}
+        badges={[
+          ["N", "#fff"],
+          ["S", BRAND],
+        ]}
+        title="Tasks assigned"
+      />
+      {/* your decisions teach the triage */}
+      <path d="M442 306 H462 V100 H450" fill="none" stroke={PRIMARY} strokeWidth="2" strokeDasharray="4 4" />
+      <path transform="translate(450 100) rotate(180)" d="M-6 -4.5 L0 0 L-6 4.5" fill="none" stroke={PRIMARY} strokeWidth="2.2" strokeLinecap="round" />
+      <text x={469} y={204} textAnchor="middle" fontSize="9.5" fontWeight="700" fill={PRIMARY} fontFamily={SANS} transform="rotate(90 469 204)">
+        learns from your calls
       </text>
 
       <rect x={16} y={326} width={448} height={26} rx="8" fill={INK} />
       <text x={240} y={343} textAnchor="middle" fontSize="10.5" fontWeight="600" fill="#fff" fontFamily={SANS}>
-        Every step logged · each tool sees only what it needs
+        Every ticket logged: where it came from, how it was sorted, who decided
       </text>
     </Canvas>
   );
