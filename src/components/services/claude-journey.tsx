@@ -56,7 +56,9 @@ function Screenshot({ shot }: { shot: Shot }) {
           width={shot.width}
           height={shot.height}
           alt={shot.alt}
-          sizes="(min-width: 1024px) 460px, 100vw"
+          // Served as-is: the PNGs are already cropped and small, and this keeps them
+          // off the image optimizer so they load the same on every host.
+          unoptimized
           className="aspect-[4/3] h-auto w-full object-cover object-left-top"
         />
       </a>
