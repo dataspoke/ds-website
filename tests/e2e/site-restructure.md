@@ -40,7 +40,7 @@ For each of `/lp/ai`, `/lp/custom-software` and `/lp/dashboards`:
 1. Open `/services#company-brain`.
 2. Expect to end up on `/services/ai-implementation`.
 3. Open `/services#assessment`.
-4. Expect to stay on `/services#assessment`.
+4. Expect to end up on `/approach#assessment`.
 
 ## f. Content checks
 

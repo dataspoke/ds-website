@@ -1,9 +1,7 @@
 import { Check } from "lucide-react";
 import { EstimateCta } from "@/components/shared/estimate-cta";
-import { SERVICES_PAGE } from "@/content/services";
+import { LINE_PAGE, SERVICES_PAGE } from "@/content/services";
 import { ServicesMap } from "./services-map";
-
-const CHIPS = ["Fixed scope", "Price up front", "You own it"];
 
 /** /services hero in the home page's style: short copy on the left, the hub-and-spoke map on the right. */
 export function ServicesHero() {
@@ -21,7 +19,7 @@ export function ServicesHero() {
           </h1>
           <p className="lede max-w-lg">{SERVICES_PAGE.lede}</p>
           <ul className="flex flex-wrap gap-2">
-            {CHIPS.map((chip) => (
+            {SERVICES_PAGE.heroChips.map((chip) => (
               <li
                 key={chip}
                 className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-sm font-semibold text-foreground ring-1 ring-tint-strong"
@@ -32,9 +30,9 @@ export function ServicesHero() {
             ))}
           </ul>
           <div className="mt-1 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <EstimateCta location="services-hero">Book your free AI strategy call</EstimateCta>
+            <EstimateCta location="services-hero">{LINE_PAGE.estimateCta}</EstimateCta>
             <a href="#lines" className="font-semibold text-primary hover:text-primary/80">
-              See the six &darr;
+              {SERVICES_PAGE.jumpLabel} &darr;
             </a>
           </div>
         </div>

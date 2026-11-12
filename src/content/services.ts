@@ -412,6 +412,8 @@ export const SERVICES_PAGE = {
   eyebrow: "Services",
   title: "Six ways to run a bigger business with the team you have.",
   lede: "Pick the problem that sounds like yours. The free call tells you where to start.",
+  heroChips: ["Fixed scope", "Price up front", "You own it"],
+  jumpLabel: "See the six",
   diagramHub: "Your data",
   hubEyebrow: "The foundation",
   hubTitle: "Get your information in one place you can trust.",
@@ -539,7 +541,8 @@ export const LINE_PAGE = {
 /**
  * Retired /services#<id> anchors from the old three-stage page, mapped to the
  * line page that now holds that copy. Product ids keep their hash so the line
- * page scrolls to the product. #assessment still lives on /services.
+ * page scrolls to the product. #assessment moved to /approach; #hub and #spokes
+ * from the previous version of this page now share one #lines section.
  */
 export const LEGACY_SERVICE_ANCHORS: Record<string, string> = {
   connected: "/services/capture",
@@ -553,4 +556,7 @@ export const LEGACY_SERVICE_ANCHORS: Record<string, string> = {
   optimized: "/services/analytics-data-science",
   "early-warnings": "/services/analytics-data-science#early-warnings",
   "find-the-margin": "/services/analytics-data-science#find-the-margin",
+  assessment: "/approach#assessment",
+  hub: "/services#lines",
+  spokes: "/services#lines",
 };

@@ -24,10 +24,11 @@ export function LineTile({
   return (
     <Link
       href={`/services/${line.slug}`}
-      className="group relative grid content-start gap-4 overflow-hidden rounded-2xl bg-gradient-to-b from-tint to-white p-6 ring-1 ring-tint-strong transition-shadow hover:shadow-lg hover:ring-brand sm:p-7"
+      aria-label={`${verb}: ${line.title}`}
+      className="group relative grid content-start gap-4 overflow-hidden rounded-2xl bg-gradient-to-b from-tint to-white p-6 ring-1 ring-tint-strong transition-shadow hover:shadow-lg hover:ring-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 sm:p-7"
     >
       <div className="flex items-start justify-between">
-        <span className="inline-flex size-14 items-center justify-center rounded-full bg-primary text-white ring-4 ring-white transition-transform group-hover:scale-105 motion-reduce:transition-none">
+        <span className="inline-flex size-14 items-center justify-center rounded-full bg-primary text-white ring-4 ring-white transition-transform group-hover:scale-105 group-focus-visible:scale-105 motion-reduce:transition-none">
           <Icon className="size-6" aria-hidden="true" />
         </span>
         <span aria-hidden="true" className="font-display text-4xl font-extrabold leading-none text-brand/25">
@@ -35,7 +36,7 @@ export function LineTile({
         </span>
       </div>
       <div className="grid gap-1">
-        <p className={cn("font-display font-extrabold tracking-tight text-ink group-hover:text-primary", large ? "text-3xl" : "text-2xl")}>
+        <p className={cn("font-display font-extrabold tracking-tight text-ink group-hover:text-primary group-focus-visible:text-primary", large ? "text-3xl" : "text-2xl")}>
           {verb}
         </p>
         <h3 className="font-semibold leading-snug text-foreground">{line.title}</h3>
@@ -50,7 +51,7 @@ export function LineTile({
       </ul>
       <ArrowRight
         aria-hidden="true"
-        className="absolute bottom-6 right-6 size-5 text-primary opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100 motion-reduce:transition-none"
+        className="absolute bottom-6 right-6 size-5 text-primary opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100 group-focus-visible:translate-x-1 group-focus-visible:opacity-100 motion-reduce:transition-none"
       />
     </Link>
   );
