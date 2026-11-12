@@ -61,20 +61,48 @@ const COMPACT: Geometry = {
   centred: true,
 };
 
+// Half-width column version (the /services/claude hero): six spokes, labels centred
+// 56 units past the dot so the diagonal pills clear their dots. Pills span y = 26..414.
+const MEDIUM: Geometry = {
+  W: 520,
+  H: 440,
+  CX: 260,
+  CY: 220,
+  R: 120,
+  labelOffset: 56,
+  fontSize: 16,
+  charWidth: 9,
+  pillH: 36,
+  hubR: 56,
+  hubFont: 18,
+  hubLine: 22,
+  strokeWidth: 3,
+  dotR: 7,
+  centred: true,
+};
+
 /** Hub-and-spoke diagram: the business in the middle, one spoke per area it runs on. */
 export function SpokeDiagram({
   hub = "Your business",
+  spokes = SPOKES,
+  ariaLabel = "Diagram: your business at the center, connected to sales, marketing, phone calls, meetings, operations, finance, customers and documents",
   compact = false,
+  medium = false,
   className,
 }: {
   hub?: string;
+  /** Spoke labels, clockwise from the top. Defaults to the home page's business areas. */
+  spokes?: readonly string[];
+  ariaLabel?: string;
   compact?: boolean;
+  /** Sized for a half-width column; wins over `compact`. */
+  medium?: boolean;
   className?: string;
 }) {
-  const g = compact ? COMPACT : DESKTOP;
+  const g = medium ? MEDIUM : compact ? COMPACT : DESKTOP;
 
-  const nodes = SPOKES.map((name, i) => {
-    const ang = ((-90 + i * (360 / SPOKES.length)) * Math.PI) / 180;
+  const nodes = spokes.map((name, i) => {
+    const ang = ((-90 + i * (360 / spokes.length)) * Math.PI) / 180;
     const cos = Math.cos(ang);
     const sin = Math.sin(ang);
     const x = g.CX + g.R * cos;
@@ -98,7 +126,7 @@ export function SpokeDiagram({
       width={g.W}
       height={g.H}
       role="img"
-      aria-label="Diagram: your business at the center, connected to sales, marketing, phone calls, meetings, operations, finance, customers and documents"
+      aria-label={ariaLabel}
       className={cn("block h-auto w-full", className)}
     >
       {nodes.map((n) => (

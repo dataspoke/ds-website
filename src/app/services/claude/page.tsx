@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ClipboardList, Lock, UserCheck } from "lucide-react";
+import { ClipboardList, Fuel, HardHat, Hotel, Landmark, Lock, UserCheck } from "lucide-react";
 import { generateMetadata } from "@/lib/metadata";
 import { LinkedText } from "@/components/shared/faq-list";
 import { Section, SectionHead } from "@/components/shared/section";
 import { EstimateCta } from "@/components/shared/estimate-cta";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
-import { JourneyPath, JourneyTimeline } from "@/components/services/claude-journey";
-import { CLAUDE_PAGE as P } from "@/content/claude-services";
+import { SpokeDiagram } from "@/components/shared/spoke-diagram";
+import { ApprovalFlow, JourneyPath, JourneyTimeline } from "@/components/services/claude-journey";
+import { CLAUDE_PAGE as P, CLAUDE_VISUALS as V } from "@/content/claude-services";
 import { LINE_PAGE } from "@/content/services";
 
 export const metadata: Metadata = generateMetadata({
@@ -17,6 +18,8 @@ export const metadata: Metadata = generateMetadata({
 });
 
 const GUARDRAIL_ICONS = [Lock, UserCheck, ClipboardList];
+/** One icon per proof item, in the order of P.proof. */
+const PROOF_ICONS = [HardHat, Fuel, Hotel, Landmark];
 
 function Cta({ location }: { location: string }) {
   return (
@@ -43,9 +46,14 @@ export default function ClaudeServicePage() {
               <p className="max-w-xl text-sm text-muted-foreground">{P.ctaSupport}</p>
             </div>
           </div>
-          <JourneyPath steps={P.journey} label={P.pathLabel} />
+          <SpokeDiagram medium hub={V.hub} spokes={V.hubSpokes} ariaLabel={V.hubAriaLabel} className="mx-auto max-w-md" />
         </div>
-        <ul className="mt-12 grid gap-3 border-t border-border pt-8 sm:grid-cols-3 sm:gap-6">
+        <JourneyPath
+          steps={P.journey}
+          label={P.pathLabel}
+          className="mt-12 rounded-2xl border border-tint-strong bg-background p-6 shadow-[0_1px_2px_rgba(15,30,51,0.04)] sm:p-8"
+        />
+        <ul className="mt-10 grid gap-3 sm:grid-cols-3 sm:gap-6">
           {P.intro.map((line) => (
             <SpokeBullet key={line} as="li" size="list" className="font-semibold text-foreground/85">
               {line}
@@ -61,16 +69,21 @@ export default function ClaudeServicePage() {
 
       <Section id="guardrails">
         <SectionHead eyebrow={P.guardrailsEyebrow} title={P.guardrailsTitle} />
-        <ul className="mt-10 grid gap-4 md:grid-cols-3">
+        <div className="mt-10">
+          <ApprovalFlow />
+        </div>
+        <ul className="mt-8 grid gap-6 md:grid-cols-3">
           {P.guardrails.map((g, i) => {
             const Icon = GUARDRAIL_ICONS[i];
             return (
-              <li key={g.title} className="grid content-start gap-3 rounded-xl border border-tint-strong bg-background p-6">
+              <li key={g.title} className="grid grid-cols-[2.75rem_1fr] gap-4">
                 <span className="grid h-11 w-11 place-items-center rounded-lg bg-tint text-primary" aria-hidden="true">
                   <Icon className="h-5 w-5" />
                 </span>
-                <h3 className="text-xl font-bold">{g.title}</h3>
-                <p className="text-muted-foreground">{g.description}</p>
+                <span className="grid content-start gap-1">
+                  <h3 className="text-lg font-bold">{g.title}</h3>
+                  <p className="text-muted-foreground">{g.description}</p>
+                </span>
               </li>
             );
           })}
@@ -80,12 +93,20 @@ export default function ClaudeServicePage() {
       <Section tint id="proof">
         <SectionHead eyebrow={P.proofEyebrow} title={P.proofTitle} lede={P.proofLede} />
         <ul className="mt-10 grid gap-4 md:grid-cols-2">
-          {P.proof.map((p) => (
-            <li key={p.who} className="grid content-start gap-2 rounded-xl border border-tint-strong bg-background p-6">
-              <h3 className="text-lg font-bold">{p.who}</h3>
-              <p className="text-muted-foreground">{p.what}</p>
-            </li>
-          ))}
+          {P.proof.map((p, i) => {
+            const Icon = PROOF_ICONS[i];
+            return (
+              <li key={p.who} className="overflow-hidden rounded-xl border border-tint-strong bg-background">
+                <div className="flex items-center gap-3 border-b border-tint-strong bg-gradient-to-r from-tint to-background px-6 py-4">
+                  <span className="grid h-10 w-10 place-items-center rounded-full bg-primary text-primary-foreground" aria-hidden="true">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <h3 className="text-lg font-bold">{p.who}</h3>
+                </div>
+                <p className="px-6 py-5 text-muted-foreground">{p.what}</p>
+              </li>
+            );
+          })}
         </ul>
       </Section>
 

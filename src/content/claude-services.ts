@@ -168,3 +168,63 @@ export const CLAUDE_PAGE = {
     link: "See Claude setup and training",
   },
 };
+
+/**
+ * Labels for the page's diagrams and step illustrations. The step pictures show
+ * what each step looks like, not real client data, so each carries the
+ * "Illustrative" tag.
+ */
+export const CLAUDE_VISUALS = {
+  illustrative: "Illustrative",
+  hub: "Claude",
+  hubSpokes: ["QuickBooks", "Xero", "HubSpot", "Your CRM", "Your ERP", "Documents"],
+  hubAriaLabel:
+    "Diagram: Claude at the center, connected to QuickBooks, Xero, HubSpot, your CRM, your ERP and your documents",
+  /** Step 1: connector list. */
+  connectors: [
+    { name: "QuickBooks", access: "Read invoices and customers" },
+    { name: "Xero", access: "Read bills and payments" },
+    { name: "HubSpot", access: "Read deals, draft follow-ups" },
+  ],
+  connected: "Connected",
+  /** Step 2: a Cowork project beside a Claude Code window. */
+  cowork: {
+    label: "Claude Cowork project",
+    name: "Weekly operations report",
+    files: ["Instructions", "Report template", "Last month's report"],
+  },
+  code: {
+    label: "Claude Code",
+    lines: ["CLAUDE.md", "  How this project works", "  What Claude may touch", "  Who approves what"],
+  },
+  /** Step 3: a skill card. */
+  skill: {
+    label: "Claude Skill",
+    name: "month-end-close",
+    steps: ["Pull the trial balance", "Match payments to invoices", "Flag anything unusual for a person"],
+  },
+  /** Step 4: a training checklist. */
+  training: {
+    label: "Training session",
+    items: [
+      { text: "Run a skill", done: true },
+      { text: "Approve a draft", done: true },
+      { text: "Read the audit trail", done: false },
+      { text: "Write the next skill", done: false },
+    ],
+  },
+  /** Step 5: the rollout stages. */
+  rollout: [
+    { label: "Prototype", note: "One workflow" },
+    { label: "Harden", note: "Access and audit trail" },
+    { label: "Roll out", note: "The whole team" },
+  ],
+  /** Guardrails: the approval flow. */
+  flowLabel: "What happens on every run",
+  flow: [
+    { title: "Claude drafts", note: "Using only the systems you approved" },
+    { title: "Exceptions are flagged", note: "Anything unusual waits" },
+    { title: "A person approves", note: "Nothing goes out on its own" },
+    { title: "Every step is logged", note: "What ran, what it touched, who approved" },
+  ],
+};
