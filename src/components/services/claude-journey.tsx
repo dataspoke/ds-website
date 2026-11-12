@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ClipboardList, Flag, Sparkles, UserCheck } from "lucide-react";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
 import { cn } from "@/lib/utils";
+import { ClaudeMdCartoon, CodeCartoon, SkillCartoon } from "@/components/services/claude-cartoons";
 import { CLAUDE_VISUALS as V, type JourneyStep, type Shot } from "@/content/claude-services";
 
 /**
@@ -67,6 +68,23 @@ function Screenshot({ shot }: { shot: Shot }) {
   );
 }
 
+const CARTOONS: Record<number, typeof SkillCartoon> = { 3: SkillCartoon, 4: CodeCartoon, 5: ClaudeMdCartoon };
+
+/** A cartoon in the same 4:3 frame as the screenshots, with a sentence caption. */
+function Cartoon({ step }: { step: number }) {
+  const Picture = CARTOONS[step];
+  const text = V.cartoons[step];
+  if (!Picture || !text) return null;
+  return (
+    <figure className="grid content-start gap-2">
+      <div className="overflow-hidden rounded-lg border border-tint-strong shadow-[0_8px_24px_-14px_rgba(15,30,51,0.35)]">
+        <Picture label={text.alt} />
+      </div>
+      <figcaption className="text-sm text-muted-foreground">{text.caption}</figcaption>
+    </figure>
+  );
+}
+
 /**
  * The full journey as a numbered timeline. A rail runs down the left on every
  * screen size; on wide screens each step card puts its text beside its screenshot.
@@ -107,7 +125,7 @@ export function JourneyTimeline({ steps }: { steps: JourneyStep[] }) {
                   ))}
                 </ul>
               </div>
-              {shot && <Screenshot shot={shot} />}
+              {shot ? <Screenshot shot={shot} /> : <Cartoon step={i + 1} />}
             </article>
           </li>
         );

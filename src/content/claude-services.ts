@@ -179,14 +179,8 @@ export const CLAUDE_VISUALS = {
   hubAriaLabel:
     "Illustration: Claude at the center, with spokes to QuickBooks, Xero, HubSpot, your ERP, your CRM, calendar, email and documents",
   /**
-   * Real screenshots (the Claude desktop app, and Claude Code and VS Code run on
-   * a demo project with sample data), cropped to leave out account details. Keyed by step number. Shown full width under the step; phones
-   * get the narrower `phone` crop so the text stays readable.
-   */
-  /**
-   * One real screenshot per step: the Claude desktop app (connectors, a Cowork
-   * project), and Claude Code and VS Code run on a demo project with sample
-   * data. Cropped to leave out account details.
+   * Real screenshots of the Claude desktop app for steps 1 and 2 (connectors, a
+   * Cowork project), cropped to leave out account details. Keyed by step number.
    */
   shots: {
     1: {
@@ -203,28 +197,22 @@ export const CLAUDE_VISUALS = {
       alt: "The Claude desktop app with a Cowork project pinned in the sidebar, along with its morning brief skill",
       caption: "A Cowork project, pinned with its skill.",
     },
+  } as Record<number, Shot>,
+  /** Cartoons for steps 3 to 5, keyed by step number. */
+  cartoons: {
     3: {
-      src: "/images/claude/skill-run.png",
-      width: 1104,
-      height: 1250,
-      alt: "The Code tab in the Claude app running a month-end-close skill on sample data and stopping for the controller's approval",
-      caption: "A month-end skill run in the Claude app, stopped for approval. Sample data.",
+      alt: "Cartoon: a month-end-close skill card. Three steps are ticked and the fourth waits for your OK, while a person says Approved",
+      caption: "A skill is a checklist Claude runs the same way every time. Illustration.",
     },
     4: {
-      src: "/images/claude/code-session.png",
-      width: 1250,
-      height: 1100,
-      alt: "Claude Code explaining a project's rules in plain English: what it may read and write, and what waits for a person",
-      caption: "Claude Code explaining the project's rules in plain English.",
+      alt: "Cartoon: Claude Code on a laptop listing what it may read and write, what it never changes, and what waits for a person, with two teammates",
+      caption: "Your team asks Claude Code what it may touch, and it answers in plain English. Illustration.",
     },
     5: {
-      src: "/images/claude/claude-md.png",
-      width: 1060,
-      height: 820,
-      alt: "A CLAUDE.md file open in VS Code, listing data sources and what Claude may and may not do",
-      caption: "The guardrails, written down in the project's CLAUDE.md.",
+      alt: "Cartoon: a CLAUDE.md page listing what Claude may read, may write, must never do, and must ask a person about, next to a lock badge",
+      caption: "The guardrails, written down in the project's CLAUDE.md. Illustration.",
     },
-  } as Record<number, Shot>,
+  } as Record<number, { alt: string; caption: string }>,
   /** Guardrails: the approval flow. */
   flowLabel: "What happens on every run",
   flow: [
