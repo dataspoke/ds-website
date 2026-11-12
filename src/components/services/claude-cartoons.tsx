@@ -88,6 +88,85 @@ function Person({ x, y, shirt = PRIMARY, flip = false }: { x: number; y: number;
   );
 }
 
+/** An app window: card, dark title bar with three dots, and a mono title. */
+function Window({ title }: { title: string }) {
+  return (
+    <>
+      <Card x={36} y={32} w={408} h={292} r={12} />
+      <path d="M36 66 V44 a12 12 0 0 1 12 -12 H432 a12 12 0 0 1 12 12 V66 Z" fill={INK} />
+      {[BRAND, "#d6e6f8", "#fff"].map((c, i) => (
+        <circle key={c} cx={56 + i * 16} cy={49} r="5" fill={c} />
+      ))}
+      <text x={240} y={54} textAnchor="middle" fontSize="12" fontWeight="600" fill="#fff" fontFamily={MONO}>
+        {title}
+      </text>
+    </>
+  );
+}
+
+/** Step 1: the connector directory, with the systems Claude can reach. Letter badges, not logos. */
+export function ConnectorsCartoon({ label }: { label: string }) {
+  const filters = ["All", "Connected", "Email", "Docs", "Finance", "Sales"];
+  const tiles: { badge: string; name: string; fill: string; on: boolean }[] = [
+    { badge: "M", name: "Gmail", fill: PRIMARY, on: true },
+    { badge: "N", name: "Notion", fill: "#fff", on: true },
+    { badge: "F", name: "Fathom", fill: BRAND, on: true },
+    { badge: "X", name: "Xero", fill: "#d6e6f8", on: false },
+    { badge: "D", name: "Google Drive", fill: PRIMARY, on: true },
+    { badge: "SF", name: "Salesforce", fill: BRAND, on: false },
+  ];
+  return (
+    <Canvas label={label}>
+      <Window title="Connectors" />
+      <rect x={38} y={66} width={116} height={256} fill={TINT} />
+      <line x1={154} y1={66} x2={154} y2={322} stroke={INK} strokeWidth="2" />
+      {filters.map((f, i) => {
+        const y = 96 + i * 30;
+        return (
+          <g key={f}>
+            {i === 1 && <rect x={46} y={y - 17} width={100} height={24} rx="6" fill={BRAND} />}
+            <text x={58} y={y} fontSize="12" fontWeight="700" fill={i === 1 ? "#fff" : INK} fontFamily={MONO}>
+              {f}
+            </text>
+          </g>
+        );
+      })}
+      {tiles.map((t, i) => {
+        const x = 168 + (i % 2) * 136;
+        const y = 80 + Math.floor(i / 2) * 80;
+        const light = t.fill === "#fff" || t.fill === "#d6e6f8";
+        return (
+          <g key={t.name}>
+            <rect x={x} y={y} width={126} height={70} rx="10" fill="#fff" stroke={INK} strokeWidth="2.5" />
+            <rect x={x + 10} y={y + 10} width={30} height={30} rx="8" fill={t.fill} stroke={INK} strokeWidth="2" />
+            <text x={x + 25} y={y + 29.5} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={light ? INK : "#fff"} fontFamily={DISPLAY}>
+              {t.badge}
+            </text>
+            <text x={x + 47} y={y + 29.5} fontSize="11.5" fontWeight="700" fill={INK} fontFamily={SANS}>
+              {t.name}
+            </text>
+            {t.on ? (
+              <>
+                <rect x={x + 10} y={y + 46} width={84} height={16} rx="8" fill={PRIMARY} />
+                <text x={x + 52} y={y + 58} textAnchor="middle" fontSize="10" fontWeight="700" fill="#fff" fontFamily={SANS}>
+                  ✓ Connected
+                </text>
+              </>
+            ) : (
+              <>
+                <rect x={x + 10} y={y + 46} width={62} height={16} rx="8" fill="#fff" stroke={PRIMARY} strokeWidth="1.5" />
+                <text x={x + 41} y={y + 58} textAnchor="middle" fontSize="10" fontWeight="700" fill={PRIMARY} fontFamily={SANS}>
+                  Connect
+                </text>
+              </>
+            )}
+          </g>
+        );
+      })}
+    </Canvas>
+  );
+}
+
 /** A small folder icon for the file tree. */
 function Folder({ x, y, fill }: { x: number; y: number; fill: string }) {
   return <path d={`M${x} ${y - 9} h6 l2 2 h8 v11 h-16 Z`} fill={fill} stroke={INK} strokeWidth="1.5" strokeLinejoin="round" />;
@@ -108,15 +187,7 @@ export function SkillsLibraryCartoon({ label }: { label: string }) {
   ];
   return (
     <Canvas label={label}>
-      <Card x={36} y={32} w={408} h={292} r={12} />
-      {/* window title bar */}
-      <path d="M36 66 V44 a12 12 0 0 1 12 -12 H432 a12 12 0 0 1 12 12 V66 Z" fill={INK} />
-      {[BRAND, "#d6e6f8", "#fff"].map((c, i) => (
-        <circle key={c} cx={56 + i * 16} cy={49} r="5" fill={c} />
-      ))}
-      <text x={240} y={54} textAnchor="middle" fontSize="12" fontWeight="600" fill="#fff" fontFamily={MONO}>
-        Skills library
-      </text>
+      <Window title="Skills library" />
       {/* sidebar: the skills folder */}
       <rect x={38} y={66} width={182} height={256} fill={TINT} />
       <line x1={220} y1={66} x2={220} y2={322} stroke={INK} strokeWidth="2" />

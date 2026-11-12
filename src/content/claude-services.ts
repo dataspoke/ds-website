@@ -180,17 +180,10 @@ export const CLAUDE_VISUALS = {
   hubAriaLabel:
     "Illustration: Claude at the center, with spokes to QuickBooks, Xero, HubSpot, your ERP, your CRM, calendar, email and documents",
   /**
-   * Real screenshots of the Claude desktop app for steps 1 and 2 (connectors, a
-   * Cowork project), cropped to leave out account details. Keyed by step number.
+   * A real screenshot of the Claude desktop app for step 2 (a Cowork project),
+   * cropped to leave out account details. Keyed by step number.
    */
   shots: {
-    1: {
-      src: "/images/claude/connectors.png",
-      width: 725,
-      height: 470,
-      alt: "Claude's connector directory, showing the Google Drive and Google Calendar connectors",
-      caption: "Claude's connector directory.",
-    },
     2: {
       src: "/images/claude/projects.png",
       width: 1250,
@@ -199,8 +192,12 @@ export const CLAUDE_VISUALS = {
       caption: "A Cowork project, pinned with its skill.",
     },
   } as Record<number, Shot>,
-  /** Cartoons for steps 3 to 5, keyed by step number. */
+  /** Drawn pictures for the other steps, keyed by step number. */
   cartoons: {
+    1: {
+      alt: "Illustration: a connector directory window. Gmail, Notion, Fathom and Google Drive are connected, and Xero and Salesforce are ready to connect",
+      caption: "Your systems, connected one at a time. Illustration.",
+    },
     3: {
       alt: "Illustration: a skills library window. A skills folder holds month-end, weekly-report, client-intake, invoice-chase and morning-brief, and the open month-end skill file lists its four steps, ending with wait for your OK",
       caption: "A skills library: one folder per repeating job, with the steps written down. Illustration.",
