@@ -1,20 +1,10 @@
 import Link from "next/link";
 import { Section, SectionHead } from "@/components/shared/section";
-import { SERVICE_LINES } from "@/content/services";
+import { SERVICE_LINES, SERVICE_PIPELINE } from "@/content/services";
 import type { ServiceLineSlug } from "@/types";
 import { cn } from "@/lib/utils";
 import { SERVICES_A_HEAD } from "./content";
-import { PipelineList, type PipelineStep } from "./pipeline-list";
-
-/** The services as one pipeline, in the order a client builds them. */
-const STEPS: Omit<PipelineStep, "title">[] = [
-  { slug: "capture", verb: "Connect", blurb: "Leads and invoices land where they belong." },
-  { slug: "organize", verb: "Organize", blurb: "One trustworthy set of records." },
-  { slug: "metrics-dashboards", verb: "Measure", blurb: "Know your numbers every Monday." },
-  { slug: "analytics-data-science", verb: "Predict", blurb: "Where money goes, what's next." },
-  { slug: "ai-implementation", verb: "Automate", blurb: "AI on your data, a person approving." },
-  { slug: "custom-software", verb: "Build", blurb: "Built around how you work." },
-];
+import { PipelineList } from "./pipeline-list";
 
 const TITLES = Object.fromEntries(SERVICE_LINES.map((l) => [l.slug, l.title])) as Record<ServiceLineSlug, string>;
 
@@ -33,7 +23,7 @@ export function ServicesA() {
         <Group label="Build on it" className="col-span-4" />
       </div>
 
-      <PipelineList steps={STEPS.map((step) => ({ ...step, title: TITLES[step.slug] }))} />
+      <PipelineList steps={SERVICE_PIPELINE.map((step) => ({ ...step, title: TITLES[step.slug] }))} />
 
       <Link href={SERVICES_A_HEAD.allLink.href} className="mt-8 inline-block font-semibold text-primary hover:text-primary/80">
         {SERVICES_A_HEAD.allLink.label} &rarr;
