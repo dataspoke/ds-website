@@ -411,18 +411,24 @@ export const SERVICES_PAGE = {
     "Grow your business with data you already have: connect your software, know your numbers, build tools and put AI to work. Free AI strategy call.",
   eyebrow: "Services",
   title: "Six ways to run a bigger business with the team you have.",
-  lede:
-    "Each service is described by what changes for you, with the technology second. You don't need to know what to ask for. Find the problem that sounds like yours, and the free AI strategy call will tell you where to start.",
+  lede: "Pick the problem that sounds like yours. The free call tells you where to start.",
   diagramHub: "Your data",
   hubEyebrow: "The foundation",
-  hubTitle: "Start by getting your information in one place you can trust.",
-  hubLede:
-    "Everything else runs on these two. Most clients start here, because a dashboard or an AI tool is only as good as the information under it.",
-  spokeEyebrow: "What runs on it",
+  hubTitle: "Get your information in one place you can trust.",
+  spokeEyebrow: "Build on it",
   spokeTitle: "Then put it to work.",
-  spokeLede:
-    "Each of these is a project with a fixed scope and a price you see first. Pick the one that hurts most today. The others get easier once the foundation is in place.",
+  spokeLede: "Fixed scope, price up front. Start with whatever hurts most.",
 };
+
+/** The six lines as one pipeline, in the order a client builds them, with a verb and a short outcome each. */
+export const SERVICE_PIPELINE: { slug: ServiceLineSlug; verb: string; blurb: string }[] = [
+  { slug: "capture", verb: "Connect", blurb: "Leads and invoices land where they belong." },
+  { slug: "organize", verb: "Organize", blurb: "One trustworthy set of records." },
+  { slug: "metrics-dashboards", verb: "Measure", blurb: "Know your numbers every Monday." },
+  { slug: "analytics-data-science", verb: "Predict", blurb: "Where money goes, what's next." },
+  { slug: "ai-implementation", verb: "Automate", blurb: "AI on your data, a person approving." },
+  { slug: "custom-software", verb: "Build", blurb: "Built around how you work." },
+];
 
 /** Diagram labels, split into lines so they fit on a phone. Hub pills are fixed width, so they stay short. */
 export const SERVICE_DIAGRAM_LABELS: Record<ServiceLineSlug, string[]> = {
