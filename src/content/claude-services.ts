@@ -205,10 +205,10 @@ export const CLAUDE_VISUALS = {
     },
     3: {
       src: "/images/claude/skill-run.png",
-      width: 1250,
-      height: 960,
-      alt: "Claude Code running a month-end-close skill on sample data and stopping for the controller's approval",
-      caption: "A month-end skill run that stops for approval. Sample data.",
+      width: 1104,
+      height: 1250,
+      alt: "The Code tab in the Claude app running a month-end-close skill on sample data and stopping for the controller's approval",
+      caption: "A month-end skill run in the Claude app, stopped for approval. Sample data.",
     },
     4: {
       src: "/images/claude/code-session.png",
