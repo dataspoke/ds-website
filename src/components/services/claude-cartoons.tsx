@@ -409,13 +409,13 @@ function ToolStep({ cy, h = 40, badges = [], title, sub }: { cy: number; h?: num
 }
 
 /** A Claude step: a judgment call, marked with the sparkle. `judge` draws it white. */
-function ClaudeStep({ cy, title, sub, judge = false }: { cy: number; title: string; sub: string; judge?: boolean }) {
+function ClaudeStep({ cy, h = 40, title, sub, judge = false }: { cy: number; h?: number; title: string; sub: string; judge?: boolean }) {
   const x = 256;
   const tc = judge ? INK : "#fff";
   return (
     <g>
-      <rect x={x + 4} y={cy - 16} width={186} height={40} rx="9" fill={judge ? PRIMARY : BRAND} stroke={INK} strokeWidth="2.5" />
-      <rect x={x} y={cy - 20} width={186} height={40} rx="9" fill={judge ? "#fff" : PRIMARY} stroke={INK} strokeWidth="2.5" />
+      <rect x={x + 4} y={cy - h / 2 + 4} width={186} height={h} rx="9" fill={judge ? PRIMARY : BRAND} stroke={INK} strokeWidth="2.5" />
+      <rect x={x} y={cy - h / 2} width={186} height={h} rx="9" fill={judge ? "#fff" : PRIMARY} stroke={INK} strokeWidth="2.5" />
       <Sparkle x={x + 16} y={cy} s={0.75} fill={judge ? PRIMARY : "#fff"} />
       <text x={x + 30} y={cy - 2} fontSize="11.5" fontWeight="800" fill={tc} fontFamily={SANS}>
         {title}
@@ -429,9 +429,9 @@ function ClaudeStep({ cy, title, sub, judge = false }: { cy: number; title: stri
 
 /**
  * Step 5: a work triage agent in two lanes. Tools on the left do exact, logged work
- * (one queue, context from the data warehouse and other systems, replies and tasks);
- * Claude on the right makes the calls (urgency, simple or not, the plan, the check).
- * Simple requests are answered straight from triage; the rest become a plan you decide.
+ * (one queue, lookups in the data warehouse and CRM, replies and tasks); Claude on
+ * the right makes the calls. Triage shows its test: only routine, low-risk requests
+ * get an automatic reply; everything else becomes a checked plan that a person decides.
  */
 export function FirstAgentCartoon({ label }: { label: string }) {
   const urgency: [string, number, boolean][] = [
@@ -452,43 +452,28 @@ export function FirstAgentCartoon({ label }: { label: string }) {
         CLAUDE · makes the calls
       </text>
 
-      {/* new work from four places */}
-      <rect x={28} y={44} width={196} height={26} rx="13" fill={INK} />
-      {(
-        [
-          ["M", PRIMARY],
-          ["S", BRAND],
-          ["F", "#d6e6f8"],
-          ["N", "#fff"],
-        ] as [string, string][]
-      ).map(([b, f], i) => (
-        <g key={b}>
-          <rect x={36 + i * 22} y={49} width={18} height={16} rx="4" fill={f} stroke={INK} strokeWidth="1.2" />
-          <text x={45 + i * 22} y={60.5} textAnchor="middle" fontSize="8.5" fontWeight="800" fill={f === "#fff" || f === "#d6e6f8" ? INK : "#fff"} fontFamily={DISPLAY}>
-            {b}
-          </text>
-        </g>
-      ))}
-      <text x={128} y={61} fontSize="10.5" fontWeight="700" fill="#fff" fontFamily={SANS}>
-        New work arrives
+      {/* new work from four places, into one queue */}
+      <rect x={28} y={44} width={196} height={24} rx="12" fill={INK} />
+      <text x={126} y={60} textAnchor="middle" fontSize="10.5" fontWeight="700" fill="#fff" fontFamily={SANS}>
+        Email · Slack · meetings · tasks
       </text>
-      <Arrow d="M126 70 V80" tip={[126, 80]} rot={90} />
-      <ToolStep cy={100} badges={[]} title="One ticket queue" sub="email, Slack, meetings, tasks" />
-      <Arrow d="M224 100 H254" tip={[254, 100]} rot={0} />
+      <Arrow d="M126 68 V78" tip={[126, 78]} rot={90} />
+      <ToolStep cy={97} h={34} title="One ticket queue" sub="every request in one place" />
+      <Arrow d="M224 97 H254" tip={[254, 97]} rot={0} />
 
-      {/* triage: urgency and whether it is simple */}
-      <rect x={260} y={78} width={186} height={52} rx="9" fill={BRAND} stroke={INK} strokeWidth="2.5" />
-      <rect x={256} y={74} width={186} height={52} rx="9" fill={PRIMARY} stroke={INK} strokeWidth="2.5" />
-      <Sparkle x={272} y={90} s={0.75} />
-      <text x={286} y={94} fontSize="11.5" fontWeight="800" fill="#fff" fontFamily={SANS}>
+      {/* triage: urgency, then the test for an automatic reply */}
+      <rect x={260} y={76} width={186} height={62} rx="9" fill={BRAND} stroke={INK} strokeWidth="2.5" />
+      <rect x={256} y={72} width={186} height={62} rx="9" fill={PRIMARY} stroke={INK} strokeWidth="2.5" />
+      <Sparkle x={272} y={87} s={0.75} />
+      <text x={286} y={91} fontSize="11.5" fontWeight="800" fill="#fff" fontFamily={SANS}>
         Triage and classify
       </text>
       {urgency.reduce<{ x: number; out: ReactNode[] }>(
         (acc, [t, w, on]) => {
           acc.out.push(
             <g key={t}>
-              <rect x={acc.x} y={104} width={w} height={16} rx="8" fill={on ? "#fff" : "none"} stroke="#fff" strokeWidth="1.5" />
-              <text x={acc.x + w / 2} y={115.5} textAnchor="middle" fontSize="9.5" fontWeight="700" fill={on ? PRIMARY : "#fff"} fontFamily={SANS}>
+              <rect x={acc.x} y={98} width={w} height={15} rx="7.5" fill={on ? "#fff" : "none"} stroke="#fff" strokeWidth="1.5" />
+              <text x={acc.x + w / 2} y={109} textAnchor="middle" fontSize="9.5" fontWeight="700" fill={on ? PRIMARY : "#fff"} fontFamily={SANS}>
                 {t}
               </text>
             </g>,
@@ -498,62 +483,51 @@ export function FirstAgentCartoon({ label }: { label: string }) {
         },
         { x: 272, out: [] },
       ).out}
-
-      {/* simple: answered straight from triage */}
-      <Arrow d="M258 124 L227 146" tip={[227, 146]} rot={145} />
-      <text x={236} y={135} textAnchor="end" fontSize="9.5" fontWeight="700" fill={PRIMARY} fontFamily={SANS}>
-        simple
+      <text x={272} y={127.5} fontSize="9.5" fontWeight="600" fill="#fff" opacity="0.85" fontFamily={SANS}>
+        Is it
       </text>
-      <ToolStep
-        cy={164}
-        badges={[
-          ["S", BRAND],
-          ["M", PRIMARY],
-        ]}
-        title="Reply sent"
-        sub="answered at triage"
-      />
-
-      {/* needs work: Claude decides what to look up, the tools fetch it */}
-      <Arrow d="M349 126 V140" tip={[349, 140]} rot={90} />
-      <text x={356} y={139.5} fontSize="9" fontWeight="700" fill={PRIMARY} fontFamily={SANS}>
-        needs work
+      <Check x={302} y={124} r={5} />
+      <text x={310} y={127.5} fontSize="9.5" fontWeight="700" fill="#fff" fontFamily={SANS}>
+        routine?
       </text>
-      <ClaudeStep cy={162} title="Gather context" sub="decides what to look up" />
-      <Arrow d="M258 180 L227 200" tip={[227, 200]} rot={147} />
-      <ToolStep
-        cy={216}
-        badges={[
-          ["DW", PRIMARY],
-          ["SF", BRAND],
-          ["D", "#d6e6f8"],
-        ]}
-        title="Look it up"
-        sub="warehouse and CRM"
-      />
-      <Arrow d="M224 216 H254" tip={[254, 216]} rot={0} />
-      <ClaudeStep cy={214} title="Assemble a plan" sub="options, risks, effort" />
-      <Arrow d="M349 234 V242" tip={[349, 242]} rot={90} />
-      <ClaudeStep cy={262} title="AI judge checks it" sub="sources, gaps, conflicts" judge />
-      <Arrow d="M349 282 V292" tip={[349, 292]} rot={90} />
-      <Card x={256} y={293} w={186} h={26} r={9} />
-      <Hand x={272} y={306} r={7} />
-      <text x={286} y={310} fontSize="11.5" fontWeight="800" fill={INK} fontFamily={SANS}>
+      <Check x={360} y={124} r={5} />
+      <text x={368} y={127.5} fontSize="9.5" fontWeight="700" fill="#fff" fontFamily={SANS}>
+        low risk?
+      </text>
+
+      {/* routine and low risk: answered straight from triage */}
+      <Arrow d="M258 132 L227 152" tip={[227, 152]} rot={147} />
+      <text x={240} y={133} textAnchor="end" fontSize="9.5" fontWeight="800" fill={PRIMARY} fontFamily={SANS}>
+        both yes: auto-reply
+      </text>
+      <text x={232} y={145} textAnchor="end" fontSize="9" fontWeight="600" fill={PRIMARY} fontFamily={SANS}>
+        routine and low risk
+      </text>
+      <ToolStep cy={170} h={36} title="Reply sent" sub="by email or Slack" />
+
+      {/* anything else: Claude decides what to look up, the tools fetch it */}
+      <Arrow d="M349 138 V148" tip={[349, 148]} rot={90} />
+      <text x={356} y={146} fontSize="9" fontWeight="700" fill={PRIMARY} fontFamily={SANS}>
+        either no
+      </text>
+      <ClaudeStep cy={168} h={36} title="Gather context" sub="decides what to look up" />
+      <Arrow d="M258 186 L227 204" tip={[227, 204]} rot={150} />
+      <ToolStep cy={214} h={36} title="Look it up" sub="data warehouse, CRM" />
+      <Arrow d="M224 214 H254" tip={[254, 214]} rot={0} />
+      <ClaudeStep cy={214} h={36} title="Assemble a plan" sub="options, risks, effort" />
+      <Arrow d="M349 236 V240" tip={[349, 240]} rot={90} />
+      <ClaudeStep cy={258} h={36} title="AI judge checks it" sub="sources, gaps, conflicts" judge />
+      <Arrow d="M349 280 V290" tip={[349, 290]} rot={90} />
+      <Card x={256} y={291} w={186} h={26} r={9} />
+      <Hand x={272} y={304} r={7} />
+      <text x={286} y={308} fontSize="11.5" fontWeight="800" fill={INK} fontFamily={SANS}>
         You decide the plan
       </text>
-      <Arrow d="M256 306 H226" tip={[226, 306]} rot={180} />
-      <ToolStep
-        cy={306}
-        h={26}
-        badges={[
-          ["N", "#fff"],
-          ["S", BRAND],
-        ]}
-        title="Tasks assigned"
-      />
+      <Arrow d="M256 304 H226" tip={[226, 304]} rot={180} />
+      <ToolStep cy={304} h={26} title="Tasks assigned in Notion" />
       {/* your decisions teach the triage */}
-      <path d="M442 306 H462 V100 H450" fill="none" stroke={PRIMARY} strokeWidth="2" strokeDasharray="4 4" />
-      <path transform="translate(450 100) rotate(180)" d="M-6 -4.5 L0 0 L-6 4.5" fill="none" stroke={PRIMARY} strokeWidth="2.2" strokeLinecap="round" />
+      <path d="M442 304 H462 V103 H450" fill="none" stroke={PRIMARY} strokeWidth="2" strokeDasharray="4 4" />
+      <path transform="translate(450 103) rotate(180)" d="M-6 -4.5 L0 0 L-6 4.5" fill="none" stroke={PRIMARY} strokeWidth="2.2" strokeLinecap="round" />
       <text x={469} y={204} textAnchor="middle" fontSize="9.5" fontWeight="700" fill={PRIMARY} fontFamily={SANS} transform="rotate(90 469 204)">
         learns from your calls
       </text>

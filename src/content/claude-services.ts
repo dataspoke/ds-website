@@ -188,8 +188,8 @@ export const CLAUDE_VISUALS = {
       caption: "The learning loop: every change to a skill is approved by a person, and the team learns it. Illustration.",
     },
     5: {
-      alt: "Illustration: a work triage agent in two lanes. New work from email, Slack, meeting action items and tasks lands in one ticket queue. Claude triages each item by urgency. Simple requests are answered right at triage. For anything that needs work, Claude decides what to look up and the tools fetch it from the data warehouse, the CRM and files; Claude assembles a plan, an AI judge checks it, and you decide. Tasks are then assigned, your decisions teach the triage, and every ticket is logged",
-      caption: "A first agent: it sorts every request, answers the simple ones, and brings you a checked plan for the rest. Illustration.",
+      alt: "Illustration: a work triage agent in two lanes. New work from email, Slack, meeting action items and tasks lands in one ticket queue. Claude triages each item by urgency and checks whether it is routine and low risk. Only routine, low-risk requests get an automatic reply by email or Slack. For anything that needs work, Claude decides what to look up and the tools fetch it from the data warehouse, the CRM and files; Claude assembles a plan, an AI judge checks it, and you decide. Tasks are then assigned, your decisions teach the triage, and every ticket is logged",
+      caption: "A first agent: it sorts every request, auto-replies only to routine, low-risk ones, and brings you a checked plan for the rest. Illustration.",
     },
   } as Record<number, { alt: string; caption: string }>,
   /** Guardrails: the approval flow. */
