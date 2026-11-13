@@ -176,8 +176,8 @@ export const CLAUDE_VISUALS = {
       caption: "Your systems, connected one at a time. Illustration.",
     },
     2: {
-      alt: "Illustration: a Cowork project window for month-end close, with its instructions, three files and the month-end skill, and a switch between Cowork and Code",
-      caption: "A Cowork project: instructions, files and a skill in one place. Illustration.",
+      alt: "Illustration: a Cowork window with projects grouped by customer (Customer A, Customer B) and by division (Finance, Field ops, Sales). The Finance project is open for month-end close, with its instructions, three files and the month-end skill, and a switch between Cowork and Code",
+      caption: "Cowork projects by customer and by division, each with its own instructions, files and skills. Illustration.",
     },
     3: {
       alt: "Illustration: a skills library window. A skills folder holds month-end, weekly-report, client-intake, invoice-chase and morning-brief, and the open month-end skill file lists its four steps, ending with wait for your OK",

@@ -207,7 +207,11 @@ export function SkillsLibraryCartoon({ label }: { label: string }) {
 
 /** Step 2: a Cowork project window: its instructions, files and skill. */
 export function ProjectCartoon({ label }: { label: string }) {
-  const projects = ["Month-end close", "Client intake", "Weekly report"];
+  // Projects grouped two ways: one per customer, one per division. Finance is open.
+  const groups: { head: string; items: string[] }[] = [
+    { head: "BY CUSTOMER", items: ["Customer A", "Customer B"] },
+    { head: "BY DIVISION", items: ["Finance", "Field ops", "Sales"] },
+  ];
   const files = [
     ["close-checklist.md", 176, 230],
     ["accounts.pdf", 324, 230],
@@ -215,24 +219,35 @@ export function ProjectCartoon({ label }: { label: string }) {
   ] as const;
   return (
     <Canvas label={label}>
-      <Window title="Month-end close" />
+      <Window title="Finance · month-end close" />
       <rect x={38} y={66} width={116} height={256} fill={TINT} />
       <line x1={154} y1={66} x2={154} y2={322} stroke={INK} strokeWidth="2" />
-      <text x={50} y={92} fontSize="12" fontWeight="800" fill={INK} fontFamily={MONO}>
+      <text x={50} y={90} fontSize="12" fontWeight="800" fill={INK} fontFamily={MONO}>
         Projects
       </text>
-      {projects.map((n, i) => {
-        const y = 120 + i * 28;
+      {groups.map((g, gi) => {
+        const top = 112 + gi * 74;
         return (
-          <g key={n}>
-            {i === 0 && <rect x={44} y={y - 17} width={104} height={24} rx="6" fill={BRAND} />}
-            <text x={50} y={y} fontSize="11" fontWeight="700" fill={i === 0 ? "#fff" : INK} fontFamily={SANS}>
-              {n}
+          <g key={g.head}>
+            <text x={50} y={top} fontSize="8.5" fontWeight="800" fill={PRIMARY} fontFamily={DISPLAY} letterSpacing="0.06em">
+              {g.head}
             </text>
+            {g.items.map((n, i) => {
+              const y = top + 20 + i * 20;
+              const on = n === "Finance";
+              return (
+                <g key={n}>
+                  {on && <rect x={44} y={y - 14} width={104} height={20} rx="6" fill={BRAND} />}
+                  <text x={56} y={y} fontSize="11" fontWeight="700" fill={on ? "#fff" : INK} fontFamily={SANS}>
+                    {n}
+                  </text>
+                </g>
+              );
+            })}
           </g>
         );
       })}
-      <text x={50} y={212} fontSize="11" fontWeight="700" fill={PRIMARY} fontFamily={SANS}>
+      <text x={50} y={276} fontSize="11" fontWeight="700" fill={PRIMARY} fontFamily={SANS}>
         + New project
       </text>
       {/* Cowork or Code */}
