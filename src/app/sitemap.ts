@@ -55,7 +55,7 @@ function pageSources(pagePath: string): string[] {
     "/industries": ["src/app/industries/page.tsx", "src/content/industries.ts", "src/components/industries"],
     "/insights": ["src/app/insights/page.tsx"],
     "/privacy": ["src/app/privacy", "src/content/privacy.ts"],
-    "/services": ["src/app/services/page.tsx", "src/content/services.ts", "src/content/approach.ts", "src/components/services"],
+    "/services": ["src/app/services/page.tsx", "src/content/services.ts", "src/content/claude-services.ts", "src/content/approach.ts", "src/components/services"],
     "/work": ["src/app/work/page.tsx", "src/components/work", "src/content/case-studies.ts"],
   };
   return sources[pagePath] ?? [`src/app${pagePath}`];

@@ -144,7 +144,7 @@ export function ConnectorsCartoon({ label }: { label: string }) {
   );
 }
 
-/** A small folder icon for the file tree. */
+/** A folder icon for the file tree. */
 function Folder({ x, y, fill }: { x: number; y: number; fill: string }) {
   return <path d={`M${x} ${y - 9} h6 l2 2 h8 v11 h-16 Z`} fill={fill} stroke={INK} strokeWidth="1.5" strokeLinejoin="round" />;
 }
@@ -286,7 +286,7 @@ export function ProjectCartoon({ label }: { label: string }) {
   );
 }
 
-/** A small uppercase section heading inside a window. */
+/** An uppercase section heading inside a window. */
 function Heading({ x, y, text }: { x: number; y: number; text: string }) {
   return (
     <text x={x} y={y} fontSize="11" fontWeight="800" fill={PRIMARY} fontFamily={DISPLAY} letterSpacing="0.06em">

@@ -82,10 +82,10 @@ export const CLAUDE_PAGE = {
       short: "Prototype to production",
       title: "A first agent, from prototype to production",
       lede:
-        "One standing agent on a real operations workflow: reporting, billing, follow-up, or another job your team already does the same way every week. A person still approves the exceptions.",
+        "One standing agent on a real operations workflow, such as sorting the work that arrives by email, Slack, meetings and tasks. Routine, low-risk requests get a reply you approved in advance. Everything else comes to a person with a plan.",
       bullets: [
         "I map how the work actually moves today, then stand up one guarded workflow first",
-        "The prototype flags issues that need a person, instead of acting on its own",
+        "The prototype replies only to routine, low-risk requests, using replies you approved, and flags everything else for a person",
         "Then I harden it: access limited to the systems that job needs, and a record of every step",
         "Once it runs the same way every week, it rolls out to the rest of the team",
         "Once the first agent is solid, the next one is easier to add",
@@ -151,8 +151,8 @@ export const CLAUDE_PAGE = {
 
 /**
  * Labels for the page's diagrams and step illustrations. The step pictures show
- * what each step looks like, not real client data, so each carries the
- * "Illustrative" tag.
+ * what each step looks like, not real client data, so each caption ends
+ * with "Illustration."
  */
 export const CLAUDE_VISUALS = {
   hub: "Claude",
@@ -188,7 +188,7 @@ export const CLAUDE_VISUALS = {
       caption: "The learning loop: every change to a skill is approved by a person, and the team learns it. Illustration.",
     },
     5: {
-      alt: "Illustration: a work triage agent in two lanes. New work from email, Slack, meeting action items and tasks lands in one ticket queue. Claude triages each item by urgency and checks whether it is routine and low risk. Only routine, low-risk requests get an automatic reply by email or Slack. For anything that needs work, Claude decides what to look up and the tools fetch it from the data warehouse, the CRM and files; Claude assembles a plan, an AI judge checks it, and you decide. Tasks are then assigned, your decisions teach the triage, and every ticket is logged",
+      alt: "Illustration: a work triage agent. Requests from email, Slack, meetings and tasks land in one queue. Claude sorts them by urgency and auto-replies only to routine, low-risk ones. For the rest, it gathers context, builds a plan, an AI judge checks it, and you decide",
       caption: "A first agent: it sorts every request, auto-replies only to routine, low-risk ones, and brings you a checked plan for the rest. Illustration.",
     },
   } as Record<number, { alt: string; caption: string }>,
@@ -197,7 +197,7 @@ export const CLAUDE_VISUALS = {
   flow: [
     { title: "Claude drafts", note: "Limited access: only the systems and records you approve" },
     { title: "Exceptions are flagged", note: "Anything unusual waits" },
-    { title: "A person approves", note: "Human approvals: drafts and exceptions wait for a person" },
+    { title: "A person approves", note: "Human approvals: drafts and exceptions wait for a person. Only replies you approved in advance go out on their own" },
     { title: "Every step is logged", note: "An audit trail: what ran, what it touched, what was approved" },
   ],
 };
