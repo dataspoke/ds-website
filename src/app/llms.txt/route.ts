@@ -12,6 +12,7 @@ import {
 import { CREDENTIALS, HERO, TOOLS } from "@/content/home";
 import { FAQS_A } from "@/components/home-a/content";
 import { FREE_ESTIMATE } from "@/content/free-estimate";
+import { CLAUDE_PAGE } from "@/content/claude-services";
 import { INDUSTRIES, INDUSTRIES_HUB, industryPath } from "@/content/industries";
 import { SERVICE_PAGE_EXTRAS } from "@/content/service-pages";
 import { HUB_LINES, SPOKE_LINES } from "@/content/services";
@@ -55,6 +56,10 @@ function body() {
     "### What runs on it",
     "",
     ...SPOKE_LINES.map(lineEntry),
+    "",
+    "### Claude setup and training",
+    "",
+    `- [${CLAUDE_PAGE.card.title}](${SITE_URL}${CLAUDE_PAGE.path}): ${CLAUDE_PAGE.card.oneLiner} ${CLAUDE_PAGE.card.summary}`,
     "",
     "## Questions on the service pages",
     "",

@@ -46,6 +46,8 @@ export interface ServicePageExtra {
   faqTitle: string;
   faqs: FaqItem[];
   engagement: ServiceEngagement;
+  /** Optional one-line pointer to a related page, shown under the intro. */
+  crossLink?: { text: string; links: TextLink[] };
 }
 
 const estimateStep = {
@@ -393,6 +395,10 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
     ],
   },
   "ai-implementation": {
+    crossLink: {
+      text: "Already working in Claude? See Claude setup and training: Claude connected to QuickBooks, Xero or your CRM, Claude Cowork and Claude Code setup, and Claude Skills.",
+      links: [{ label: "Claude setup and training", href: "/services/claude" }],
+    },
     faqEyebrow: "Questions",
     faqTitle: "Before AI touches your data",
     engagement: {
