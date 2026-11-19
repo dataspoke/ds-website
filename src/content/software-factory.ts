@@ -1,8 +1,9 @@
 import type { TextLink } from "@/types";
 
 // Copy for /services/software-factory (DRAFT, noindex, not linked anywhere).
-// First person ("I"): Nick runs this setup himself. Every claim and number comes
-// from Nick's own repos; sources are listed in docs/drafts/software-factory-summary.md.
+// Written for business leaders in plain English: what DataSpoke sets up for
+// companies, backed by real lessons and numbers from our own operation.
+// Sources are listed in docs/drafts/software-factory-summary.md.
 // Clients stay anonymous. No prices, client names, quotes from third parties,
 // or made-up numbers. Hyphens only, no em or en dashes.
 
@@ -25,135 +26,222 @@ export interface IncidentRule {
 
 export const FACTORY_PAGE = {
   path: "/services/software-factory",
-  metaTitle: "AI software factory setup: agents build, people own the gates",
+  metaTitle: "AI software factory setup: AI builds, your team owns the sign-offs",
   metaDescription:
-    "How I run software as an assembly line: Claude Code agents do the stations, a second agent reviews, and people own merge, migration and deploy.",
+    "We set up an AI-powered software assembly line for your company: AI assistants build and test updates, a second AI checks every change, and your team owns every approval before anything goes live.",
   draftBadge: "Draft - not published",
 
   eyebrow: "AI software factory setup",
   title: "A software factory, not a dark factory.",
   lede:
-    "Agents do the stations. People own the gates. This is the line I run every day across client codebases, and the one I can set up for your team.",
-  intro: ["Agents build, people decide", "A second agent reviews every change", "Separate yeses for merge, migration and deploy"],
+    "AI assistants run the assembly line. Your team owns the sign-offs. We set up the workflow, safeguards, and review gates so your company can build and update software faster without losing control.",
+  intro: [
+    "AI builds, your team decides",
+    "A second AI checks every change",
+    "Separate sign-offs to approve, update data, and launch",
+  ],
 
   compareEyebrow: "Two kinds of factory",
-  compareTitle: "Same agents. Different answer to who says yes.",
+  compareTitle: "Same AI tools. Different answer to who is in charge.",
   compareLede:
-    "A dark factory takes people out of writing and reviewing code. I keep people at the few steps that can hurt you.",
-  compareCols: { topic: "", dark: "Dark factory", mine: "The line I run" },
+    "A \"dark factory\" takes people out of building and reviewing software altogether. The factory we set up keeps your team in charge of the few decisions that can actually hurt your business.",
+  compareCols: { topic: "", dark: "Dark factory", ours: "What we set up for you" },
   compareRows: [
-    { topic: "Who writes the code", dark: "Agents", mine: "Agents" },
-    { topic: "Who reviews it", dark: "No person. Tests and scenarios decide", mine: "A second agent that did not write it, then me" },
-    { topic: "Who approves merge, migration, deploy", dark: "The pipeline", mine: "A person, one yes for each" },
-    { topic: "When something breaks", dark: "Add test scenarios and rerun", mine: "The lesson becomes a hook, a check, or a rule" },
+    { topic: "Who builds the software", dark: "AI assistants", ours: "AI assistants" },
+    {
+      topic: "Who checks the work",
+      dark: "No person. Automated tests decide",
+      ours: "A second AI that did not build it, then your team",
+    },
+    {
+      topic: "Who approves changes, data updates, and launch",
+      dark: "Automated software",
+      ours: "A person on your team, one sign-off for each",
+    },
+    {
+      topic: "When something goes wrong",
+      dark: "Add more automated tests and rerun",
+      ours: "The lesson becomes an automatic safeguard or rule",
+    },
   ],
   compareNote:
-    "The term is older than AI. A software factory meant running delivery as one repeatable line. I keep that meaning and put agents at the stations.",
+    "The term is older than AI. A software factory simply meant building and releasing software on one repeatable assembly line. We set up that line for your company, with AI assistants at the workstations and your team at the quality gates.",
 
-  lineEyebrow: "The line",
-  lineTitle: "From request to running code, station by station.",
-  lineLegendStation: "Agent station",
-  lineLegendGate: "Human gate",
+  lineEyebrow: "The assembly line",
+  lineTitle: "From business request to live software, step by step.",
+  lineLegendStation: "AI workstation",
+  lineLegendGate: "Human sign-off",
   lineEndLabel: "Live, and watched",
-  lineLoopLabel: "Mistakes loop back as hooks, checks, or rules",
+  lineLoopLabel: "Mistakes loop back as automatic checks or rules",
   stations: [
-    { title: "Work comes in", note: "Bots turn requests and alerts into owned tasks. Claude Code sessions do the building" },
-    { title: "Own workspace", note: "Every code change gets its own git worktree, so parallel agents don't undo each other" },
-    { title: "Build and test", note: "Plain-English test scenarios, driven in a real browser" },
-    { title: "Second-agent review", note: "An agent that did not write the change reviews it before I see it" },
-    { title: "Merge", note: "My yes, on a pull request", gate: true },
-    { title: "Migrate and deploy", note: "A yes for the migration, then a separate yes for the deploy. One deploy slot per codebase. No monitoring plan, no deploy", gate: true },
-    { title: "Watch and learn", note: "Each session ends by asking what check would have stopped its mistakes" },
+    {
+      title: "Work comes in",
+      note: "Automated intake turns requests and system alerts into owned tasks. AI assistants pick up the build work.",
+    },
+    {
+      title: "Separate workspace",
+      note: "Every software change is built in its own isolated workspace, so multiple AI assistants working at once cannot overwrite each other.",
+    },
+    {
+      title: "Build and test",
+      note: "AI builds the update and tests it in a real browser using plain-English checklists written like a real user.",
+    },
+    {
+      title: "Second-AI review",
+      note: "A separate AI that did not build the change inspects it for accuracy, security, and side effects before your team sees it.",
+    },
+    {
+      title: "Approve the change",
+      note: "A person on your team reviews the plain-English summary and signs off before the update joins your main software.",
+      gate: true,
+    },
+    {
+      title: "Update data & launch",
+      note: "One sign-off for any database update, then a separate sign-off to launch to users. Only one release runs per system at a time, and nothing launches without a monitoring plan.",
+      gate: true,
+    },
+    {
+      title: "Watch and improve",
+      note: "Every work session ends by asking what check or rule would have stopped any mistake earlier.",
+    },
   ] satisfies FactoryStation[],
 
-  stopsEyebrow: "Run to a gate",
-  stopsTitle: "An agent may stop for only four reasons.",
+  stopsEyebrow: "Clear boundaries",
+  stopsTitle: "An AI assistant may stop and ask your team for only four reasons.",
   stops: [
-    { title: "A gate", note: "A production write, merge, deploy, anything other people see, spending money" },
-    { title: "A real fork", note: "Two readings of the job lead to different work" },
-    { title: "A blocker only I can clear", note: "A login, a secret, hardware" },
-    { title: "Done", note: "With the proof attached" },
+    {
+      title: "An approval gate",
+      note: "Changing live business data, approving a change, launching to users, anything external people see, or spending money.",
+    },
+    {
+      title: "A real business choice",
+      note: "Two reasonable readings of the request would lead to very different outcomes.",
+    },
+    {
+      title: "Access only a person has",
+      note: "A password, a private account login, or a physical device.",
+    },
+    {
+      title: "Finished work",
+      note: "Ready for your team's review, with proof that it works attached.",
+    },
   ] satisfies FactoryCard[],
-  stopsRule: "If I would say yes and the step can be undone, the answer is yes: act.",
-  stopsRuleNote: "Gates stay gates even when they can be undone. A merge can be reverted. It still needs my yes.",
+  stopsRule: "If your team would say yes and the step can be undone, the AI acts without waiting.",
+  stopsRuleNote:
+    "Approval gates stay gates even when a step can be reversed. A software change can be rolled back, but it still requires a person's sign-off.",
 
-  bottleneckEyebrow: "Where the line jams",
-  bottleneckTitle: "Code is cheap now. Proof isn't.",
-  bottleneckLede: "Faster code moves the jam to review, shared environments and deploys. That's where my gates sit.",
+  bottleneckEyebrow: "Where teams get stuck",
+  bottleneckTitle: "Building software is fast now. Proof isn't.",
+  bottleneckLede:
+    "When AI builds software faster, the bottleneck moves to reviewing changes, sharing test systems, and launching safely. That is where we put your team's controls.",
+  bottleneckSrJam: "The bottleneck: ",
+  bottleneckSrFix: "How we solve it: ",
   bottlenecks: [
     {
       title: "Review",
-      jam: "More code than one person can read",
-      fix: "A second agent reviews every branch for correctness, fit, blast radius and security. I read its findings, not every line.",
+      jam: "AI produces more changes than your team can check line by line.",
+      fix: "A second AI inspects every change for accuracy, fit, business impact, and security. Your team reads a clear summary instead of raw code.",
     },
     {
-      title: "Shared environments",
-      jam: "Parallel agents collide on the same test database and backend",
-      fix: "One session at a time holds the migration and deploy slot, from the database change to a clean watch.",
+      title: "Shared test systems",
+      jam: "Multiple AI assistants working at once collide on the same test database and break each other's tests.",
+      fix: "Only one release at a time holds the update lane, from the database change through confirming a clean launch.",
     },
     {
-      title: "Deploys",
-      jam: "Code ships before anyone says what to watch",
-      fix: "A deploy refuses to run until there is a monitoring plan: what to watch, when, and when to roll back.",
+      title: "Launching live",
+      jam: "Updates go out to staff or customers before anyone agrees on what to watch.",
+      fix: "Nothing is allowed to launch until there is a monitoring plan: what to watch, when to check it, and when to roll back.",
     },
   ],
 
-  incidentsEyebrow: "Rules from incidents",
-  incidentsTitle: "Every time an agent burns me, the lesson becomes a guard.",
-  incidentsLede: "Not a note in someone's head. A hook or a check that fires every time.",
+  incidentsEyebrow: "Safeguards from real lessons",
+  incidentsTitle: "When something goes wrong once, it becomes a permanent safeguard.",
+  incidentsLede: "Not a note people have to remember. An automatic check or warning that runs every time.",
+  incidentBeforeLabel: "What went wrong",
+  incidentAfterLabel: "The safeguard now",
   incidents: [
     {
-      incident: "A feature vanished from a test build of a gym's app. The build was cut from a feature branch.",
-      rule: "A hook fires on every app-store build and tells the agent to stop and confirm it is from main with all features merged.",
+      incident:
+        "A finished feature vanished from a test version of a gym's mobile app because the build was pulled from an unfinished draft instead of the official version.",
+      rule: "An automatic check fires before every mobile app build and tells the AI to stop and confirm it is packaging the official version with all approved features included.",
     },
     {
-      incident: "Three parallel build tracks shared one test database and one backend. Deploys collided and one session dropped a table.",
-      rule: "One migration and deploy slot per codebase, plus a checklist before fanning out.",
+      incident:
+        "Three parallel projects shared one test environment. Updates collided and one AI assistant accidentally deleted a table in the test database.",
+      rule: "Only one update and launch can run per software system at a time, backed by a required checklist before parallel work starts.",
     },
     {
-      incident: "A cloud login expired three times during one build and cost an overnight release window.",
-      rule: "Every production gate checks the cloud login first, and a guard blocks changes to the login all sessions share.",
+      incident:
+        "An expired cloud account login failed three times during a build and cost an entire overnight release window.",
+      rule: "Every live release checks account access first, and a built-in guard blocks AI assistants from changing the shared login settings.",
     },
   ] satisfies IncidentRule[],
 
-  ratchetEyebrow: "Checks that test themselves",
-  ratchetTitle: "Freeze the risky surface. Fail on anything new.",
+  ratchetEyebrow: "Safeguards that test themselves",
+  ratchetTitle: "Lock down customer data. Flag any new access.",
   ratchetSteps: [
-    { title: "Freeze", note: "Every place the code reads private contact data goes on a fingerprinted list" },
-    { title: "Fail on new", note: "Any new or changed read turns the check red. Merges wait until a person signs off" },
-    { title: "Test the test", note: "Before checking the code, the check plants bad reads. Each one must fail" },
-    { title: "Only down", note: "A count of reads still to convert can go down, never up" },
+    {
+      title: "Lock the list",
+      note: "Every place the software reads private customer contact information goes on a locked inventory.",
+    },
+    {
+      title: "Flag anything new",
+      note: "Any new or changed access to customer data turns the check red. Approvals wait until a person signs off.",
+    },
+    {
+      title: "Test the alarm",
+      note: "Before checking the real software, the safeguard plants fake unauthorized reads. Every single one must trigger an alarm.",
+    },
+    {
+      title: "Only shrink the risk",
+      note: "The count of older data touchpoints still waiting to be upgraded can go down, never up.",
+    },
   ] satisfies FactoryCard[],
-  ratchetStat: { value: "355", label: "reads left to convert in one run of the check. A test fails if that number rises." },
+  ratchetStat: {
+    value: "355",
+    label: "older customer-data touchpoints tracked in one real run of the check. A test fails if that number ever rises.",
+  },
 
-  loopEyebrow: "Unattended loops",
-  loopTitle: "No check, no loop.",
-  loopQuote: "An agent runs unattended only when something other than the agent can tell it is done.",
+  loopEyebrow: "Safe autonomous work",
+  loopTitle: "No independent check, no autopilot.",
+  loopQuote: "An AI assistant works unattended only when something other than that AI can prove the job is done.",
   loopParts: [
-    { title: "A checkable exit", note: "Done means a test passes, not a feeling" },
-    { title: "A separate judge", note: "Never the agent that did the work" },
-    { title: "Stacked stops", note: "Success, 12 rounds max, no progress, or budget spent" },
-    { title: "A state file", note: "So the next round knows what the last one tried" },
+    {
+      title: "A clear finish line",
+      note: "Done means an objective test passes, not the AI saying it feels ready.",
+    },
+    {
+      title: "A separate judge",
+      note: "The checker is never the same AI that did the work.",
+    },
+    {
+      title: "Built-in stop limits",
+      note: "Work stops on success, after 12 tries max, if progress stalls, or when the budget limit is reached.",
+    },
+    {
+      title: "A written handoff log",
+      note: "Every round leaves a written record so the next try knows what the last one already tried.",
+    },
   ] satisfies FactoryCard[],
 
-  retroEyebrow: "The human gets graded too",
-  retroTitle: "Every bare yes I type gets counted. Many shouldn't be needed.",
+  retroEyebrow: "Measuring the human bottleneck",
+  retroTitle: "Every routine \"yes\" gets counted. Most shouldn't be needed.",
   retroLede:
-    "A weekly retro reads every session and measures me: how long agents sat waiting on me, and how often I typed a yes with nothing to decide. One week:",
+    "We set up a weekly review that audits every AI work session and shows where people are slowing the line down: how long AI assistants sat waiting for an answer, and how often someone approved a routine step with nothing real to decide. One real week from our own operation:",
   retroStats: [
-    { value: "91", label: "sessions" },
-    { value: "707", label: "prompts from me" },
-    { value: "24 h", label: "agents waited on me" },
+    { value: "91", label: "AI work sessions" },
+    { value: "707", label: "human check-ins" },
+    { value: "24 h", label: "spent waiting on a person" },
     { value: "103", label: "rubber-stamp yeses" },
   ],
-  retroNote: "Each finding becomes an action with a target. Next week's retro checks whether it held.",
+  retroNote: "Each finding becomes an action with a target. Next week's review checks whether it held.",
 
   startEyebrow: "How to start",
   startTitle: "Book a free AI strategy call.",
   startPoints: [
     "A free 30-minute call.",
-    "Tell me where your team is: Claude Code with no rails yet, parallel agents stepping on each other, or review piling up.",
-    "Within two business days I send a written estimate with a recommended plan and a price range.",
+    "Tell us where your company is today: AI tools running without guardrails, parallel work colliding, or software changes piling up waiting for review.",
+    "Within two business days we send a written estimate with a recommended plan and a price range.",
     "No obligation. You keep the estimate either way.",
   ],
   assessmentNote:
@@ -166,5 +254,5 @@ export const FACTORY_PAGE = {
 
   /** Alt text for the hero diagram. */
   heroDiagramLabel:
-    "Diagram: an assembly line. Agent stations build, test and review the change. Two human gates sit before the code goes live: merge, then migrate and deploy, each with its own yes. Lessons loop back to the start.",
+    "Diagram: an assembly line. AI workstations build, test and review each software change. Two human sign-offs sit before anything goes live: approving the change, then updating data and launching, each with its own sign-off. Lessons loop back to the start.",
 };

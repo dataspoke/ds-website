@@ -2,30 +2,31 @@
 
 ## TLDR
 
-- I built a draft **service page** at `/services/software-factory`: "A software factory, not a dark factory."
-- It shows the line I run. Agents do the stations, a second agent reviews, and people own the merge and deploy gates. It also covers rules written after real incidents, a privacy check that tests itself, the loop rule, and a weekly retro that grades me.
-- It is a draft. It is noindexed, shows a "Draft - not published" badge, and is not linked from anywhere. It is visible only on the PR's Vercel preview.
-- Every claim and number comes from my own repos. Clients stay anonymous, and the page has no prices and no third-party quotes.
+- Draft **service page** at `/services/software-factory`: "A software factory, not a dark factory."
+- Framed around what DataSpoke sets up for companies, written in plain business English for non-technical leaders: AI assistants run the assembly line, a second AI checks every change, and the client's team owns separate sign-offs for approving changes, updating data, and launching live.
+- Includes safeguards born from real lessons, self-testing customer-data checks, safe autonomous work rules, and a weekly bottleneck review backed by real numbers from our own operation.
+- Kept strictly as a draft: noindexed, shows a "Draft - not published" badge, and not linked from anywhere. Visible only on the PR's Vercel preview.
+- Every claim and number is grounded in verified repos. Clients stay anonymous, with no prices, no third-party quotes, and no made-up numbers.
 
 ## Service page or blog post: service page
 
 - **The site has no published Insights posts yet.** `content/insights/` holds only `_template.md`. Insights posts are plain markdown, which can't carry the diagrams, the comparison table or the stat tiles without building a new rich-post renderer.
 - **The /services/claude page is the precedent.** It has a hero with chips and the CTA, visual sections and the dark CTA block. This page reuses those patterns and components (`Section`, `SectionHead`, `EstimateCta`, `LinkedText`).
-- **The topic is something I sell.** I set up guarded agent lines for teams and bring the guardrails while they build. A service page fits that.
-- **It's easy to convert.** If you'd rather publish it as a post, the copy file reads like an essay outline, so it would convert in under an hour.
+- **The topic is something DataSpoke sells.** Setting up guarded AI software delivery lines for companies fits the service-page format.
+- **It's easy to convert.** If Nick prefers an Insights post, the copy file reads like an essay outline and converts quickly.
 
 ## What's on the page (top to bottom)
 
-1. **Hero:** the draft badge, the title, a short lede, 3 chips, the CTA, and a tile diagram of the line (stations are circles, gates are amber diamonds, and a loop-back bar runs underneath).
-2. **Two kinds of factory:** the dark factory vs the line I run, as a table on desktop and cards on phones.
-3. **The line:** 7 stations, 2 of them human gates.
-4. **Run to a gate:** the 4 allowed stops, plus the rule "If I would say yes and the step can be undone, the answer is yes: act."
-5. **Where the line jams:** review, shared environments and deploys, each shown as the jam and then the fix.
-6. **Rules from incidents:** 3 cards, each going from what happened to the guard that exists now.
-7. **Checks that test themselves:** the privacy-check ratchet, with the 355 stat.
-8. **Unattended loops:** "No check, no loop." Then 4 parts: a checkable exit, a separate judge, stacked stops and a state file.
-9. **The human gets graded too:** 4 stat tiles from one week's retro.
-10. **CTA block:** the same pattern as /services/claude. No prices.
+1. **Hero:** the draft badge, the title, a business-focused lede ("what we set up for your company"), 3 chips, the CTA, and a tile diagram of the assembly line (AI workstations as circles, human sign-offs as amber diamonds, and a loop-back bar underneath).
+2. **Two kinds of factory:** Dark factory vs What we set up for you, as a table on desktop and cards on phones.
+3. **The assembly line:** 7 plain-English steps from business request to live software, with 2 human sign-off gates.
+4. **Clear boundaries:** the 4 reasons an AI assistant may stop and ask your team, plus the reversible-action rule.
+5. **Where teams get stuck:** Review, Shared test systems, and Launching live, each shown as the bottleneck and how we solve it.
+6. **Safeguards from real lessons:** 3 cards going from what went wrong to the permanent safeguard now in place, written without developer jargon.
+7. **Safeguards that test themselves:** the self-testing customer-data privacy check, with the 355 stat from one real run.
+8. **Safe autonomous work:** "No independent check, no autopilot." Then 4 parts: a clear finish line, a separate judge, built-in stop limits, and a written handoff log.
+9. **Measuring the human bottleneck:** weekly review showing wait time and rubber-stamp approvals, illustrated with 4 stat tiles from one real week in our own operation.
+10. **CTA block:** the same pattern as `/services/claude`, in "we" voice, with no prices.
 
 ## Research findings
 

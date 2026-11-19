@@ -86,7 +86,7 @@ export default function SoftwareFactoryPage() {
             <tr className="border-b border-tint-strong">
               <th scope="col" className="p-5"><span className="sr-only">Question</span></th>
               <th scope="col" className="p-5 font-display text-lg font-bold text-muted-foreground">{P.compareCols.dark}</th>
-              <th scope="col" className="bg-primary p-5 font-display text-lg font-bold text-primary-foreground">{P.compareCols.mine}</th>
+              <th scope="col" className="bg-primary p-5 font-display text-lg font-bold text-primary-foreground">{P.compareCols.ours}</th>
             </tr>
           </thead>
           <tbody>
@@ -94,7 +94,7 @@ export default function SoftwareFactoryPage() {
               <tr key={r.topic} className="border-b border-tint-strong last:border-0">
                 <th scope="row" className="p-5 font-semibold">{r.topic}</th>
                 <td className="p-5 text-muted-foreground">{r.dark}</td>
-                <td className="bg-tint/60 p-5 font-semibold">{r.mine}</td>
+                <td className="bg-tint/60 p-5 font-semibold">{r.ours}</td>
               </tr>
             ))}
           </tbody>
@@ -111,8 +111,8 @@ export default function SoftwareFactoryPage() {
                   <dd className="mt-1">{r.dark}</dd>
                 </div>
                 <div className="rounded-lg bg-primary p-3 text-primary-foreground">
-                  <dt className="text-xs font-semibold uppercase tracking-[0.06em] opacity-85">{P.compareCols.mine}</dt>
-                  <dd className="mt-1 font-semibold">{r.mine}</dd>
+                  <dt className="text-xs font-semibold uppercase tracking-[0.06em] opacity-85">{P.compareCols.ours}</dt>
+                  <dd className="mt-1 font-semibold">{r.ours}</dd>
                 </div>
               </dl>
             </li>
@@ -160,11 +160,11 @@ export default function SoftwareFactoryPage() {
               <div className="grid gap-3 p-5">
                 <p className="flex items-start gap-2.5 text-[0.95rem]">
                   <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden="true" />
-                  <span><span className="sr-only">The jam: </span>{b.jam}</span>
+                  <span><span className="sr-only">{P.bottleneckSrJam}</span>{b.jam}</span>
                 </p>
                 <p className="flex items-start gap-2.5 text-[0.95rem] text-muted-foreground">
                   <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-                  <span><span className="sr-only">What I do: </span>{b.fix}</span>
+                  <span><span className="sr-only">{P.bottleneckSrFix}</span>{b.fix}</span>
                 </p>
               </div>
             </li>
@@ -179,12 +179,12 @@ export default function SoftwareFactoryPage() {
             <li key={x.rule} className="grid items-stretch gap-2 md:grid-cols-[1fr_2.5rem_1fr] md:gap-0">
               <div className="flex items-start gap-3 rounded-xl border border-tint-strong bg-background p-5">
                 <Flame className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden="true" />
-                <p><span className="block text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">What happened</span>{x.incident}</p>
+                <p><span className="block text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">{P.incidentBeforeLabel}</span>{x.incident}</p>
               </div>
               <FlowArrow />
               <div className="flex items-start gap-3 rounded-xl border border-primary/30 bg-background p-5">
                 <Wrench className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-                <p className="font-semibold"><span className="block text-xs font-semibold uppercase tracking-[0.08em] text-primary">The guard now</span>{x.rule}</p>
+                <p className="font-semibold"><span className="block text-xs font-semibold uppercase tracking-[0.08em] text-primary">{P.incidentAfterLabel}</span>{x.rule}</p>
               </div>
             </li>
           ))}
