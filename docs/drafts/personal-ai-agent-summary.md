@@ -4,14 +4,14 @@
 
 - **What:** a draft **service page** at **`/services/personal-ai-agent`**, titled "An AI assistant that takes work off your plate, under your rules."
 - **What it covers:** what I set up for clients:
-  - dedicated assistants for inbox, meetings, follow-ups, a morning brief, and content;
+  - dedicated workflows for inbox, meetings, follow-ups, a morning brief, and content;
   - clear boundaries between automatic prep work and actions that wait for your approval;
   - four reasons an assistant interrupts your day;
   - five setup steps;
   - a comparison table (typical AI setup vs. how I build it);
   - the weekly improvement loop.
-- **Proof:** "Proven on my own business", with the company commander framing and weekly review numbers.
-- **Audience:** business owners and executives, written in natural executive language without developer phrasing.
+- **Proof:** "Built from real experience", pairing the company commander quote with a 4-pillar view across Sales, Marketing, Production, and Finance.
+- **Audience:** business leaders and executives, written in natural executive language without developer phrasing.
 - **Draft only:** noindex, a visible "Draft - not published" badge, and no links from anywhere. View it on the Vercel preview of the draft PR.
 
 ## Blog post or service page: I chose a service page (changed 2026-11-19)
@@ -24,14 +24,15 @@
   - the dark "How to start" block;
   - no prices.
 - **Nick's feedback, round 3:** rewrite to make it more natural for a business leader to consume. Removed stiff/dev-translated phrasing ("this fall's big launches", "test runs", "a real fork", "bare yes") and framed every section around executive delegation, risk boundaries, and ongoing improvement.
-- **How it avoids overlap with /services/claude:** that page covers Claude for a team's operations. This page covers one person's own assistant: inbox, meetings, follow-ups. The footer note cross-links to /services/claude for team-wide setups.
+- **Nick's feedback, round 4:** use "business leaders" instead of "owners", redesign the comparison table visually, remove the Permissions row and separate per-agent permission claims, and replace the setup-specific W45 retro stats with a broader business view across Sales, Marketing, Production, and Finance.
+- **How it avoids overlap with /services/claude:** that page covers Claude for a team's operations. This page covers one leader's personal assistant across inbox, meetings, follow-ups, and visibility across the business. The footer note cross-links to /services/claude for team-wide setups.
 - **Voice:** first person ("I"), matching /services/claude and its line "I do the work myself."
 
 ## Files
 
 - `src/app/services/personal-ai-agent/page.tsx`: the page. noIndex, draft badge.
 - `src/content/personal-ai-agent.ts`: all the copy.
-- `src/components/services/personal-agent-visuals.tsx`: the TeamGrid, GateLanes, StopTiles, SetupSteps, CompareTable (stacked cards on phones), LearningLoop and RetroStats components.
+- `src/components/services/personal-agent-visuals.tsx`: the TeamGrid, GateLanes, StopTiles, SetupSteps, CompareTable (white card table on desktop, stacked cards on phones), LearningLoop and BusinessPillars components.
 - `docs/previews/personal-ai-agent/`: screenshots at 1440 and 390.
 
 ## What the client offer rests on (not invented)

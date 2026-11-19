@@ -2,9 +2,7 @@ import type { TextLink } from "@/types";
 
 // Copy for the DRAFT service page /services/personal-ai-agent. First person ("I"),
 // matching /services/claude: Nick does this work himself.
-// Audience: business owners and professionals, not developers. Plain business words.
-// What the client gets is described as the setup and its rules. Proof comes from the
-// setup Nick runs on his own work (sources in docs/drafts/personal-ai-agent-summary.md).
+// Audience: business leaders and executives, not developers. Plain business words.
 // No client names, no client results, no prices, no invented numbers, no third-party quotes.
 // Hyphens only, never em or en dashes.
 
@@ -12,12 +10,12 @@ export const AGENT_PAGE = {
   path: "/services/personal-ai-agent",
   metaTitle: "Personal AI assistant setup for business leaders",
   metaDescription:
-    "A personal AI assistant built around your inbox, calendar, meetings, and follow-ups, with clear rules on what runs on its own and what waits for your approval.",
+    "A personal AI assistant built around your inbox, meetings, follow-ups, and core business workflows, with clear rules on what runs automatically and what waits for your approval.",
   draftBadge: "Draft - not published",
   eyebrow: "Personal AI assistant setup",
   title: "An AI assistant that takes work off your plate, under your rules.",
   lede:
-    "I set up personal AI assistants for business owners and executives. They stay on top of your inbox, prep you for meetings, track your follow-ups, and brief you every morning, while anything that leaves your desk waits for your approval.",
+    "I set up personal AI assistants for business leaders and executives. They stay on top of your inbox, prep you for meetings, track your follow-ups, and brief you every morning, while anything that leaves your desk waits for your approval.",
   intro: [
     "Built on the tools you already use",
     "Nothing goes out without your approval",
@@ -28,7 +26,7 @@ export const AGENT_PAGE = {
     eyebrow: "What it handles",
     title: "Dedicated support for the work that eats your week.",
     lede:
-      "Instead of one general-purpose bot with access to everything, I set up focused assistants for specific parts of your day. Everything that needs your decision lands in one place.",
+      "Instead of one messy chat window trying to do everything, I set up focused workflows for the recurring parts of your day. Everything that needs your decision lands in one place.",
     items: [
       {
         name: "Inbox",
@@ -63,7 +61,7 @@ export const AGENT_PAGE = {
       "Pulling context from your email, calendar, and connected tools",
       "Sorting, summarizing, and organizing incoming requests",
       "Drafting replies, briefs, meeting notes, and reports",
-      "Checking what a proposed change would affect before anything moves",
+      "Flagging overdue items, risks, and follow-ups before they slip",
       "Keeping a clear record of what ran and why",
     ],
     waitLabel: "Always waits for your approval",
@@ -113,8 +111,8 @@ export const AGENT_PAGE = {
         note: "We look at where your time actually goes and pick the repetitive work that will give you the most hours back first.",
       },
       {
-        title: "Connect your tools safely",
-        note: "I connect email, calendar, and the software you already use, with reading, drafting, and sending kept as separate permissions.",
+        title: "Connect your tools",
+        note: "I connect email, calendar, and the business tools you already use, with clear guardrails on what gets drafted versus sent.",
       },
       {
         title: "Set your operating rules",
@@ -122,7 +120,7 @@ export const AGENT_PAGE = {
       },
       {
         title: "Launch with training wheels",
-        note: "We turn on one assistant first with approvals required on everything. As it earns your trust, we relax the checks you don't need.",
+        note: "We turn on one workflow first with approvals required on everything. As it earns your trust, we relax the checks you don't need.",
       },
       {
         title: "Tune it every week",
@@ -139,11 +137,6 @@ export const AGENT_PAGE = {
     colMine: "How I build it",
     rows: [
       {
-        topic: "Permissions",
-        common: "One assistant logged into everything with broad access.",
-        mine: "Each assistant only sees the tools its job requires. Access to read your inbox never quietly includes permission to send as you.",
-      },
-      {
         topic: "Oversight",
         common: "Either asks permission for every tiny step or runs unchecked.",
         mine: "A clear, written approval list. Everything else gets handled quietly in the background.",
@@ -151,7 +144,7 @@ export const AGENT_PAGE = {
       {
         topic: "Sign-off",
         common: "Rules live in a chat prompt and get ignored or overridden over time.",
-        mine: "Only your explicit sign-off counts, using a simple approve or decline card. No AI ever approves work on your behalf.",
+        mine: "Only your explicit sign-off counts, with a simple approve or decline step. Nothing goes out without your say-so.",
       },
       {
         topic: "Continuity",
@@ -182,27 +175,49 @@ export const AGENT_PAGE = {
   },
 
   proof: {
-    eyebrow: "Proven on my own business",
-    title: "I don't sell theory. I run my own work this way every day.",
+    eyebrow: "Built from real experience",
+    title: "I run my own business this way across every core function.",
     commander:
-      "As a company commander, I delegated to develop my leaders, while keeping the high-stakes calls on my desk. I manage AI assistants the exact same way, and that's how I set them up for clients.",
+      "As a company commander, I delegated to develop my leaders, while keeping the high-stakes calls on my desk. I run my business with AI assistants the same way, and that's the operating rhythm I build for clients.",
     lede:
-      "Most people either give AI too much leash or spend all day babysitting it. I review my own system every week to spot where my rules create unnecessary busywork. Here's what one week of tracking uncovered:",
-    stats: [
-      { value: "91", label: "assistant work sessions" },
-      { value: "103", label: "times I only replied \"yes\", \"ok\" or \"go\"" },
-      { value: "65", label: "interruptions that didn't actually need me" },
-      { value: "24 h", label: "work left waiting on a rubber-stamp approval" },
+      "A personal AI assistant shouldn't stop at sorting email. When it's wired into the four core functions of your company, it keeps prep work moving across the board while every major call stays on your desk:",
+    handlesLabel: "Assistant handles",
+    approvalLabel: "Stays with you",
+    pillars: [
+      {
+        name: "Sales",
+        handles:
+          "Researches prospects before calls, summarizes meeting notes for your CRM, drafts follow-ups, and flags proposals that have gone quiet.",
+        approval: "Pricing, terms, and sending proposals to prospects.",
+      },
+      {
+        name: "Marketing",
+        handles:
+          "Turns weekly notes, client questions, and call takeaways into draft posts, emails, and updates in your voice so outreach never stalls.",
+        approval: "Final edits and approving anything published in your name.",
+      },
+      {
+        name: "Production",
+        handles:
+          "Pulls status from project tools, meetings, and email into one clean digest so you spot bottlenecks, overdue work, and client risks early.",
+        approval: "Client escalations, scope changes, and shifting team priorities.",
+      },
+      {
+        name: "Finance",
+        handles:
+          "Surfaces overdue invoices, flags unusual charges, and puts a plain-English weekly snapshot in front of you before month-end surprises hit.",
+        approval: "Approving payments, moving money, and any changes to live books.",
+      },
     ],
     callout:
-      "Every one-word \"yes\" points to a bottleneck you can remove safely. Measuring those stops is how we trim the noise, keep the real guardrails in place, and get more of your week back without giving up control.",
+      "I run this same discipline on my own business every week, trimming unnecessary check-ins and tightening the guardrails. What I set up for you is the operating rhythm I rely on myself.",
   },
 
   startEyebrow: "How to start",
   startTitle: "Book a free AI strategy call.",
   startPoints: [
     "A free 30-minute conversation, no sales pitch.",
-    "Walk me through the parts of your week you want off your plate first: inbox, meetings, follow-ups, or daily briefs.",
+    "Walk me through the parts of your week you want off your plate first: inbox, meetings, follow-ups, or visibility across sales, marketing, production, and finance.",
     "Within two business days, I send a written estimate with a recommended plan and a clear price range.",
     "No obligation. You keep the plan either way.",
   ],

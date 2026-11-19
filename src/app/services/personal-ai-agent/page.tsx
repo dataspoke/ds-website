@@ -6,10 +6,10 @@ import { LinkedText } from "@/components/shared/faq-list";
 import { Section, SectionHead } from "@/components/shared/section";
 import { EstimateCta } from "@/components/shared/estimate-cta";
 import {
+  BusinessPillars,
   CompareTable,
   GateLanes,
   LearningLoop,
-  RetroStats,
   SetupSteps,
   StopTiles,
   TeamGrid,
@@ -114,7 +114,7 @@ export default function PersonalAiAgentPage() {
           <blockquote className="font-display text-lg font-bold leading-snug sm:text-xl">{P.proof.commander}</blockquote>
         </figure>
         <p className="lede mt-10 max-w-2xl">{P.proof.lede}</p>
-        <RetroStats />
+        <BusinessPillars />
       </Section>
 
       <Section id="contact-cta">
