@@ -2,7 +2,7 @@ import {
   ArrowDown,
   ArrowRight,
   Bot,
-  Briefcase,
+  CalendarCheck,
   Check,
   CircleCheck,
   GitFork,
@@ -11,21 +11,21 @@ import {
   Mail,
   Megaphone,
   MessagesSquare,
+  Newspaper,
   RotateCcw,
   ShieldCheck,
-  Waypoints,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { AGENT_POST as P } from "@/content/personal-ai-agent";
+import { AGENT_PAGE as P } from "@/content/personal-ai-agent";
 
-const TEAM_ICONS = [Waypoints, Mail, MessagesSquare, Megaphone, Briefcase];
+const TEAM_ICONS = [Mail, MessagesSquare, CalendarCheck, Newspaper, Megaphone];
 const STOP_ICONS = [Lock, GitFork, KeyRound, CircleCheck];
 
-/** One card per agent, each with its single job. */
+/** One card per assistant, each with its single job. */
 export function TeamGrid() {
   return (
     <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-      {P.team.members.map((m, i) => {
+      {P.handles.items.map((m, i) => {
         const Icon = TEAM_ICONS[i] ?? Bot;
         return (
           <li key={m.name} className="grid content-start gap-3 rounded-xl border border-tint-strong bg-background p-5">
@@ -205,7 +205,7 @@ export function LearningLoop() {
 
 /** Stat tiles from one weekly retro, with the honest miss below. */
 export function RetroStats() {
-  const r = P.retro;
+  const r = P.proof;
   return (
     <div className="mt-10 grid gap-4">
       <dl className="grid grid-cols-2 gap-4 lg:grid-cols-4">
@@ -218,5 +218,22 @@ export function RetroStats() {
       </dl>
       <p className="rounded-xl bg-ink px-5 py-4 text-white/90 sm:px-6">{r.callout}</p>
     </div>
+  );
+}
+
+/** The setup, as five numbered steps: a row on wide screens, a column on phones. */
+export function SetupSteps() {
+  return (
+    <ol className="relative mt-10 grid gap-4 lg:grid-cols-5">
+      {P.steps.items.map((s, i) => (
+        <li key={s.title} className="grid content-start gap-2 rounded-xl border border-tint-strong bg-background p-5">
+          <span className="grid h-9 w-9 place-items-center rounded-full bg-primary font-display text-sm font-extrabold text-primary-foreground">
+            {i + 1}
+          </span>
+          <h3 className="text-lg font-bold leading-snug">{s.title}</h3>
+          <p className="text-sm text-muted-foreground">{s.note}</p>
+        </li>
+      ))}
+    </ol>
   );
 }

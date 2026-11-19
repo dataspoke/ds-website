@@ -2,27 +2,52 @@
 
 ## TLDR
 
-- I built a draft Insights post at **`/insights/personal-ai-agent`**: "My AI assistants work on my behalf. Here are the rules they follow."
-- **Audience: business professionals, not developers** (Nick, 2026-11-19). The copy uses plain business words (inbox, meetings, live records, playbooks) and leaves out branches, deploys and tool names.
-- It is visual and low on words. It has a team grid, a "runs alone vs waits for my yes" gate picture, four allowed stops, a comparison table, a learning-loop diagram, retro stat tiles and five starter rules.
-- I chose a **blog post (Insights)**, not a service page. The reasons are below.
-- It is a draft only. It has noindex, a visible "Draft - not published" badge, and no links from anywhere. View it on the Vercel preview of the draft PR. The URL is in the PR body.
+- **What:** a draft **service page** at **`/services/personal-ai-agent`**, titled "An AI assistant that works on your behalf, by your rules."
+- **What it covers:** what I set up for clients:
+  - assistants for inbox, meetings, follow-ups, a morning brief and content;
+  - the client's own rules on what runs alone and what waits for their yes;
+  - four reasons an assistant may interrupt;
+  - five setup steps;
+  - a comparison table;
+  - the learning loop.
+- **Proof:** "I run this myself", with my weekly review numbers.
+- **Audience:** business owners and professionals, not developers. It uses plain business words.
+- **Draft only:** noindex, a visible "Draft - not published" badge, and no links from anywhere. View it on the Vercel preview of the draft PR.
 
-## Blog post or service page: I chose a blog post
+## Blog post or service page: I chose a service page (changed 2026-11-19)
 
-1. **The topic is Nick's own operating practice.** The X gap is the operating rules: what needs a yes, what gets logged, how mistakes become rules. That is sharing expertise, which suits a post. A service page would be a sales pitch.
-2. **A service page would overlap /services/claude.** Its step 5, "a first agent", already sells guarded agents to clients.
-3. **It stays out of sight for free.** The Insights index and the sitemap list only markdown posts (`content/insights/*.md`). A separate route at `src/app/insights/personal-ai-agent/` therefore appears on neither until it is linked.
-4. **Markdown can't carry the visuals.** The page is a contained TSX route. The markdown post template is untouched.
-
-If Nick prefers a service page, move the route to `src/app/services/personal-ai-agent/`. Then add the site's `EstimateCta` block from /services/claude. The content file and components move over unchanged.
+- **First version:** an Insights post about my own setup.
+- **Nick's feedback, round 1:** "geared at business professionals not devs." The copy was rewritten in plain business words.
+- **Nick's feedback, round 2:** "this needs to be like what we build for clients." Describing what a client gets is a service page, so I moved it to `/services/personal-ai-agent`. It follows the /services/claude pattern:
+  - a hero with chips;
+  - the site's standard `EstimateCta` ("Book your free AI strategy call");
+  - the dark "How to start" block;
+  - no prices.
+- **How it avoids overlap with /services/claude:** that page covers Claude for a team's operations. This page covers one person's own assistant: inbox, meetings, follow-ups. The footer note cross-links to /services/claude for team-wide setups.
+- **Voice:** first person ("I"), matching /services/claude and its line "I do the work myself."
 
 ## Files
 
-- `src/app/insights/personal-ai-agent/page.tsx`: the page. noIndex, draft badge.
+- `src/app/services/personal-ai-agent/page.tsx`: the page. noIndex, draft badge.
 - `src/content/personal-ai-agent.ts`: all the copy.
-- `src/components/insights/personal-agent-visuals.tsx`: the TeamGrid, GateLanes, StopTiles, CompareTable (a stacked card on phones), LearningLoop and RetroStats components.
+- `src/components/services/personal-agent-visuals.tsx`: the TeamGrid, GateLanes, StopTiles, SetupSteps, CompareTable (stacked cards on phones), LearningLoop and RetroStats components.
 - `docs/previews/personal-ai-agent/`: screenshots at 1440 and 390.
+
+## What the client offer rests on (not invented)
+
+- **Nick sets up guarded agents for clients today:**
+  - the live /services/claude page (connect data, setup, skills, training, a first agent with approvals);
+  - the Orchestrator chat, Nov 9: "I also have built these setups for many clients and know how to get the team up and running quickly with the proper guard rails".
+- **The rules, steps and loop on the page** are the ones Nick runs on his own work. The sources are in the table below.
+- **"Start with approvals on everything, remove them as trust builds":** Nick on the Jeff call, Nov 17: "at the beginning, you'll have a lot of gates, but you start to remove the gates."
+- **"Reading your inbox never quietly means sending as you" (separate read, draft and send permissions):** what practitioners ask for. Sources: EqualAI in Fortune and Meta Muse's per-app access, both linked below.
+- **Assistant jobs (inbox sorting, meeting notes, morning brief, content drafts):** jobs Nick runs for himself:
+  - the triage-email LaunchAgent;
+  - the hourly sync-meetings job;
+  - the personal-brief skill;
+  - the content bot.
+- **"Follow-ups: tracks what you promised" (inference):** this one is extrapolated from the CRM task logging. It is not a standalone assistant in Nick's files. **Open question 3.**
+- **No client names, client results, quotes or prices.** The "two business days" estimate promise is copied from /services/claude.
 
 ## Internet research (verified on the web, 2026-11-19)
 
@@ -118,28 +143,28 @@ If Nick prefers a service page, move the route to `src/app/services/personal-ai-
 
 ## Kept anonymous
 
-The page has no client names, people, handles, PR numbers or product names. The scan flagged names to avoid, including client codes, family members and the Bot Board URL token, and none of them appear on the page.
+The page has no client names, people, handles, PR numbers or product names.
 
 ## How it's kept a draft (undo at publish)
 
-- `noIndex: true` in the page metadata, which renders `robots: noindex, nofollow`.
+- `noIndex: true` in the page metadata, which renders `<meta name="robots" content="noindex, nofollow">`.
 - A "Draft - not published" badge in the hero.
-- No links from the nav, the /insights index, the home page, `sitemap.ts` or `llms.txt`.
+- No links from the nav, the /services index, the home page, `sitemap.ts` or `llms.txt`.
 
 **To publish:**
 1. Remove `noIndex` and the badge.
-2. Add the page to the /insights index. Either make `getInsightPosts` aware of TSX posts, or add a stub entry.
-3. Add it to `src/app/sitemap.ts`. The sitemap lists only markdown posts today.
+2. Add a card to the /services index. The `card` object on `CLAUDE_PAGE` in `src/content/claude-services.ts` is the pattern.
+3. Add the page to `src/app/sitemap.ts`, with its source file in the lastmod map.
 4. Add it to `src/app/llms.txt`.
-5. Optionally, add `ArticleJsonLd`, as the markdown post route does.
+5. Optionally, link it from the home service grid.
 
 ## Open questions for Nick
 
-1. **Blog or service page?** I recommend the blog, because it shares rather than sells and doesn't overlap /services/claude.
-2. **Is the X-post refusal story OK to tell?** It is not recorded in any file I could read. The page states only the general rule.
-3. **Can the W45 retro numbers be public?** They are 91 sessions, 103 bare approvals, 65 unneeded stops, 24 hours waiting, and the "slipped" rule. They show Nick as the bottleneck, which is the point, but it is a candid number.
-4. **Assistant names on the page.** The page uses role names (Coordinator, Inbox, Meetings, Content, Client work) instead of the bots' internal names.
+1. **"We" or "I"?** The site speaks as "I" (/services/claude: "I do the work myself"). The page matches that. Switch to "we" if DataSpoke now presents as a team.
+2. **Should the "I run this myself" proof use the W45 numbers?** They are 91 sessions, 103 bare yeses, 65 unneeded interruptions and 24 h of waiting. I recommend yes: they show the method works on real work.
+3. **Is "Follow-ups" an assistant you would build for a client?** It is inferred from your task logging, not a separate assistant in your files. Keep it, or swap in another job such as "Reports".
+4. **The page name.** The URL says personal-ai-agent, and the copy says "AI assistant". I recommend keeping "assistant" in the copy, because it is plainer for business readers.
 
 ## Preview
 
-The Vercel preview URL and the exact path are in the draft PR body. The path is `/insights/personal-ai-agent`.
+The Vercel preview URL and the exact path are in the draft PR body. The path is `/services/personal-ai-agent`.
