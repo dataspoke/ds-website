@@ -30,7 +30,17 @@ function StationDot({ className }: { className?: string }) {
  * diamonds, and a bar underneath shows lessons looping back to the start.
  * Two columns on phones, four on wide screens.
  */
-export function LineDiagram({ stations, label }: { stations: FactoryStation[]; label: string }) {
+export function LineDiagram({
+  stations,
+  label,
+  endLabel,
+  loopLabel,
+}: {
+  stations: FactoryStation[];
+  label: string;
+  endLabel: string;
+  loopLabel: string;
+}) {
   return (
     <div role="img" aria-label={label} className="rounded-2xl border border-tint-strong bg-background p-4 shadow-[0_8px_24px_-14px_rgba(15,30,51,0.35)] sm:p-6">
       <ol className="grid grid-cols-2 gap-2.5 sm:grid-cols-4 sm:gap-3" aria-hidden="true">
@@ -50,12 +60,12 @@ export function LineDiagram({ stations, label }: { stations: FactoryStation[]; l
           </li>
         ))}
         <li className="flex items-center justify-center rounded-xl border-2 border-dashed border-tint-strong p-3 text-center text-sm font-semibold text-primary">
-          Live, and watched
+          {endLabel}
         </li>
       </ol>
       <div className="mt-3 flex items-center gap-2 rounded-lg bg-ink px-3 py-2 text-sm text-white" aria-hidden="true">
         <RotateCcw className="h-4 w-4 shrink-0 text-[#9cc4f0]" />
-        <span>Every mistake loops back as a hook, a check, or a rule</span>
+        <span>{loopLabel}</span>
       </div>
     </div>
   );
@@ -78,13 +88,13 @@ export function LineLegend({ station, gate }: { station: string; gate: string })
 }
 
 /** The line in full: a vertical rail of stations, gates called out in amber. */
-export function LineTimeline({ stations }: { stations: FactoryStation[] }) {
+export function LineTimeline({ stations, station, gate }: { stations: FactoryStation[]; station: string; gate: string }) {
   return (
     <ol className="relative mt-8 grid max-w-3xl gap-3">
       <span className="absolute bottom-6 left-[1.1rem] top-6 w-0.5 bg-gradient-to-b from-brand via-amber-300 to-tint-strong" aria-hidden="true" />
       {stations.map((s, i) => (
         <li key={s.title} className="relative grid grid-cols-[2.25rem_1fr] items-start gap-4">
-          {s.gate ? <GateDiamond className="mt-3 h-8 w-8" /> : <StationDot className="mt-3" />}
+          {s.gate ? <GateDiamond className="mt-3 h-7 w-7 ring-2" /> : <StationDot className="mt-3" />}
           <div
             className={cn(
               "rounded-xl border p-4 sm:p-5",
@@ -92,7 +102,7 @@ export function LineTimeline({ stations }: { stations: FactoryStation[] }) {
             )}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.08em] text-primary">
-              {i + 1} · {s.gate ? "Human gate" : "Agent station"}
+              {i + 1} · {s.gate ? gate : station}
             </p>
             <h3 className="mt-1 text-lg font-bold leading-snug">{s.title}</h3>
             <p className="mt-1 text-[0.95rem] text-muted-foreground">{s.note}</p>

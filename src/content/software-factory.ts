@@ -33,7 +33,7 @@ export const FACTORY_PAGE = {
   eyebrow: "AI software factory setup",
   title: "A software factory, not a dark factory.",
   lede:
-    "Agents do the stations. People own the gates. This is the line I run every day across client codebases, and the one I set up for teams that build with Claude Code.",
+    "Agents do the stations. People own the gates. This is the line I run every day across client codebases, and the one I can set up for your team.",
   intro: ["Agents build, people decide", "A second agent reviews every change", "Separate yeses for merge, migration and deploy"],
 
   compareEyebrow: "Two kinds of factory",
@@ -45,7 +45,7 @@ export const FACTORY_PAGE = {
     { topic: "Who writes the code", dark: "Agents", mine: "Agents" },
     { topic: "Who reviews it", dark: "No person. Tests and scenarios decide", mine: "A second agent that did not write it, then me" },
     { topic: "Who approves merge, migration, deploy", dark: "The pipeline", mine: "A person, one yes for each" },
-    { topic: "When something breaks", dark: "Run more agents", mine: "The lesson becomes a hook, a check, or a rule" },
+    { topic: "When something breaks", dark: "Add test scenarios and rerun", mine: "The lesson becomes a hook, a check, or a rule" },
   ],
   compareNote:
     "The term is older than AI. A software factory meant running delivery as one repeatable line. I keep that meaning and put agents at the stations.",
@@ -54,20 +54,22 @@ export const FACTORY_PAGE = {
   lineTitle: "From request to running code, station by station.",
   lineLegendStation: "Agent station",
   lineLegendGate: "Human gate",
+  lineEndLabel: "Live, and watched",
+  lineLoopLabel: "Mistakes loop back as hooks, checks, or rules",
   stations: [
     { title: "Work comes in", note: "Bots turn requests and alerts into owned tasks. Claude Code sessions do the building" },
-    { title: "Own workspace", note: "Every session gets its own git worktree, so parallel agents don't undo each other" },
+    { title: "Own workspace", note: "Every code change gets its own git worktree, so parallel agents don't undo each other" },
     { title: "Build and test", note: "Plain-English test scenarios, driven in a real browser" },
     { title: "Second-agent review", note: "An agent that did not write the change reviews it before I see it" },
     { title: "Merge", note: "My yes, on a pull request", gate: true },
-    { title: "Migrate and deploy", note: "Its own yes. One deploy slot per codebase. No monitoring plan, no deploy", gate: true },
+    { title: "Migrate and deploy", note: "A yes for the migration, then a separate yes for the deploy. One deploy slot per codebase. No monitoring plan, no deploy", gate: true },
     { title: "Watch and learn", note: "Each session ends by asking what check would have stopped its mistakes" },
   ] satisfies FactoryStation[],
 
   stopsEyebrow: "Run to a gate",
   stopsTitle: "An agent may stop for only four reasons.",
   stops: [
-    { title: "A gate", note: "Production data, merge, deploy, anything other people see, spending money" },
+    { title: "A gate", note: "A production write, merge, deploy, anything other people see, spending money" },
     { title: "A real fork", note: "Two readings of the job lead to different work" },
     { title: "A blocker only I can clear", note: "A login, a secret, hardware" },
     { title: "Done", note: "With the proof attached" },
@@ -76,7 +78,7 @@ export const FACTORY_PAGE = {
   stopsRuleNote: "Gates stay gates even when they can be undone. A merge can be reverted. It still needs my yes.",
 
   bottleneckEyebrow: "Where the line jams",
-  bottleneckTitle: "Writing code got cheap. Trusting it didn't.",
+  bottleneckTitle: "Code is cheap now. Proof isn't.",
   bottleneckLede: "Faster code moves the jam to review, shared environments and deploys. That's where my gates sit.",
   bottlenecks: [
     {
@@ -98,11 +100,11 @@ export const FACTORY_PAGE = {
 
   incidentsEyebrow: "Rules from incidents",
   incidentsTitle: "Every time an agent burns me, the lesson becomes a guard.",
-  incidentsLede: "Not a reminder. A hook or a check that runs whether anyone remembers or not.",
+  incidentsLede: "Not a note in someone's head. A hook or a check that fires every time.",
   incidents: [
     {
       incident: "A feature vanished from a test build of a gym's app. The build was cut from a feature branch.",
-      rule: "A hook fires on every app-store build and makes the agent confirm it is from main with all features merged.",
+      rule: "A hook fires on every app-store build and tells the agent to stop and confirm it is from main with all features merged.",
     },
     {
       incident: "Three parallel build tracks shared one test database and one backend. Deploys collided and one session dropped a table.",
@@ -125,8 +127,8 @@ export const FACTORY_PAGE = {
   ratchetStat: { value: "355", label: "reads left to convert in one run of the check. A test fails if that number rises." },
 
   loopEyebrow: "Unattended loops",
-  loopTitle: "A loop is a task with a check.",
-  loopQuote: "A task without a check is just hope.",
+  loopTitle: "No check, no loop.",
+  loopQuote: "An agent runs unattended only when something other than the agent can tell it is done.",
   loopParts: [
     { title: "A checkable exit", note: "Done means a test passes, not a feeling" },
     { title: "A separate judge", note: "Never the agent that did the work" },
@@ -135,7 +137,7 @@ export const FACTORY_PAGE = {
   ] satisfies FactoryCard[],
 
   retroEyebrow: "The human gets graded too",
-  retroTitle: "Every bare yes I type is a gate that shouldn't exist.",
+  retroTitle: "Every bare yes I type gets counted. Many shouldn't be needed.",
   retroLede:
     "A weekly retro reads every session and measures me: how long agents sat waiting on me, and how often I typed a yes with nothing to decide. One week:",
   retroStats: [
@@ -164,5 +166,5 @@ export const FACTORY_PAGE = {
 
   /** Alt text for the hero diagram. */
   heroDiagramLabel:
-    "Diagram: an assembly line. Agent stations build, test and review the change. Two human gates, merge and deploy, sit before the code goes live, and lessons loop back to the start.",
+    "Diagram: an assembly line. Agent stations build, test and review the change. Two human gates sit before the code goes live: merge, then migrate and deploy, each with its own yes. Lessons loop back to the start.",
 };

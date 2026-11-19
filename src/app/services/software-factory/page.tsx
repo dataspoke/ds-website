@@ -5,7 +5,7 @@ import { generateMetadata } from "@/lib/metadata";
 import { LinkedText } from "@/components/shared/faq-list";
 import { Section, SectionHead } from "@/components/shared/section";
 import { EstimateCta } from "@/components/shared/estimate-cta";
-import { FlowArrow, LineDiagram, LineLegend, LineTimeline } from "@/components/services/factory-visuals";
+import { FlowArrow, LineDiagram, LineLegend, LineTimeline } from "@/components/software-factory/factory-visuals";
 import { FACTORY_PAGE as P } from "@/content/software-factory";
 import { LINE_PAGE } from "@/content/services";
 
@@ -71,7 +71,7 @@ export default function SoftwareFactoryPage() {
               </div>
             </div>
             <figure className="mx-auto w-full max-w-[640px]">
-              <LineDiagram stations={P.stations} label={P.heroDiagramLabel} />
+              <LineDiagram stations={P.stations} label={P.heroDiagramLabel} endLabel={P.lineEndLabel} loopLabel={P.lineLoopLabel} />
             </figure>
           </div>
         </div>
@@ -80,7 +80,8 @@ export default function SoftwareFactoryPage() {
       <Section tint id="compare">
         <SectionHead eyebrow={P.compareEyebrow} title={P.compareTitle} lede={P.compareLede} />
         {/* Wide screens: a real table. */}
-        <table className="mt-10 hidden w-full overflow-hidden rounded-xl border border-tint-strong bg-background text-left md:table">
+        <div className="mt-10 hidden overflow-hidden rounded-xl border border-tint-strong bg-background md:block">
+        <table className="w-full text-left">
           <thead>
             <tr className="border-b border-tint-strong">
               <th scope="col" className="p-5"><span className="sr-only">Question</span></th>
@@ -98,6 +99,7 @@ export default function SoftwareFactoryPage() {
             ))}
           </tbody>
         </table>
+        </div>
         {/* Phones: one card per question. */}
         <ul className="mt-8 grid gap-3 md:hidden">
           {P.compareRows.map((r) => (
@@ -124,14 +126,14 @@ export default function SoftwareFactoryPage() {
         <div className="mt-6">
           <LineLegend station={P.lineLegendStation} gate={P.lineLegendGate} />
         </div>
-        <LineTimeline stations={P.stations} />
+        <LineTimeline stations={P.stations} station={P.lineLegendStation} gate={P.lineLegendGate} />
       </Section>
 
       <Section tint id="stops">
         <SectionHead eyebrow={P.stopsEyebrow} title={P.stopsTitle} />
         <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {P.stops.map((s, i) => {
-            const Icon = STOP_ICONS[i];
+            const Icon = STOP_ICONS[i] ?? CircleStop;
             return (
               <li key={s.title} className="grid content-start gap-3 rounded-xl border border-tint-strong bg-background p-5">
                 <span className="grid h-10 w-10 place-items-center rounded-full bg-primary text-primary-foreground" aria-hidden="true">
@@ -198,10 +200,10 @@ export default function SoftwareFactoryPage() {
                 <span className="grid h-9 w-9 place-items-center rounded-full bg-tint font-display text-sm font-extrabold text-primary" aria-hidden="true">
                   {i + 1}
                 </span>
-                <span>
+                <div>
                   <h3 className="font-bold leading-snug">{s.title}</h3>
                   <p className="mt-1 text-[0.95rem] text-muted-foreground">{s.note}</p>
-                </span>
+                </div>
               </li>
             ))}
           </ol>

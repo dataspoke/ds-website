@@ -23,7 +23,7 @@
 5. **Where the line jams:** review, shared environments and deploys, each shown as the jam and then the fix.
 6. **Rules from incidents:** 3 cards, each going from what happened to the guard that exists now.
 7. **Checks that test themselves:** the privacy-check ratchet, with the 355 stat.
-8. **Unattended loops:** "A loop is a task with a check." Then 4 parts.
+8. **Unattended loops:** "No check, no loop." Then 4 parts: a checkable exit, a separate judge, stacked stops and a state file.
 9. **The human gets graded too:** 4 stat tiles from one week's retro.
 10. **CTA block:** the same pattern as /services/claude. No prices.
 
@@ -81,17 +81,38 @@
 | Release-guard hook after a feature vanished from a test build cut from a feature branch (2026-06-21) | `~/work/dropgym/dropgym-member-app/.claude/hooks/release-guard.sh:2-7`; that repo's `CLAUDE.md:47-49` |
 | Cloud login expired 3 times and cost an overnight window, so prod gates check auth first; gcloud guard blocks changes to the shared profile | `docs/retros/2026-W45.md:192`; `aar-...:25`; `CLAUDE.md` (Production writes); `auth/gcloud_guard.py:1-6` |
 | Privacy check: frozen content-hashed allowlist, self-test plants bad reads, "355" to-convert, a test fails if the count rises | worai `origin/main`: `scripts/checks/README.md:3-4,19,27-29`; `.github/workflows/contact-access-check.yml:27-28` |
-| Loop designer: "a task without a check is just hope", judge "never the maker", max 12 iterations, no-progress, budget, state file | `bundles/dev/skills/loop-designer/SKILL.md:9,26,27` |
+| Loop designer: judge "never the maker", max 12 iterations, no-progress, budget, state file | `bundles/dev/skills/loop-designer/SKILL.md:26,27` |
 | Weekly retro: 91 sessions, 707 prompts, 24.0 h blocked wait, 103 rubber-stamp prompts | `docs/retros/2026-W45.md:8`; bare-yes rule in `bundles/dev/skills/weekly-retro/scan_week.py:70` |
 
 All `bundles/` and `docs/` paths above are in `~/work/claude-config`.
 
 **Wording I softened after verification**
-- **Release guard:** it only reminds; it never blocks. The page says it "fires on every app-store build and makes the agent confirm."
+- **Release guard:** it only reminds; it never blocks. The page says it "tells the agent to stop and confirm", and the incidents lede no longer says "not a reminder."
 - **Error routing:** alerts become CRM tasks automatically through the daily routine and the Ops bot. No Claude Code session auto-starts from an error yet; `dev:incident` is planned. The page says bots "turn requests and alerts into owned tasks."
 - **355:** this is the count from one example run in the README, not a live count. The page says so.
 - **Privacy check enforcement:** it is advisory on GitHub, and the merge skills refuse to merge while it is red. The page says "Merges wait", not "the build fails."
-- **Loop quote:** the source uses an em dash. The page splits it into two sentences.
+- **Loop line:** "A loop is a task with a check - a task without a check is just hope" is a third-party line. `loop-designer/RESEARCH.md:72-73` credits it to Loop Library / Forward Future. The page uses my own wording instead: "No check, no loop."
+
+## Independent review (applied)
+
+An opus agent that did not write the page reviewed it and found 17 items, all fixed in the second commit:
+- **Uncredited line:** the loop line was a third-party quote, so it is reworded.
+- **Overstatements fixed:**
+  - "not a reminder" next to a hook that only reminds;
+  - "every session gets a worktree" (now "every code change");
+  - "every bare yes is a gate that shouldn't exist";
+  - "Production data" (now "a production write");
+  - the dark-factory row "Run more agents" (now "Add test scenarios and rerun", which StrongDM's source supports).
+- **Service claim:** "the one I set up for teams" became "the one I can set up for your team", pending your confirmation.
+- **Migration and deploy:** they now read as separate yeses everywhere on the page.
+- **Bain line:** the bottleneck title was close to Bain's wording, so it now reads "Code is cheap now. Proof isn't."
+- **Markup and layout:**
+  - invalid h3 inside a span;
+  - table corners that didn't round;
+  - a gate diamond that spilled into the phone gutter;
+  - an unsafe icon lookup;
+  - copy hard-coded in the component.
+- **File move:** the component moved to `src/components/software-factory/`. In `src/components/services/` it would have bumped the sitemap dates of every published service page.
 
 ## How it's kept a draft
 
@@ -110,7 +131,8 @@ All `bundles/` and `docs/` paths above are in `~/work/claude-config`.
 2. **Retro numbers:** are you OK publishing your own W45 numbers (24 h agents waited, 103 rubber-stamp yeses)? They're the most distinctive part of the page.
 3. **The 355 stat** comes from a referral-network client's codebase, with no name shown. Keep it, or drop it to be safe?
 4. **Do you want error-to-PR automation (`dev:incident`) built before this publishes?** The page currently claims only "alerts become owned tasks."
-5. **Should this link from /services/claude** (the step 2 Claude Code setup) when it publishes?
+5. **Hero line:** the reviewer found no file showing I've set this exact line up for a client team. Can it say "the one I set up for teams" (Theme 6: clients build, I bring the guardrails), or keep "can set up for your team"?
+6. **Should this link from /services/claude** (the step 2 Claude Code setup) when it publishes?
 
 ## Preview
 
