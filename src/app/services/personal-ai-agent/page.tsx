@@ -93,7 +93,7 @@ export default function PersonalAiAgentPage() {
       </Section>
 
       <Section id="setup">
-        <SectionHead eyebrow={P.steps.eyebrow} title={P.steps.title} />
+        <SectionHead eyebrow={P.steps.eyebrow} title={P.steps.title} lede={P.steps.lede} />
         <SetupSteps />
       </Section>
 
@@ -103,7 +103,7 @@ export default function PersonalAiAgentPage() {
       </Section>
 
       <Section id="loop">
-        <SectionHead eyebrow={P.loop.eyebrow} title={P.loop.title} />
+        <SectionHead eyebrow={P.loop.eyebrow} title={P.loop.title} lede={P.loop.lede} />
         <LearningLoop />
       </Section>
 

@@ -10,152 +10,207 @@ import type { TextLink } from "@/types";
 
 export const AGENT_PAGE = {
   path: "/services/personal-ai-agent",
-  metaTitle: "Personal AI assistant setup for business owners",
+  metaTitle: "Personal AI assistant setup for business leaders",
   metaDescription:
-    "I set up AI assistants for your inbox, meetings, follow-ups and reports, with clear rules on what runs alone and what waits for your yes. Free AI strategy call.",
+    "A personal AI assistant built around your inbox, calendar, meetings, and follow-ups, with clear rules on what runs on its own and what waits for your approval.",
   draftBadge: "Draft - not published",
   eyebrow: "Personal AI assistant setup",
-  title: "An AI assistant that works on your behalf, by your rules.",
+  title: "An AI assistant that takes work off your plate, under your rules.",
   lede:
-    "I set up AI assistants for business owners and leaders. They handle the inbox, meeting prep, follow-ups and reports. You decide what they may do alone and what waits for your yes.",
-  intro: ["On accounts you already use", "Nothing goes out without your yes", "I teach you to run it"],
+    "I set up personal AI assistants for business owners and executives. They stay on top of your inbox, prep you for meetings, track your follow-ups, and brief you every morning, while anything that leaves your desk waits for your approval.",
+  intro: [
+    "Built on the tools you already use",
+    "Nothing goes out without your approval",
+    "Set up with you, so you own it",
+  ],
 
   handles: {
     eyebrow: "What it handles",
-    title: "Several assistants, one job each.",
-    lede: "Each assistant owns one kind of work. Anything that needs you lands on one list.",
+    title: "Dedicated support for the work that eats your week.",
+    lede:
+      "Instead of one general-purpose bot with access to everything, I set up focused assistants for specific parts of your day. Everything that needs your decision lands in one place.",
     items: [
-      { name: "Inbox", job: "Sorts your email each morning, drafts replies, and turns what needs you into a task." },
-      { name: "Meetings", job: "Preps you before the call, then captures notes and action items after it." },
-      { name: "Follow-ups", job: "Tracks what you promised and to whom, and drafts the nudge when it's due." },
-      { name: "Morning brief", job: "One page each morning: what needs you today, and what can wait." },
-      { name: "Content", job: "Drafts posts and updates in your voice. Nothing publishes until you say yes." },
+      {
+        name: "Inbox",
+        job: "Reviews incoming email each morning, filters out the noise, drafts replies in your voice, and flags what actually needs your attention.",
+      },
+      {
+        name: "Meetings",
+        job: "Sends a concise brief before every call, then pulls together clean notes and action items as soon as it wraps.",
+      },
+      {
+        name: "Follow-ups",
+        job: "Keeps track of commitments you made in emails and meetings, and prepares the follow-up message when it's due.",
+      },
+      {
+        name: "Morning brief",
+        job: "One clear page to start your day: what needs a decision, what's on your calendar, and what's already handled.",
+      },
+      {
+        name: "Content",
+        job: "Drafts posts and updates in your voice so you stay visible without staring at a blank page. Nothing publishes until you approve it.",
+      },
     ],
   },
 
   gates: {
-    eyebrow: "Your rules",
-    title: "Most work runs alone. A short list waits for you.",
-    lede: "This fall's big launches drew the same line: read and draft alone, ask before sending or paying. I write your version down and set the assistants to follow it.",
-    aloneLabel: "Runs on its own",
+    eyebrow: "Clear boundaries",
+    title: "Prep work runs automatically. Decisions wait for you.",
+    lede:
+      "The fear with AI isn't that it can't do the work. It's that it will send the wrong email or change the wrong record. We draw a hard line up front between preparation and action.",
+    aloneLabel: "Handled automatically",
     alone: [
-      "Looking things up in the systems you connect",
-      "Sorting, summarizing and drafting",
-      "Preparing a plan, a report or a reply",
-      "Test runs that show what a change would do",
-      "Logging what it did and why",
+      "Pulling context from your email, calendar, and connected tools",
+      "Sorting, summarizing, and organizing incoming requests",
+      "Drafting replies, briefs, meeting notes, and reports",
+      "Checking what a proposed change would affect before anything moves",
+      "Keeping a clear record of what ran and why",
     ],
-    waitLabel: "Waits for your yes",
+    waitLabel: "Always waits for your approval",
     wait: [
-      "Sending anything in your name: emails, posts, comments",
-      "Changing live records: customers, accounts, money",
-      "Spending money",
-      "Anything else you add to the list",
+      "Sending anything in your name: emails, messages, or public posts",
+      "Updating live business records: clients, accounts, or financials",
+      "Spending money or approving commitments",
+      "Any other sensitive area you want locked down",
     ],
-    rule: "If you'd say yes and it can be undone, it goes ahead. The short list always waits, even when it could be undone.",
+    rule:
+      "The operating principle is simple: routine, reversible prep work runs on its own. Anything external, financial, or hard to undo waits for your sign-off.",
   },
 
   stops: {
-    eyebrow: "When it may interrupt you",
-    title: "Four reasons an assistant may stop and ask.",
-    lede: "Otherwise, it does the work and reports back. Fewer interruptions, and the ones you get matter.",
+    eyebrow: "No constant pings",
+    title: "Only four reasons it interrupts your day.",
+    lede:
+      "A good assistant doesn't tap you on the shoulder every ten minutes. Yours works quietly in the background and only reaches out when it genuinely needs you.",
     items: [
-      { title: "A decision", note: "Something on your short list" },
-      { title: "A real fork", note: "Two fair readings that lead to different work" },
-      { title: "Something only you can do", note: "A login, a password, a signature" },
-      { title: "Done", note: "With proof that it worked" },
+      {
+        title: "An approval on your list",
+        note: "A draft is ready to send, or an action touches something you've marked for sign-off.",
+      },
+      {
+        title: "A judgment call",
+        note: "There are two reasonable ways forward, and it needs your direction before proceeding.",
+      },
+      {
+        title: "Something only you can do",
+        note: "A secure login, a signature, or a personal call that can't be delegated.",
+      },
+      {
+        title: "Finished work to review",
+        note: "The job is complete, with a quick summary of what was done and where to find it.",
+      },
     ],
   },
 
   steps: {
-    eyebrow: "How I set it up",
-    title: "Five steps, one assistant at a time.",
+    eyebrow: "How it comes together",
+    title: "Five steps, starting with the biggest drain on your week.",
+    lede:
+      "I don't drop a complicated system on your desk and walk away. We start with one high-value workflow, prove it works, and expand at your pace.",
     items: [
-      { title: "Map your week", note: "Where your time goes, and which jobs repeat." },
-      { title: "Connect your accounts", note: "Email, calendar and the tools you already use. Reading, drafting and sending are separate permissions." },
-      { title: "Write your rules", note: "What runs alone, what waits for your yes, and what it may never do." },
-      { title: "Turn on one assistant", note: "Start with approvals on everything. Remove them as trust builds." },
-      { title: "Review weekly", note: "Count where it stopped for you, then cut the approvals you don't need." },
+      {
+        title: "Audit your week",
+        note: "We look at where your time actually goes and pick the repetitive work that will give you the most hours back first.",
+      },
+      {
+        title: "Connect your tools safely",
+        note: "I connect email, calendar, and the software you already use, with reading, drafting, and sending kept as separate permissions.",
+      },
+      {
+        title: "Set your operating rules",
+        note: "We put your boundaries in writing: what runs automatically, what waits for your approval, and what is strictly off-limits.",
+      },
+      {
+        title: "Launch with training wheels",
+        note: "We turn on one assistant first with approvals required on everything. As it earns your trust, we relax the checks you don't need.",
+      },
+      {
+        title: "Tune it every week",
+        note: "We review where it slowed down or asked unnecessarily, refine the rules, and add the next workflow when you're ready.",
+      },
     ],
   },
 
   compare: {
-    eyebrow: "The difference",
-    title: "What I set up, next to a common setup.",
-    colTopic: "Topic",
-    colCommon: "A common setup",
-    colMine: "What I set up",
+    eyebrow: "Why this works",
+    title: "Built like a real operating system, not a chat window.",
+    colTopic: "Area",
+    colCommon: "Typical AI setup",
+    colMine: "How I build it",
     rows: [
       {
-        topic: "Access",
-        common: "One assistant signed in to everything",
-        mine: "Each assistant gets only the accounts its job needs. Reading your inbox never quietly means sending as you.",
+        topic: "Permissions",
+        common: "One assistant logged into everything with broad access.",
+        mine: "Each assistant only sees the tools its job requires. Access to read your inbox never quietly includes permission to send as you.",
       },
       {
-        topic: "Approvals",
-        common: "It asks about everything, or about nothing",
-        mine: "A written short list. Everything else runs.",
+        topic: "Oversight",
+        common: "Either asks permission for every tiny step or runs unchecked.",
+        mine: "A clear, written approval list. Everything else gets handled quietly in the background.",
       },
       {
-        topic: "Who says go",
-        common: "One assistant can okay another's work",
-        mine: "Only your own yes counts, on a simple approve or don't-approve card.",
+        topic: "Sign-off",
+        common: "Rules live in a chat prompt and get ignored or overridden over time.",
+        mine: "Only your explicit sign-off counts, using a simple approve or decline card. No AI ever approves work on your behalf.",
       },
       {
-        topic: "Memory",
-        common: "Whatever is in the chat",
-        mine: "Every job is logged as a task, so you or your team can pick it up later.",
+        topic: "Continuity",
+        common: "Context stays buried in old chat threads nobody can find later.",
+        mine: "Every task, draft, and decision is logged in one place, so nothing gets lost and your team can pick up the thread.",
       },
       {
-        topic: "Mistakes",
-        common: "Fixed once, then forgotten",
-        mine: "Turned into a written rule, a check, or a playbook, so it doesn't repeat.",
+        topic: "Reliability",
+        common: "You correct the same mistake again next week.",
+        mine: "Every miss becomes a permanent rule or checklist update, so the system stops making that mistake.",
       },
     ],
   },
 
   loop: {
-    eyebrow: "It gets better every week",
-    title: "How a mistake becomes a rule.",
+    eyebrow: "Gets sharper over time",
+    title: "Like a great hire, you shouldn't have to correct the same thing twice.",
+    lede:
+      "Most AI tools forget your preferences the moment you open a new chat. Every setup I build includes a simple weekly improvement loop, so small corrections turn into lasting habits.",
     steps: [
-      { title: "Job ends", note: "Every piece of work closes the same way" },
-      { title: "One question", note: "Could the setup have prevented this?" },
-      { title: "Lesson logged", note: "Saved where the weekly review finds it" },
-      { title: "Weekly review", note: "Ranks the fixes, each with a target" },
-      { title: "Setup changes", note: "A new rule, check or playbook" },
+      { title: "Work wraps up", note: "A brief, email draft, or follow-up finishes." },
+      { title: "Spot the friction", note: "If something missed the mark, we ask why." },
+      { title: "Capture the lesson", note: "That miss is logged automatically instead of forgotten." },
+      { title: "Weekly review", note: "We look at the patterns that cost you the most time." },
+      { title: "Update the playbook", note: "We tighten a rule, add a check, or refine a template." },
     ],
-    loopNote: "Then the next job runs on the better setup.",
+    loopNote: "Next week, the system runs on the updated playbook without needing reminders.",
   },
 
   proof: {
-    eyebrow: "I run this myself",
-    title: "Same rules, on my own work, every day.",
+    eyebrow: "Proven on my own business",
+    title: "I don't sell theory. I run my own work this way every day.",
     commander:
-      "As a company commander, I delegated to build up my leaders. Some calls stayed with me because the stakes were too high. I run AI assistants the same way, and I set yours up that way too.",
-    lede: "My weekly review counts where I slowed my own assistants down. One week in November:",
+      "As a company commander, I delegated to develop my leaders, while keeping the high-stakes calls on my desk. I manage AI assistants the exact same way, and that's how I set them up for clients.",
+    lede:
+      "Most people either give AI too much leash or spend all day babysitting it. I review my own system every week to spot where my rules create unnecessary busywork. Here's what one week of tracking uncovered:",
     stats: [
-      { value: "91", label: "work sessions" },
-      { value: "103", label: "times I only typed \"yes\", \"ok\" or \"go\"" },
-      { value: "65", label: "interruptions that didn't need me" },
-      { value: "24 h", label: "assistants sat waiting on me" },
+      { value: "91", label: "assistant work sessions" },
+      { value: "103", label: "times I only replied \"yes\", \"ok\" or \"go\"" },
+      { value: "65", label: "interruptions that didn't actually need me" },
+      { value: "24 h", label: "work left waiting on a rubber-stamp approval" },
     ],
     callout:
-      "Those numbers are why the rules exist. Every bare \"yes\" is an approval you may not need. Counting them is how you know which ones to cut.",
+      "Every one-word \"yes\" points to a bottleneck you can remove safely. Measuring those stops is how we trim the noise, keep the real guardrails in place, and get more of your week back without giving up control.",
   },
 
   startEyebrow: "How to start",
   startTitle: "Book a free AI strategy call.",
   startPoints: [
-    "A free 30-minute call.",
-    "Tell me which part of your week you want back first: the inbox, meetings, follow-ups or reports.",
-    "Within two business days I send a written estimate with a recommended plan and a price range.",
-    "No obligation. You keep the estimate either way.",
+    "A free 30-minute conversation, no sales pitch.",
+    "Walk me through the parts of your week you want off your plate first: inbox, meetings, follow-ups, or daily briefs.",
+    "Within two business days, I send a written estimate with a recommended plan and a clear price range.",
+    "No obligation. You keep the plan either way.",
   ],
   assessmentNote:
-    "Want the same rules for your whole team's AI, not just your own assistant? See Claude setup and training.",
+    "Looking to roll out AI with the same guardrails across your whole team, not just for yourself? See Claude setup and training.",
   assessmentLinks: [{ label: "Claude setup and training", href: "/services/claude" }] satisfies TextLink[],
 
   ctaButton: "Book your free AI strategy call",
   ctaSupport:
-    "A free 30-minute call, then a written estimate with a recommended plan and a price range within two business days. No obligation.",
+    "A free 30-minute call, followed by a written estimate with a recommended plan and a price range within two business days. No obligation.",
 };

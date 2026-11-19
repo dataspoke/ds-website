@@ -2,16 +2,16 @@
 
 ## TLDR
 
-- **What:** a draft **service page** at **`/services/personal-ai-agent`**, titled "An AI assistant that works on your behalf, by your rules."
+- **What:** a draft **service page** at **`/services/personal-ai-agent`**, titled "An AI assistant that takes work off your plate, under your rules."
 - **What it covers:** what I set up for clients:
-  - assistants for inbox, meetings, follow-ups, a morning brief and content;
-  - the client's own rules on what runs alone and what waits for their yes;
-  - four reasons an assistant may interrupt;
+  - dedicated assistants for inbox, meetings, follow-ups, a morning brief, and content;
+  - clear boundaries between automatic prep work and actions that wait for your approval;
+  - four reasons an assistant interrupts your day;
   - five setup steps;
-  - a comparison table;
-  - the learning loop.
-- **Proof:** "I run this myself", with my weekly review numbers.
-- **Audience:** business owners and professionals, not developers. It uses plain business words.
+  - a comparison table (typical AI setup vs. how I build it);
+  - the weekly improvement loop.
+- **Proof:** "Proven on my own business", with the company commander framing and weekly review numbers.
+- **Audience:** business owners and executives, written in natural executive language without developer phrasing.
 - **Draft only:** noindex, a visible "Draft - not published" badge, and no links from anywhere. View it on the Vercel preview of the draft PR.
 
 ## Blog post or service page: I chose a service page (changed 2026-11-19)
@@ -23,6 +23,7 @@
   - the site's standard `EstimateCta` ("Book your free AI strategy call");
   - the dark "How to start" block;
   - no prices.
+- **Nick's feedback, round 3:** rewrite to make it more natural for a business leader to consume. Removed stiff/dev-translated phrasing ("this fall's big launches", "test runs", "a real fork", "bare yes") and framed every section around executive delegation, risk boundaries, and ongoing improvement.
 - **How it avoids overlap with /services/claude:** that page covers Claude for a team's operations. This page covers one person's own assistant: inbox, meetings, follow-ups. The footer note cross-links to /services/claude for team-wide setups.
 - **Voice:** first person ("I"), matching /services/claude and its line "I do the work myself."
 
