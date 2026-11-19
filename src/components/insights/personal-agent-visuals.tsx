@@ -2,15 +2,15 @@ import {
   ArrowDown,
   ArrowRight,
   Bot,
-  CalendarClock,
+  Briefcase,
   Check,
   CircleCheck,
-  Code2,
-  FileSearch,
   GitFork,
   KeyRound,
   Lock,
+  Mail,
   Megaphone,
+  MessagesSquare,
   RotateCcw,
   ShieldCheck,
   Waypoints,
@@ -18,7 +18,7 @@ import {
 import { cn } from "@/lib/utils";
 import { AGENT_POST as P } from "@/content/personal-ai-agent";
 
-const TEAM_ICONS = [Waypoints, Megaphone, Code2, CalendarClock, FileSearch];
+const TEAM_ICONS = [Waypoints, Mail, MessagesSquare, Megaphone, Briefcase];
 const STOP_ICONS = [Lock, GitFork, KeyRound, CircleCheck];
 
 /** One card per agent, each with its single job. */

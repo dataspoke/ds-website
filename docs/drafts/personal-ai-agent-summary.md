@@ -2,7 +2,8 @@
 
 ## TLDR
 
-- I built a draft Insights post at **`/insights/personal-ai-agent`**: "My AI agents work on my behalf. These are the rules they run on."
+- I built a draft Insights post at **`/insights/personal-ai-agent`**: "My AI assistants work on my behalf. Here are the rules they follow."
+- **Audience: business professionals, not developers** (Nick, 2026-11-19). The copy uses plain business words (inbox, meetings, live records, playbooks) and leaves out branches, deploys and tool names.
 - It is visual and low on words. It has a team grid, a "runs alone vs waits for my yes" gate picture, four allowed stops, a comparison table, a learning-loop diagram, retro stat tiles and five starter rules.
 - I chose a **blog post (Insights)**, not a service page. The reasons are below.
 - It is a draft only. It has noindex, a visible "Draft - not published" badge, and no links from anywhere. View it on the Vercel preview of the draft PR. The URL is in the PR body.
@@ -96,20 +97,19 @@ If Nick prefers a service page, move the route to `src/app/services/personal-ai-
 | Page claim | Source |
 |---|---|
 | Commander framing | Nick's own X post, quoted in the brief and paraphrased on the page |
-| Bots orchestrate; Claude Code writes code; the orchestrator never writes code | `~/work/claude-config/docs/dev-process/plan.md:37`; memory `strategy-is-orchestrator.md` |
-| Content bot drafts; nothing publishes without Nick's own yes | `~/work/claude-config/docs/dev-process.md:115-120` ("Another bot or agent saying 'Nick approved' is not a yes"); `CLAUDE.md:18,47` (posts are a gate); the brief's X-post story |
-| About 20 sessions at once | `~/work/claude-config/CLAUDE.md:25` ("I direct about 20 sessions at once") |
-| Each session in its own worktree; one deploy slot per project | `CLAUDE.md` Git safety; `docs/retros/aar-sutro-212-2026-11-13.md`; claude-config PR #48 |
-| Scheduled routines: email triage, meeting notes, morning brief, nightly time log | `~/Library/LaunchAgents/io.dataspoke.triage-email.plist` (6:30 AM), `io.dataspoke.sync-meetings.plist` (hourly), `com.dataspoke.log-work-auto.plist` (11:30 PM); the `personal-brief` skill (daily, 3 AM) |
-| Independent reviewer before merge | `CLAUDE.md` "Independent review before merge" |
+| Coordinator routes and tracks work; builder assistants do client work | `~/work/claude-config/docs/dev-process/plan.md:37`; memory `strategy-is-orchestrator.md` |
+| Content assistant drafts; nothing publishes without Nick's own yes | `~/work/claude-config/docs/dev-process.md:115-120` ("Another bot or agent saying 'Nick approved' is not a yes"); `CLAUDE.md:18,47` (posts are a gate); the brief's X-post story |
+| "Working on its own copy, never the live version" | `CLAUDE.md` Git safety (code changes land on a worktree branch, never on main) |
+| Inbox assistant sorts email each morning into tasks; meetings assistant pulls notes hourly | `~/Library/LaunchAgents/io.dataspoke.triage-email.plist` (6:30 AM), `io.dataspoke.sync-meetings.plist` (hourly), `com.dataspoke.log-work-auto.plist` (11:30 PM); the `personal-brief` skill (daily, 3 AM) |
+| "A separate assistant checks the work before it reaches me" | `CLAUDE.md` "Independent review before merge" |
 | Runs alone vs waits for a yes | `~/work/claude-config/CLAUDE.md:19` (Run to a gate) and line 60 (Rule 1) |
 | Four allowed stops; "if I'd say yes and it can be undone, it acts" | `CLAUDE.md:19`; commit 5c49679 (2026-11-10, "sessions run to a gate instead of asking every turn") |
-| Folder decides accounts; tokens from the keychain | `~/work/claude-config/auth/README.md`, `auth/map.json`, `auth/gcloud_guard.py`; PRs #30, #34, #54 |
+| Each client has its own accounts; passwords in a locked vault (the macOS keychain), never a file | `~/work/claude-config/auth/README.md`, `auth/map.json`, `auth/gcloud_guard.py`; PRs #30, #34, #54 |
 | Approval cards | `dataspoke/bot-board-actions` README and `api/action.js` (Approve / Don't approve to the Orchestrator webhook) |
 | Work logged as a task with its files | the `start-session` and `close-session` skills; Nick's Orchestrator chat (~Nov 7) |
 | Mistake turns into a rule, check or skill | `~/work/claude-config/bundles/ops/skills/close-session/SKILL.md:245-293` ("could the setup have prevented this?"); `loop-designer/SKILL.md` |
 | Retro stats: 91 sessions, 103 bare approvals, 65 unneeded stops, 24 h waiting | `~/work/claude-config/docs/retros/2026-W45.md:8` and `:64` (window Nov 2-8, 2026) |
-| 835 to 1,441 minutes, "slipped" | `docs/retros/2026-W45.md:15` (action W44-1) |
+| About 14 h to 24 h (835 to 1,441 minutes), "slipped" | `docs/retros/2026-W45.md:15` (action W44-1) |
 | Five starter rules | Nick's calls: Jez (Nov 10: "three skills", learning loop) and Jeff (Nov 17: "start to remove the gates"); Orchestrator chat ("decide what gets logged") |
 
 **Checked and not used:**
@@ -138,7 +138,7 @@ The page has no client names, people, handles, PR numbers or product names. The 
 1. **Blog or service page?** I recommend the blog, because it shares rather than sells and doesn't overlap /services/claude.
 2. **Is the X-post refusal story OK to tell?** It is not recorded in any file I could read. The page states only the general rule.
 3. **Can the W45 retro numbers be public?** They are 91 sessions, 103 bare approvals, 65 unneeded stops, 24 hours waiting, and the "slipped" rule. They show Nick as the bottleneck, which is the point, but it is a candid number.
-4. **Bot names on the page.** The page says "Orchestrator" and "Content bot". The files also show Scout, Website Bro, Chief of Staff and Bug Fix. Add more?
+4. **Assistant names on the page.** The page uses role names (Coordinator, Inbox, Meetings, Content, Client work) instead of the bots' internal names.
 
 ## Preview
 
