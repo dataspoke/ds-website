@@ -16,6 +16,7 @@ import { CLAUDE_PAGE } from "@/content/claude-services";
 import { INDUSTRIES, INDUSTRIES_HUB, industryPath } from "@/content/industries";
 import { SERVICE_PAGE_EXTRAS } from "@/content/service-pages";
 import { HUB_LINES, SPOKE_LINES } from "@/content/services";
+import { getInsightPosts } from "@/lib/insights";
 import type { CaseStudy, ServiceLine } from "@/types";
 
 // Plain-text summary for AI assistants and answer engines (https://llmstxt.org).
@@ -32,6 +33,7 @@ function caseStudyEntry(c: CaseStudy) {
 }
 
 function body() {
+  const insights = getInsightPosts();
   const lines: string[] = [
     `# ${SITE_NAME}`,
     "",
@@ -100,6 +102,14 @@ function body() {
     ...(WORK_PUBLISHED && CASE_STUDIES.length
       ? ["## Case studies", "", ...CASE_STUDIES.map(caseStudyEntry), ""]
       : []),
+    ...(insights.length > 0
+      ? [
+          "## Insights",
+          "",
+          ...insights.map((p) => `- [${p.title}](${SITE_URL}/insights/${p.slug}): ${p.description}`),
+          "",
+        ]
+      : []),
     "## Pages",
     "",
     `- [Home](${SITE_URL}): what ${SITE_NAME} does for business owners and who it's for`,
@@ -108,6 +118,7 @@ function body() {
     ...(WORK_PUBLISHED ? [`- [Work](${SITE_URL}/work): case studies, filterable by service`] : []),
     `- [Approach](${SITE_URL}/approach): the ${ASSESSMENT.name}, then build, hand-over and retainer, plus how the numbers that run a business get picked`,
     `- [About](${SITE_URL}/about): Nick Paul's background and how he works`,
+    ...(insights.length > 0 ? [`- [Insights](${SITE_URL}/insights): practical articles on data, operations and AI agents`] : []),
     `- [${FREE_ESTIMATE.headline}](${SITE_URL}${FREE_ESTIMATE.path}): ${FREE_ESTIMATE.lede}`,
     `- [Contact](${SITE_URL}/contact): book your free AI strategy call or send a note`,
     "",
