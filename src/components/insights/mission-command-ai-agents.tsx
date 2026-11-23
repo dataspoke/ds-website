@@ -32,8 +32,8 @@ export function MissionCommandArticle() {
         <p>
           Most AI hype makes it sound like you flip a switch and software runs your operation. That is not how it works.
           Hand an agent vague directions, and you get vague work back. In the Army, we solved that with mission command
-          - giving someone a clear objective and letting them run inside set boundaries. Six principles hold that system
-          together:
+          - giving someone a clear objective and letting them run inside set boundaries. Seven principles hold that
+          system together:
         </p>
 
         <MissionCommandHub />
@@ -82,10 +82,12 @@ export function MissionCommandArticle() {
         </p>
 
         <p>
-          <strong className="font-semibold text-ink">Disciplined initiative</strong> sits right in the middle - and in
-          an inbox workflow, the Send button literally is the line. The agent runs across disconnected systems, segments
-          accounts or stalled deals, pulls the context, and pre-drafts the outreach on its own. Totally fine. What it
-          does not do is click Send, offer a credit, or change pricing without a person in the loop.
+          <strong className="font-semibold text-ink">Disciplined initiative</strong> and{" "}
+          <strong className="font-semibold text-ink">risk acceptance</strong> sit right in the middle - and in an inbox
+          workflow, the Send button literally is the line. You accept prudent risk on the prep: the agent runs across
+          disconnected systems, segments accounts or stalled deals, pulls the context, and pre-drafts the outreach on
+          its own. Totally fine. What it does not do is click Send, offer a credit, or change pricing without a person
+          in the loop.
         </p>
 
         <DecisionLineVisual />
@@ -113,7 +115,8 @@ export function MissionCommandArticle() {
         <DelegationStageLadder />
 
         <p>
-          That progression is pretty painless, and each stage buys back more of your week without adding risk.
+          That progression is pretty painless, and each stage buys back more of your week with risk you control at each
+          step.
         </p>
 
         <div className="mt-4 rounded-2xl bg-ink p-6 text-white sm:p-7">

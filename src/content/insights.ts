@@ -22,14 +22,14 @@ export interface InsightEntry {
  * Registry of Insights articles.
  * Flip `status` between "draft" and "published" to control visibility on the live site:
  * drafts stay off /insights, the nav, sitemap.xml and llms.txt in production, while
- * remaining previewable locally at /insights/<slug>.
+ * remaining previewable locally and on Vercel preview builds at /insights/<slug>.
  */
 export const INSIGHT_ENTRIES: InsightEntry[] = [
   {
     slug: "mission-command-ai-agents",
-    title: "Mission Command for AI Agents",
+    title: "Give your AI agents task and purpose.",
     description:
-      "How six U.S. Army mission command principles turn vague AI prompts into reliable delegation - without giving up control of the calls that matter.",
+      "How the U.S. Army's seven mission command principles turn vague AI prompts into reliable delegation - without giving up control of the calls that matter.",
     eyebrow: "AI operations",
     date: "2026-11-23",
     author: "Nick Paul",

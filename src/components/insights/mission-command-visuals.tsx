@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, type KeyboardEvent, type ReactNode } from "react";
+import { createContext, useContext, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type ExampleKey = "churn" | "quotes";
@@ -33,12 +33,20 @@ const MONO = "ui-monospace, SFMono-Regular, Menlo, monospace";
 
 function TabBar({ ariaLabel, prefix }: { ariaLabel: string; prefix: string }) {
   const { selected, setSelected } = useSelectedExample();
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const onKeyDown = (e: KeyboardEvent<HTMLButtonElement>, index: number) => {
-    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const keys: Record<string, number> = {
+      ArrowRight: (index + 1) % EXAMPLES.length,
+      ArrowLeft: (index - 1 + EXAMPLES.length) % EXAMPLES.length,
+      Home: 0,
+      End: EXAMPLES.length - 1,
+    };
+    const nextIndex = keys[e.key];
+    if (nextIndex === undefined) return;
     e.preventDefault();
-    const next = EXAMPLES[(index + (e.key === "ArrowRight" ? 1 : EXAMPLES.length - 1)) % EXAMPLES.length];
-    setSelected(next.key);
+    setSelected(EXAMPLES[nextIndex].key);
+    tabRefs.current[nextIndex]?.focus();
   };
 
   return (
@@ -49,6 +57,9 @@ function TabBar({ ariaLabel, prefix }: { ariaLabel: string; prefix: string }) {
           return (
             <button
               key={ex.key}
+              ref={(el) => {
+                tabRefs.current[i] = el;
+              }}
               type="button"
               role="tab"
               id={`${prefix}-tab-${ex.key}`}
@@ -70,95 +81,107 @@ function TabBar({ ariaLabel, prefix }: { ariaLabel: string; prefix: string }) {
           );
         })}
       </div>
-      <span className="text-xs font-semibold text-primary">Switch example</span>
+      <span className="text-xs font-semibold text-primary">Both diagrams follow this example</span>
     </div>
   );
 }
 
-/** Visual 1: Six Mission Command principles mapped to AI delegation, in DataSpoke's hub-and-spoke style. */
+/** Visual 1: Seven Mission Command principles (ADP 6-0) mapped to AI delegation. */
 export function MissionCommandHub() {
   return (
     <figure className="my-2 rounded-2xl border border-tint-strong bg-tint p-4 sm:p-5">
-      <svg
-        viewBox="0 0 680 296"
-        role="img"
-        aria-label="Mission Command hub with six spokes: Competence, Mutual trust, Shared understanding, Commander's intent, Mission orders, and Disciplined initiative"
-        className="block h-auto w-full"
-      >
-        <g stroke="#9ec5f0" strokeWidth="2.5" fill="none">
-          <path d="M292 120 C260 90, 252 50, 224 50" />
-          <path d="M282 148 L224 148" />
-          <path d="M292 176 C260 206, 252 246, 224 246" />
-          <path d="M388 120 C420 90, 428 50, 456 50" />
-          <path d="M398 148 L456 148" />
-          <path d="M388 176 C420 206, 428 246, 456 246" />
-        </g>
+      <div className="-mx-1 overflow-x-auto px-1">
+        <svg
+          viewBox="0 0 680 384"
+          role="img"
+          aria-label="Mission Command hub with seven principles: Competence, Mutual trust, Shared understanding, Commander's intent, Mission orders, Disciplined initiative, and Risk acceptance"
+          className="block h-auto w-full min-w-[560px]"
+        >
+          <g stroke="#9ec5f0" strokeWidth="2.5" fill="none">
+            <path d="M292 120 C260 90, 252 50, 224 50" />
+            <path d="M282 148 L224 148" />
+            <path d="M292 176 C260 206, 252 246, 224 246" />
+            <path d="M388 120 C420 90, 428 50, 456 50" />
+            <path d="M398 148 L456 148" />
+            <path d="M388 176 C420 206, 428 246, 456 246" />
+            <path d="M340 208 L340 298" />
+          </g>
 
-        <circle cx="340" cy="148" r="60" fill="var(--tint-strong)" />
-        <circle cx="340" cy="148" r="52" fill="var(--brand)" stroke="var(--ink)" strokeWidth="2.5" />
-        <text x="340" y="143" textAnchor="middle" fontFamily={DISPLAY} fontSize="13.5" fontWeight="800" fill="#ffffff" letterSpacing="0.04em">
-          MISSION
-        </text>
-        <text x="340" y="161" textAnchor="middle" fontFamily={DISPLAY} fontSize="13.5" fontWeight="800" fill="#ffffff" letterSpacing="0.04em">
-          COMMAND
-        </text>
+          <circle cx="340" cy="148" r="60" fill="var(--tint-strong)" />
+          <circle cx="340" cy="148" r="52" fill="var(--brand)" stroke="var(--ink)" strokeWidth="2.5" />
+          <text x="340" y="143" textAnchor="middle" fontFamily={DISPLAY} fontSize="13.5" fontWeight="800" fill="#ffffff" letterSpacing="0.04em">
+            MISSION
+          </text>
+          <text x="340" y="161" textAnchor="middle" fontFamily={DISPLAY} fontSize="13.5" fontWeight="800" fill="#ffffff" letterSpacing="0.04em">
+            COMMAND
+          </text>
 
-        <rect x="14" y="16" width="210" height="68" rx="12" fill="#ffffff" stroke="var(--ink)" strokeWidth="2" />
-        <circle cx="224" cy="50" r="5.5" fill="var(--brand)" stroke="var(--ink)" strokeWidth="1.5" />
-        <text x="28" y="42" fontFamily={DISPLAY} fontSize="13.5" fontWeight="700" fill="var(--ink)">
-          1. Competence
-        </text>
-        <text x="28" y="62" fontFamily={SANS} fontSize="12" fill="var(--muted-foreground)">
-          Prove it on one narrow job first
-        </text>
+          <rect x="14" y="16" width="210" height="68" rx="12" fill="#ffffff" stroke="var(--ink)" strokeWidth="2" />
+          <circle cx="224" cy="50" r="5.5" fill="var(--brand)" stroke="var(--ink)" strokeWidth="1.5" />
+          <text x="28" y="42" fontFamily={DISPLAY} fontSize="13.5" fontWeight="700" fill="var(--ink)">
+            1. Competence
+          </text>
+          <text x="28" y="62" fontFamily={SANS} fontSize="12" fill="var(--muted-foreground)">
+            Prove it on one narrow job first
+          </text>
 
-        <rect x="14" y="114" width="210" height="68" rx="12" fill="#ffffff" stroke="var(--ink)" strokeWidth="2" />
-        <circle cx="224" cy="148" r="5.5" fill="var(--brand)" stroke="var(--ink)" strokeWidth="1.5" />
-        <text x="28" y="140" fontFamily={DISPLAY} fontSize="13.5" fontWeight="700" fill="var(--ink)">
-          2. Mutual trust
-        </text>
-        <text x="28" y="160" fontFamily={SANS} fontSize="12" fill="var(--muted-foreground)">
-          Earn authority in stages
-        </text>
+          <rect x="14" y="114" width="210" height="68" rx="12" fill="#ffffff" stroke="var(--ink)" strokeWidth="2" />
+          <circle cx="224" cy="148" r="5.5" fill="var(--brand)" stroke="var(--ink)" strokeWidth="1.5" />
+          <text x="28" y="140" fontFamily={DISPLAY} fontSize="13.5" fontWeight="700" fill="var(--ink)">
+            2. Mutual trust
+          </text>
+          <text x="28" y="160" fontFamily={SANS} fontSize="12" fill="var(--muted-foreground)">
+            Earn authority in stages
+          </text>
 
-        <rect x="14" y="212" width="210" height="68" rx="12" fill="#ffffff" stroke="var(--ink)" strokeWidth="2" />
-        <circle cx="224" cy="246" r="5.5" fill="var(--brand)" stroke="var(--ink)" strokeWidth="1.5" />
-        <text x="28" y="238" fontFamily={DISPLAY} fontSize="13.5" fontWeight="700" fill="var(--ink)">
-          3. Shared understanding
-        </text>
-        <text x="28" y="258" fontFamily={SANS} fontSize="12" fill="var(--muted-foreground)">
-          Put your context in the brief
-        </text>
+          <rect x="14" y="212" width="210" height="68" rx="12" fill="#ffffff" stroke="var(--ink)" strokeWidth="2" />
+          <circle cx="224" cy="246" r="5.5" fill="var(--brand)" stroke="var(--ink)" strokeWidth="1.5" />
+          <text x="28" y="238" fontFamily={DISPLAY} fontSize="13.5" fontWeight="700" fill="var(--ink)">
+            3. Shared understanding
+          </text>
+          <text x="28" y="258" fontFamily={SANS} fontSize="12" fill="var(--muted-foreground)">
+            Put your context in the brief
+          </text>
 
-        <rect x="456" y="16" width="210" height="68" rx="12" fill="#ffffff" stroke="var(--primary)" strokeWidth="2.5" />
-        <circle cx="456" cy="50" r="5.5" fill="var(--primary)" stroke="var(--ink)" strokeWidth="1.5" />
-        <text x="472" y="42" fontFamily={DISPLAY} fontSize="13.5" fontWeight="700" fill="var(--primary)">
-          4. Commander&apos;s intent
-        </text>
-        <text x="472" y="62" fontFamily={SANS} fontSize="12" fill="var(--muted-foreground)">
-          Purpose, key tasks, end state
-        </text>
+          <rect x="456" y="16" width="210" height="68" rx="12" fill="#ffffff" stroke="var(--primary)" strokeWidth="2.5" />
+          <circle cx="456" cy="50" r="5.5" fill="var(--primary)" stroke="var(--ink)" strokeWidth="1.5" />
+          <text x="472" y="42" fontFamily={DISPLAY} fontSize="13.5" fontWeight="700" fill="var(--primary)">
+            4. Commander&apos;s intent
+          </text>
+          <text x="472" y="62" fontFamily={SANS} fontSize="12" fill="var(--muted-foreground)">
+            Purpose, key tasks, end state
+          </text>
 
-        <rect x="456" y="114" width="210" height="68" rx="12" fill="#ffffff" stroke="var(--ink)" strokeWidth="2" />
-        <circle cx="456" cy="148" r="5.5" fill="var(--brand)" stroke="var(--ink)" strokeWidth="1.5" />
-        <text x="472" y="140" fontFamily={DISPLAY} fontSize="13.5" fontWeight="700" fill="var(--ink)">
-          5. Mission orders
-        </text>
-        <text x="472" y="160" fontFamily={SANS} fontSize="12" fill="var(--muted-foreground)">
-          Outcomes and limits, not clicks
-        </text>
+          <rect x="456" y="114" width="210" height="68" rx="12" fill="#ffffff" stroke="var(--ink)" strokeWidth="2" />
+          <circle cx="456" cy="148" r="5.5" fill="var(--brand)" stroke="var(--ink)" strokeWidth="1.5" />
+          <text x="472" y="140" fontFamily={DISPLAY} fontSize="13.5" fontWeight="700" fill="var(--ink)">
+            5. Mission orders
+          </text>
+          <text x="472" y="160" fontFamily={SANS} fontSize="12" fill="var(--muted-foreground)">
+            Outcomes and limits, not clicks
+          </text>
 
-        <rect x="456" y="212" width="210" height="68" rx="12" fill="#ffffff" stroke="var(--ink)" strokeWidth="2" />
-        <circle cx="456" cy="246" r="5.5" fill="var(--brand)" stroke="var(--ink)" strokeWidth="1.5" />
-        <text x="472" y="238" fontFamily={DISPLAY} fontSize="13.5" fontWeight="700" fill="var(--ink)">
-          6. Disciplined initiative
-        </text>
-        <text x="472" y="258" fontFamily={SANS} fontSize="12" fill="var(--muted-foreground)">
-          Run up to the decision line
-        </text>
-      </svg>
+          <rect x="456" y="212" width="210" height="68" rx="12" fill="#ffffff" stroke="var(--ink)" strokeWidth="2" />
+          <circle cx="456" cy="246" r="5.5" fill="var(--brand)" stroke="var(--ink)" strokeWidth="1.5" />
+          <text x="472" y="238" fontFamily={DISPLAY} fontSize="13.5" fontWeight="700" fill="var(--ink)">
+            6. Disciplined initiative
+          </text>
+          <text x="472" y="258" fontFamily={SANS} fontSize="12" fill="var(--muted-foreground)">
+            Run up to the decision line
+          </text>
+
+          <rect x="215" y="298" width="250" height="68" rx="12" fill="#ffffff" stroke="var(--ink)" strokeWidth="2" />
+          <circle cx="340" cy="298" r="5.5" fill="var(--brand)" stroke="var(--ink)" strokeWidth="1.5" />
+          <text x="340" y="325" textAnchor="middle" fontFamily={DISPLAY} fontSize="13.5" fontWeight="700" fill="var(--ink)">
+            7. Risk acceptance
+          </text>
+          <text x="340" y="346" textAnchor="middle" fontFamily={SANS} fontSize="12" fill="var(--muted-foreground)">
+            Accept risk on prep, keep big calls
+          </text>
+        </svg>
+      </div>
       <figcaption className="mt-2.5 text-center text-xs text-muted-foreground">
-        The six mission command principles translated into a practical AI delegation system.
+        The seven mission command principles translated into a practical AI delegation system.
       </figcaption>
     </figure>
   );
@@ -177,7 +200,9 @@ export function BriefAndInboxVisual() {
         role="tabpanel"
         id="brief-panel-churn"
         aria-labelledby="brief-tab-churn"
+        tabIndex={0}
         hidden={selected !== "churn"}
+        className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded-xl"
       >
         <div className="mb-3.5 grid gap-2 rounded-xl border border-tint-strong bg-white p-3.5 text-sm leading-snug text-ink">
           <div className="grid gap-1 sm:grid-cols-[96px_1fr] sm:items-baseline sm:gap-2.5">
@@ -204,11 +229,12 @@ export function BriefAndInboxVisual() {
           </div>
         </div>
 
+        <div className="-mx-1 overflow-x-auto px-1">
         <svg
           viewBox="0 0 680 282"
           role="img"
           aria-label="At-risk customer inbox tool showing risk segments, Customer A drill-in with pulled signals, editable pre-drafted message, and Send from inbox button"
-          className="block h-auto w-full"
+          className="block h-auto w-full min-w-[560px]"
         >
           <rect x="24" y="16" width="636" height="252" rx="14" fill="var(--brand)" stroke="var(--ink)" strokeWidth="2.5" />
           <rect x="16" y="8" width="636" height="252" rx="14" fill="#ffffff" stroke="var(--ink)" strokeWidth="2.5" />
@@ -310,6 +336,7 @@ export function BriefAndInboxVisual() {
             Waits for your click
           </text>
         </svg>
+        </div>
         <figcaption className="mt-2.5 text-center text-xs text-muted-foreground">
           End state in action: segmented risk inbox, drill-in proof per customer, and one-click send after review.
         </figcaption>
@@ -320,7 +347,9 @@ export function BriefAndInboxVisual() {
         role="tabpanel"
         id="brief-panel-quotes"
         aria-labelledby="brief-tab-quotes"
+        tabIndex={0}
         hidden={selected !== "quotes"}
+        className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded-xl"
       >
         <div className="mb-3.5 grid gap-2 rounded-xl border border-tint-strong bg-white p-3.5 text-sm leading-snug text-ink">
           <div className="grid gap-1 sm:grid-cols-[96px_1fr] sm:items-baseline sm:gap-2.5">
@@ -347,11 +376,12 @@ export function BriefAndInboxVisual() {
           </div>
         </div>
 
+        <div className="-mx-1 overflow-x-auto px-1">
         <svg
           viewBox="0 0 680 282"
           role="img"
           aria-label="Stalled quote recovery inbox tool showing deal segments, Quote A drill-in with call objection, editable 3-step call and email sequence, and Launch sequence button"
-          className="block h-auto w-full"
+          className="block h-auto w-full min-w-[560px]"
         >
           <rect x="24" y="16" width="636" height="252" rx="14" fill="var(--brand)" stroke="var(--ink)" strokeWidth="2.5" />
           <rect x="16" y="8" width="636" height="252" rx="14" fill="#ffffff" stroke="var(--ink)" strokeWidth="2.5" />
@@ -456,6 +486,7 @@ export function BriefAndInboxVisual() {
             Waits for your click
           </text>
         </svg>
+        </div>
         <figcaption className="mt-2.5 text-center text-xs text-muted-foreground">
           End state in action: prioritized deal inbox, call objection pulled in, and an editable call + email sequence ready to launch.
         </figcaption>
@@ -488,7 +519,7 @@ export function DecisionLineVisual() {
         "Segment deals & spot open objection",
         "Pre-draft Day 1 / 3 / 7 call & email",
       ],
-      human: ["Edit & click Launch", "Make the Day 3 live call", "Adjust price or scope"],
+      human: ["Edit & click Launch", "Own the Day 3 call", "Adjust price or scope"],
       caption: "The agent loads the inbox with each deal's sequence; your rep clicks Launch and owns the live call.",
       label: "Decision line for recovering stalled quotes",
     },
@@ -506,9 +537,12 @@ export function DecisionLineVisual() {
             role="tabpanel"
             id={`line-panel-${key}`}
             aria-labelledby={`line-tab-${key}`}
+            tabIndex={0}
             hidden={selected !== key}
+            className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded-xl"
           >
-            <svg viewBox="0 0 680 264" role="img" aria-label={cfg.label} className="block h-auto w-full">
+            <div className="-mx-1 overflow-x-auto px-1">
+            <svg viewBox="0 0 680 264" role="img" aria-label={cfg.label} className="block h-auto w-full min-w-[560px]">
               <rect x="14" y="54" width="382" height="192" rx="14" fill="#ffffff" stroke="var(--ink)" strokeWidth="2" />
               <rect x="28" y="40" width="212" height="28" rx="14" fill="var(--brand)" stroke="var(--ink)" strokeWidth="2" />
               <text x="134" y="58.5" textAnchor="middle" fontFamily={DISPLAY} fontSize="11.5" fontWeight="800" fill="#ffffff" letterSpacing="0.05em">
@@ -568,6 +602,7 @@ export function DecisionLineVisual() {
                 );
               })}
             </svg>
+            </div>
             <figcaption className="mt-2.5 text-center text-xs text-muted-foreground">{cfg.caption}</figcaption>
           </div>
         );
