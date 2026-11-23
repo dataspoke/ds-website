@@ -40,31 +40,53 @@ export function generateMetadata(page: {
   absoluteTitle?: boolean;
   /** Ad landing pages and other URLs that should stay out of the index. */
   noIndex?: boolean;
+  /** Optional custom share image (e.g. a per-post opengraph-image route). */
+  image?: { url: string; width: number; height: number; alt: string };
+  /** Emit Open Graph article metadata for blog / Insights posts. */
+  article?: {
+    publishedTime: string;
+    modifiedTime?: string;
+    authors?: string[];
+  };
 }): Metadata {
   const fullTitle = page.absoluteTitle ? page.title : `${page.title} | ${SITE_NAME}`;
   // Drop any query or hash. /contact?service=* must canonical to /contact,
   // including retired params such as ai-integration, fractional-cto, and web-apps.
   const pathname = page.path.split(/[?#]/)[0] || "/";
   const pageUrl = pathname === "/" ? SITE_URL : `${SITE_URL}${pathname}`;
+  const ogImage = page.image ?? shareImage;
+  const openGraph = page.article
+    ? {
+        title: fullTitle,
+        description: page.description,
+        url: pageUrl,
+        siteName: SITE_NAME,
+        type: "article" as const,
+        publishedTime: page.article.publishedTime,
+        modifiedTime: page.article.modifiedTime ?? page.article.publishedTime,
+        authors: page.article.authors,
+        images: [ogImage],
+      }
+    : {
+        title: fullTitle,
+        description: page.description,
+        url: pageUrl,
+        siteName: SITE_NAME,
+        type: "website" as const,
+        images: [ogImage],
+      };
   return {
     title: page.absoluteTitle ? { absolute: page.title } : page.title,
     description: page.description,
     alternates: {
       canonical: pageUrl,
     },
-    openGraph: {
-      title: fullTitle,
-      description: page.description,
-      url: pageUrl,
-      siteName: SITE_NAME,
-      type: "website",
-      images: [shareImage],
-    },
+    openGraph,
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description: page.description,
-      images: [shareImage],
+      images: [ogImage],
     },
     ...(page.noIndex ? { robots: { index: false, follow: false } } : {}),
   };

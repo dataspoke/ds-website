@@ -53,7 +53,7 @@ function pageSources(pagePath: string): string[] {
     "/contact": ["src/app/contact", "src/components/contact"],
     "/free-estimate": ["src/app/free-estimate", "src/content/free-estimate.ts", "src/components/estimate"],
     "/industries": ["src/app/industries/page.tsx", "src/content/industries.ts", "src/components/industries"],
-    "/insights": ["src/app/insights/page.tsx"],
+    "/insights": ["src/app/insights/page.tsx", "src/content/insights.ts"],
     "/privacy": ["src/app/privacy", "src/content/privacy.ts"],
     "/services": ["src/app/services/page.tsx", "src/content/services.ts", "src/content/claude-services.ts", "src/content/approach.ts", "src/components/services"],
     "/work": ["src/app/work/page.tsx", "src/components/work", "src/content/case-studies.ts"],
