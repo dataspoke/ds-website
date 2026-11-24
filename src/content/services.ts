@@ -285,7 +285,7 @@ export const SERVICE_LINES: ServiceLine[] = [
     oneLiner: "One trustworthy set of records, so everyone works from the same facts.",
     metaTitle: "Data Organization and Warehousing",
     metaDescription:
-      "Data organization and warehousing for growing businesses. I clean up the duplicates and bring every system into one warehouse your whole team can trust.",
+      "Data organization and warehousing for growing businesses. We clean up the duplicates and bring every system into one warehouse your whole team can trust.",
     problem:
       "Once the information is captured, it's still a pile. Two documents disagree. A decision was made on a call and nobody can find it. A report says one thing and the accounting software says another. We sort the pile into organized records of clients, projects, decisions and policies, and we mark each fact with how far you can trust it. A data warehouse is the plain word for where that organized copy lives: one central, well-kept store of your business information that you own and that your reports, software and AI all read from.",
     soundsLike: [
