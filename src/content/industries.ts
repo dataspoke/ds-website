@@ -259,7 +259,7 @@ export const INDUSTRIES: Industry[] = [
       {
         question: "What does business intelligence look like for a law firm?",
         answer:
-          "It means one place to see the numbers that run the firm: new leads by source, consultations booked, cases signed and fees collected. We pull them out of Clio or Lawmatics, your phones and your accounting, and put them on one dashboard that updates itself. Your team stops building reports by hand, and you can see which marketing actually signs cases.",
+          "It means one place to see the numbers that run the firm: new leads by source, consultations booked, cases signed and fees collected, each broken out by case type. We pull them out of Clio or Lawmatics, your phones and your accounting, and put them on one dashboard that updates itself. Your team stops building reports by hand, and you can see which marketing actually signs cases and which practice areas bring in the most revenue.",
       },
       {
         question: "How do we start?",
@@ -423,7 +423,7 @@ export const INDUSTRIES: Industry[] = [
       {
         question: "How can AI-powered analytics help a contractor or home service business?",
         answer:
-          "It reads the lead, job and invoice data you already have and points out what is easy to miss by eye, such as which ads bring in paid jobs, which reps close the most and which leads nobody called back. That only works once your CRM, ad accounts and accounting are connected, so that is where we start. A person still makes every call. The AI does the digging and drafts the follow-up for someone to approve.",
+          "It reads the lead, job and invoice data you already have and points out what is easy to miss by eye, such as which ads bring in paid jobs and which leads nobody called back. That only works once your CRM, ad accounts and accounting are connected, so that is where we start. A person still makes every decision. The AI does the digging and drafts the follow-up for someone to approve.",
       },
       {
         question: "How do we start?",
@@ -900,7 +900,7 @@ export const INDUSTRIES: Industry[] = [
       {
         question: "What does a manufacturing data consultant do?",
         answer:
-          "A manufacturing data consultant connects the planning, production, quality and shipping systems a plant runs into one trusted set of numbers. We copy the data out of those systems into a separate data lake you own, so validated systems are read from and never written to. From there we define each number once, such as output per line or on-time shipments, and build the dashboards and tools your team runs on.",
+          "A manufacturing data consultant turns the records spread across a plant's systems into numbers and tools the team can actually use. The systems involved are usually planning, quality, inventory and accounting, and in a regulated plant some of them are validated, so we take copies and leave the originals alone. A first project usually copies the data one tool needs, then builds that tool, such as a scheduling planner that replaces the spreadsheet one person maintains, or a portal where customers find their own certificates.",
       },
       {
         question: "How do we start?",
