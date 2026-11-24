@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
     // browsers would cache a 308 and keep hiding the page after it ships.
     // Delete the redirect in the same PR that ships the page.
     const deadUrls = [
-      { source: "/insights/personal-ai-agent", destination: "/services/claude", permanent: true },
+      { source: "/insights/personal-ai-agent", destination: "/services/personal-ai-agent", permanent: true },
       // Remove when the draft page at this URL ships (PR #31).
       { source: "/insights/company-brain", destination: "/services/organize", permanent: false },
       // Remove when the draft page at this URL ships (PR #32).
