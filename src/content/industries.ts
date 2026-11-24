@@ -762,7 +762,7 @@ export const INDUSTRIES: Industry[] = [
     h1: "AI and data consulting for manufacturers: put plant data to work without touching validated systems.",
     definition:
       "DataSpoke is a data and AI consulting firm that works with manufacturers across the United States, including contract and regulated manufacturers. We copy data out of the systems your plant runs into a separate place you own, so validated systems are read from and never written to. Then we build the planning tools, customer portals, dashboards and AI your team runs on. You own every account and every line of code.",
-    lastUpdated: "2026-11-10",
+    lastUpdated: "2026-11-23",
     card: {
       body: "Contract and regulated manufacturers: plant data copied into one place you own, with scheduling tools, a customer portal and dashboards on top.",
     },
@@ -896,6 +896,11 @@ export const INDUSTRIES: Industry[] = [
         question: "Do we have to replace our software?",
         answer:
           "No. We build beside the systems you already run. Your planning, quality and accounting systems stay in place, and the tools we add read from a copy of their data.",
+      },
+      {
+        question: "What does a manufacturing data consultant do?",
+        answer:
+          "A manufacturing data consultant connects the planning, production, quality and shipping systems a plant runs into one trusted set of numbers. We copy the data out of those systems into a separate data lake you own, so validated systems are read from and never written to. From there we define each number once, such as output per line or on-time shipments, and build the dashboards and tools your team runs on.",
       },
       {
         question: "How do we start?",
