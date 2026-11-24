@@ -129,4 +129,7 @@ export const COMPANY_BRAIN = {
     { title: "Log what matters", note: "Decide what someone will need in the next session, and log only that." },
     { title: "Then connect data", note: "Through an MCP server or API. Read-only first." },
   ],
+
+  serviceText: "Want one set up for your company? See Company brain setup.",
+  serviceLinks: [{ label: "Company brain setup", href: "/services/company-brain" }],
 };

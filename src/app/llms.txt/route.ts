@@ -15,6 +15,7 @@ import { FREE_ESTIMATE } from "@/content/free-estimate";
 import { CLAUDE_PAGE } from "@/content/claude-services";
 import { AGENT_PAGE } from "@/content/personal-ai-agent";
 import { FACTORY_PAGE } from "@/content/software-factory";
+import { BRAIN_PAGE } from "@/content/company-brain-service";
 import { INDUSTRIES, INDUSTRIES_HUB, industryPath } from "@/content/industries";
 import { SERVICE_PAGE_EXTRAS } from "@/content/service-pages";
 import { HUB_LINES, SPOKE_LINES } from "@/content/services";
@@ -72,6 +73,10 @@ function body() {
     "### AI software factory setup",
     "",
     `- [${FACTORY_PAGE.card.title}](${SITE_URL}${FACTORY_PAGE.path}): ${FACTORY_PAGE.card.oneLiner} ${FACTORY_PAGE.card.summary}`,
+    "",
+    "### Company brain setup",
+    "",
+    `- [${BRAIN_PAGE.card.title}](${SITE_URL}${BRAIN_PAGE.path}): ${BRAIN_PAGE.card.oneLiner} ${BRAIN_PAGE.card.summary}`,
     "",
     "## Questions on the service pages",
     "",
