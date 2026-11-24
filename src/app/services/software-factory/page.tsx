@@ -9,13 +9,10 @@ import { FlowArrow, LineDiagram, LineLegend, LineTimeline } from "@/components/s
 import { FACTORY_PAGE as P } from "@/content/software-factory";
 import { LINE_PAGE } from "@/content/services";
 
-// DRAFT page. Kept out of search (noIndex) and out of the nav, /services,
-// the home page, sitemap.ts and llms.txt until Nick approves publishing.
 export const metadata: Metadata = generateMetadata({
   title: P.metaTitle,
   description: P.metaDescription,
   path: P.path,
-  noIndex: true,
 });
 
 const STOP_ICONS = [CircleStop, GitFork, KeyRound, CheckCircle2];
@@ -37,14 +34,9 @@ export default function SoftwareFactoryPage() {
           className="pointer-events-none absolute -right-32 -top-32 h-[28rem] w-[28rem] rounded-full bg-brand/10 blur-3xl"
         />
         <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="flex flex-wrap items-center gap-3">
-            <Link href="/services" className="inline-block py-2 text-sm font-semibold text-primary hover:text-primary/80">
-              &larr; {LINE_PAGE.backLabel}
-            </Link>
-            <p className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-amber-900 ring-1 ring-amber-300">
-              {P.draftBadge}
-            </p>
-          </div>
+          <Link href="/services" className="inline-block py-2 text-sm font-semibold text-primary hover:text-primary/80">
+            &larr; {LINE_PAGE.backLabel}
+          </Link>
           <div className="mt-4 grid items-center gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
             <div className="grid gap-5">
               <p className="eyebrow">{P.eyebrow}</p>

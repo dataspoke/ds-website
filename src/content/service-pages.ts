@@ -320,6 +320,10 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
     ],
   },
   "custom-software": {
+    crossLink: {
+      text: "Want to build and update your software and internal tools every week with AI? See AI software factory setup.",
+      links: [{ label: "AI software factory setup", href: "/services/software-factory" }],
+    },
     faqEyebrow: "Questions",
     faqTitle: "Before we write the app",
     engagement: {

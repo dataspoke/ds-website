@@ -1,9 +1,8 @@
 import type { TextLink } from "@/types";
 
-// Copy for /services/software-factory (DRAFT, noindex, not linked anywhere).
+// Copy for /services/software-factory.
 // Written for business leaders in plain English: what DataSpoke sets up for
 // companies, backed by real lessons and numbers from our own operation.
-// Sources are listed in docs/drafts/software-factory-summary.md.
 // Clients stay anonymous. No prices, client names, quotes from third parties,
 // or made-up numbers. Hyphens only, no em or en dashes.
 
@@ -26,15 +25,14 @@ export interface IncidentRule {
 
 export const FACTORY_PAGE = {
   path: "/services/software-factory",
-  metaTitle: "AI Software Factory Setup for Your Business",
+  metaTitle: "AI Internal Tools & Software Factory Setup",
   metaDescription:
-    "We set up an AI software factory for your company: AI builds and tests updates, a second AI reviews, and your team owns every sign-off. Free AI strategy call.",
-  draftBadge: "Draft - not published",
+    "Set up an AI software factory to build and update apps and internal tools every week, with your team owning every sign-off. Free AI strategy call.",
 
   eyebrow: "AI software factory setup",
-  title: "An AI software factory your team actually controls.",
+  title: "Build and update your software and internal tools every week with AI.",
   lede:
-    "AI assistants run the assembly line. Your team owns the sign-offs. We set up the workflow, safeguards, and review gates so your company can build and update software faster without losing control.",
+    "We set up an AI assembly line for your company so you can build and update the apps and internal tools your business needs every week, without hiring a full dev team or waiting months for changes. AI assistants do the heavy lifting, a second AI checks every change, and your team owns the sign-offs.",
   intro: [
     "AI builds, your team decides",
     "A second AI checks every change",
@@ -255,4 +253,15 @@ export const FACTORY_PAGE = {
   /** Alt text for the hero diagram. */
   heroDiagramLabel:
     "Diagram: an assembly line. AI workstations build, test and review each software change. Two human sign-offs sit before anything goes live: approving the change, then updating data and launching, each with its own sign-off. Lessons loop back to the start.",
+
+  /** Card on the /services index. */
+  card: {
+    eyebrow: "Want weekly software updates?",
+    title: "AI software factory setup",
+    oneLiner: "Build and update your software and internal tools every week with AI.",
+    summary:
+      "An AI assembly line for your business apps and internal tools: AI assistants build and test updates, a second AI inspects every change, and your team owns the sign-offs before anything goes live.",
+    steps: "Automated intake · Isolated workspaces · Build & test · Second-AI review · Human sign-offs",
+    link: "See AI software factory setup",
+  },
 };
