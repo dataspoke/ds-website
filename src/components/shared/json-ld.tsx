@@ -262,6 +262,7 @@ export function ArticleJsonLd({
   datePublished,
   dateModified,
   authorName,
+  image,
   about,
 }: {
   headline: string;
@@ -270,6 +271,7 @@ export function ArticleJsonLd({
   datePublished: string;
   dateModified: string;
   authorName: string;
+  image?: string;
   about?: { id: string; name: string; url: string }[];
 }) {
   const url = `${SITE_URL}${path}`;
@@ -302,7 +304,7 @@ export function ArticleJsonLd({
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     url,
-    image: `${SITE_URL}/opengraph-image`,
+    image: image ? `${SITE_URL}${image}` : `${SITE_URL}/opengraph-image`,
     ...(about?.length
       ? {
           about: about.map((item) => ({
