@@ -34,7 +34,7 @@ For `/industries` and each industry page:
 2. Expect the document to be no wider than the viewport (no horizontal scroll).
 3. Expect exactly one H1 and a visible breadcrumb: "Home > Industries", plus the industry name on an industry page.
 4. On each industry page, expect a "Last updated" date.
-5. On each industry page, expect six FAQ questions, visible and all closed. Open the first question and expect its answer to show.
+5. On each industry page, expect its FAQ questions visible and all closed: seven on law firms, home services and gyms and fitness, six on the others. Open the first question and expect its answer to show.
 6. Save a screenshot of the page at each width.
 
 ## e. Structured data

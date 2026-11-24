@@ -131,7 +131,7 @@ export const INDUSTRIES: Industry[] = [
     h1: "AI and data consulting for law firms: every lead, call and matter in one place you own.",
     definition:
       "DataSpoke is a data and AI consulting firm for law firms across the United States. We connect your intake CRM, practice management, phones and accounting so every lead, call and matter sits in one record. Then we build dashboards for intake and revenue by case type, and set up AI that drafts from your firm's own files, with a lawyer approving every word. You own every account and every line of code.",
-    lastUpdated: "2026-11-10",
+    lastUpdated: "2026-11-23",
     card: {
       body: "Intake, phones, practice management and billing in one record you own, with a weekly intake scorecard and AI drafts a lawyer approves.",
     },
@@ -257,6 +257,11 @@ export const INDUSTRIES: Industry[] = [
           "No. We build on the systems you already pay for, such as Clio and Lawmatics. The goal is for those systems to share information, not for your team to learn a new one. Your intake team keeps working in Lawmatics, and your lawyers keep working in Clio.",
       },
       {
+        question: "What does business intelligence look like for a law firm?",
+        answer:
+          "It means one place to see the numbers that run the firm: new leads by source, consultations booked, cases signed and fees collected. We pull them out of Clio or Lawmatics, your phones and your accounting, and put them on one dashboard that updates itself. Your team stops building reports by hand, and you can see which marketing actually signs cases.",
+      },
+      {
         question: "How do we start?",
         answer:
           "Book a free AI strategy call. It is a 30-minute call about the tools you run and where leads and hours slip away. Within two business days you get a written estimate with a recommended plan and a price range, with no obligation to go ahead. Firms that want the full map first can start with the two-week Data & AI Assessment.",
@@ -280,7 +285,7 @@ export const INDUSTRIES: Industry[] = [
     h1: "AI and data consulting for home service companies: trace every ad dollar to a paid job.",
     definition:
       "DataSpoke is a data and AI consulting firm for home service companies across the United States, including roofing, HVAC, plumbing and other trades. We connect your CRM, ad accounts and accounting so every lead is counted, build a weekly scorecard your managers run on, and put AI to work on the office busywork. You own every account and every line of code.",
-    lastUpdated: "2026-11-10",
+    lastUpdated: "2026-11-23",
     card: {
       body: "Roofing, HVAC, plumbing and other trades: every lead counted, every ad dollar traced to a paid job, and a weekly scorecard for your managers.",
     },
@@ -416,6 +421,11 @@ export const INDUSTRIES: Industry[] = [
           "No. We build the connections and the scorecard, and we train your team on the parts they use. They keep working in the tools they know, with less retyping, and every account and every line of code is yours, with plain-English documentation.",
       },
       {
+        question: "How can AI-powered analytics help a contractor or home service business?",
+        answer:
+          "It reads the lead, job and invoice data you already have and points out what is easy to miss by eye, such as which ads bring in paid jobs, which reps close the most and which leads nobody called back. That only works once your CRM, ad accounts and accounting are connected, so that is where we start. A person still makes every call. The AI does the digging and drafts the follow-up for someone to approve.",
+      },
+      {
         question: "How do we start?",
         answer:
           "Book a free AI strategy call. It is a 30-minute call about the tools you run and where leads and money slip away. Within two business days you get a written estimate with a recommended plan and a price range, with no obligation to go ahead. Companies that want the full map first can start with the two-week Data & AI Assessment.",
@@ -439,7 +449,7 @@ export const INDUSTRIES: Industry[] = [
     h1: "AI and data consulting for gyms and fitness: see which members are drifting away while there is time to act.",
     definition:
       "DataSpoke is a data and AI consulting firm that works with gyms and fitness businesses across the United States. We connect your booking system, payments and accounting so every member, visit and payment sits in one place you own. Then we build what the business runs on: a member app in your own brand, reports that flag members drifting away, and views of how each trainer and location is doing. You own every account and every line of code.",
-    lastUpdated: "2026-11-10",
+    lastUpdated: "2026-11-23",
     card: {
       body: "Booking, payments and member records in one place you own, with a member app in your brand and reports that flag members drifting away.",
     },
@@ -574,6 +584,11 @@ export const INDUSTRIES: Industry[] = [
         question: "Do we have to replace our booking software?",
         answer:
           "No. We build on the booking system you already pay for. It keeps running the schedule, and members can book through it or through your own app. The goal is for your systems to share information, not for your staff to learn a new one.",
+      },
+      {
+        question: "What is fitness business intelligence, and does a gym need it?",
+        answer:
+          "It is a clear view of the numbers that keep a gym open: new members, cancellations, how often each member visits, and how each trainer and location is doing. Most gyms already have this data in Mindbody or another booking system, plus their payments, but it is hard to see in one place. We connect it into one view you own, with a list of members whose visits are falling off, so managers can reach them while there is still time.",
       },
       {
         question: "How do we start?",
