@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { generateMetadata } from "@/lib/metadata";
 import { Section, SectionHead } from "@/components/shared/section";
 import { SpokeBullet } from "@/components/shared/spoke-bullet";
@@ -93,6 +94,13 @@ export default function AboutPage() {
               contractor, I traced every ad dollar through to paying jobs, so the owner knows
               which marketing actually makes money. For a membership business, I replaced a
               slow vendor app with iOS and Android apps the owner controls outright.
+            </p>
+            <p className="text-muted-foreground">
+              Those are three projects out of many. You can see{" "}
+              <Link href="/services" className="font-semibold text-primary hover:text-primary/80">
+                everything I build for clients
+              </Link>{" "}
+              on the services page.
             </p>
             <ProofLine />
             <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">

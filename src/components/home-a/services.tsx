@@ -25,9 +25,17 @@ export function ServicesA() {
 
       <PipelineList steps={SERVICE_PIPELINE.map((step) => ({ ...step, title: TITLES[step.slug] }))} />
 
-      <Link href={SERVICES_A_HEAD.allLink.href} className="mt-8 inline-block font-semibold text-primary hover:text-primary/80">
-        {SERVICES_A_HEAD.allLink.label} &rarr;
-      </Link>
+      <div className="mt-8 flex flex-wrap items-baseline gap-x-8 gap-y-3">
+        <Link href={SERVICES_A_HEAD.allLink.href} className="font-semibold text-primary hover:text-primary/80">
+          {SERVICES_A_HEAD.allLink.label} &rarr;
+        </Link>
+        <p className="text-muted-foreground">
+          {SERVICES_A_HEAD.claudeLink.lead}{" "}
+          <Link href={SERVICES_A_HEAD.claudeLink.href} className="font-semibold text-primary hover:text-primary/80">
+            {SERVICES_A_HEAD.claudeLink.label} &rarr;
+          </Link>
+        </p>
+      </div>
     </Section>
   );
 }
