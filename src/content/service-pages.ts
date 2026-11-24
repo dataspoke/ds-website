@@ -164,8 +164,8 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
   },
   organize: {
     crossLink: {
-      text: "Want to see how this looks in practice? Read Your company brain is a data problem.",
-      links: [{ label: "Your company brain is a data problem", href: "/insights/company-brain" }],
+      text: "Organized records are the foundation of a company brain: one written picture of how your company runs, shared by your team and your AI. See Company brain setup.",
+      links: [{ label: "Company brain setup", href: "/services/company-brain" }],
     },
     faqEyebrow: "Questions",
     faqTitle: "Before we sort the pile",
@@ -404,10 +404,11 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
   },
   "ai-implementation": {
     crossLink: {
-      text: "Already working in Claude? See Claude setup and training. Looking for an executive assistant for your own inbox, meetings, and follow-ups? See Personal AI assistant setup.",
+      text: "Already working in Claude? See Claude setup and training. Looking for an executive assistant for your own inbox, meetings, and follow-ups? See Personal AI assistant setup. Want your team and your AI working from one written picture of how your company runs? See Company brain setup.",
       links: [
         { label: "Claude setup and training", href: "/services/claude" },
         { label: "Personal AI assistant setup", href: "/services/personal-ai-agent" },
+        { label: "Company brain setup", href: "/services/company-brain" },
       ],
     },
     faqEyebrow: "Questions",

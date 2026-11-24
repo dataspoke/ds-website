@@ -17,6 +17,7 @@ import {
   X,
 } from "lucide-react";
 import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/shared/json-ld";
+import { LinkedText } from "@/components/shared/faq-list";
 import { Section, SectionHead } from "@/components/shared/section";
 import { generateMetadata } from "@/lib/metadata";
 import { formatLongDate } from "@/lib/dates";
@@ -318,6 +319,9 @@ export default function CompanyBrainPost() {
             </li>
           ))}
         </ol>
+        <p className="mt-8 rounded-xl border border-tint-strong bg-background px-5 py-4 text-foreground/85 [&_a]:font-semibold [&_a]:text-primary hover:[&_a]:text-primary/80">
+          <LinkedText text={P.serviceText} links={P.serviceLinks} />
+        </p>
       </Section>
     </>
   );

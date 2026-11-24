@@ -11,6 +11,7 @@ import { ServicesHero } from "@/components/services/services-hero";
 import { CLAUDE_PAGE } from "@/content/claude-services";
 import { AGENT_PAGE } from "@/content/personal-ai-agent";
 import { FACTORY_PAGE } from "@/content/software-factory";
+import { BRAIN_PAGE } from "@/content/company-brain-service";
 import { LINE_PAGE, SERVICE_LINES, SERVICE_PIPELINE, SERVICES_PAGE } from "@/content/services";
 
 export const metadata: Metadata = generateMetadata({
@@ -60,8 +61,9 @@ export default function ServicesPage() {
             {LINE_PAGE.workLink.label} &rarr;
           </Link>
         )}
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">
-          {[CLAUDE_PAGE, AGENT_PAGE, FACTORY_PAGE].map((page) => (
+        {/* Four special service cards: one column on phones, 2x2 from md up. */}
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {[CLAUDE_PAGE, AGENT_PAGE, FACTORY_PAGE, BRAIN_PAGE].map((page) => (
             <Link
               key={page.path}
               href={page.path}
