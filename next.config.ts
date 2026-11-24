@@ -10,15 +10,9 @@ const nextConfig: NextConfig = {
   async redirects() {
     // Dead URLs that still get visits. Config redirects run before filesystem
     // routes, so a redirect here hides any page later built at the same URL.
-    // The 307s (permanent: false) sit on URLs where a draft page is being built:
-    // browsers would cache a 308 and keep hiding the page after it ships.
-    // Delete the redirect in the same PR that ships the page.
+    // Never redirect a URL where a page is being built.
     const deadUrls = [
       { source: "/insights/personal-ai-agent", destination: "/services/personal-ai-agent", permanent: true },
-      // Remove when the draft page at this URL ships (PR #31).
-      { source: "/insights/company-brain", destination: "/services/organize", permanent: false },
-      // Remove when the draft page at this URL ships (PR #32).
-      { source: "/services/software-factory", destination: "/services/custom-software", permanent: false },
     ];
 
     // /work is down until clients approve their case studies. Permanent (308)
