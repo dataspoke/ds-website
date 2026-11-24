@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowRight, Bot, RotateCcw, UserCheck } from "lucide-react";
+import { Bot, RotateCcw, UserCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { FactoryStation } from "@/content/software-factory";
 
@@ -110,15 +110,5 @@ export function LineTimeline({ stations, station, gate }: { stations: FactorySta
         </li>
       ))}
     </ol>
-  );
-}
-
-/** "Before -> after" arrow that points down on phones and right on wide screens. */
-export function FlowArrow({ className }: { className?: string }) {
-  return (
-    <span className={cn("grid place-items-center text-primary", className)} aria-hidden="true">
-      <ArrowDown className="h-5 w-5 md:hidden" />
-      <ArrowRight className="hidden h-5 w-5 md:block" />
-    </span>
   );
 }

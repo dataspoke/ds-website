@@ -2,9 +2,8 @@ import type { TextLink } from "@/types";
 
 // Copy for /services/software-factory.
 // Written for business leaders in plain English: what DataSpoke sets up for
-// companies, backed by real lessons and numbers from our own operation.
-// Clients stay anonymous. No prices, client names, quotes from third parties,
-// or made-up numbers. Hyphens only, no em or en dashes.
+// companies, in general terms. No prices, client names, internal stack details,
+// quotes from third parties, or made-up numbers. Hyphens only, no em or en dashes.
 
 export interface FactoryStation {
   title: string;
@@ -16,11 +15,6 @@ export interface FactoryStation {
 export interface FactoryCard {
   title: string;
   note: string;
-}
-
-export interface IncidentRule {
-  incident: string;
-  rule: string;
 }
 
 export const FACTORY_PAGE = {
@@ -95,38 +89,38 @@ export const FACTORY_PAGE = {
     },
     {
       title: "Update data & launch",
-      note: "One sign-off for any database update, then a separate sign-off to launch to users. Only one release runs per system at a time, and nothing launches without a monitoring plan.",
+      note: "One sign-off for any database update, then a separate sign-off to launch to users, with releases run one at a time per system and a clear plan for what to watch after launch.",
       gate: true,
     },
     {
       title: "Watch and improve",
-      note: "Every work session ends by asking what check or rule would have stopped any mistake earlier.",
+      note: "Monitor live behavior after launch, and run a regular review that turns lessons and bottlenecks into simpler rules and stronger automated checks.",
     },
   ] satisfies FactoryStation[],
 
   stopsEyebrow: "Clear boundaries",
-  stopsTitle: "An AI assistant may stop and ask your team for only four reasons.",
+  stopsTitle: "Clear rules for when AI moves forward and when it asks your team.",
   stops: [
     {
       title: "An approval gate",
-      note: "Changing live business data, approving a change, launching to users, anything external people see, or spending money.",
+      note: "Changing live business data, approving a software update, launching to users, external communications, or spending money.",
     },
     {
-      title: "A real business choice",
-      note: "Two reasonable readings of the request would lead to very different outcomes.",
+      title: "A business decision",
+      note: "When a request could reasonably be handled two different ways and needs a judgment call.",
     },
     {
-      title: "Access only a person has",
-      note: "A password, a private account login, or a physical device.",
+      title: "Restricted access",
+      note: "Logins, credentials, or approvals that only a designated person on your team should touch.",
     },
     {
-      title: "Finished work",
-      note: "Ready for your team's review, with proof that it works attached.",
+      title: "Ready for review",
+      note: "Completed work with plain-English notes and test proof attached for your team to sign off.",
     },
   ] satisfies FactoryCard[],
-  stopsRule: "If your team would say yes and the step can be undone, the AI acts without waiting.",
+  stopsRule: "Routine, reversible work keeps moving. High-impact decisions always wait for your team.",
   stopsRuleNote:
-    "Approval gates stay gates even when a step can be reversed. A software change can be rolled back, but it still requires a person's sign-off.",
+    "Approval gates stay in place even for changes that can be rolled back, so nothing reaches your team or customers without a human sign-off.",
 
   bottleneckEyebrow: "Where teams get stuck",
   bottleneckTitle: "Building software is fast now. Proof isn't.",
@@ -142,97 +136,58 @@ export const FACTORY_PAGE = {
     },
     {
       title: "Shared test systems",
-      jam: "Multiple AI assistants working at once collide on the same test database and break each other's tests.",
-      fix: "Only one release at a time holds the update lane, from the database change through confirming a clean launch.",
+      jam: "Multiple AI assistants working at once can collide on the same test database and disrupt each other's tests.",
+      fix: "Releases move through shared test environments one at a time, so parallel work does not interfere with an active update.",
     },
     {
       title: "Launching live",
-      jam: "Updates go out to staff or customers before anyone agrees on what to watch.",
-      fix: "Nothing is allowed to launch until there is a monitoring plan: what to watch, when to check it, and when to roll back.",
+      jam: "Updates go out to staff or customers before anyone agrees on how to verify they are working.",
+      fix: "Every release includes a simple post-launch checklist: what to watch, when to check it, and how to roll back if needed.",
     },
   ],
-
-  incidentsEyebrow: "Safeguards from real lessons",
-  incidentsTitle: "When something goes wrong once, it becomes a permanent safeguard.",
-  incidentsLede: "Not a note people have to remember. An automatic check or warning that runs every time.",
-  incidentBeforeLabel: "What went wrong",
-  incidentAfterLabel: "The safeguard now",
-  incidents: [
-    {
-      incident:
-        "A finished feature vanished from a test version of a gym's mobile app because the build was pulled from an unfinished draft instead of the official version.",
-      rule: "An automatic check fires before every mobile app build and tells the AI to stop and confirm it is packaging the official version with all approved features included.",
-    },
-    {
-      incident:
-        "Three parallel projects shared one test environment. Updates collided and one AI assistant accidentally deleted a table in the test database.",
-      rule: "Only one update and launch can run per software system at a time, backed by a required checklist before parallel work starts.",
-    },
-    {
-      incident:
-        "An expired cloud account login failed three times during a build and cost an entire overnight release window.",
-      rule: "Every live release checks account access first, and a built-in guard blocks AI assistants from changing the shared login settings.",
-    },
-  ] satisfies IncidentRule[],
 
   ratchetEyebrow: "Safeguards that test themselves",
   ratchetTitle: "Lock down customer data. Flag any new access.",
   ratchetSteps: [
     {
       title: "Lock the list",
-      note: "Every place the software reads private customer contact information goes on a locked inventory.",
+      note: "Every place your software reads private customer contact information goes on a controlled inventory.",
     },
     {
       title: "Flag anything new",
-      note: "Any new or changed access to customer data turns the check red. Approvals wait until a person signs off.",
+      note: "Any new or changed access to sensitive customer data triggers an alert and waits for a person to sign off.",
     },
     {
       title: "Test the alarm",
-      note: "Before checking the real software, the safeguard plants fake unauthorized reads. Every single one must trigger an alarm.",
+      note: "Safeguards are tested against simulated unauthorized reads so you know the checks actually catch issues before they matter.",
     },
     {
-      title: "Only shrink the risk",
-      note: "The count of older data touchpoints still waiting to be upgraded can go down, never up.",
+      title: "Shrink exposure over time",
+      note: "As older parts of your software are modernized, automated checks keep new data exposure from creeping back in.",
     },
   ] satisfies FactoryCard[],
-  ratchetStat: {
-    value: "355",
-    label: "older customer-data touchpoints tracked in one real run of the check. A test fails if that number ever rises.",
-  },
 
   loopEyebrow: "Safe autonomous work",
   loopTitle: "No independent check, no autopilot.",
-  loopQuote: "An AI assistant works unattended only when something other than that AI can prove the job is done.",
+  loopQuote: "An AI assistant works unattended only when an independent check can verify the job is done.",
   loopParts: [
     {
       title: "A clear finish line",
       note: "Done means an objective test passes, not the AI saying it feels ready.",
     },
     {
-      title: "A separate judge",
-      note: "The checker is never the same AI that did the work.",
+      title: "An independent checker",
+      note: "Verification runs separately from the AI that built the change.",
     },
     {
       title: "Built-in stop limits",
-      note: "Work stops on success, after 12 tries max, if progress stalls, or when the budget limit is reached.",
+      note: "Work stops automatically on success, if progress stalls, or when time or budget caps are reached.",
     },
     {
-      title: "A written handoff log",
-      note: "Every round leaves a written record so the next try knows what the last one already tried.",
+      title: "A clear audit trail",
+      note: "Every step leaves a written record of what was tried, what changed, and what passed.",
     },
   ] satisfies FactoryCard[],
-
-  retroEyebrow: "Measuring the human bottleneck",
-  retroTitle: "Every routine \"yes\" gets counted. Most shouldn't be needed.",
-  retroLede:
-    "We set up a weekly review that audits every AI work session and shows where people are slowing the line down: how long AI assistants sat waiting for an answer, and how often someone approved a routine step with nothing real to decide. One real week from our own operation:",
-  retroStats: [
-    { value: "91", label: "AI work sessions" },
-    { value: "707", label: "human check-ins" },
-    { value: "24 h", label: "spent waiting on a person" },
-    { value: "103", label: "rubber-stamp yeses" },
-  ],
-  retroNote: "Each finding becomes an action with a target. Next week's review checks whether it held.",
 
   startEyebrow: "How to start",
   startTitle: "Book a free AI strategy call.",

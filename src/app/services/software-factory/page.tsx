@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AlertTriangle, Check, CheckCircle2, CircleStop, Flame, GitFork, KeyRound, ShieldCheck, Wrench } from "lucide-react";
+import { AlertTriangle, Check, CheckCircle2, CircleStop, GitFork, KeyRound, ShieldCheck } from "lucide-react";
 import { generateMetadata } from "@/lib/metadata";
 import { LinkedText } from "@/components/shared/faq-list";
 import { Section, SectionHead } from "@/components/shared/section";
 import { EstimateCta } from "@/components/shared/estimate-cta";
-import { FlowArrow, LineDiagram, LineLegend, LineTimeline } from "@/components/software-factory/factory-visuals";
+import { LineDiagram, LineLegend, LineTimeline } from "@/components/software-factory/factory-visuals";
 import { FACTORY_PAGE as P } from "@/content/software-factory";
 import { LINE_PAGE } from "@/content/services";
 
@@ -164,49 +164,24 @@ export default function SoftwareFactoryPage() {
         </ul>
       </Section>
 
-      <Section tint id="incidents">
-        <SectionHead eyebrow={P.incidentsEyebrow} title={P.incidentsTitle} lede={P.incidentsLede} />
-        <ol className="mt-10 grid gap-4">
-          {P.incidents.map((x) => (
-            <li key={x.rule} className="grid items-stretch gap-2 md:grid-cols-[1fr_2.5rem_1fr] md:gap-0">
-              <div className="flex items-start gap-3 rounded-xl border border-tint-strong bg-background p-5">
-                <Flame className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden="true" />
-                <p><span className="block text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">{P.incidentBeforeLabel}</span>{x.incident}</p>
-              </div>
-              <FlowArrow />
-              <div className="flex items-start gap-3 rounded-xl border border-primary/30 bg-background p-5">
-                <Wrench className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-                <p className="font-semibold"><span className="block text-xs font-semibold uppercase tracking-[0.08em] text-primary">{P.incidentAfterLabel}</span>{x.rule}</p>
+      <Section tint id="ratchet">
+        <SectionHead eyebrow={P.ratchetEyebrow} title={P.ratchetTitle} />
+        <ol className="mt-10 grid gap-4 sm:grid-cols-2">
+          {P.ratchetSteps.map((s, i) => (
+            <li key={s.title} className="grid grid-cols-[2.25rem_1fr] gap-3 rounded-xl border border-tint-strong bg-background p-5">
+              <span className="grid h-9 w-9 place-items-center rounded-full bg-tint font-display text-sm font-extrabold text-primary" aria-hidden="true">
+                {i + 1}
+              </span>
+              <div>
+                <h3 className="font-bold leading-snug">{s.title}</h3>
+                <p className="mt-1 text-[0.95rem] text-muted-foreground">{s.note}</p>
               </div>
             </li>
           ))}
         </ol>
       </Section>
 
-      <Section id="ratchet">
-        <SectionHead eyebrow={P.ratchetEyebrow} title={P.ratchetTitle} />
-        <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_17rem] lg:items-start">
-          <ol className="grid gap-3 sm:grid-cols-2">
-            {P.ratchetSteps.map((s, i) => (
-              <li key={s.title} className="grid grid-cols-[2.25rem_1fr] gap-3 rounded-xl border border-tint-strong bg-background p-5">
-                <span className="grid h-9 w-9 place-items-center rounded-full bg-tint font-display text-sm font-extrabold text-primary" aria-hidden="true">
-                  {i + 1}
-                </span>
-                <div>
-                  <h3 className="font-bold leading-snug">{s.title}</h3>
-                  <p className="mt-1 text-[0.95rem] text-muted-foreground">{s.note}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-          <div className="rounded-xl bg-ink p-6 text-white">
-            <p className="font-display text-5xl font-extrabold tabular-nums">{P.ratchetStat.value}</p>
-            <p className="mt-2 text-sm text-white/80">{P.ratchetStat.label}</p>
-          </div>
-        </div>
-      </Section>
-
-      <Section tint id="loops">
+      <Section id="loops">
         <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr] lg:items-center">
           <div className="grid gap-3.5">
             <p className="eyebrow">{P.loopEyebrow}</p>
@@ -222,19 +197,6 @@ export default function SoftwareFactoryPage() {
             ))}
           </ul>
         </div>
-      </Section>
-
-      <Section id="retro">
-        <SectionHead eyebrow={P.retroEyebrow} title={P.retroTitle} lede={P.retroLede} />
-        <dl className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4">
-          {P.retroStats.map((s) => (
-            <div key={s.label} className="flex flex-col-reverse gap-1 rounded-xl border border-tint-strong bg-tint p-5">
-              <dt className="text-sm font-semibold text-muted-foreground">{s.label}</dt>
-              <dd className="font-display text-4xl font-extrabold tabular-nums text-ink">{s.value}</dd>
-            </div>
-          ))}
-        </dl>
-        <p className="mt-6 max-w-2xl text-muted-foreground">{P.retroNote}</p>
       </Section>
 
       <Section tint id="contact-cta">
