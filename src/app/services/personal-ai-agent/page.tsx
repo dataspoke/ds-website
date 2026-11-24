@@ -17,14 +17,10 @@ import {
 import { AGENT_PAGE as P } from "@/content/personal-ai-agent";
 import { LINE_PAGE } from "@/content/services";
 
-// DRAFT. noIndex keeps it out of search, even on the Vercel preview. It is not
-// linked from the nav, the /services index, the home page, sitemap.ts or llms.txt.
-// Remove noIndex and the draft badge when Nick approves publishing.
 export const metadata: Metadata = generateMetadata({
   title: P.metaTitle,
   description: P.metaDescription,
   path: P.path,
-  noIndex: true,
 });
 
 function Cta({ location }: { location: string }) {
@@ -44,14 +40,9 @@ export default function PersonalAiAgentPage() {
           className="pointer-events-none absolute -right-32 -top-32 h-[28rem] w-[28rem] rounded-full bg-brand/10 blur-3xl"
         />
         <div className="relative mx-auto grid max-w-6xl gap-5 px-4 sm:px-6">
-          <div className="flex flex-wrap items-center gap-3">
-            <Link href="/services" className="inline-block py-2 text-sm font-semibold text-primary hover:text-primary/80">
-              &larr; {LINE_PAGE.backLabel}
-            </Link>
-            <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold uppercase tracking-[0.06em] text-amber-900 ring-1 ring-amber-300">
-              {P.draftBadge}
-            </span>
-          </div>
+          <Link href="/services" className="inline-block w-fit py-2 text-sm font-semibold text-primary hover:text-primary/80">
+            &larr; {LINE_PAGE.backLabel}
+          </Link>
           <p className="eyebrow">{P.eyebrow}</p>
           <h1 className="max-w-4xl text-[2.3rem] font-extrabold leading-[1.08] tracking-[-0.025em] sm:text-5xl lg:text-[3.25rem]">
             {P.title}

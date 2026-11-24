@@ -1,6 +1,6 @@
 import type { TextLink } from "@/types";
 
-// Copy for the DRAFT service page /services/personal-ai-agent. First person ("I"),
+// Copy for /services/personal-ai-agent. First person ("I"),
 // matching /services/claude: Nick does this work himself.
 // Audience: business leaders and executives, not developers. Plain business words.
 // No client names, no client results, no prices, no invented numbers, no third-party quotes.
@@ -10,8 +10,7 @@ export const AGENT_PAGE = {
   path: "/services/personal-ai-agent",
   metaTitle: "Personal AI assistant setup for business leaders",
   metaDescription:
-    "A personal AI assistant built around your inbox, meetings, follow-ups, and core business workflows, with clear rules on what runs automatically and what waits for your approval.",
-  draftBadge: "Draft - not published",
+    "Personal AI assistant setup for business leaders: inbox, meetings, follow-ups, and morning briefs, with clear rules on what waits for your approval.",
   eyebrow: "Personal AI assistant setup",
   title: "An AI assistant that takes work off your plate, under your rules.",
   lede:
@@ -228,4 +227,15 @@ export const AGENT_PAGE = {
   ctaButton: "Book your free AI strategy call",
   ctaSupport:
     "A free 30-minute call, followed by a written estimate with a recommended plan and a price range within two business days. No obligation.",
+
+  /** Card on the /services index. */
+  card: {
+    eyebrow: "Want your week back?",
+    title: "Personal AI assistant setup",
+    oneLiner: "An AI assistant that takes work off your plate, under your rules.",
+    summary:
+      "Focused AI workflows for your inbox, meetings, follow-ups, morning briefs, and visibility across sales, marketing, production, and finance, with clear rules on what runs automatically and what waits for your approval.",
+    steps: "Audit your week · Connect your tools · Set operating rules · Launch with training wheels · Tune weekly",
+    link: "See personal AI assistant setup",
+  },
 };
