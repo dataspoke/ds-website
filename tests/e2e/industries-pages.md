@@ -8,7 +8,7 @@ Industry pages: `/industries/law-firms`, `/industries/home-services`, `/industri
 ## a. Home page
 
 1. Open `/`.
-2. Expect one plain line, just above the FAQ: "We've worked with law firms, home service companies, gyms, health and wellness brands, manufacturers and government teams, in both B2B and B2C." followed by a "See the industries" link.
+2. Expect one line, just above the FAQ, where law firms, home service companies, gyms, health and wellness brands and manufacturers each link to their industry page: "We've worked with law firms, home service companies, gyms, health and wellness brands, manufacturers and government teams, in both B2B and B2C." followed by a "See the industries" link.
 3. Click "See the industries". Expect to land on `/industries`.
 4. Expect no "Who we work with" section and no industry cards on the home page.
 
@@ -34,7 +34,7 @@ For `/industries` and each industry page:
 2. Expect the document to be no wider than the viewport (no horizontal scroll).
 3. Expect exactly one H1 and a visible breadcrumb: "Home > Industries", plus the industry name on an industry page.
 4. On each industry page, expect a "Last updated" date.
-5. On each industry page, expect six FAQ questions, visible and all closed. Open the first question and expect its answer to show.
+5. On each industry page, expect its FAQ questions visible and all closed: seven on law firms, home services, gyms and fitness and manufacturing, six on health and wellness. Open the first question and expect its answer to show.
 6. Save a screenshot of the page at each width.
 
 ## e. Structured data
