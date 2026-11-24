@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
-  ArrowUp,
   BookOpen,
   Check,
   ClipboardList,
@@ -14,10 +13,10 @@ import {
   X,
 } from "lucide-react";
 import { generateMetadata } from "@/lib/metadata";
-import { cn } from "@/lib/utils";
 import { LinkedText } from "@/components/shared/faq-list";
 import { Section, SectionHead } from "@/components/shared/section";
 import { EstimateCta } from "@/components/shared/estimate-cta";
+import { SharedPicture } from "@/components/services/company-brain-visuals";
 import { BRAIN_PAGE as P } from "@/content/company-brain-service";
 import { LINE_PAGE } from "@/content/services";
 
@@ -43,34 +42,6 @@ function CardIcon({ Icon }: { Icon: typeof Check }) {
     <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground" aria-hidden="true">
       <Icon className="h-5 w-5" />
     </span>
-  );
-}
-
-/** Hero visual: the layers of a company brain, widest at the foundation. */
-function BrainStack() {
-  const last = P.stack.length - 1;
-  return (
-    <ol className="grid gap-1.5" aria-label={P.stackLabel}>
-      {P.stack.map((layer, i) => (
-        <li key={layer.name} className="grid justify-items-center gap-1.5">
-          <div
-            className={cn(
-              "flex w-full flex-col gap-0.5 rounded-xl px-4 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4 sm:px-5",
-              i === 0 && "bg-primary text-primary-foreground",
-              i === last && "bg-ink text-white",
-              i !== 0 && i !== last && "border border-tint-strong bg-white"
-            )}
-            style={{ maxWidth: `${76 + i * 6}%` }}
-          >
-            <span className="font-display font-bold">{layer.name}</span>
-            <span className={cn("text-sm", i === 0 || i === last ? "text-white/80" : "text-muted-foreground")}>
-              {layer.note}
-            </span>
-          </div>
-          {i < last && <ArrowUp className="size-4 text-brand" aria-hidden="true" />}
-        </li>
-      ))}
-    </ol>
   );
 }
 
@@ -112,7 +83,7 @@ export default function CompanyBrainServicePage() {
               </div>
             </div>
             <figure className="mx-auto w-full max-w-[560px]">
-              <BrainStack />
+              <SharedPicture />
             </figure>
           </div>
         </div>

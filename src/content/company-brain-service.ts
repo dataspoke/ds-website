@@ -23,15 +23,21 @@ export const BRAIN_PAGE = {
     "We write down your definitions, playbooks and decisions, connect them to your live numbers, and keep the whole thing accurate. Your team and your AI assistants answer from the same source, instead of guessing.",
   intro: ["Built on records you can trust", "Kept current, not set up once", "Each person sees only what they should"],
 
-  /** Hero visual: the layers, top to bottom. */
-  stackLabel: "How a company brain is built, top to bottom",
-  stack: [
-    { name: "Your team and AI assistants", note: "Ask, decide, do the work" },
-    { name: "Playbooks", note: "How each job gets done here" },
-    { name: "Definitions and decisions", note: "What words mean, what was agreed" },
-    { name: "Live numbers", note: "Read from your systems, not pasted in" },
-    { name: "One trustworthy set of records", note: "The foundation" },
-  ],
+  /** Hero visual: before and after. Same four people, separate pictures vs one shared picture. */
+  picture: {
+    label:
+      "Without a company brain, your team, a leader, a new hire and an AI assistant each work from a different source: an old doc, a chat thread, someone's memory or a guess. People re-explain, answers conflict and new hires and AI guess. With a company brain, all four work from one shared picture of definitions, playbooks, decisions and live numbers, kept current and permission-safe, built on one trusted set of records. The result: the same answers, faster onboarding, AI that gets it right the first time and less re-explaining.",
+    people: ["Your team", "A leader", "A new hire", "AI assistant"],
+    beforeTitle: "Without a company brain",
+    beforeSources: ["Old doc", "Chat thread", "Someone's memory", "A guess"],
+    beforePains: ["Re-explaining", "Answers conflict", "Guessing"],
+    afterTitle: "With a company brain",
+    hubTitle: "One shared picture",
+    hubItems: ["Definitions", "Playbooks", "Decisions", "Live numbers"],
+    hubBadges: ["Current", "Permission-safe"],
+    foundation: "Built on one trusted set of records",
+    outcomes: ["Same answers", "Faster onboarding", "AI right the first time", "Less re-explaining"],
+  },
 
   insideEyebrow: "What goes in it",
   insideTitle: "Four things your company already knows, written down once.",
