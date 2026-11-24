@@ -18,7 +18,7 @@ export const BRAIN_PAGE = {
     "We write down how your company runs and keep it accurate, current and permission-safe, so your people and AI assistants work from the same picture.",
 
   eyebrow: "Company brain setup",
-  title: "One picture of how your company runs, for your people and your AI.",
+  title: "A company brain: one picture of how your company runs, for your people and your AI.",
   lede:
     "We write down your definitions, playbooks and decisions, connect them to your live numbers, and keep the whole thing accurate. Your team and your AI assistants answer from the same source, instead of guessing.",
   intro: ["Built on records you can trust", "Kept current, not set up once", "Each person sees only what they should"],
@@ -27,7 +27,7 @@ export const BRAIN_PAGE = {
   stackLabel: "How a company brain is built, top to bottom",
   stack: [
     { name: "Your team and AI assistants", note: "Ask, decide, do the work" },
-    { name: "Playbooks", note: "How we do each job here" },
+    { name: "Playbooks", note: "How each job gets done here" },
     { name: "Definitions and decisions", note: "What words mean, what was agreed" },
     { name: "Live numbers", note: "Read from your systems, not pasted in" },
     { name: "One trustworthy set of records", note: "The foundation" },
@@ -67,7 +67,7 @@ export const BRAIN_PAGE = {
 
   keepEyebrow: "The real work",
   keepTitle: "Accurate, fresh and permission-safe.",
-  keepLede: "A company brain is only useful while people trust it. These three are where most setups break, so they are where we spend the effort.",
+  keepLede: "A company brain is only useful while people trust it. These three are where setups usually break, so they are where we spend the effort.",
   keep: [
     {
       title: "Accurate",
@@ -86,7 +86,7 @@ export const BRAIN_PAGE = {
   foundationEyebrow: "The foundation",
   foundationTitle: "It starts with one trustworthy set of records.",
   foundationText:
-    "If your CRM, accounting and job records disagree, a company brain just repeats the disagreement faster. That is why most clients start with Data Organization & Warehousing, then build the company brain on top.",
+    "If your CRM, accounting and job records disagree, a company brain just repeats the disagreement faster. That is why we usually start with Data Organization & Warehousing, then build the company brain on top.",
   foundationLinks: [{ label: "Data Organization & Warehousing", href: "/services/organize" }] satisfies TextLink[],
 
   stepsEyebrow: "How we set it up",
