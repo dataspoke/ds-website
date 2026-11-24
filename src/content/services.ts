@@ -283,9 +283,9 @@ export const SERVICE_LINES: ServiceLine[] = [
     kind: "hub",
     title: "Data Organization & Warehousing",
     oneLiner: "One trustworthy set of records, so everyone works from the same facts.",
-    metaTitle: "Organize your data into one trustworthy record",
+    metaTitle: "Data Organization and Warehousing",
     metaDescription:
-      "We turn your calls, emails, documents and spreadsheets into one trustworthy set of records you own, ready for reports and AI. Free AI strategy call.",
+      "Data organization and warehousing for growing businesses. We clean up the duplicates and bring every system into one warehouse your whole team can trust.",
     problem:
       "Once the information is captured, it's still a pile. Two documents disagree. A decision was made on a call and nobody can find it. A report says one thing and the accounting software says another. We sort the pile into organized records of clients, projects, decisions and policies, and we mark each fact with how far you can trust it. A data warehouse is the plain word for where that organized copy lives: one central, well-kept store of your business information that you own and that your reports, software and AI all read from.",
     soundsLike: [
@@ -406,9 +406,9 @@ export function serviceLinkText(line: { title: string; oneLiner: string }): stri
 
 /** Copy for the /services overview page. */
 export const SERVICES_PAGE = {
-  metaTitle: "Services: data, dashboards, software and AI",
+  metaTitle: "Data, Dashboards, Software and AI",
   metaDescription:
-    "Grow your business with data you already have: connect your software, know your numbers, build tools and put AI to work. Free AI strategy call.",
+    "Connect your software, clean up your data, see your numbers on one dashboard and put AI to work. Data and AI consulting for business owners, start to finish.",
   eyebrow: "Services",
   title: "Six ways to run a bigger business with the team you have.",
   lede: "Pick the problem that sounds like yours. The free call tells you where to start.",

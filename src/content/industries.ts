@@ -274,7 +274,7 @@ export const INDUSTRIES: Industry[] = [
     audienceName: "home service companies",
     audienceType: "Home service businesses",
     serviceName: "AI and data consulting for home services",
-    metaTitle: "AI and Data Consulting for Home Services",
+    metaTitle: "AI and Analytics for Home Services",
     metaDescription:
       "Trace every ad dollar to a booked, paid job. We connect Salesforce, your ad accounts and accounting, then build a weekly scorecard. Free AI strategy call.",
     h1: "AI and data consulting for home service companies: trace every ad dollar to a paid job.",
@@ -433,7 +433,7 @@ export const INDUSTRIES: Industry[] = [
     audienceName: "gyms",
     audienceType: "Gyms and fitness businesses",
     serviceName: "AI and data consulting for gyms and fitness businesses",
-    metaTitle: "AI and Data Consulting for Gyms and Fitness",
+    metaTitle: "AI and Data Consulting for Gyms",
     metaDescription:
       "We connect Mindbody, payments and accounting, then build a member app in your brand and reports that flag members at risk. Free AI strategy call.",
     h1: "AI and data consulting for gyms and fitness: see which members are drifting away while there is time to act.",
@@ -593,7 +593,7 @@ export const INDUSTRIES: Industry[] = [
     audienceName: "health and wellness brands",
     audienceType: "Health and wellness businesses",
     serviceName: "AI and data consulting for health and wellness businesses",
-    metaTitle: "AI and Data Consulting for Health and Wellness",
+    metaTitle: "AI and Data Consulting for Wellness",
     metaDescription:
       "For clinics and supplement brands: we connect your store, shipping and accounting systems, then build customer segments and reports. Free AI strategy call.",
     h1: "AI and data consulting for health and wellness: every order, shipment and customer in one place you own.",
@@ -741,7 +741,7 @@ export const INDUSTRIES: Industry[] = [
     audienceName: "manufacturers",
     audienceType: "Manufacturers",
     serviceName: "AI and data consulting for manufacturers",
-    metaTitle: "AI and Data Consulting for Manufacturers",
+    metaTitle: "AI and Data for Manufacturers",
     metaDescription:
       "We copy plant data out of validated systems into one place you own, then build scheduling tools, customer portals and dashboards. Free AI strategy call.",
     h1: "AI and data consulting for manufacturers: put plant data to work without touching validated systems.",
