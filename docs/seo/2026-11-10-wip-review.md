@@ -70,6 +70,8 @@ Use a **temporary redirect (307)** from both URLs to **/about**. Gate everything
 
 If /work will **not** come back within about three months, switch both to permanent (308) instead.
 
+**Update 2026-11-23:** switched both to permanent (308). /work is still indexed and the case studies are not coming back soon.
+
 ### Steps (one PR)
 
 1. **Add a flag.** Add `export const WORK_PUBLISHED = false;` to `src/lib/constants.ts`.
@@ -91,7 +93,7 @@ If /work will **not** come back within about three months, switch both to perman
 8. **Dead links.** Delete or ignore `WORK_HEAD.allLink` (`src/content/home.ts:113`). Only unused old home components render it (finding 19).
 9. **Leave in place:** `src/app/work/*`, `src/components/work/*` and `src/content/case-studies.ts`. The redirect runs before the route, so these stay unreachable but ready.
 10. **Verify after deploy.** Check these:
-    - `curl -sI https://www.dataspoke.io/work` returns `307` with `location: /about`.
+    - `curl -sI https://www.dataspoke.io/work` returns `308` with `location: /about` (307 before 2026-11-23).
     - The same check passes for `/work/back-office-on-autopilot`.
     - The nav and footer show no Work link.
     - `/sitemap.xml` and `/llms.txt` contain no `/work`.
