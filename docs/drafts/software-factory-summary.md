@@ -2,7 +2,7 @@
 
 ## TLDR
 
-- Draft **service page** at `/services/software-factory`: "A software factory, not a dark factory."
+- Draft **service page** at `/services/software-factory`: "An AI software factory your team actually controls."
 - Framed around what DataSpoke sets up for companies, written in plain business English for non-technical leaders: AI assistants run the assembly line, a second AI checks every change, and the client's team owns separate sign-offs for approving changes, updating data, and launching live.
 - Includes safeguards born from real lessons, self-testing customer-data checks, safe autonomous work rules, and a weekly bottleneck review backed by real numbers from our own operation.
 - Kept strictly as a draft: noindexed, shows a "Draft - not published" badge, and not linked from anywhere. Visible only on the PR's Vercel preview.

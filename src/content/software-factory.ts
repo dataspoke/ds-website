@@ -26,13 +26,13 @@ export interface IncidentRule {
 
 export const FACTORY_PAGE = {
   path: "/services/software-factory",
-  metaTitle: "AI software factory setup: AI builds, your team owns the sign-offs",
+  metaTitle: "AI Software Factory Setup for Your Business",
   metaDescription:
-    "We set up an AI-powered software assembly line for your company: AI assistants build and test updates, a second AI checks every change, and your team owns every approval before anything goes live.",
+    "We set up an AI software factory for your company: AI builds and tests updates, a second AI reviews, and your team owns every sign-off. Free AI strategy call.",
   draftBadge: "Draft - not published",
 
   eyebrow: "AI software factory setup",
-  title: "A software factory, not a dark factory.",
+  title: "An AI software factory your team actually controls.",
   lede:
     "AI assistants run the assembly line. Your team owns the sign-offs. We set up the workflow, safeguards, and review gates so your company can build and update software faster without losing control.",
   intro: [
