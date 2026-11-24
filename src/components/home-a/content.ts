@@ -39,6 +39,7 @@ export const SERVICES_A_HEAD = {
   title: "Start with the foundation.",
   lede: "Each step builds on the one before it.",
   allLink: { label: "Compare all six", href: "/services" },
+  claudeLink: { lead: "Already using Claude?", label: "Get Claude set up for your team", href: "/services/claude" },
 };
 
 export const EVERY_DEVICE_HEAD = {
