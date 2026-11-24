@@ -13,7 +13,7 @@ export interface InsightPost {
   author: string;
   readingTime: string;
   status: InsightStatus;
-  Content: ComponentType;
+  Content?: ComponentType;
 }
 
 const ALL_POSTS: InsightPost[] = INSIGHT_ENTRIES.map((entry) => ({
@@ -39,8 +39,8 @@ export function getInsightPost(slug: string): InsightPost | undefined {
   return post;
 }
 
-/** Static params for /insights/[slug] (published posts in prod; all posts in dev and previews). */
+/** Static params for /insights/[slug] (excludes standalone routes that omit `Content`). */
 export function getInsightStaticParams(): { slug: string }[] {
   const visible = ALLOW_DRAFTS ? ALL_POSTS : getInsightPosts();
-  return visible.map((post) => ({ slug: post.slug }));
+  return visible.filter((post) => Boolean(post.Content)).map((post) => ({ slug: post.slug }));
 }

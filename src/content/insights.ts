@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
 import { MissionCommandArticle } from "@/components/insights/mission-command-ai-agents";
+import { COMPANY_BRAIN } from "@/content/company-brain";
 
 export type InsightStatus = "draft" | "published";
 
@@ -15,7 +16,8 @@ export interface InsightEntry {
   author: string;
   readingTime: string;
   status: InsightStatus;
-  Content: ComponentType;
+  /** Omit when the post owns its own static route under src/app/insights/<slug>/page.tsx. */
+  Content?: ComponentType;
 }
 
 /**
@@ -25,6 +27,16 @@ export interface InsightEntry {
  * remaining previewable locally and on Vercel preview builds at /insights/<slug>.
  */
 export const INSIGHT_ENTRIES: InsightEntry[] = [
+  {
+    slug: "company-brain",
+    title: COMPANY_BRAIN.title,
+    description: COMPANY_BRAIN.metaDescription,
+    eyebrow: "AI in practice",
+    date: COMPANY_BRAIN.date,
+    author: COMPANY_BRAIN.author,
+    readingTime: COMPANY_BRAIN.readingTime,
+    status: "published",
+  },
   {
     slug: "mission-command-ai-agents",
     title: "Give your AI agents task and purpose.",
