@@ -8,7 +8,7 @@ Industry pages: `/industries/law-firms`, `/industries/home-services`, `/industri
 ## a. Home page
 
 1. Open `/`.
-2. Expect one plain line, just above the FAQ: "We've worked with law firms, home service companies, gyms, health and wellness brands, manufacturers and government teams, in both B2B and B2C." followed by a "See the industries" link.
+2. Expect one line, just above the FAQ, where law firms, home service companies, gyms, health and wellness brands and manufacturers each link to their industry page: "We've worked with law firms, home service companies, gyms, health and wellness brands, manufacturers and government teams, in both B2B and B2C." followed by a "See the industries" link.
 3. Click "See the industries". Expect to land on `/industries`.
 4. Expect no "Who we work with" section and no industry cards on the home page.
 
