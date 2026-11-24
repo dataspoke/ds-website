@@ -163,6 +163,10 @@ export const SERVICE_PAGE_EXTRAS: Record<ServiceLineSlug, ServicePageExtra> = {
     ],
   },
   organize: {
+    crossLink: {
+      text: "Want to see how this looks in practice? Read Your company brain is a data problem.",
+      links: [{ label: "Your company brain is a data problem", href: "/insights/company-brain" }],
+    },
     faqEyebrow: "Questions",
     faqTitle: "Before we sort the pile",
     engagement: {

@@ -42,7 +42,7 @@ export async function generateMetadata({
 export default async function InsightPostPage({ params }: PageProps<"/insights/[slug]">) {
   const { slug } = await params;
   const post = getInsightPost(slug);
-  if (!post) notFound();
+  if (!post?.Content) notFound();
 
   const showUpdated = !sameCalendarDay(post.date, post.updated);
   const crumbs = [

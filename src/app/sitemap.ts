@@ -42,6 +42,9 @@ function pageSources(pagePath: string): string[] {
   if (pagePath === "/services/personal-ai-agent") {
     return ["src/app/services/personal-ai-agent", "src/content/personal-ai-agent.ts", "src/components/services/personal-agent-visuals.tsx"];
   }
+  if (pagePath === "/insights/company-brain") {
+    return ["src/app/insights/company-brain", "src/content/company-brain.ts"];
+  }
   if (pagePath.startsWith("/services/")) {
     return ["src/app/services/[line]", "src/content/services.ts", "src/content/service-pages.ts", "src/components/services"];
   }
@@ -56,7 +59,7 @@ function pageSources(pagePath: string): string[] {
     "/contact": ["src/app/contact", "src/components/contact"],
     "/free-estimate": ["src/app/free-estimate", "src/content/free-estimate.ts", "src/components/estimate"],
     "/industries": ["src/app/industries/page.tsx", "src/content/industries.ts", "src/components/industries"],
-    "/insights": ["src/app/insights/page.tsx", "src/content/insights.ts"],
+    "/insights": ["src/app/insights/page.tsx", "src/content/insights.ts", "src/content/company-brain.ts"],
     "/privacy": ["src/app/privacy", "src/content/privacy.ts"],
     "/services": ["src/app/services/page.tsx", "src/content/services.ts", "src/content/claude-services.ts", "src/content/personal-ai-agent.ts", "src/content/approach.ts", "src/components/services"],
     "/work": ["src/app/work/page.tsx", "src/components/work", "src/content/case-studies.ts"],
@@ -83,11 +86,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   /** Real per-page lastmod: git history of the page's sources, plus content dates where a page has them. */
   const lastmodFor = (pagePath: string): string => {
-    if (pagePath.startsWith("/insights/")) {
-      const post = posts.find((p) => `/insights/${p.slug}` === pagePath);
-      if (post) return new Date(post.updated).toISOString();
-    }
     const dates = [gitLastmod(pageSources(pagePath))];
+    if (pagePath.startsWith("/insights/")) {
+      dates.push(posts.find((p) => `/insights/${p.slug}` === pagePath)?.updated);
+    }
     if (pagePath.startsWith("/work/")) {
       dates.push(CASE_STUDIES.find((c) => `/work/${c.slug}` === pagePath)?.dates?.modified);
     }

@@ -16,20 +16,29 @@ import {
   UserCheck,
   X,
 } from "lucide-react";
+import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/shared/json-ld";
 import { Section, SectionHead } from "@/components/shared/section";
 import { generateMetadata } from "@/lib/metadata";
 import { formatLongDate } from "@/lib/dates";
 import { cn } from "@/lib/utils";
 import { COMPANY_BRAIN as P } from "@/content/company-brain";
 
-// DRAFT PAGE. noIndex + visible badge; not linked from the nav, /insights, sitemap or llms.txt.
-// Remove the badge and noIndex when Nick approves publishing.
 export const metadata: Metadata = generateMetadata({
   title: P.metaTitle,
   description: P.metaDescription,
   path: P.path,
-  noIndex: true,
+  article: {
+    publishedTime: P.date,
+    modifiedTime: P.date,
+    authors: [P.author],
+  },
 });
+
+const CRUMBS = [
+  { name: "Home", path: "/" },
+  { name: "Insights", path: "/insights" },
+  { name: P.title, path: P.path },
+];
 
 const PIECE_ICONS = [BookOpen, FileText, Library, ClipboardList];
 const GATE_ICONS = [Lock, KeyRound, ShieldCheck, UserCheck];
@@ -48,6 +57,15 @@ function CardIcon({ Icon }: { Icon: typeof Lock }) {
 export default function CompanyBrainPost() {
   return (
     <>
+      <BreadcrumbJsonLd items={CRUMBS} />
+      <ArticleJsonLd
+        headline={P.title}
+        description={P.metaDescription}
+        path={P.path}
+        datePublished={P.date}
+        dateModified={P.date}
+        authorName={P.author}
+      />
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-b from-tint via-white to-white pb-12 pt-8 sm:pb-16 sm:pt-12">
         <div
@@ -55,17 +73,9 @@ export default function CompanyBrainPost() {
           className="pointer-events-none absolute -right-32 -top-32 h-[28rem] w-[28rem] rounded-full bg-brand/10 blur-3xl"
         />
         <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <Link href="/insights" className="inline-block py-2 text-sm font-semibold text-primary hover:text-primary/80">
-              &larr; Insights
-            </Link>
-            <p
-              role="note"
-              className="rounded-full border border-amber-300 bg-amber-50 px-3 py-1 text-xs font-bold uppercase tracking-[0.06em] text-amber-900"
-            >
-              {P.draftBadge}
-            </p>
-          </div>
+          <Link href="/insights" className="inline-block py-2 text-sm font-semibold text-primary hover:text-primary/80">
+            &larr; Insights
+          </Link>
           <div className="mt-4 grid items-start gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-12">
             <div className="grid gap-5">
               <p className="eyebrow">{P.eyebrow}</p>
@@ -77,6 +87,8 @@ export default function CompanyBrainPost() {
                 </Link>
                 {" · "}
                 <time dateTime={P.date}>{formatLongDate(P.date)}</time>
+                {" · "}
+                <span>{P.readingTime}</span>
               </p>
             </div>
             <aside

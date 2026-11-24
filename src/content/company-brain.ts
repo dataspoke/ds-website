@@ -1,16 +1,14 @@
-// Copy for /insights/company-brain. DRAFT: noindex, not in the nav, the
-// /insights index, the sitemap, or llms.txt. See docs/drafts/company-brain-summary.md.
-// First person as Nick. Every claim comes from Nick's own setup (paths in the
-// summary doc). No client names, no invented numbers, no quotes from third parties.
+// Copy for /insights/company-brain. First person as Nick. Every claim comes from
+// Nick's own setup. No client names, no invented numbers, no quotes from third parties.
 
 export const COMPANY_BRAIN = {
   path: "/insights/company-brain",
   metaTitle: "Your company brain is a data problem",
   metaDescription:
     "What I mean by a company brain, why connecting Slack and Notion to an AI falls short, and the four pieces I run so people and agents work from the same picture.",
-  date: "2026-11-19",
+  date: "2026-11-24",
+  readingTime: "3 min read",
   author: "Nick Paul",
-  draftBadge: "Draft - not published",
 
   eyebrow: "Insights · AI in practice",
   title: "Your company brain is a data problem.",
