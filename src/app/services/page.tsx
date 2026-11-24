@@ -9,6 +9,7 @@ import { LegacyAnchorRedirect } from "@/components/services/legacy-anchor-redire
 import { LineTile } from "@/components/services/line-tile";
 import { ServicesHero } from "@/components/services/services-hero";
 import { CLAUDE_PAGE } from "@/content/claude-services";
+import { AGENT_PAGE } from "@/content/personal-ai-agent";
 import { LINE_PAGE, SERVICE_LINES, SERVICE_PIPELINE, SERVICES_PAGE } from "@/content/services";
 
 export const metadata: Metadata = generateMetadata({
@@ -58,19 +59,26 @@ export default function ServicesPage() {
             {LINE_PAGE.workLink.label} &rarr;
           </Link>
         )}
-        <Link
-          href={CLAUDE_PAGE.path}
-          className="mt-10 grid gap-2.5 rounded-xl border border-tint-strong bg-tint p-6 transition-colors hover:border-brand md:grid-cols-[1fr_auto] md:items-end md:gap-8"
-        >
-          <div className="grid gap-2.5">
-            <p className="eyebrow">{CLAUDE_PAGE.card.eyebrow}</p>
-            <h3 className="text-xl font-bold">{CLAUDE_PAGE.card.title}</h3>
-            <p className="font-semibold text-foreground/80">{CLAUDE_PAGE.card.oneLiner}</p>
-            <p className="text-[0.97rem] text-muted-foreground">{CLAUDE_PAGE.card.summary}</p>
-            <p className="mt-1 border-t border-tint-strong pt-2.5 text-sm text-muted-foreground">{CLAUDE_PAGE.card.steps}</p>
-          </div>
-          <p className="font-semibold text-primary">{CLAUDE_PAGE.card.link} &rarr;</p>
-        </Link>
+        <div className="mt-10 grid gap-4 lg:grid-cols-2">
+          {[CLAUDE_PAGE, AGENT_PAGE].map((page) => (
+            <Link
+              key={page.path}
+              href={page.path}
+              className="flex flex-col justify-between gap-4 rounded-xl border border-tint-strong bg-tint p-6 transition-colors hover:border-brand"
+            >
+              <div className="grid gap-2.5">
+                <p className="eyebrow">{page.card.eyebrow}</p>
+                <h3 className="text-xl font-bold">{page.card.title}</h3>
+                <p className="font-semibold text-foreground/80">{page.card.oneLiner}</p>
+                <p className="text-[0.97rem] text-muted-foreground">{page.card.summary}</p>
+              </div>
+              <div className="grid gap-3 border-t border-tint-strong pt-3">
+                <p className="text-sm text-muted-foreground">{page.card.steps}</p>
+                <p className="font-semibold text-primary">{page.card.link} &rarr;</p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </Section>
 
       <HowItWorksA />
