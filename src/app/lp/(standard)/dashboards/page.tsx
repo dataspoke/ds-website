@@ -24,7 +24,7 @@ export default function LpDashboardsPage() {
             {LP_DASHBOARDS.headline}
           </h1>
           <p className="lede max-w-xl">{LP_DASHBOARDS.lede}</p>
-          <BookCall className="justify-self-start">{LP_DASHBOARDS.ctaLabel}</BookCall>
+          <BookCall location="lp-dashboards-hero" className="justify-self-start">{LP_DASHBOARDS.ctaLabel}</BookCall>
         </div>
       </Section>
 
@@ -61,7 +61,7 @@ export default function LpDashboardsPage() {
         <p className="mt-8 max-w-3xl text-muted-foreground">{LP_DASHBOARDS.trustedNumberBody}</p>
       </Section>
 
-      <LpCtaBanner title="Build the scorecard once. Trust it every week." ctaLabel={LP_DASHBOARDS.ctaLabel} />
+      <LpCtaBanner title="Build the scorecard once. Trust it every week." ctaLabel={LP_DASHBOARDS.ctaLabel} bookLocation="lp-dashboards-banner" />
     </>
   );
 }

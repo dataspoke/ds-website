@@ -20,6 +20,8 @@ export const BOOKING_EMBED_URL =
  * The offer is now called "Free AI strategy call", but the URL intentionally
  * stays /free-estimate (as do FREE_ESTIMATE_* names and the estimate_cta_click
  * event) so existing links, ads and analytics keep working. Don't rename it.
+ * Clicks that open the calendar itself send booking_page_open instead (see
+ * src/components/shared/estimate-cta.tsx).
  */
 export const FREE_ESTIMATE_PATH = "/free-estimate";
 /** Ad landing page. Same offer as /free-estimate, with no site navigation. */
