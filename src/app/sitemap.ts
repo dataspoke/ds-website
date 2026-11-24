@@ -39,6 +39,9 @@ function pageSources(pagePath: string): string[] {
   if (pagePath === "/services/claude") {
     return ["src/app/services/claude", "src/content/claude-services.ts", "src/components/services/claude-journey.tsx", "src/components/services/claude-cartoons.tsx", "src/components/home-a/illustrations.tsx"];
   }
+  if (pagePath === "/services/personal-ai-agent") {
+    return ["src/app/services/personal-ai-agent", "src/content/personal-ai-agent.ts", "src/components/services/personal-agent-visuals.tsx"];
+  }
   if (pagePath.startsWith("/services/")) {
     return ["src/app/services/[line]", "src/content/services.ts", "src/content/service-pages.ts", "src/components/services"];
   }
@@ -53,9 +56,9 @@ function pageSources(pagePath: string): string[] {
     "/contact": ["src/app/contact", "src/components/contact"],
     "/free-estimate": ["src/app/free-estimate", "src/content/free-estimate.ts", "src/components/estimate"],
     "/industries": ["src/app/industries/page.tsx", "src/content/industries.ts", "src/components/industries"],
-    "/insights": ["src/app/insights/page.tsx"],
+    "/insights": ["src/app/insights/page.tsx", "src/content/insights.ts"],
     "/privacy": ["src/app/privacy", "src/content/privacy.ts"],
-    "/services": ["src/app/services/page.tsx", "src/content/services.ts", "src/content/claude-services.ts", "src/content/approach.ts", "src/components/services"],
+    "/services": ["src/app/services/page.tsx", "src/content/services.ts", "src/content/claude-services.ts", "src/content/personal-ai-agent.ts", "src/content/approach.ts", "src/components/services"],
     "/work": ["src/app/work/page.tsx", "src/components/work", "src/content/case-studies.ts"],
   };
   return sources[pagePath] ?? [`src/app${pagePath}`];
@@ -102,6 +105,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services",
     ...SERVICE_LINES.map((l) => `/services/${l.slug}`),
     "/services/claude",
+    "/services/personal-ai-agent",
     "/industries",
     ...INDUSTRIES.map((i) => `/industries/${i.slug}`),
     // /insights is noindex until a post is published (see src/app/insights/page.tsx).

@@ -4,7 +4,7 @@ import type { NavItem } from "@/types";
 
 const NAV_ITEMS = WORK_PUBLISHED ? ALL_NAV_ITEMS : ALL_NAV_ITEMS.filter((item) => item.href !== "/work");
 
-/** Site nav. Insights stays off the list until content/insights has a published post. */
+/** Site nav. Insights stays off the list until src/content/insights.ts has a published post. */
 export function getNavItems(): NavItem[] {
   if (getInsightPosts().length === 0) return NAV_ITEMS;
   const contact = NAV_ITEMS.findIndex((item) => item.href === "/contact");
