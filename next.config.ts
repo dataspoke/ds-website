@@ -17,8 +17,6 @@ const nextConfig: NextConfig = {
       { source: "/insights/personal-ai-agent", destination: "/services/claude", permanent: true },
       // Remove when the draft page at this URL ships (PR #31).
       { source: "/insights/company-brain", destination: "/services/organize", permanent: false },
-      // Remove when the draft page at this URL ships (PR #30).
-      { source: "/services/personal-ai-agent", destination: "/services/claude", permanent: false },
       // Remove when the draft page at this URL ships (PR #32).
       { source: "/services/software-factory", destination: "/services/custom-software", permanent: false },
     ];
