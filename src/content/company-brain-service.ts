@@ -26,7 +26,7 @@ export const BRAIN_PAGE = {
   /** Hero visual: before and after. Same four people, separate pictures vs one shared picture. */
   picture: {
     label:
-      "Without a company brain, your team, a leader, a new hire and an AI assistant each work from a different source: an old doc, a chat thread, someone's memory or a guess. People re-explain, answers conflict and new hires and AI guess. With a company brain, all four work from one shared picture of definitions, playbooks, decisions and live numbers, kept current and permission-safe, built on one trusted set of records. The result: the same answers, faster onboarding, AI that gets it right the first time and less re-explaining.",
+      "Without a company brain, your team, a leader, a new hire and an AI assistant each work from a different source: an old doc, a chat thread, someone's memory or a guess. People re-explain, answers conflict and new hires and AI guess. With a company brain, all four work from one shared picture of definitions, playbooks, decisions and live numbers, kept current and permission-safe, built on one trusted set of records. The result: the same answers, faster onboarding and AI that gets it right the first time.",
     people: ["Your team", "A leader", "A new hire", "AI assistant"],
     beforeTitle: "Without a company brain",
     beforeSources: ["Old doc", "Chat thread", "Someone's memory", "A guess"],
@@ -36,7 +36,7 @@ export const BRAIN_PAGE = {
     hubItems: ["Definitions", "Playbooks", "Decisions", "Live numbers"],
     hubBadges: ["Current", "Permission-safe"],
     foundation: "Built on one trusted set of records",
-    outcomes: ["Same answers", "Faster onboarding", "AI right the first time", "Less re-explaining"],
+    outcomes: ["Same answers", "Faster onboarding", "AI right the first time"],
   },
 
   insideEyebrow: "What goes in it",
