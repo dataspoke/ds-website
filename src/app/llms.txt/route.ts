@@ -14,6 +14,7 @@ import { FAQS_A } from "@/components/home-a/content";
 import { FREE_ESTIMATE } from "@/content/free-estimate";
 import { CLAUDE_PAGE } from "@/content/claude-services";
 import { AGENT_PAGE } from "@/content/personal-ai-agent";
+import { FACTORY_PAGE } from "@/content/software-factory";
 import { INDUSTRIES, INDUSTRIES_HUB, industryPath } from "@/content/industries";
 import { SERVICE_PAGE_EXTRAS } from "@/content/service-pages";
 import { HUB_LINES, SPOKE_LINES } from "@/content/services";
@@ -67,6 +68,10 @@ function body() {
     "### Personal AI assistant setup",
     "",
     `- [${AGENT_PAGE.card.title}](${SITE_URL}${AGENT_PAGE.path}): ${AGENT_PAGE.card.oneLiner} ${AGENT_PAGE.card.summary}`,
+    "",
+    "### AI software factory setup",
+    "",
+    `- [${FACTORY_PAGE.card.title}](${SITE_URL}${FACTORY_PAGE.path}): ${FACTORY_PAGE.card.oneLiner} ${FACTORY_PAGE.card.summary}`,
     "",
     "## Questions on the service pages",
     "",
