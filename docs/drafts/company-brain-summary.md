@@ -1,7 +1,7 @@
 # Company brain page - draft summary (2026-11-19)
 
 ## TLDR
-- I drafted a visual Insights post at `/insights/company-brain`: "A company brain is a data problem, not a chatbot."
+- I drafted a visual Insights post at `/insights/company-brain`: "Your company brain is a data problem."
 - It's a blog post, not a service page. The site already sells a "Company Brain" product on a service-line page, so a second service page would compete with it. A post also fits the brief's "share, don't sell".
 - It's a draft. It has noindex, a "Draft - not published" badge, and no links from the nav, the /insights index, the sitemap or llms.txt. You can see it only on the PR's Vercel preview.
 - The copy uses only your setup and your own words, with no client names. It has no numbers on purpose (see open questions).
@@ -9,8 +9,7 @@
 ## Service page or blog post: blog, and why
 1. The site already sells "Company Brain" as a product: `src/content/services.ts:162` and `src/content/lp.ts:61`. A service page called "Company brain" would duplicate it and could confuse.
 2. The angle that wins on X is "how it actually works and where it breaks." That is expertise, not an offer, and it reads better as a post.
-3. The Insights section has no posts yet, so this would be the first one.
-4. Markdown can't carry the layout, so I built a static page at `src/app/insights/company-brain/page.tsx`. It overrides `[slug]` for that one path. Because the index reads only `content/insights/*.md`, the post stays out of the index automatically.
+3. This branch predates PR #33 on `main` (which added the `mission-command-ai-agents` post and the React Insights registry in `src/content/insights.ts`). While this draft lives at static `src/app/insights/company-brain/page.tsx`, it stays outside the registry and out of the index automatically.
 
 ## What's on the page (visual, low word count)
 1. A hero with a 4-bullet "short version" card.
@@ -60,28 +59,31 @@ These were verified by a read-only scan.
 
 | Page claim | Source |
 |---|---|
-| A definitions doc for a client platform that sits next to the schema and that agents read | worai `CONTEXT.md:5-6`; `docs/adr/0004-single-wor-glossary-in-worai.md:28-29` ("changes in the same commit"), `:40-41` (agents read it at commit time) |
-| "The same word is defined in several places, and they disagree" (failure mode) | worai `docs/adr/0004-...md:8` ("defined in four groups of files that disagreed", since consolidated); Atlan on conflicting definitions |
+| Hero lede ("Connecting tools is the easy part; keeping it true is the real work.") | X freshness/governance trend: https://x.com/Cch_Chichieh/status/2122048195878654200, https://x.com/Title9Jen/status/2096303899527578069; Falconer ("Better retrieval doesn't fix rot") |
+| Short version, line 1 ("Explaining the same thing to AI every day? The context is missing.") | X trend (paraphrased): https://x.com/aryanXmahajan/status/2114378985115468033; your Nov 10 call ("so you don't have to tell it over and over") |
+| Short version, line 2 ("Write definitions and playbooks first. Connect tools after.") | Your Nov 10 call ("context.md", "maybe like three skills"); `worai/docs/adr/0004-single-wor-glossary-in-worai.md` |
+| Short version, line 3 ("Log the work, or the next session starts from zero.") | `dataspoke/crm/mcp/crm_mcp/server.py`; `start-session` and `log-work` skills |
+| Short version, line 4 ("Treat freshness and permissions like data quality. That's where I see these setups break.") | Falconer (rot), Spinach (per-agent permissions), NeuralTrust (no owner), X freshness/permissions trend above |
+| A definitions doc for a client platform that sits next to the schema and that agents read when changing code | `wor/worai/CONTEXT.md:5-6`; `wor/worai/docs/adr/0004-single-wor-glossary-in-worai.md:28-29` ("sits next to the schema and changes in the same commit"), `:37-41` ("agents changing code need the terms in the repo", read at commit time) |
+| "The same word is defined in a few places, and they disagree." (failure mode) | `wor/worai/docs/adr/0004-single-wor-glossary-in-worai.md:8` ("defined in four groups of files that disagreed", since consolidated); Atlan on conflicting definitions |
 | "Built largely from meeting transcripts" and the quote "What I told the team: The tighter we get this..." | Your words on a client call, Nov 13 (from the pasted context). **No file says this.** |
 | A context file per project | 34 CLAUDE.md and 5 AGENTS.md files under `~/work`; `claude-config/docs/routers/README.md:4` |
 | A skills library in bundles, improved by use | `claude-config/bundles/*/skills` (49 of your own skills in 6 bundles, plus 12 third-party); your Nov 10 call ("you'll make a skill and it's going to suck") |
 | A work log in the CRM, one task per session, with file locations | `dataspoke/crm/mcp/crm_mcp/server.py` (CRM MCP tools); the start-session and log-work skills |
 | Close the session and ask whether the setup could have prevented it | `claude-config/bundles/ops/skills/close-session/SKILL.md:243-253, 290` |
 | The weekly retro turns lessons into changes | `claude-config/docs/retros/2026-W45.md` |
-| The context file changes in the same commit as the schema | `claude-config/CLAUDE.md:92` |
-| A CI job flags MCP doc drift | worai `.github/workflows/mcp-docs-check.yml:2-5` (it's advisory on GitHub, so the page says "flags", not "fails") |
+| Glossary and context files update in the same commit as schema changes | `wor/worai/docs/adr/0004-single-wor-glossary-in-worai.md:28-29`; `claude-config/CLAUDE.md:96` |
+| A CI job flags MCP doc drift | `wor/worai/.github/workflows/mcp-docs-check.yml:1-9` (advisory on GitHub, so the page says "flags", not "fails") |
 | One claim-check skill shared by two agent systems, with a drift warning | `claude-config/bundles/ops/skills/verify-before-presenting/SKILL.md:18`; `_catalog/build.py:197` |
-| Production databases are read-only | `claude-config/CLAUDE.md:12` |
+| Production databases are read-only | `claude-config/CLAUDE.md:15` |
 | Identity per folder | `claude-config/auth/README.md:3`; `auth/map.json` |
-| A ratchet on private data (blocked from merging unless approved) | worai `.github/workflows/contact-access-check.yml:2-5`; `scripts/checks/README.md:37-38` |
-| A person at the gates | `claude-config/CLAUDE.md` ("Run to a gate") |
-| Where to start: one context file, three skills, log what someone will pick up | Your Nov 10 call ("context.md", "maybe like three skills"); Orchestrator chat, Nov 9 ("I don't want everything") |
-
-| Short version, line 1: "If you explain the same thing to AI every day, the context is missing" | X trend (paraphrased): https://x.com/aryanXmahajan/status/2114378985115468033; your Nov 10 call ("so you don't have to tell it over and over") |
-| "Wiring tools in" column (connect-everything, one pile, access as wide as the connector) | Merge: https://www.merge.dev/blog/universal-context-layer; Spinach: https://www.spinach.ai/blog/company-brain-still-cant-do; X: https://x.com/Cch_Chichieh/status/2122048195878654200. Worded with "often" on purpose. |
+| A ratchet on private data ("fails CI and waits for my review") | `wor/worai/.github/workflows/contact-access-check.yml:2-5` (fails CI on un-allowlisted reads; advisory on GitHub, enforced by merge skills); `scripts/checks/README.md:37-38` (Nick reviews added allowlist lines) |
+| A person at the gates | `claude-config/CLAUDE.md:23` ("Run to a gate") |
+| Where to start: one context file, three skills, log what someone will need | Your Nov 10 call ("context.md", "maybe like three skills"); Orchestrator chat, Nov 9 ("I don't want everything") |
+| "Wiring tools in" column (connect-everything, one pile, access as wide as the connector, set up once) | Merge: https://www.merge.dev/blog/universal-context-layer; Spinach: https://www.spinach.ai/blog/company-brain-still-cant-do; NeuralTrust; X: https://x.com/Cch_Chichieh/status/2122048195878654200. Every row hedged with "Often". |
 | Failure modes "Rot", "Leaky access", "No owner" | Falconer (rot), Spinach (per-agent permissions), NeuralTrust (no owner or review date); links in Research |
 | "Logging everything" failure mode | Your Orchestrator chat, Nov 9 ("we also need to decide what gets logged") |
-| Layer notes (what each layer holds) | The brief's layer list; examples drawn from the rows above (CRM, meetings, MCP tools, skills) |
+| Layer notes (CRM, meetings, app database, MCP tools, skills, key terms) | The brief's layer list; examples drawn only from the rows above (CRM, meetings, app database, MCP tools, skills) |
 
 **Not found in any file:** the "Your Business Can't See Itself: The Layers of Company Data" article. The layers diagram uses the list from the brief, and the page doesn't cite the article.
 
@@ -92,11 +94,9 @@ These were verified by a read-only scan.
 - No links to it from the nav, the /insights index, `sitemap.ts` or `llms.txt`.
 
 **At publish:**
-1. Remove `noIndex: true` and the badge from `src/app/insights/company-brain/page.tsx`, and `draftBadge` from `src/content/company-brain.ts`.
-2. Make the post show up in the /insights index. That index reads only markdown. Teach `src/lib/insights.ts` a registry of TSX posts that the `[slug]` route skips. Don't add a markdown stub with the same slug: `[slug]` would also build that path, and the sitemap would list it twice. The `/insights` page and the sitemap list posts only once one exists.
-3. Make sure the sitemap gets `/insights/company-brain` once, through that registry, and add a `pageSources` entry for its files.
-4. Add the post to `src/app/llms.txt/route.ts`.
-5. Add `ArticleJsonLd`, as `[slug]` does.
+1. Merge `main` (which already includes the React Insights registry in `src/content/insights.ts` from PR #33).
+2. Remove `noIndex: true` and the badge from `src/app/insights/company-brain/page.tsx`, and `draftBadge` from `src/content/company-brain.ts`.
+3. Register the post in `INSIGHT_ENTRIES` (`src/content/insights.ts`) with `status: "published"` (or keep it `"draft"` while staging) and move the component under the registry pattern so `/insights`, `sitemap.xml`, `llms.txt`, and `ArticleJsonLd` stay in sync automatically.
 
 ## Open questions for Nick
 1. Is blog the right route? Or do you want this folded into the existing Company Brain product page as a "how it works" section?
