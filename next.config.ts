@@ -7,12 +7,23 @@ const nextConfig: NextConfig = {
     // the source file, so the 1220px portrait isn't shipped at full size.
     formats: ["image/avif", "image/webp"],
   },
-  // /work is down until clients approve their case studies. Temporary (307) so it can come back.
   async redirects() {
-    if (WORK_PUBLISHED) return [];
+    // Dead URLs that still get visits. Config redirects run before filesystem
+    // routes, so a redirect here hides any page later built at the same URL.
+    // Never redirect a URL where a page is being built.
+    const deadUrls = [
+      { source: "/insights/personal-ai-agent", destination: "/services/personal-ai-agent", permanent: true },
+    ];
+
+    // /work is down until clients approve their case studies. Permanent (308)
+    // because /work is indexed and the case studies are not coming back soon.
+    // Setting WORK_PUBLISHED to true removes these redirects, but browsers that
+    // cached the 308 may keep sending visitors to /about until their cache clears.
+    if (WORK_PUBLISHED) return deadUrls;
     return [
-      { source: "/work", destination: "/about", permanent: false },
-      { source: "/work/:slug*", destination: "/about", permanent: false },
+      ...deadUrls,
+      { source: "/work", destination: "/about", permanent: true },
+      { source: "/work/:slug*", destination: "/about", permanent: true },
     ];
   },
 };
