@@ -160,6 +160,44 @@ export function ServiceJsonLd({
 }
 
 /**
+ * A service page outside the six lines (Claude setup, personal AI assistant, software factory,
+ * company brain): Service plus a Home > Services > page breadcrumb. No FAQPage: these pages have no FAQ.
+ */
+export function ServicePageJsonLd({
+  name,
+  description,
+  path,
+}: {
+  name: string;
+  description: string;
+  path: string;
+}) {
+  const pageUrl = `${SITE_URL}${path}`;
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${pageUrl}#service`,
+    name,
+    description,
+    url: pageUrl,
+    provider,
+    areaServed,
+  };
+  return (
+    <>
+      <LdScript data={data} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name, path },
+        ]}
+      />
+    </>
+  );
+}
+
+/**
  * The service offered to one industry. Rendered only on that industry's page.
  * `offers` lists the service lines the page's cards link to, by name, with no prices.
  */
