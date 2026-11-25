@@ -8,10 +8,7 @@ import { CtaA } from "@/components/home-a/cta";
 import { LegacyAnchorRedirect } from "@/components/services/legacy-anchor-redirect";
 import { LineTile } from "@/components/services/line-tile";
 import { ServicesHero } from "@/components/services/services-hero";
-import { CLAUDE_PAGE } from "@/content/claude-services";
-import { AGENT_PAGE } from "@/content/personal-ai-agent";
-import { FACTORY_PAGE } from "@/content/software-factory";
-import { BRAIN_PAGE } from "@/content/company-brain-service";
+import { SETUP_SERVICES } from "@/content/service-catalog";
 import { LINE_PAGE, SERVICE_LINES, SERVICE_PIPELINE, SERVICES_PAGE } from "@/content/services";
 
 export const metadata: Metadata = generateMetadata({
@@ -61,9 +58,9 @@ export default function ServicesPage() {
             {LINE_PAGE.workLink.label} &rarr;
           </Link>
         )}
-        {/* Four special service cards: one column on phones, 2x2 from md up. */}
+        {/* Setup service cards (SETUP_SERVICES): one column on phones, 2x2 from md up. */}
         <div className="mt-10 grid gap-4 md:grid-cols-2">
-          {[CLAUDE_PAGE, AGENT_PAGE, FACTORY_PAGE, BRAIN_PAGE].map((page) => (
+          {SETUP_SERVICES.map((page) => (
             <Link
               key={page.path}
               href={page.path}

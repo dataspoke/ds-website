@@ -51,7 +51,7 @@ const LINE_CONTACT_LABELS: Record<ServiceLineSlug, string> = {
   "analytics-data-science": "Find where the money is and what's coming",
 };
 
-/** Contact form label for each setup service, keyed by its slug. */
+/** Contact form label for each setup service, keyed by its slug. A missing label fails the build (see setupContactLabel). */
 const SETUP_CONTACT_LABELS: Record<string, string> = {
   claude: "Set up Claude for our team",
   "personal-ai-agent": "A personal AI assistant for me",

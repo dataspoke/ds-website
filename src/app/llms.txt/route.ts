@@ -63,6 +63,7 @@ function body() {
     "",
     ...SPOKE_LINES.map(lineEntry),
     "",
+    // One section per setup service; keep in step with SETUP_SERVICES (src/content/service-catalog.ts).
     "### Claude setup and training",
     "",
     `- [${CLAUDE_PAGE.card.title}](${SITE_URL}${CLAUDE_PAGE.path}): ${CLAUDE_PAGE.card.oneLiner} ${CLAUDE_PAGE.card.summary}`,
