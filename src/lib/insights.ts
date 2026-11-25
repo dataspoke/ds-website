@@ -4,6 +4,7 @@ import { INSIGHT_ENTRIES, type InsightStatus } from "@/content/insights";
 export interface InsightPost {
   slug: string;
   title: string;
+  metaTitle?: string;
   description: string;
   eyebrow: string;
   /** YYYY-MM-DD publish date. */

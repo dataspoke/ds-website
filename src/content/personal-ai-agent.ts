@@ -8,7 +8,7 @@ import type { TextLink } from "@/types";
 
 export const AGENT_PAGE = {
   path: "/services/personal-ai-agent",
-  metaTitle: "Personal AI assistant setup for business leaders",
+  metaTitle: "Personal AI assistant for leaders",
   metaDescription:
     "Personal AI assistant setup for business leaders: inbox, meetings, follow-ups, and morning briefs, with clear rules on what waits for your approval.",
   eyebrow: "Personal AI assistant setup",

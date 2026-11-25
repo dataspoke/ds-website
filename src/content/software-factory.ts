@@ -19,7 +19,7 @@ export interface FactoryCard {
 
 export const FACTORY_PAGE = {
   path: "/services/software-factory",
-  metaTitle: "AI Internal Tools & Software Factory Setup",
+  metaTitle: "AI Internal Tools & Software Factory",
   metaDescription:
     "Set up an AI software factory to build and update apps and internal tools every week, with your team owning every sign-off. Free AI strategy call.",
 

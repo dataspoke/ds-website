@@ -13,7 +13,7 @@ export interface BrainCard {
 
 export const BRAIN_PAGE = {
   path: "/services/company-brain",
-  metaTitle: "Company Brain Setup for Your Team and AI",
+  metaTitle: "Company Brain Setup for Teams and AI",
   metaDescription:
     "We write down how your company runs and keep it accurate, current and permission-safe, so your people and AI assistants work from the same picture.",
 

@@ -3,7 +3,7 @@ import type { FaqItem } from "@/types";
 
 export const FREE_ESTIMATE = {
   path: FREE_ESTIMATE_PATH,
-  metaTitle: "Free AI strategy call, then a written estimate",
+  metaTitle: "Free AI strategy call and estimate",
   metaDescription:
     "Free AI strategy call: 30 minutes, then a written estimate with a recommended plan and a price range within two business days. No obligation.",
   eyebrow: "For established businesses, from owner-run to mid-size",

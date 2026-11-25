@@ -15,7 +15,7 @@ export interface JourneyStep {
 
 export const CLAUDE_PAGE = {
   path: "/services/claude",
-  metaTitle: "Claude Cowork, Claude Code, Skills and MCP setup",
+  metaTitle: "Claude Code, Cowork and MCP setup",
   metaDescription:
     "I connect Claude to QuickBooks, Xero or your CRM, set up Claude Cowork and Claude Code, and build Skills and a first agent. Free AI strategy call.",
   eyebrow: "Claude setup and training",
