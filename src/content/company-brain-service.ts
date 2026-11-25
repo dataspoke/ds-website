@@ -90,7 +90,7 @@ export const BRAIN_PAGE = {
   foundationLinks: [{ label: "Data Organization & Warehousing", href: "/services/organize" }] satisfies TextLink[],
 
   stepsEyebrow: "How we set it up",
-  stepsTitle: "Small first, then wider.",
+  stepsTitle: "Start narrow, then go wider.",
   steps: [
     { title: "Find the repeat questions", note: "What your team asks every week, and where the answers live today." },
     { title: "Write it down", note: "Definitions, playbooks and recent decisions for one team or one part of the business." },

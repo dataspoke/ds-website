@@ -1,7 +1,7 @@
 import type { TextLink } from "@/types";
 
-// Copy for /services/personal-ai-agent. First person ("I"),
-// matching /services/claude: Nick does this work himself.
+// Copy for /services/personal-ai-agent. "We" voice, like the other service pages.
+// The founder story in `proof` names Nick in the third person.
 // Audience: business leaders and executives, not developers. Plain business words.
 // No client names, no client results, no prices, no invented numbers, no third-party quotes.
 // Hyphens only, never em or en dashes.
@@ -14,7 +14,7 @@ export const AGENT_PAGE = {
   eyebrow: "Personal AI assistant setup",
   title: "An AI assistant that takes work off your plate, under your rules.",
   lede:
-    "I set up personal AI assistants for business leaders and executives. They stay on top of your inbox, prep you for meetings, track your follow-ups, and brief you every morning, while anything that leaves your desk waits for your approval.",
+    "We set up personal AI assistants for business leaders and executives. They stay on top of your inbox, prep you for meetings, track your follow-ups, and brief you every morning, while anything that leaves your desk waits for your approval.",
   intro: [
     "Built on the tools you already use",
     "Nothing goes out without your approval",
@@ -25,7 +25,7 @@ export const AGENT_PAGE = {
     eyebrow: "What it handles",
     title: "Dedicated support for the work that eats your week.",
     lede:
-      "Instead of one messy chat window trying to do everything, I set up focused workflows for the recurring parts of your day. Everything that needs your decision lands in one place.",
+      "Instead of one messy chat window trying to do everything, we set up focused workflows for the recurring parts of your day. Everything that needs your decision lands in one place.",
     items: [
       {
         name: "Inbox",
@@ -103,7 +103,7 @@ export const AGENT_PAGE = {
     eyebrow: "How it comes together",
     title: "Five steps, starting with the biggest drain on your week.",
     lede:
-      "I don't drop a complicated system on your desk and walk away. We start with one high-value workflow, prove it works, and expand at your pace.",
+      "We don't drop a complicated system on your desk and walk away. We start with one high-value workflow, prove it works, and expand at your pace.",
     items: [
       {
         title: "Audit your week",
@@ -111,7 +111,7 @@ export const AGENT_PAGE = {
       },
       {
         title: "Connect your tools",
-        note: "I connect email, calendar, and the business tools you already use, with clear guardrails on what gets drafted versus sent.",
+        note: "We connect email, calendar, and the business tools you already use, with clear guardrails on what gets drafted versus sent.",
       },
       {
         title: "Set your operating rules",
@@ -133,7 +133,7 @@ export const AGENT_PAGE = {
     title: "Built like a real operating system, not a chat window.",
     colTopic: "Area",
     colCommon: "Typical AI setup",
-    colMine: "How I build it",
+    colMine: "How we build it",
     rows: [
       {
         topic: "Oversight",
@@ -162,7 +162,7 @@ export const AGENT_PAGE = {
     eyebrow: "Gets sharper over time",
     title: "Like a great hire, you shouldn't have to correct the same thing twice.",
     lede:
-      "Most AI tools forget your preferences the moment you open a new chat. Every setup I build includes a simple weekly improvement loop, so small corrections turn into lasting habits.",
+      "Most AI tools forget your preferences the moment you open a new chat. Every setup we build includes a simple weekly improvement loop, so each correction turns into a lasting habit.",
     steps: [
       { title: "Work wraps up", note: "A brief, email draft, or follow-up finishes." },
       { title: "Spot the friction", note: "If something missed the mark, we ask why." },
@@ -175,9 +175,9 @@ export const AGENT_PAGE = {
 
   proof: {
     eyebrow: "Built from real experience",
-    title: "I run my own business this way across every core function.",
+    title: "We run DataSpoke this way across every core function.",
     commander:
-      "As a company commander, I delegated to develop my leaders, while keeping the high-stakes calls on my desk. I run my business with AI assistants the same way, and that's the operating rhythm I build for clients.",
+      "Our founder, Nick Paul, learned as a company commander to delegate to develop his leaders while keeping the high-stakes calls on his own desk. We run DataSpoke with AI assistants the same way, and that's the operating rhythm we build for clients.",
     lede:
       "A personal AI assistant shouldn't stop at sorting email. When it's wired into the four core functions of your company, it keeps prep work moving across the board while every major call stays on your desk:",
     handlesLabel: "Assistant handles",
@@ -209,15 +209,15 @@ export const AGENT_PAGE = {
       },
     ],
     callout:
-      "I run this same discipline on my own business every week, trimming unnecessary check-ins and tightening the guardrails. What I set up for you is the operating rhythm I rely on myself.",
+      "We run this same discipline on DataSpoke every week, trimming unnecessary check-ins and tightening the guardrails. What we set up for you is the operating rhythm we rely on ourselves.",
   },
 
   startEyebrow: "How to start",
   startTitle: "Book a free AI strategy call.",
   startPoints: [
     "A free 30-minute conversation, no sales pitch.",
-    "Walk me through the parts of your week you want off your plate first: inbox, meetings, follow-ups, or visibility across sales, marketing, production, and finance.",
-    "Within two business days, I send a written estimate with a recommended plan and a clear price range.",
+    "Walk us through the parts of your week you want off your plate first: inbox, meetings, follow-ups, or visibility across sales, marketing, production, and finance.",
+    "Within two business days, we send a written estimate with a recommended plan and a clear price range.",
     "No obligation. You keep the plan either way.",
   ],
   assessmentNote:
