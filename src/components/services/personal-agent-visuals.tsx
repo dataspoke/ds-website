@@ -114,7 +114,7 @@ export function StopTiles() {
 }
 
 /**
- * Typical AI setup vs how I build it. Crisp white card table on desktop;
+ * Typical AI setup vs how we build it. Crisp white card table on desktop;
  * stacked white cards on mobile so nothing scrolls sideways.
  */
 export function CompareTable() {
