@@ -11,10 +11,20 @@ interface LpCtaBannerProps {
    * calendar, tracked under this GA location.
    */
   estimateLocation?: string;
+  /**
+   * GA location for the calendar button (booking_page_open). Used when
+   * estimateLocation is not set.
+   */
+  bookLocation?: string;
 }
 
 /** Closing section for a landing page: proof line, then the one CTA. */
-export function LpCtaBanner({ title, ctaLabel, estimateLocation }: LpCtaBannerProps) {
+export function LpCtaBanner({
+  title,
+  ctaLabel,
+  estimateLocation,
+  bookLocation = "lp-cta-banner",
+}: LpCtaBannerProps) {
   return (
     <Section tint>
       <div className="grid max-w-2xl gap-6">
@@ -25,7 +35,9 @@ export function LpCtaBanner({ title, ctaLabel, estimateLocation }: LpCtaBannerPr
             {ctaLabel}
           </EstimateCta>
         ) : (
-          <BookCall className="justify-self-start">{ctaLabel}</BookCall>
+          <BookCall location={bookLocation} className="justify-self-start">
+            {ctaLabel}
+          </BookCall>
         )}
       </div>
     </Section>

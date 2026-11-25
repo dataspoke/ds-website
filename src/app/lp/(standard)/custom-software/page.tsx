@@ -24,7 +24,7 @@ export default function LpCustomSoftwarePage() {
             {LP_CUSTOM_SOFTWARE.headline}
           </h1>
           <p className="lede max-w-xl">{LP_CUSTOM_SOFTWARE.lede}</p>
-          <BookCall className="justify-self-start">{LP_CUSTOM_SOFTWARE.ctaLabel}</BookCall>
+          <BookCall location="lp-custom-software-hero" className="justify-self-start">{LP_CUSTOM_SOFTWARE.ctaLabel}</BookCall>
         </div>
       </Section>
 
@@ -69,7 +69,7 @@ export default function LpCustomSoftwarePage() {
         </div>
       </Section>
 
-      <LpCtaBanner title="You own the code and the accounts." ctaLabel={LP_CUSTOM_SOFTWARE.ctaLabel} />
+      <LpCtaBanner title="You own the code and the accounts." ctaLabel={LP_CUSTOM_SOFTWARE.ctaLabel} bookLocation="lp-custom-software-banner" />
     </>
   );
 }

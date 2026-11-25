@@ -33,9 +33,19 @@ function lpEstimateHref(search: string) {
   return url.pathname + url.search;
 }
 
-/** GA4 event for every click that starts the free AI strategy call booking path. */
+/**
+ * GA4 event for an on-site click toward the free AI strategy call: a link to
+ * /free-estimate (or /lp/free-estimate), or the scroll to the #book widget.
+ * Clicks that open the Google Calendar page send booking_page_open instead,
+ * so one click is never counted as both.
+ */
 export function trackEstimateCta(location: string) {
   sendGAEvent("event", "estimate_cta_click", { cta_location: location });
+}
+
+/** GA4 event for a click that opens the Google Calendar booking page in a new tab. */
+export function trackBookingPageOpen(location: string) {
+  sendGAEvent("event", "booking_page_open", { cta_location: location });
 }
 
 interface EstimateCtaProps {
@@ -44,7 +54,7 @@ interface EstimateCtaProps {
   location: string;
   size?: "default" | "lg";
   className?: string;
-  /** Open the Google Calendar page in a new tab. */
+  /** Open the Google Calendar page in a new tab. Sends booking_page_open, not estimate_cta_click. */
   external?: boolean;
   /**
    * External mode only. Defaults to BOOKING_URL. The ad landing page passes
@@ -65,6 +75,8 @@ interface EstimateCtaProps {
  * /free-estimate (or /lp/free-estimate with `lp`). On /free-estimate and /lp/free-estimate it scrolls to the
  * booking widget, so campaign parameters on the page URL stay put.
  * External mode opens the calendar in a new tab when the embed cannot.
+ * Link and scroll clicks send estimate_cta_click; external clicks send
+ * booking_page_open.
  */
 export function EstimateCta({
   children,
@@ -92,7 +104,12 @@ export function EstimateCta({
   if (external) {
     return (
       <Button asChild size={size} variant="outline" className={classes}>
-        <a href={href ?? BOOKING_URL} target="_blank" rel="noopener noreferrer" onClick={onClick}>
+        <a
+          href={href ?? BOOKING_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => trackBookingPageOpen(location)}
+        >
           {children}
           {icon}
         </a>
