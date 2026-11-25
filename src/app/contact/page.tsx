@@ -4,6 +4,7 @@ import { generateMetadata } from "@/lib/metadata";
 import { Section } from "@/components/shared/section";
 import { EstimateCta } from "@/components/shared/estimate-cta";
 import { ContactForm } from "@/components/contact/contact-form";
+import { SERVICE_OPTIONS } from "@/content/service-catalog";
 import { CONTACT_EMAIL, SOCIAL_LINKS } from "@/lib/constants";
 import { STEPS } from "@/content/approach";
 
@@ -83,7 +84,7 @@ export default function ContactPage() {
           <div>
             <h2 className="mb-5 text-2xl font-bold">Or send a note</h2>
             <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-tint" />}>
-              <ContactForm />
+              <ContactForm options={SERVICE_OPTIONS} />
             </Suspense>
           </div>
         </div>

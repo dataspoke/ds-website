@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Section, SectionHead } from "@/components/shared/section";
+import { SERVICE_COUNT, countWord } from "@/content/service-catalog";
 import { SERVICE_LINES, SERVICE_PIPELINE } from "@/content/services";
 import type { ServiceLineSlug } from "@/types";
 import { cn } from "@/lib/utils";
@@ -27,7 +28,7 @@ export function ServicesA() {
 
       <div className="mt-8 flex flex-wrap items-baseline gap-x-8 gap-y-3">
         <Link href={SERVICES_A_HEAD.allLink.href} className="font-semibold text-primary hover:text-primary/80">
-          {SERVICES_A_HEAD.allLink.label} &rarr;
+          {SERVICES_A_HEAD.allLink.label(countWord(SERVICE_COUNT))} &rarr;
         </Link>
         <p className="text-muted-foreground">
           {SERVICES_A_HEAD.claudeLink.lead}{" "}

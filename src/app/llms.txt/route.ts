@@ -18,6 +18,7 @@ import { FACTORY_PAGE } from "@/content/software-factory";
 import { BRAIN_PAGE } from "@/content/company-brain-service";
 import { INDUSTRIES, INDUSTRIES_HUB, industryPath } from "@/content/industries";
 import { SERVICE_PAGE_EXTRAS } from "@/content/service-pages";
+import { SERVICE_COUNT, SETUP_SERVICES, countWord, countWordCapitalized } from "@/content/service-catalog";
 import { HUB_LINES, SPOKE_LINES } from "@/content/services";
 import { getInsightPosts } from "@/lib/insights";
 import type { CaseStudy, ServiceLine } from "@/types";
@@ -52,7 +53,7 @@ function body() {
     "",
     "## Services",
     "",
-    "Six services. Two get the company's information into one trustworthy place it owns. Four put it to work.",
+    `${countWordCapitalized(SERVICE_COUNT)} services. ${countWordCapitalized(HUB_LINES.length)} get the company's information into one trustworthy place it owns. ${countWordCapitalized(SPOKE_LINES.length)} put it to work. ${countWordCapitalized(SETUP_SERVICES.length)} more set up AI for the team and its leaders.`,
     "",
     "### The foundation",
     "",
@@ -62,6 +63,7 @@ function body() {
     "",
     ...SPOKE_LINES.map(lineEntry),
     "",
+    // One section per setup service; keep in step with SETUP_SERVICES (src/content/service-catalog.ts).
     "### Claude setup and training",
     "",
     `- [${CLAUDE_PAGE.card.title}](${SITE_URL}${CLAUDE_PAGE.path}): ${CLAUDE_PAGE.card.oneLiner} ${CLAUDE_PAGE.card.summary}`,
@@ -128,7 +130,7 @@ function body() {
     "## Pages",
     "",
     `- [Home](${SITE_URL}): what ${SITE_NAME} does for business owners and who it's for`,
-    `- [Services](${SITE_URL}/services): the six services, each described by what changes for the owner`,
+    `- [Services](${SITE_URL}/services): the ${countWord(SERVICE_COUNT)} services, each described by what changes for the owner`,
     `- [Industries](${SITE_URL}${INDUSTRIES_HUB.path}): industries ${SITE_NAME} has worked in, with a page each for ${INDUSTRIES.map((i) => i.audienceName).slice(0, -1).join(", ")} and ${INDUSTRIES[INDUSTRIES.length - 1].audienceName}`,
     ...(WORK_PUBLISHED ? [`- [Work](${SITE_URL}/work): case studies, filterable by service`] : []),
     `- [Approach](${SITE_URL}/approach): the ${ASSESSMENT.name}, then build, hand-over and retainer, plus how the numbers that run a business get picked`,
