@@ -21,7 +21,7 @@ export async function generateMetadata({
   const post = getInsightPost(slug);
   if (!post) return {};
   return pageMetadata({
-    title: post.title,
+    title: post.metaTitle ?? post.title,
     description: post.description,
     path: `/insights/${post.slug}`,
     noIndex: post.status === "draft",

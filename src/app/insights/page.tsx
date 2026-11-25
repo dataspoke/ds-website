@@ -15,7 +15,7 @@ const CRUMBS = [
 export function generateMetadata(): Metadata {
   const posts = getInsightPosts();
   return pageMetadata({
-    title: "Insights: running a business on its own data",
+    title: "Insights: running a business on data",
     description:
       "Plain-English articles for business owners on connecting your software, knowing your numbers and putting AI to work.",
     path: "/insights",

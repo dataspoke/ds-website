@@ -7,6 +7,8 @@ export type InsightStatus = "draft" | "published";
 export interface InsightEntry {
   slug: string;
   title: string;
+  /** Browser-tab and share title when `title` is too long for the 48-character rule. Defaults to `title`. */
+  metaTitle?: string;
   description: string;
   eyebrow: string;
   /** YYYY-MM-DD publish date. */
@@ -40,6 +42,7 @@ export const INSIGHT_ENTRIES: InsightEntry[] = [
   {
     slug: "mission-command-ai-agents",
     title: "Give your AI agents task and purpose.",
+    metaTitle: "Give your AI agents task and purpose",
     description:
       "How the U.S. Army's seven mission command principles turn vague AI prompts into reliable delegation - without giving up control of the calls that matter.",
     eyebrow: "AI operations",

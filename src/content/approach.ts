@@ -49,7 +49,7 @@ export const RETAINER_NOTE =
 
 /** /approach page. */
 export const APPROACH_PAGE = {
-  metaTitle: "How working with DataSpoke goes, step by step",
+  metaTitle: "How we work, step by step",
   metaDescription:
     "How we work: a free AI strategy call, an optional two-week Data & AI Assessment, fixed-scope projects you own, a hand-over and an optional retainer.",
   eyebrow: "Approach",
