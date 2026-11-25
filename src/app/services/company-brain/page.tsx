@@ -1,3 +1,4 @@
+import { ServicePageJsonLd } from "@/components/shared/json-ld";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -77,6 +78,7 @@ function BrainStack() {
 export default function CompanyBrainServicePage() {
   return (
     <>
+      <ServicePageJsonLd name={P.card.title} description={P.metaDescription} path={P.path} />
       <section className="relative overflow-hidden bg-gradient-to-b from-tint via-white to-white pb-12 pt-10 sm:pb-16 sm:pt-14">
         <div
           aria-hidden="true"

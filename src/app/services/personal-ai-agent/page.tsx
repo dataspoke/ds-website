@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Check, Quote } from "lucide-react";
 import { generateMetadata } from "@/lib/metadata";
+import { ServicePageJsonLd } from "@/components/shared/json-ld";
 import { LinkedText } from "@/components/shared/faq-list";
 import { Section, SectionHead } from "@/components/shared/section";
 import { EstimateCta } from "@/components/shared/estimate-cta";
@@ -34,6 +35,7 @@ function Cta({ location }: { location: string }) {
 export default function PersonalAiAgentPage() {
   return (
     <>
+      <ServicePageJsonLd name={P.card.title} description={P.metaDescription} path={P.path} />
       <section className="relative overflow-hidden bg-gradient-to-b from-tint via-white to-white pb-12 pt-10 sm:pb-16 sm:pt-14">
         <div
           aria-hidden="true"
