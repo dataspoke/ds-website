@@ -177,7 +177,7 @@ export const AGENT_PAGE = {
     eyebrow: "Built from real experience",
     title: "We run DataSpoke this way across every core function.",
     commander:
-      "As a company commander, our founder, Nick Paul, delegated to develop his leaders while keeping the high-stakes calls on his own desk. We run DataSpoke with AI assistants the same way, and that's the operating rhythm we build for clients.",
+      "Our founder, Nick Paul, learned as a company commander to delegate to develop his leaders while keeping the high-stakes calls on his own desk. We run DataSpoke with AI assistants the same way, and that's the operating rhythm we build for clients.",
     lede:
       "A personal AI assistant shouldn't stop at sorting email. When it's wired into the four core functions of your company, it keeps prep work moving across the board while every major call stays on your desk:",
     handlesLabel: "Assistant handles",
