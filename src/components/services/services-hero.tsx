@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import { EstimateCta } from "@/components/shared/estimate-cta";
+import { SERVICE_COUNT, countWord, countWordCapitalized } from "@/content/service-catalog";
 import { LINE_PAGE, SERVICES_PAGE } from "@/content/services";
 import { ServicesWheel } from "./services-wheel";
 
@@ -15,7 +16,7 @@ export function ServicesHero() {
         <div className="grid gap-5">
           <p className="eyebrow">{SERVICES_PAGE.eyebrow}</p>
           <h1 className="text-[2.3rem] font-extrabold leading-[1.08] tracking-[-0.025em] sm:text-5xl lg:text-[3.25rem]">
-            {SERVICES_PAGE.title}
+            {SERVICES_PAGE.title(countWordCapitalized(SERVICE_COUNT))}
           </h1>
           <p className="lede max-w-lg">{SERVICES_PAGE.lede}</p>
           <ul className="flex flex-wrap gap-2">
@@ -32,7 +33,7 @@ export function ServicesHero() {
           <div className="mt-1 flex flex-wrap items-center gap-x-6 gap-y-3">
             <EstimateCta location="services-hero">{LINE_PAGE.estimateCta}</EstimateCta>
             <a href="#lines" className="font-semibold text-primary hover:text-primary/80">
-              {SERVICES_PAGE.jumpLabel} &darr;
+              {SERVICES_PAGE.jumpLabel(countWord(SERVICE_COUNT))} &darr;
             </a>
           </div>
         </div>

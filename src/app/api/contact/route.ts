@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { validateContactForm } from "@/lib/schemas";
-import { SERVICE_OPTIONS } from "@/lib/constants";
+import { SERVICE_OPTIONS } from "@/content/service-catalog";
 
 // In-memory rate limit store — tracks submissions per IP
 // Resets on server restart, which is fine for a small site

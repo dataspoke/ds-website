@@ -42,18 +42,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Contact", href: "/contact" },
 ];
 
-// One option per service line slug (src/content/services.ts), so /contact?service=<slug> preselects.
-// "assessment" and "other" have no service page: "assessment" maps to /approach#assessment.
-export const SERVICE_OPTIONS = [
-  { value: "assessment", label: "Start with the Data & AI Assessment" },
-  { value: "capture", label: "Get all our systems feeding one place" },
-  { value: "organize", label: "Clean up and organize our data" },
-  { value: "metrics-dashboards", label: "Numbers and dashboards we can trust" },
-  { value: "custom-software", label: "Build our own app or internal tool" },
-  { value: "ai-implementation", label: "Put AI to work on our business" },
-  { value: "analytics-data-science", label: "Find where the money is and what's coming" },
-  { value: "other", label: "Not sure yet. Let's talk." },
-];
+// Contact form options live in src/content/service-catalog.ts (SERVICE_OPTIONS), built from the service list.
 
 export const TRADEMARK_NOTE =
   "Product names are trademarks of their respective owners. DataSpoke is not affiliated with, endorsed by or a partner of these companies.";

@@ -1,4 +1,5 @@
 import { WheelMark } from "@/components/shared/logo";
+import { countWord } from "@/content/service-catalog";
 import { SERVICE_LINES, SERVICE_PIPELINE, SERVICES_PAGE } from "@/content/services";
 import { cn } from "@/lib/utils";
 import { LINE_ICONS } from "./line-icons";
@@ -49,7 +50,7 @@ export function ServicesWheel({ className }: { className?: string }) {
       aria-labelledby="services-wheel-title"
     >
       <title id="services-wheel-title">
-        The six DataSpoke services as spokes of one wheel, with your data at the hub
+        {`The ${countWord(SERVICE_PIPELINE.length)} core DataSpoke services as spokes of one wheel, with your data at the hub`}
       </title>
       <defs>
         <radialGradient id="sw-glow" cx="50%" cy="50%" r="50%">

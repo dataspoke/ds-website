@@ -38,7 +38,8 @@ export const SERVICES_A_HEAD = {
   eyebrow: "What we do",
   title: "Start with the foundation.",
   lede: "Each step builds on the one before it.",
-  allLink: { label: "Compare all six", href: "/services" },
+  /** `count` is the number of services as a word (src/content/service-catalog.ts). */
+  allLink: { label: (count: string) => `Compare all ${count}`, href: "/services" },
   claudeLink: { lead: "Already using Claude?", label: "Get Claude set up for your team", href: "/services/claude" },
 };
 

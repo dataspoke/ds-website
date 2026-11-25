@@ -254,7 +254,7 @@ const FIND_THE_MARGIN: Product = {
   ],
 };
 
-/** The six service lines. Two hub lines first, then four spokes. */
+/** The six core service lines. Two hub lines first, then four spokes. Setup services: src/content/service-catalog.ts. */
 export const SERVICE_LINES: ServiceLine[] = [
   {
     slug: "capture",
@@ -410,10 +410,11 @@ export const SERVICES_PAGE = {
   metaDescription:
     "Connect your software, clean up your data, see your numbers on one dashboard and put AI to work. Data and AI consulting for business owners, start to finish.",
   eyebrow: "Services",
-  title: "Six ways to run a bigger business with the team you have.",
+  /** `count` is the number of services, as a capitalized word (src/content/service-catalog.ts). */
+  title: (count: string) => `${count} ways to run a bigger business with the team you have.`,
   lede: "Pick the problem that sounds like yours. The free call tells you where to start.",
   heroChips: ["Fixed scope", "Price up front", "You own it"],
-  jumpLabel: "See the six",
+  jumpLabel: (count: string) => `See all ${count}`,
   diagramHub: "Your data",
   hubEyebrow: "The foundation",
   hubTitle: "Get your information in one place you can trust.",

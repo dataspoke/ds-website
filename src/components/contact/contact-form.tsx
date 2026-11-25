@@ -14,10 +14,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { SERVICE_OPTIONS } from "@/lib/constants";
 import { validateContactForm } from "@/lib/schemas";
 
-export function ContactForm() {
+/** `options` comes from the server page (SERVICE_OPTIONS in src/content/service-catalog.ts), so service copy stays out of the browser bundle. */
+export function ContactForm({ options }: { options: { value: string; label: string }[] }) {
   const searchParams = useSearchParams();
   const preselectedService = searchParams.get("service") || "";
 
@@ -148,7 +148,7 @@ export function ContactForm() {
             <SelectValue placeholder="Pick the closest one" />
           </SelectTrigger>
           <SelectContent>
-            {SERVICE_OPTIONS.map((opt) => (
+            {options.map((opt) => (
               <SelectItem key={opt.value} value={opt.value}>
                 {opt.label}
               </SelectItem>
