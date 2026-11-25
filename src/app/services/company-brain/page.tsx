@@ -1,3 +1,4 @@
+import { ServicePageJsonLd } from "@/components/shared/json-ld";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -14,7 +15,6 @@ import {
   X,
 } from "lucide-react";
 import { generateMetadata } from "@/lib/metadata";
-import { ServicePageJsonLd } from "@/components/shared/json-ld";
 import { cn } from "@/lib/utils";
 import { LinkedText } from "@/components/shared/faq-list";
 import { Section, SectionHead } from "@/components/shared/section";
